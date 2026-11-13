@@ -1,70 +1,64 @@
-import { SymbolView } from 'expo-symbols';
-import { Link, Tabs } from 'expo-router';
-import { Platform, Pressable } from 'react-native';
+import { router, Tabs } from 'expo-router';
+import { Pressable, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
 
-import Colors from '@/constants/Colors';
-import { useColorScheme } from '@/components/useColorScheme';
-import { useClientOnlyValue } from '@/components/useClientOnlyValue';
+import { HelpButton, Icon, useTheme, type IconName } from '../../src/ui';
+
+function HeaderActions() {
+  const { colors } = useTheme();
+  const { t } = useTranslation();
+  return (
+    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+      <HelpButton compact />
+      <Pressable
+        accessibilityRole="button"
+        accessibilityLabel={t('a11y.settings')}
+        onPress={() => router.push('/settings')}
+        hitSlop={8}
+        style={{ width: 48, height: 48, alignItems: 'center', justifyContent: 'center', marginRight: 4 }}
+      >
+        <Icon name="settings" color={colors.text} />
+      </Pressable>
+    </View>
+  );
+}
+
+const TABS: { name: string; icon: IconName }[] = [
+  { name: 'today', icon: 'today' },
+  { name: 'checkin', icon: 'checkin' },
+  { name: 'comfort', icon: 'comfort' },
+  { name: 'insights', icon: 'insights' },
+  { name: 'care', icon: 'care' },
+];
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
+  const { colors } = useTheme();
+  const { t } = useTranslation();
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme].tint,
-        // Disable the static render of the header on web
-        // to prevent a hydration error in React Navigation v6.
-        headerShown: useClientOnlyValue(false, true),
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => (
-            <SymbolView
-              name={{
-                ios: 'chevron.left.forwardslash.chevron.right',
-                android: 'code',
-                web: 'code',
-              }}
-              tintColor={color}
-              size={28}
-            />
-          ),
-          headerRight: () => (
-            <Link href="/modal" asChild>
-              <Pressable style={{ marginRight: 15 }}>
-                {({ pressed }) => (
-                  <SymbolView
-                    name={{ ios: 'info.circle', android: 'info', web: 'info' }}
-                    size={25}
-                    tintColor={Colors[colorScheme].text}
-                    style={{ opacity: pressed ? 0.5 : 1 }}
-                  />
-                )}
-              </Pressable>
-            </Link>
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="two"
-        options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => (
-            <SymbolView
-              name={{
-                ios: 'chevron.left.forwardslash.chevron.right',
-                android: 'code',
-                web: 'code',
-              }}
-              tintColor={color}
-              size={28}
-            />
-          ),
-        }}
-      />
+        headerStyle: { backgroundColor: colors.background },
+        headerTintColor: colors.text,
+        headerShadowVisible: false,
+        headerRight: () => <HeaderActions />,
+        tabBarActiveTintColor: colors.primary,
+        tabBarInactiveTintColor: colors.textMuted,
+        tabBarStyle: { backgroundColor: colors.surface, borderTopColor: colors.border, minHeight: 64 },
+        tabBarLabelStyle: { fontSize: 12, fontWeight: '600' },
+        sceneStyle: { backgroundColor: colors.background },
+      }}
+    >
+      {TABS.map(({ name, icon }) => (
+        <Tabs.Screen
+          key={name}
+          name={name}
+          options={{
+            title: t(`tabs.${name}`),
+            tabBarAccessibilityLabel: t(`tabs.${name}`),
+            tabBarIcon: ({ color }) => <Icon name={icon} color={color} />,
+          }}
+        />
+      ))}
     </Tabs>
   );
 }
