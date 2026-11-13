@@ -61,8 +61,7 @@ export function Slider({ label, value, min, max, step = 1, onChange, minLabel, m
           return (
             <Pressable
               key={v}
-              importantForAccessibility="no"
-              accessibilityElementsHidden
+              aria-hidden
               onPress={() => set(v)}
               hitSlop={4}
               style={[

@@ -1,4 +1,4 @@
-import type { ColorValue } from 'react-native';
+import { View, type ColorValue } from 'react-native';
 import Svg, { Circle, Path } from 'react-native-svg';
 
 export type IconName = 'today' | 'checkin' | 'comfort' | 'insights' | 'care' | 'settings' | 'help' | 'check' | 'close' | 'shield';
@@ -7,7 +7,8 @@ export type IconName = 'today' | 'checkin' | 'comfort' | 'insights' | 'care' | '
 export function Icon({ name, color, size = 24 }: { name: IconName; color: ColorValue; size?: number }) {
   const p = { stroke: color, strokeWidth: 2, fill: 'none', strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const };
   return (
-    <Svg width={size} height={size} viewBox="0 0 24 24" accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
+    <View aria-hidden>
+    <Svg width={size} height={size} viewBox="0 0 24 24">
       {name === 'today' && (
         <>
           <Circle cx={12} cy={12} r={4.5} {...p} />
@@ -32,8 +33,9 @@ export function Icon({ name, color, size = 24 }: { name: IconName; color: ColorV
       )}
       {name === 'settings' && (
         <>
-          <Circle cx={12} cy={12} r={3} {...p} />
-          <Path d="M12 3v2.2M12 18.8V21M3 12h2.2M18.8 12H21M5.6 5.6l1.6 1.6M16.8 16.8l1.6 1.6M5.6 18.4l1.6-1.6M16.8 7.2l1.6-1.6" {...p} />
+          <Path d="M4 7h9M17 7h3M4 17h3M11 17h9" {...p} />
+          <Circle cx={15} cy={7} r={2.2} {...p} />
+          <Circle cx={9} cy={17} r={2.2} {...p} />
         </>
       )}
       {name === 'help' && (
@@ -47,5 +49,6 @@ export function Icon({ name, color, size = 24 }: { name: IconName; color: ColorV
       {name === 'close' && <Path d="M6 6l12 12M18 6L6 18" {...p} />}
       {name === 'shield' && <Path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6l7-3z" {...p} />}
     </Svg>
+    </View>
   );
 }
