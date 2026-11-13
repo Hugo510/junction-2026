@@ -1,0 +1,494 @@
+{
+  "common": {
+    "appName": "Valo",
+    "tagline": "Må bra efter TMS, ett litet steg i taget",
+    "continue": "Fortsätt",
+    "back": "Tillbaka",
+    "skip": "Hoppa över",
+    "done": "Klar",
+    "save": "Spara",
+    "cancel": "Avbryt",
+    "close": "Stäng",
+    "start": "Starta",
+    "stop": "Stoppa",
+    "retry": "Försök igen",
+    "loading": "Laddar…",
+    "errorTitle": "Något laddades inte",
+    "errorBody": "Det är inte ditt fel. Försök igen om en stund.",
+    "yes": "Ja",
+    "no": "Nej",
+    "needHelp": "Behöver du hjälp nu?",
+    "notMedicalDevice": "Inte en medicinteknisk produkt. Den ställer inga diagnoser, ger ingen behandling och ersätter inte ditt vårdteam. Vid nödsituation, ring 112.",
+    "minutes_one": "{{count}} min",
+    "minutes_other": "{{count}} min",
+    "hours_one": "{{count}} timme",
+    "hours_other": "{{count}} timmar",
+    "today": "Idag",
+    "yesterday": "Igår"
+  },
+  "languages": {
+    "en": "English",
+    "fi": "Suomi",
+    "es": "Español",
+    "sv": "Svenska"
+  },
+  "tabs": {
+    "today": "Idag",
+    "checkin": "Incheckning",
+    "comfort": "Lugn",
+    "insights": "Översikt",
+    "care": "Vård"
+  },
+  "a11y": {
+    "increase": "Öka",
+    "decrease": "Minska",
+    "helpHint": "Öppnar kontakter för nödsituationer och stöd",
+    "settings": "Inställningar",
+    "companion": "Följeslagare ({{species}}) som heter {{name}}",
+    "moodOption": "Humör {{value}} av 5: {{label}}",
+    "chart": "{{label}} de senaste 14 dagarna",
+    "selected": "vald"
+  },
+  "onboarding": {
+    "step": "Steg {{current}} av {{total}}",
+    "language": {
+      "title": "Välj språk",
+      "subtitle": "Du kan ändra det när som helst i Inställningar."
+    },
+    "welcome": {
+      "title": "Välkommen",
+      "body": "Den här appen hjälper dig att må bra hemma efter din TMS-behandling: korta incheckningar, små idéer för varje dag och ett enkelt sätt att nå ditt vårdteam.",
+      "disclaimerTitle": "Bra att veta",
+      "disclaimer": "Den här appen är inte en medicinteknisk produkt. Den ställer inga diagnoser, ger ingen behandling och ersätter aldrig ditt vårdteam. Vid nödsituation, ring 112."
+    },
+    "consent": {
+      "title": "Du bestämmer, sensor för sensor",
+      "subtitle": "Allt är frivilligt. Appen fungerar utan dessa och du kan ändra dem senare.",
+      "movement": "Rörelse",
+      "movementDesc": "Använder rörelsesensorn under övningar för att räkna aktiva minuter.",
+      "taps": "Tryckmönster",
+      "tapsDesc": "Ett kort tryckspel. Endast din genomsnittliga hastighet och träffsäkerhet sparas.",
+      "location": "Ungefärlig plats",
+      "locationDesc": "Endast för att uppskatta tid utomhus i dagsljus. Behandlas i telefonen; koordinater sparas aldrig.",
+      "vibration": "Vibration",
+      "vibrationDesc": "Mjuka vibrationer som guidar andning och andra övningar."
+    },
+    "companion": {
+      "title": "Välj en följeslagare",
+      "subtitle": "En liten vän som håller dig sällskap. Bara för tröst.",
+      "nameLabel": "Ge den ett namn",
+      "namePlaceholder": "Namn",
+      "defaults": {
+        "bee": "Pörri",
+        "cat": "Kuu",
+        "dog": "Nalle",
+        "bird": "Pipo",
+        "person": "Alex"
+      }
+    },
+    "baseline": {
+      "title": "En första, kort incheckning",
+      "subtitle": "Det här visar var du börjar. Det finns inga rätta eller fel svar."
+    },
+    "finish": "Nu börjar vi"
+  },
+  "species": {
+    "bee": "Bi",
+    "cat": "Katt",
+    "dog": "Hund",
+    "bird": "Fågel",
+    "person": "Person"
+  },
+  "checkin": {
+    "title": "Hur mår du idag?",
+    "step": "Steg {{current}} av {{total}}",
+    "mood": {
+      "question": "Hur är ditt humör idag?",
+      "levels": {
+        "1": "Mycket lågt",
+        "2": "Lågt",
+        "3": "Okej",
+        "4": "Bra",
+        "5": "Mycket bra"
+      }
+    },
+    "energy": {
+      "question": "Hur är din energi?",
+      "low": "Låg",
+      "high": "Hög"
+    },
+    "anxiety": {
+      "question": "Hur spänd eller orolig känner du dig?",
+      "low": "Lugn",
+      "high": "Mycket spänd"
+    },
+    "sleep": {
+      "question": "Hur många timmar sov du i natt?",
+      "value": "{{hours}} h"
+    },
+    "scaleValue": "{{value}} av 5",
+    "game": {
+      "title": "Tryck när cirkeln lyser",
+      "intro": "Ett kort spel med {{rounds}} omgångar. Endast ett genomsnitt sparas, aldrig varje tryck.",
+      "wait": "Vänta på ljuset…",
+      "tap": "Tryck nu!",
+      "tooEarly": "Lite för tidigt — det gör inget.",
+      "nice": "Bra!",
+      "round": "Omgång {{current}} av {{total}}",
+      "result": "Tack! Ditt genomsnitt var {{ms}} ms.",
+      "skip": "Hoppa över spelet",
+      "off": "Tryckspelet är avstängt i dina integritetsinställningar, så vi hoppar över det.",
+      "circle": "Reaktionscirkel. Tryck när den lyser."
+    },
+    "safety": {
+      "title": "En fråga till",
+      "question": "Har du de senaste dagarna haft tankar på att skada dig själv?",
+      "context": "Vi frågar alla detta. Ditt svar hjälper ditt vårdteam att stödja dig."
+    },
+    "note": {
+      "question": "Vill du anteckna något?",
+      "placeholder": "Några ord, om du vill (frivilligt)"
+    },
+    "save": "Spara incheckning",
+    "doneTitle": "Tack för att du checkade in",
+    "suggestion": "Något som kan hjälpa nu",
+    "alreadyDone": "Du har redan checkat in idag. Om något har ändrats kan du checka in igen.",
+    "again": "Checka in igen",
+    "backToday": "Tillbaka till Idag"
+  },
+  "crisis": {
+    "title": "Du är inte ensam",
+    "body": "Om du är i fara eller kan skada dig själv, sök hjälp nu. Att be om hjälp är modigt.",
+    "call112": "Ring 112",
+    "call112Hint": "Nödnummer i Finland",
+    "linesTitle": "Prata med någon",
+    "call": "Ring {{number}}",
+    "contactTeam": "Kontakta mitt vårdteam",
+    "contactTeamSent": "Ditt vårdteam har meddelats (simulerat i denna demo). De kontaktar dig så snart som möjligt.",
+    "urgentSent": "På grund av ditt svar har ditt vårdteam larmats (simulerat). Vänta inte om du inte känner dig trygg.",
+    "breathe": "Andas med mig en minut",
+    "resources": {
+      "mieliFi": "Krisjour (finska)",
+      "mieliSv": "Krisjour (svenska)",
+      "mieliEn": "Krisjour (engelska)",
+      "always": "Dygnet runt",
+      "check": "Kontrollera öppettider"
+    }
+  },
+  "today": {
+    "title": "Idag",
+    "howDoing": "Hur det går för dig",
+    "trend": {
+      "better": "Ditt humör har känts lite lättare den här veckan.",
+      "steady": "Din vecka har varit ganska jämn.",
+      "harder": "Den här veckan verkar tyngre än förra. Det är okej — vi tar det lugnt.",
+      "notEnough": "Efter några incheckningar ser du din vecka här."
+    },
+    "moodLabel": "Humör",
+    "plan": {
+      "title": "Din lilla plan för idag",
+      "subtitle": "Bara idéer. Vilken som helst av dem räknas.",
+      "done": "Klart",
+      "notToday": "Inte idag",
+      "markedDone": "Klart — bra gjort",
+      "markedNotToday": "Kanske en annan dag",
+      "allDone": "Härligt. Det räcker gott för idag.",
+      "open": "Öppna",
+      "undo": "Ångra"
+    },
+    "checkinCta": "Checka in för idag",
+    "checkinDone": "Klart för idag ✓",
+    "suggestConsult": {
+      "title": "Skulle det hjälpa att prata med någon?",
+      "cta": "Be om en konsultation",
+      "dismiss": "Inte nu"
+    },
+    "urgentNotice": "Ditt vårdteam larmades idag (simulerat). Om du inte känner dig trygg, ring 112."
+  },
+  "companion": {
+    "greeting": {
+      "morning": "God morgon!",
+      "afternoon": "God eftermiddag!",
+      "evening": "God kväll!",
+      "night": "Hej, det är sent."
+    },
+    "voice": {
+      "bee": "Bzz — små steg räknas också.",
+      "cat": "Vi tar det lugnt idag.",
+      "dog": "Jag blir så glad av att se dig!",
+      "bird": "Jag sparade en liten sång åt dig.",
+      "person": "Jag är här med dig."
+    },
+    "context": {
+      "welcomeBack": "Välkommen tillbaka. Vad roligt att se dig.",
+      "lowMood": "Igår kändes tungt. Låt oss vara extra snälla idag.",
+      "midMood": "En liten sak i taget räcker.",
+      "highMood": "Härligt att det kändes lättare igår.",
+      "noMood": "Hur känner du dig idag?",
+      "daylight": "Dagarna är korta nu — redan 10 minuter dagsljus hjälper.",
+      "night": "Vila är också viktigt. I morgon är en ny dag."
+    },
+    "checkin": {
+      "low": "Tack för att du berättade. Tunga dagar går över — låt oss göra något litet och snällt.",
+      "mid": "Tack för att du checkade in. Jämnt är bra.",
+      "high": "Vad glad jag blir att idag känns bra! Vi fortsätter i lugn takt.",
+      "urgent": "Tack för att du är ärlig. Du förtjänar stöd — sök hjälp nu."
+    },
+    "encourage": {
+      "start": "När du är redo.",
+      "gentle": "All rörelse räknas.",
+      "done": "Du klarade det. Bra gjort.",
+      "keepGoing": {
+        "bee": "Bzz bzz, fortsätt så!",
+        "cat": "Lugnt och mjukt. Perfekt.",
+        "dog": "Ja! Du gör det jättebra!",
+        "bird": "Kvitter! Härlig rytm!",
+        "person": "Du gör det riktigt bra."
+      }
+    },
+    "suggestConsult": "{{name}} märkte att de senaste dagarna verkar tyngre. Vill du prata med ditt vårdteam? Det är ditt val."
+  },
+  "interventions": {
+    "breathing": {
+      "title": "Guidad andning",
+      "why": "Långsam andning lugnar kroppens stressreaktion."
+    },
+    "daylightWalk": {
+      "title": "Dagsljuspromenad",
+      "why": "Dagsljus stöder din inre klocka och ditt humör, särskilt under mörka månader."
+    },
+    "reachOut": {
+      "title": "Skriv till någon",
+      "why": "En liten kontakt kan lyfta dagen.",
+      "howTo": "Skicka ett kort meddelande till någon du tycker om. \"Tänker på dig\" räcker."
+    },
+    "move": {
+      "title": "Rör dig med mig",
+      "why": "Mjuk rörelse släpper spänningar och ger lite energi."
+    },
+    "fireplace": {
+      "title": "Brasa",
+      "why": "Att titta på en lugn eld hjälper sinnet att vila."
+    },
+    "fish": {
+      "title": "Fiskar i sjön",
+      "why": "Lugna, långsamma rörelser ger tankarna en paus."
+    },
+    "puzzle": {
+      "title": "Lugnt pussel",
+      "why": "En mjuk uppgift kan tysta stressiga tankar. Ingen tidtagning, inga fel."
+    },
+    "gratitude": {
+      "title": "En bra sak",
+      "why": "Att lägga märke till små goda stunder stöder återhämtningen.",
+      "howTo": "Tänk på en liten sak som gick okej idag. Det är allt."
+    }
+  },
+  "comfort": {
+    "title": "Lugn",
+    "subtitle": "Lugna saker att göra, i din egen takt.",
+    "open": "Starta",
+    "feedbackQuestion": "Hjälpte det?",
+    "helped": "Hjälpte",
+    "neutral": "Vet inte",
+    "notHelped": "Hjälpte inte",
+    "thanks": "Tack — antecknat.",
+    "breathing": {
+      "box": "Fyrkant 4-4-4-4",
+      "calm": "Lugn 4-6",
+      "pattern": "Mönster",
+      "duration": "Längd",
+      "inhale": "Andas in",
+      "hold": "Håll",
+      "exhale": "Andas ut",
+      "remaining": "{{time}} kvar",
+      "finished": "Fint gjort. Känn efter hur du mår."
+    },
+    "fireplace": {
+      "hint": "Titta bara på lågorna. Stanna så länge du vill."
+    },
+    "fish": {
+      "hint": "Tryck lätt på vattnet eller luta telefonen.",
+      "tiltOff": "Lutning är avstängd eftersom rörelsesensorn inte är aktiverad.",
+      "a11y": "En lugn sjö med fiskar som simmar långsamt. Tryck för att göra ringar på vattnet."
+    },
+    "puzzle": {
+      "hint": "Skjut brickorna i ordning. Ingen tidtagning, inga fel.",
+      "solved": "Löst! Ta ett lugnt andetag.",
+      "shuffle": "Nytt pussel",
+      "tile": "Bricka {{n}}",
+      "tileMovable": "Bricka {{n}}, kan flyttas",
+      "moves_one": "{{count}} drag",
+      "moves_other": "{{count}} drag"
+    },
+    "move": {
+      "hint": "Rör dig som det känns bra i 2 minuter. Gunga, stretcha eller dansa.",
+      "beat": "Takt",
+      "movementOff": "Rörelsesensorn är avstängd — följ bara takten.",
+      "activity": "Din rörelse",
+      "finished": "Härligt rört! {{minutes}} aktiva minuter lades till idag."
+    },
+    "walk": {
+      "daylightToday": "Idag finns det ungefär {{hours}} timmar dagsljus.",
+      "locationOn": "Vi använder ungefärlig plats för att uppskatta tid utomhus. Koordinater sparas aldrig.",
+      "locationOff": "Plats är avstängd. Vi använder dagsljuset i Helsingfors och du kan logga tid utomhus själv.",
+      "start": "Starta promenad",
+      "finish": "Avsluta promenad",
+      "elapsed": "Tid: {{time}}",
+      "outside": "Tid utomhus hittills: cirka {{minutes}} min",
+      "manualQuestion": "Ungefär hur många minuter var du ute?",
+      "saved": "{{minutes}} minuter dagsljus sparades. Bra gjort.",
+      "permissionDenied": "Platsbehörighet gavs inte, så du kan logga tid utomhus själv."
+    }
+  },
+  "insights": {
+    "title": "Översikt",
+    "subtitle": "Dina senaste 14 dagar, i enkla ord.",
+    "mood": "Humör",
+    "sleep": "Sömn",
+    "activity": "Aktivitet",
+    "reaction": "Reaktionstid",
+    "daylight": "Dagsljus",
+    "avgMood": "Genomsnitt {{value}} av 5",
+    "avgHours": "Genomsnitt {{value}} h per natt",
+    "avgMinutes": "Genomsnitt {{value}} min per dag",
+    "avgMs": "Genomsnitt {{value}} ms",
+    "reactionNote": "Lägre är snabbare. Långsammare dagar är vanliga när man är trött.",
+    "noData": "Inga data än",
+    "empty": "Inte tillräckligt med data än. Checka in några gånger för att se dina trender.",
+    "helpsTitle": "Vad som verkar hjälpa dig",
+    "helpsBody": "Baserat på dina betyg och hur du mådde dagen efter.",
+    "helpsEmpty": "Betygsätt några lugnande aktiviteter så visar vi vad som hjälper dig mest.",
+    "rank": {
+      "top": "Hjälper dig mest",
+      "good": "Verkar hjälpa",
+      "mixed": "Blandat hittills",
+      "low": "Hjälper mindre hittills"
+    },
+    "tried_one": "Betygsatt {{count}} gång",
+    "tried_other": "Betygsatt {{count}} gånger"
+  },
+  "care": {
+    "title": "Vård",
+    "subtitle": "Ditt vårdteam (fiktivt, för denna demo).",
+    "speaks": "Talar: {{list}}",
+    "nextSlot": "Nästa lediga tid: {{time}}",
+    "noSlot": "Inga lediga tider de närmaste 48 timmarna",
+    "roles": {
+      "psychiatrist": "Psykiater",
+      "nurse": "Psykiatrisjuksköterska",
+      "psychologist": "Psykolog"
+    },
+    "requestCta": "Be om en konsultation",
+    "requestsTitle": "Dina förfrågningar",
+    "noRequests": "Inga förfrågningar än. Du kan be om ett samtal när som helst.",
+    "position": "Plats i kön: {{position}}",
+    "eta_one": "Svar väntas inom cirka {{count}} timme",
+    "eta_other": "Svar väntas inom cirka {{count}} timmar",
+    "replied": "Ditt vårdteam har svarat och kontaktar dig (simulerat).",
+    "sent": "Skickad {{time}}",
+    "urgentAlert": "Brådskande larm skickat {{time}}. Ditt vårdteam meddelades (simulerat).",
+    "priorityLabel": "Prioritet: {{level}}",
+    "consult": {
+      "title": "Be om en konsultation",
+      "reasonQuestion": "Vad vill du prata om?",
+      "reasons": {
+        "moodLower": "Mitt humör är sämre",
+        "sleep": "Sömn",
+        "worried": "Jag känner mig orolig",
+        "treatment": "Frågor om behandlingen",
+        "talk": "Jag vill bara prata"
+      },
+      "urgencyQuestion": "Hur brådskande känns det?",
+      "urgency": {
+        "low": "Det kan vänta några dagar",
+        "medium": "Snart vore bra",
+        "high": "Så snart som möjligt"
+      },
+      "submit": "Skicka förfrågan",
+      "resultTitle": "Förfrågan skickad",
+      "whyTitle": "Det här ser ditt vårdteam",
+      "noReasons": "Inget oroande stack ut under dina senaste dagar.",
+      "unsafe": "Om du inte känner dig trygg, vänta inte — ring 112.",
+      "urgentRouted": "På grund av dagens svar på säkerhetsfrågan gick detta direkt till ditt vårdteam som brådskande (simulerat)."
+    }
+  },
+  "priority": {
+    "level": {
+      "low": "låg",
+      "medium": "medel",
+      "high": "hög"
+    },
+    "reasons": {
+      "moodDrop": "Ditt humör har varit lägre än veckan innan",
+      "lowMood": "Ditt humör har varit lågt flera dagar",
+      "missedCheckIns": "Det var flera dagar utan incheckning",
+      "activityDrop": "Du har rört dig mindre än vanligt",
+      "reactionSlower": "Ditt tryckspel har gått långsammare än vanligt",
+      "shortSleep": "Flera korta nätter (under 5 timmar)",
+      "highAnxiety": "Du har känt dig ganska spänd",
+      "perceivedUrgency": "Du berättade att det känns brådskande"
+    }
+  },
+  "risk": {
+    "reasons": {
+      "safetyAnswer": "Säkerhetsfrågan besvarades med \"ja\""
+    }
+  },
+  "privacy": {
+    "title": "Integritetscenter",
+    "intro": "I den här versionen stannar dina data i den här telefonen. Du bestämmer vad som samlas in.",
+    "whatTitle": "Vad vi samlar in och varför",
+    "items": {
+      "checkins": "Incheckningar: humör, energi, spänning, sömn och frivilliga anteckningar — för att visa dina trender.",
+      "reaction": "Tryckspel: endast din genomsnittliga hastighet och träffsäkerhet — trötthet kan synas här.",
+      "movement": "Rörelse: aktiva minuter under övningar — aldrig rå sensordata.",
+      "location": "Plats: endast om du är ute under en promenad. Koordinater sparas aldrig.",
+      "where": "Var: endast i den här telefonen. Inget konto och inget moln än.",
+      "sharing": "Delning: ditt vårdteam ser bara en sammanfattning när du ber om en konsultation, eller om ett säkerhetssvar kräver brådskande hjälp."
+    },
+    "sensorsTitle": "Sensorer",
+    "export": "Exportera mina data",
+    "exportBody": "Skapar en fil med allt som sparats, som du kan spara eller skicka.",
+    "delete": "Radera alla mina data",
+    "deleteTitle": "Radera allt?",
+    "deleteBody": "Detta tar bort dina incheckningar, inställningar och historik från den här telefonen. Det kan inte ångras.",
+    "deleteConfirm": "Radera"
+  },
+  "settings": {
+    "title": "Inställningar",
+    "language": "Språk",
+    "companion": "Följeslagare",
+    "companionName": "Namn",
+    "appearance": "Utseende",
+    "theme": {
+      "system": "System",
+      "light": "Ljust",
+      "dark": "Mörkt"
+    },
+    "accessibility": "Tillgänglighet",
+    "largeText": "Större text",
+    "largeTextDesc": "Gör texten större, utöver telefonens textstorlek.",
+    "reduceMotion": "Minska rörelse",
+    "reduceMotionDesc": "Stänger av kraftiga animationer.",
+    "vibration": "Vibration",
+    "vibrationDesc": "Mjuka vibrationer under guidade övningar.",
+    "privacy": "Integritetscenter",
+    "about": "Om appen",
+    "aboutBody": "{{app}} stöder välmående efter TMS-behandling. Den är inte en medicinteknisk produkt: den ställer inga diagnoser, ger ingen behandling och ersätter inte ditt vårdteam. Vid nödsituation, ring 112.",
+    "version": "Version {{version}}",
+    "logo": "{{app}}-logotyp"
+  },
+  "demo": {
+    "title": "Demoläge",
+    "subtitle": "För presentationer. Använder endast syntetiska data.",
+    "seedGood": "Skapa en bra vecka",
+    "seedDeclining": "Skapa en vecka som försämras",
+    "triggerUrgent": "Simulera brådskande incheckning",
+    "advanceDay": "Gå fram 1 dag",
+    "reset": "Återställ appen",
+    "simulatedDate": "Simulerat datum: {{date}}",
+    "priorityNow": "Prioritet nu: {{score}} / 100 ({{level}})",
+    "doneToast": "Klart ✓"
+  }
+}

@@ -1,0 +1,494 @@
+{
+  "common": {
+    "appName": "Valo",
+    "tagline": "Hyvinvointia TMS-hoidon jälkeen, pieni askel kerrallaan",
+    "continue": "Jatka",
+    "back": "Takaisin",
+    "skip": "Ohita",
+    "done": "Valmis",
+    "save": "Tallenna",
+    "cancel": "Peruuta",
+    "close": "Sulje",
+    "start": "Aloita",
+    "stop": "Lopeta",
+    "retry": "Yritä uudelleen",
+    "loading": "Ladataan…",
+    "errorTitle": "Jokin ei latautunut",
+    "errorBody": "Se ei ole sinun vikasi. Yritä hetken päästä uudelleen.",
+    "yes": "Kyllä",
+    "no": "Ei",
+    "needHelp": "Tarvitsetko apua nyt?",
+    "notMedicalDevice": "Ei ole lääkinnällinen laite. Se ei diagnosoi eikä hoida, eikä korvaa hoitotiimiäsi. Hätätilanteessa soita 112.",
+    "minutes_one": "{{count}} min",
+    "minutes_other": "{{count}} min",
+    "hours_one": "{{count}} tunti",
+    "hours_other": "{{count}} tuntia",
+    "today": "Tänään",
+    "yesterday": "Eilen"
+  },
+  "languages": {
+    "en": "English",
+    "fi": "Suomi",
+    "es": "Español",
+    "sv": "Svenska"
+  },
+  "tabs": {
+    "today": "Tänään",
+    "checkin": "Kuulumiset",
+    "comfort": "Rauhoitu",
+    "insights": "Kehitys",
+    "care": "Hoito"
+  },
+  "a11y": {
+    "increase": "Lisää",
+    "decrease": "Vähennä",
+    "helpHint": "Avaa hätä- ja tukipalvelujen yhteystiedot",
+    "settings": "Asetukset",
+    "companion": "Kumppani ({{species}}), nimeltään {{name}}",
+    "moodOption": "Mieliala {{value}}/5: {{label}}",
+    "chart": "{{label}} viimeisen 14 päivän ajalta",
+    "selected": "valittu"
+  },
+  "onboarding": {
+    "step": "Vaihe {{current}}/{{total}}",
+    "language": {
+      "title": "Valitse kieli",
+      "subtitle": "Voit vaihtaa sen milloin tahansa asetuksista."
+    },
+    "welcome": {
+      "title": "Tervetuloa",
+      "body": "Tämä sovellus auttaa sinua voimaan hyvin kotona TMS-hoidon jälkeen: lyhyitä kuulumisia, pieniä ideoita joka päivälle ja helppo tapa ottaa yhteyttä hoitotiimiisi.",
+      "disclaimerTitle": "Hyvä tietää",
+      "disclaimer": "Tämä sovellus ei ole lääkinnällinen laite. Se ei diagnosoi eikä hoida, eikä se koskaan korvaa hoitotiimiäsi. Hätätilanteessa soita 112."
+    },
+    "consent": {
+      "title": "Sinä päätät, anturi kerrallaan",
+      "subtitle": "Kaikki on vapaaehtoista. Sovellus toimii ilman näitä, ja voit muuttaa valintoja myöhemmin.",
+      "movement": "Liike",
+      "movementDesc": "Käyttää liikeanturia harjoitusten aikana aktiivisten minuuttien laskemiseen.",
+      "taps": "Napautukset",
+      "tapsDesc": "Lyhyt napautuspeli. Vain keskimääräinen nopeus ja tarkkuus tallennetaan.",
+      "location": "Likimääräinen sijainti",
+      "locationDesc": "Vain ulkona päivänvalossa vietetyn ajan arvioimiseen. Käsitellään puhelimessasi; koordinaatteja ei koskaan tallenneta.",
+      "vibration": "Värinä",
+      "vibrationDesc": "Pehmeät värinät ohjaavat hengitystä ja muita harjoituksia."
+    },
+    "companion": {
+      "title": "Valitse kumppani",
+      "subtitle": "Pieni ystävä seuraksesi. Vain lohduksi.",
+      "nameLabel": "Anna sille nimi",
+      "namePlaceholder": "Nimi",
+      "defaults": {
+        "bee": "Pörri",
+        "cat": "Kuu",
+        "dog": "Nalle",
+        "bird": "Pipo",
+        "person": "Alex"
+      }
+    },
+    "baseline": {
+      "title": "Ensimmäiset, lyhyet kuulumiset",
+      "subtitle": "Tämä näyttää, mistä lähdet liikkeelle. Oikeita tai vääriä vastauksia ei ole."
+    },
+    "finish": "Aloitetaan"
+  },
+  "species": {
+    "bee": "Mehiläinen",
+    "cat": "Kissa",
+    "dog": "Koira",
+    "bird": "Lintu",
+    "person": "Ihminen"
+  },
+  "checkin": {
+    "title": "Mitä sinulle kuuluu tänään?",
+    "step": "Vaihe {{current}}/{{total}}",
+    "mood": {
+      "question": "Millainen mielialasi on tänään?",
+      "levels": {
+        "1": "Hyvin matala",
+        "2": "Matala",
+        "3": "Kohtalainen",
+        "4": "Hyvä",
+        "5": "Erittäin hyvä"
+      }
+    },
+    "energy": {
+      "question": "Millainen on energiatasosi?",
+      "low": "Matala",
+      "high": "Korkea"
+    },
+    "anxiety": {
+      "question": "Kuinka jännittynyt tai ahdistunut olo sinulla on?",
+      "low": "Rauhallinen",
+      "high": "Hyvin jännittynyt"
+    },
+    "sleep": {
+      "question": "Montako tuntia nukuit viime yönä?",
+      "value": "{{hours}} h"
+    },
+    "scaleValue": "{{value}}/5",
+    "game": {
+      "title": "Napauta, kun ympyrä hehkuu",
+      "intro": "Lyhyt peli, {{rounds}} kierrosta. Vain keskiarvo tallennetaan, ei yksittäisiä napautuksia.",
+      "wait": "Odota hehkua…",
+      "tap": "Napauta nyt!",
+      "tooEarly": "Hieman liian aikaisin — ei haittaa.",
+      "nice": "Hienoa!",
+      "round": "Kierros {{current}}/{{total}}",
+      "result": "Kiitos! Keskiarvosi oli {{ms}} ms.",
+      "skip": "Ohita peli",
+      "off": "Napautuspeli on pois päältä yksityisyysasetuksissasi, joten ohitamme sen.",
+      "circle": "Reaktioympyrä. Napauta, kun se hehkuu."
+    },
+    "safety": {
+      "title": "Vielä yksi kysymys",
+      "question": "Onko sinulla viime päivinä ollut ajatuksia itsesi vahingoittamisesta?",
+      "context": "Kysymme tätä kaikilta. Vastauksesi auttaa hoitotiimiäsi tukemaan sinua."
+    },
+    "note": {
+      "question": "Haluatko kirjata jotain?",
+      "placeholder": "Muutama sana, jos haluat (vapaaehtoinen)"
+    },
+    "save": "Tallenna kuulumiset",
+    "doneTitle": "Kiitos, että kerroit kuulumisesi",
+    "suggestion": "Jotain, mikä voisi auttaa nyt",
+    "alreadyDone": "Olet jo kertonut tämän päivän kuulumiset. Jos jokin muuttui, voit tehdä sen uudelleen.",
+    "again": "Kerro kuulumiset uudelleen",
+    "backToday": "Takaisin Tänään-näkymään"
+  },
+  "crisis": {
+    "title": "Et ole yksin",
+    "body": "Jos olet vaarassa tai saatat vahingoittaa itseäsi, hae apua heti. Avun pyytäminen on rohkea teko.",
+    "call112": "Soita 112",
+    "call112Hint": "Hätänumero Suomessa",
+    "linesTitle": "Puhu jonkun kanssa",
+    "call": "Soita {{number}}",
+    "contactTeam": "Ota yhteyttä hoitotiimiini",
+    "contactTeamSent": "Hoitotiimillesi on ilmoitettu (simuloitu tässä demossa). He ottavat sinuun yhteyttä mahdollisimman pian.",
+    "urgentSent": "Vastauksesi vuoksi hoitotiimillesi on lähetetty hälytys (simuloitu). Älä odota, jos et tunne oloasi turvalliseksi.",
+    "breathe": "Hengitä kanssani minuutin ajan",
+    "resources": {
+      "mieliFi": "Kriisipuhelin (suomeksi)",
+      "mieliSv": "Kriisipuhelin (ruotsiksi)",
+      "mieliEn": "Kriisipuhelin (englanniksi)",
+      "always": "24/7",
+      "check": "Tarkista aukioloajat"
+    }
+  },
+  "today": {
+    "title": "Tänään",
+    "howDoing": "Miten sinulla menee",
+    "trend": {
+      "better": "Mielialasi on tuntunut tällä viikolla hieman kevyemmältä.",
+      "steady": "Viikkosi on ollut melko tasainen.",
+      "harder": "Tämä viikko vaikuttaa raskaammalta kuin edellinen. Se on okei — otetaan rauhallisesti.",
+      "notEnough": "Muutaman kuulumisen jälkeen näet viikkosi tässä."
+    },
+    "moodLabel": "Mieliala",
+    "plan": {
+      "title": "Pieni suunnitelmasi tälle päivälle",
+      "subtitle": "Vain ideoita. Mikä tahansa niistä riittää.",
+      "done": "Tehty",
+      "notToday": "Ei tänään",
+      "markedDone": "Tehty — hienoa",
+      "markedNotToday": "Ehkä toisena päivänä",
+      "allDone": "Ihanaa. Se riittää tälle päivälle.",
+      "open": "Avaa",
+      "undo": "Kumoa"
+    },
+    "checkinCta": "Kerro tämän päivän kuulumiset",
+    "checkinDone": "Valmista tältä päivältä ✓",
+    "suggestConsult": {
+      "title": "Auttaisiko jutella jonkun kanssa?",
+      "cta": "Pyydä vastaanottoaikaa",
+      "dismiss": "Ei nyt"
+    },
+    "urgentNotice": "Hoitotiimillesi lähetettiin tänään hälytys (simuloitu). Jos et tunne oloasi turvalliseksi, soita 112."
+  },
+  "companion": {
+    "greeting": {
+      "morning": "Hyvää huomenta!",
+      "afternoon": "Hyvää iltapäivää!",
+      "evening": "Hyvää iltaa!",
+      "night": "Hei, on jo myöhä."
+    },
+    "voice": {
+      "bee": "Bzz — pienetkin askeleet ovat tärkeitä.",
+      "cat": "Otetaan tänään rauhallisesti.",
+      "dog": "Olen niin iloinen nähdessäni sinut!",
+      "bird": "Säästin sinulle pienen laulun.",
+      "person": "Olen tässä kanssasi."
+    },
+    "context": {
+      "welcomeBack": "Tervetuloa takaisin. Kiva nähdä sinua.",
+      "lowMood": "Eilinen tuntui raskaalta. Ollaan tänään erityisen lempeitä.",
+      "midMood": "Yksi pieni asia kerrallaan riittää.",
+      "highMood": "Ihanaa, että eilen tuntui kevyemmältä.",
+      "noMood": "Miltä sinusta tänään tuntuu?",
+      "daylight": "Päivät ovat nyt lyhyitä — jo 10 minuuttia päivänvaloa auttaa.",
+      "night": "Lepokin on tärkeää. Huomenna on uusi päivä."
+    },
+    "checkin": {
+      "low": "Kiitos, että kerroit. Raskaat päivät menevät ohi — tehdään jotain pientä ja lempeää.",
+      "mid": "Kiitos kuulumisista. Tasainen on hyvä.",
+      "high": "Mukavaa, että tänään tuntuu hyvältä! Jatketaan lempeästi.",
+      "urgent": "Kiitos rehellisyydestäsi. Ansaitset tukea — hae apua nyt."
+    },
+    "encourage": {
+      "start": "Kun olet valmis.",
+      "gentle": "Kaikki liike on hyvästä.",
+      "done": "Teit sen. Hienoa.",
+      "keepGoing": {
+        "bee": "Bzz bzz, jatka samaan malliin!",
+        "cat": "Rauhallisesti ja pehmeästi. Täydellistä.",
+        "dog": "Jee! Teet tosi hienosti!",
+        "bird": "Tsirp! Ihana rytmi!",
+        "person": "Teet todella hienosti."
+      }
+    },
+    "suggestConsult": "{{name}} huomasi, että viime päivät vaikuttavat raskaammilta. Haluaisitko jutella hoitotiimisi kanssa? Valinta on sinun."
+  },
+  "interventions": {
+    "breathing": {
+      "title": "Ohjattu hengitys",
+      "why": "Hidas hengitys rauhoittaa kehon stressireaktiota."
+    },
+    "daylightWalk": {
+      "title": "Päivänvalokävely",
+      "why": "Päivänvalo tukee sisäistä kelloa ja mielialaa, etenkin pimeinä kuukausina."
+    },
+    "reachOut": {
+      "title": "Laita viesti jollekulle",
+      "why": "Pieni yhteydenotto voi piristää päivää.",
+      "howTo": "Lähetä lyhyt viesti jollekulle, josta pidät. \"Ajattelin sinua\" riittää."
+    },
+    "move": {
+      "title": "Liiku kanssani",
+      "why": "Lempeä liike vapauttaa jännitystä ja tuo vähän energiaa."
+    },
+    "fireplace": {
+      "title": "Takkatuli",
+      "why": "Hitaan tulen katselu auttaa mieltä lepäämään."
+    },
+    "fish": {
+      "title": "Kalat järvessä",
+      "why": "Rauhallinen, hidas liike antaa ajatuksille tauon."
+    },
+    "puzzle": {
+      "title": "Rauhallinen palapeli",
+      "why": "Lempeä tehtävä voi hiljentää kiireisiä ajatuksia. Ei ajastinta, ei virheitä."
+    },
+    "gratitude": {
+      "title": "Yksi hyvä asia",
+      "why": "Pienten hyvien hetkien huomaaminen tukee toipumista.",
+      "howTo": "Mieti yhtä pientä asiaa, joka meni tänään hyvin. Siinä kaikki."
+    }
+  },
+  "comfort": {
+    "title": "Rauhoitu",
+    "subtitle": "Rauhallista tekemistä omaan tahtiin.",
+    "open": "Aloita",
+    "feedbackQuestion": "Auttoiko tämä?",
+    "helped": "Auttoi",
+    "neutral": "En tiedä",
+    "notHelped": "Ei auttanut",
+    "thanks": "Kiitos — kirjattu.",
+    "breathing": {
+      "box": "Laatikko 4-4-4-4",
+      "calm": "Rauha 4-6",
+      "pattern": "Rytmi",
+      "duration": "Kesto",
+      "inhale": "Hengitä sisään",
+      "hold": "Pidätä",
+      "exhale": "Hengitä ulos",
+      "remaining": "{{time}} jäljellä",
+      "finished": "Hienosti tehty. Huomaa, miltä sinusta tuntuu."
+    },
+    "fireplace": {
+      "hint": "Katsele vain liekkejä. Viivy niin kauan kuin haluat."
+    },
+    "fish": {
+      "hint": "Napauta vettä kevyesti tai kallista puhelinta.",
+      "tiltOff": "Kallistus ei ole käytössä, koska liikeanturia ei ole otettu käyttöön.",
+      "a11y": "Tyyni järvi, jossa kalat uivat hitaasti. Napauta tehdäksesi väreitä."
+    },
+    "puzzle": {
+      "hint": "Liu'uta palat järjestykseen. Ei ajastinta, ei virheitä.",
+      "solved": "Ratkaistu! Hengitä hitaasti.",
+      "shuffle": "Uusi palapeli",
+      "tile": "Pala {{n}}",
+      "tileMovable": "Pala {{n}}, voi siirtää",
+      "moves_one": "{{count}} siirto",
+      "moves_other": "{{count}} siirtoa"
+    },
+    "move": {
+      "hint": "Liiku 2 minuutin ajan niin kuin hyvältä tuntuu. Keinu, venyttele tai tanssi.",
+      "beat": "Tahti",
+      "movementOff": "Liikeanturi on pois päältä — liiku vain tahdin mukana.",
+      "activity": "Liikkeesi",
+      "finished": "Ihanaa liikettä! Tälle päivälle lisättiin {{minutes}} aktiivista minuuttia."
+    },
+    "walk": {
+      "daylightToday": "Tänään on noin {{hours}} tuntia päivänvaloa.",
+      "locationOn": "Käytämme likimääräistä sijaintia ulkona vietetyn ajan arvioimiseen. Koordinaatteja ei koskaan tallenneta.",
+      "locationOff": "Sijainti on pois päältä. Käytämme Helsingin päivänvaloa, ja voit kirjata ulkoiluajan itse.",
+      "start": "Aloita kävely",
+      "finish": "Lopeta kävely",
+      "elapsed": "Aika: {{time}}",
+      "outside": "Ulkona tähän mennessä: noin {{minutes}} min",
+      "manualQuestion": "Noin montako minuuttia olit ulkona?",
+      "saved": "Tallennettiin {{minutes}} minuuttia päivänvaloa. Hienoa.",
+      "permissionDenied": "Sijaintilupaa ei annettu, joten voit kirjata ulkoiluajan itse."
+    }
+  },
+  "insights": {
+    "title": "Kehitys",
+    "subtitle": "Viimeiset 14 päivääsi selkokielellä.",
+    "mood": "Mieliala",
+    "sleep": "Uni",
+    "activity": "Liikkuminen",
+    "reaction": "Reaktioaika",
+    "daylight": "Päivänvalo",
+    "avgMood": "Keskiarvo {{value}}/5",
+    "avgHours": "Keskimäärin {{value}} h yössä",
+    "avgMinutes": "Keskimäärin {{value}} min päivässä",
+    "avgMs": "Keskiarvo {{value}} ms",
+    "reactionNote": "Pienempi on nopeampi. Hitaammat päivät ovat tavallisia väsyneenä.",
+    "noData": "Ei vielä tietoja",
+    "empty": "Tietoja ei ole vielä tarpeeksi. Kerro kuulumisesi muutaman kerran nähdäksesi kehityksen.",
+    "helpsTitle": "Mikä näyttää auttavan sinua",
+    "helpsBody": "Perustuu arvioihisi ja siihen, miltä sinusta tuntui seuraavana päivänä.",
+    "helpsEmpty": "Arvioi muutama rauhoittava harjoitus, niin näytämme, mikä auttaa sinua eniten.",
+    "rank": {
+      "top": "Auttaa sinua eniten",
+      "good": "Näyttää auttavan",
+      "mixed": "Vaihtelevaa toistaiseksi",
+      "low": "Auttanut vähemmän toistaiseksi"
+    },
+    "tried_one": "Arvioitu {{count}} kerran",
+    "tried_other": "Arvioitu {{count}} kertaa"
+  },
+  "care": {
+    "title": "Hoito",
+    "subtitle": "Hoitotiimisi (kuvitteellinen, tätä demoa varten).",
+    "speaks": "Kielet: {{list}}",
+    "nextSlot": "Seuraava vapaa aika: {{time}}",
+    "noSlot": "Ei vapaita aikoja seuraavan 48 tunnin aikana",
+    "roles": {
+      "psychiatrist": "Psykiatri",
+      "nurse": "Psykiatrinen sairaanhoitaja",
+      "psychologist": "Psykologi"
+    },
+    "requestCta": "Pyydä vastaanottoaikaa",
+    "requestsTitle": "Pyyntösi",
+    "noRequests": "Ei vielä pyyntöjä. Voit pyytää keskustelua milloin tahansa.",
+    "position": "Sijainti jonossa: {{position}}",
+    "eta_one": "Vastaus odotettavissa noin {{count}} tunnin kuluessa",
+    "eta_other": "Vastaus odotettavissa noin {{count}} tunnin kuluessa",
+    "replied": "Hoitotiimisi on vastannut ja ottaa sinuun yhteyttä (simuloitu).",
+    "sent": "Lähetetty {{time}}",
+    "urgentAlert": "Kiireellinen hälytys lähetetty {{time}}. Hoitotiimillesi ilmoitettiin (simuloitu).",
+    "priorityLabel": "Kiireellisyys: {{level}}",
+    "consult": {
+      "title": "Pyydä vastaanottoaikaa",
+      "reasonQuestion": "Mistä haluaisit puhua?",
+      "reasons": {
+        "moodLower": "Mielialani on matalampi",
+        "sleep": "Uni",
+        "worried": "Olen huolissani",
+        "treatment": "Kysymyksiä hoidosta",
+        "talk": "Haluaisin vain jutella"
+      },
+      "urgencyQuestion": "Kuinka kiireelliseltä se tuntuu?",
+      "urgency": {
+        "low": "Voi odottaa muutaman päivän",
+        "medium": "Pian olisi hyvä",
+        "high": "Mahdollisimman pian"
+      },
+      "submit": "Lähetä pyyntö",
+      "resultTitle": "Pyyntö lähetetty",
+      "whyTitle": "Mitä hoitotiimisi näkee",
+      "noReasons": "Viime päivistäsi ei noussut esiin mitään huolestuttavaa.",
+      "unsafe": "Jos et tunne oloasi turvalliseksi, älä odota — soita 112.",
+      "urgentRouted": "Tämänpäiväisen turvallisuusvastauksesi vuoksi tämä meni suoraan hoitotiimillesi kiireellisenä (simuloitu)."
+    }
+  },
+  "priority": {
+    "level": {
+      "low": "matala",
+      "medium": "keskitaso",
+      "high": "korkea"
+    },
+    "reasons": {
+      "moodDrop": "Mielialasi on ollut matalampi kuin edellisellä viikolla",
+      "lowMood": "Mielialasi on ollut matala useana päivänä",
+      "missedCheckIns": "Useana päivänä kuulumisia ei kirjattu",
+      "activityDrop": "Olet liikkunut tavallista vähemmän",
+      "reactionSlower": "Napautuspelisi on ollut tavallista hitaampi",
+      "shortSleep": "Useita lyhyitä öitä (alle 5 tuntia)",
+      "highAnxiety": "Olet tuntenut itsesi melko jännittyneeksi",
+      "perceivedUrgency": "Kerroit, että asia tuntuu kiireelliseltä"
+    }
+  },
+  "risk": {
+    "reasons": {
+      "safetyAnswer": "Turvallisuuskysymykseen vastattiin \"kyllä\""
+    }
+  },
+  "privacy": {
+    "title": "Yksityisyyskeskus",
+    "intro": "Tässä versiossa tietosi pysyvät tässä puhelimessa. Sinä päätät, mitä kerätään.",
+    "whatTitle": "Mitä keräämme ja miksi",
+    "items": {
+      "checkins": "Kuulumiset: mieliala, energia, jännitys, uni ja vapaaehtoiset muistiinpanot — kehityksen näyttämiseksi.",
+      "reaction": "Napautuspeli: vain keskimääräinen nopeus ja tarkkuus — väsymys voi näkyä tässä.",
+      "movement": "Liike: aktiiviset minuutit harjoitusten aikana — ei koskaan raakaa anturidataa.",
+      "location": "Sijainti: vain se, oletko ulkona kävelyn aikana. Koordinaatteja ei koskaan tallenneta.",
+      "where": "Missä: vain tässä puhelimessa. Ei tiliä eikä pilveä vielä.",
+      "sharing": "Jakaminen: hoitotiimisi näkee yhteenvedon vain, kun pyydät vastaanottoaikaa, tai jos turvallisuusvastaus vaatii kiireellistä apua."
+    },
+    "sensorsTitle": "Anturit",
+    "export": "Vie tietoni",
+    "exportBody": "Luo tiedoston kaikesta tallennetusta, jonka voit tallentaa tai lähettää.",
+    "delete": "Poista kaikki tietoni",
+    "deleteTitle": "Poistetaanko kaikki?",
+    "deleteBody": "Tämä poistaa kuulumisesi, asetuksesi ja historiasi tästä puhelimesta. Toimintoa ei voi perua.",
+    "deleteConfirm": "Poista"
+  },
+  "settings": {
+    "title": "Asetukset",
+    "language": "Kieli",
+    "companion": "Kumppani",
+    "companionName": "Nimi",
+    "appearance": "Ulkoasu",
+    "theme": {
+      "system": "Järjestelmä",
+      "light": "Vaalea",
+      "dark": "Tumma"
+    },
+    "accessibility": "Saavutettavuus",
+    "largeText": "Suurempi teksti",
+    "largeTextDesc": "Suurentaa tekstiä puhelimesi tekstikoon lisäksi.",
+    "reduceMotion": "Vähennä liikettä",
+    "reduceMotionDesc": "Poistaa voimakkaat animaatiot käytöstä.",
+    "vibration": "Värinä",
+    "vibrationDesc": "Pehmeät värinät ohjattujen harjoitusten aikana.",
+    "privacy": "Yksityisyyskeskus",
+    "about": "Tietoja",
+    "aboutBody": "{{app}} tukee hyvinvointia TMS-hoidon jälkeen. Se ei ole lääkinnällinen laite: se ei diagnosoi eikä hoida, eikä korvaa hoitotiimiäsi. Hätätilanteessa soita 112.",
+    "version": "Versio {{version}}",
+    "logo": "{{app}}-logo"
+  },
+  "demo": {
+    "title": "Demotila",
+    "subtitle": "Esityksiä varten. Käyttää vain synteettistä dataa.",
+    "seedGood": "Luo hyvä viikko",
+    "seedDeclining": "Luo heikkenevä viikko",
+    "triggerUrgent": "Simuloi kiireellinen kuulumiskirjaus",
+    "advanceDay": "Siirry 1 päivä eteenpäin",
+    "reset": "Nollaa sovellus",
+    "simulatedDate": "Simuloitu päivä: {{date}}",
+    "priorityNow": "Kiireellisyys nyt: {{score}} / 100 ({{level}})",
+    "doneToast": "Valmis ✓"
+  }
+}

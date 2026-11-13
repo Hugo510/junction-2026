@@ -1,0 +1,494 @@
+{
+  "common": {
+    "appName": "Valo",
+    "tagline": "Staying well after TMS, one small step at a time",
+    "continue": "Continue",
+    "back": "Back",
+    "skip": "Skip",
+    "done": "Done",
+    "save": "Save",
+    "cancel": "Cancel",
+    "close": "Close",
+    "start": "Start",
+    "stop": "Stop",
+    "retry": "Try again",
+    "loading": "Loading…",
+    "errorTitle": "Something didn't load",
+    "errorBody": "It's not your fault. Please try again in a moment.",
+    "yes": "Yes",
+    "no": "No",
+    "needHelp": "Need help now?",
+    "notMedicalDevice": "Not a medical device. It does not diagnose or treat, and it does not replace your care team. In an emergency, call 112.",
+    "minutes_one": "{{count}} min",
+    "minutes_other": "{{count}} min",
+    "hours_one": "{{count}} hour",
+    "hours_other": "{{count}} hours",
+    "today": "Today",
+    "yesterday": "Yesterday"
+  },
+  "languages": {
+    "en": "English",
+    "fi": "Suomi",
+    "es": "Español",
+    "sv": "Svenska"
+  },
+  "tabs": {
+    "today": "Today",
+    "checkin": "Check-in",
+    "comfort": "Comfort",
+    "insights": "Insights",
+    "care": "Care"
+  },
+  "a11y": {
+    "increase": "Increase",
+    "decrease": "Decrease",
+    "helpHint": "Opens emergency and support contacts",
+    "settings": "Settings",
+    "companion": "{{species}} companion called {{name}}",
+    "moodOption": "Mood {{value}} of 5: {{label}}",
+    "chart": "{{label}} over the last 14 days",
+    "selected": "selected"
+  },
+  "onboarding": {
+    "step": "Step {{current}} of {{total}}",
+    "language": {
+      "title": "Choose your language",
+      "subtitle": "You can change it anytime in Settings."
+    },
+    "welcome": {
+      "title": "Welcome",
+      "body": "This app helps you stay well at home after your TMS treatment: short check-ins, small ideas for each day and an easy way to reach your care team.",
+      "disclaimerTitle": "Good to know",
+      "disclaimer": "This app is not a medical device. It does not diagnose or treat, and it never replaces your care team. In an emergency, call 112."
+    },
+    "consent": {
+      "title": "You decide, sensor by sensor",
+      "subtitle": "Everything is optional. The app works without any of these, and you can change them later.",
+      "movement": "Movement",
+      "movementDesc": "Uses the motion sensor during exercises to count active minutes.",
+      "taps": "Tap pattern",
+      "tapsDesc": "A short tap game. Only your average speed and accuracy are kept.",
+      "location": "Approximate location",
+      "locationDesc": "Only to estimate time outside in daylight. Processed on your phone; coordinates are never saved.",
+      "vibration": "Vibration",
+      "vibrationDesc": "Gentle vibrations that guide breathing and other exercises."
+    },
+    "companion": {
+      "title": "Choose a companion",
+      "subtitle": "A small friend to keep you company. Just for comfort.",
+      "nameLabel": "Give them a name",
+      "namePlaceholder": "Name",
+      "defaults": {
+        "bee": "Pörri",
+        "cat": "Kuu",
+        "dog": "Nalle",
+        "bird": "Pipo",
+        "person": "Alex"
+      }
+    },
+    "baseline": {
+      "title": "A first, short check-in",
+      "subtitle": "This shows where you're starting from. There are no right or wrong answers."
+    },
+    "finish": "Let's begin"
+  },
+  "species": {
+    "bee": "Bee",
+    "cat": "Cat",
+    "dog": "Dog",
+    "bird": "Bird",
+    "person": "Person"
+  },
+  "checkin": {
+    "title": "How are you today?",
+    "step": "Step {{current}} of {{total}}",
+    "mood": {
+      "question": "How is your mood today?",
+      "levels": {
+        "1": "Very low",
+        "2": "Low",
+        "3": "Okay",
+        "4": "Good",
+        "5": "Very good"
+      }
+    },
+    "energy": {
+      "question": "How is your energy?",
+      "low": "Low",
+      "high": "High"
+    },
+    "anxiety": {
+      "question": "How tense or anxious do you feel?",
+      "low": "Calm",
+      "high": "Very tense"
+    },
+    "sleep": {
+      "question": "How many hours did you sleep last night?",
+      "value": "{{hours}} h"
+    },
+    "scaleValue": "{{value}} of 5",
+    "game": {
+      "title": "Tap when the circle glows",
+      "intro": "A short game of {{rounds}} rounds. Only an average is saved, never each tap.",
+      "wait": "Wait for the glow…",
+      "tap": "Tap now!",
+      "tooEarly": "A little early — that's okay.",
+      "nice": "Nice!",
+      "round": "Round {{current}} of {{total}}",
+      "result": "Thanks! Your average was {{ms}} ms.",
+      "skip": "Skip the game",
+      "off": "The tap game is off in your privacy settings, so we'll skip it.",
+      "circle": "Reaction circle. Tap when it glows."
+    },
+    "safety": {
+      "title": "One more question",
+      "question": "In the last few days, have you had thoughts of harming yourself?",
+      "context": "We ask everyone this. Your answer helps your care team support you."
+    },
+    "note": {
+      "question": "Anything you'd like to note?",
+      "placeholder": "A few words, if you like (optional)"
+    },
+    "save": "Save check-in",
+    "doneTitle": "Thank you for checking in",
+    "suggestion": "Something that might help now",
+    "alreadyDone": "You've already checked in today. If something changed, you can check in again.",
+    "again": "Check in again",
+    "backToday": "Back to Today"
+  },
+  "crisis": {
+    "title": "You're not alone",
+    "body": "If you are in danger or might hurt yourself, please get help right now. Reaching out is a strong thing to do.",
+    "call112": "Call 112",
+    "call112Hint": "Emergency number in Finland",
+    "linesTitle": "Talk to someone",
+    "call": "Call {{number}}",
+    "contactTeam": "Contact my care team",
+    "contactTeamSent": "Your care team has been notified (simulated in this demo). They will contact you as soon as possible.",
+    "urgentSent": "Because of your answer, your care team has been alerted (simulated). Please don't wait if you feel unsafe.",
+    "breathe": "Breathe with me for a minute",
+    "resources": {
+      "mieliFi": "Crisis Helpline (Finnish)",
+      "mieliSv": "Crisis Helpline (Swedish)",
+      "mieliEn": "Crisis Helpline (English)",
+      "always": "24/7",
+      "check": "Check opening hours"
+    }
+  },
+  "today": {
+    "title": "Today",
+    "howDoing": "How you're doing",
+    "trend": {
+      "better": "Your mood has felt a bit lighter this week.",
+      "steady": "Your week has been fairly steady.",
+      "harder": "This week seems heavier than the last. That's okay — let's take it gently.",
+      "notEnough": "After a few check-ins, you'll see your week here."
+    },
+    "moodLabel": "Mood",
+    "plan": {
+      "title": "Your small plan for today",
+      "subtitle": "Just ideas. Any one of them counts.",
+      "done": "Done",
+      "notToday": "Not today",
+      "markedDone": "Done — well done",
+      "markedNotToday": "Maybe another day",
+      "allDone": "Lovely. That's plenty for today.",
+      "open": "Open",
+      "undo": "Undo"
+    },
+    "checkinCta": "Check in for today",
+    "checkinDone": "Done for today ✓",
+    "suggestConsult": {
+      "title": "Would it help to talk to someone?",
+      "cta": "Request a consultation",
+      "dismiss": "Not now"
+    },
+    "urgentNotice": "Your care team was alerted today (simulated). If you feel unsafe, call 112."
+  },
+  "companion": {
+    "greeting": {
+      "morning": "Good morning!",
+      "afternoon": "Good afternoon!",
+      "evening": "Good evening!",
+      "night": "Hi, it's late."
+    },
+    "voice": {
+      "bee": "Bzz — small steps still count.",
+      "cat": "Let's take things slowly today.",
+      "dog": "I'm so happy to see you!",
+      "bird": "I saved a little song for you.",
+      "person": "I'm here with you."
+    },
+    "context": {
+      "welcomeBack": "Welcome back. It's good to see you.",
+      "lowMood": "Yesterday felt heavy. Let's be extra gentle today.",
+      "midMood": "One small thing at a time is enough.",
+      "highMood": "It's lovely that things felt lighter yesterday.",
+      "noMood": "How are you feeling today?",
+      "daylight": "Days are short now — even 10 minutes of daylight helps.",
+      "night": "Rest matters too. Tomorrow is a new day."
+    },
+    "checkin": {
+      "low": "Thank you for telling me. Heavy days pass — let's do something small and kind.",
+      "mid": "Thanks for checking in. Steady is good.",
+      "high": "I'm glad today feels good! Let's keep it gentle.",
+      "urgent": "Thank you for being honest. You deserve support — please reach out now."
+    },
+    "encourage": {
+      "start": "Whenever you're ready.",
+      "gentle": "Any movement counts.",
+      "done": "You did it. Well done.",
+      "keepGoing": {
+        "bee": "Bzz bzz, keep it up!",
+        "cat": "Nice and easy. Purr-fect.",
+        "dog": "Yes! You're doing great!",
+        "bird": "Tweet! Lovely rhythm!",
+        "person": "You're doing really well."
+      }
+    },
+    "suggestConsult": "{{name}} noticed the last days seem harder. Would you like to talk to your care team? It's your choice."
+  },
+  "interventions": {
+    "breathing": {
+      "title": "Guided breathing",
+      "why": "Slow breathing calms the body's stress response."
+    },
+    "daylightWalk": {
+      "title": "Daylight walk",
+      "why": "Daylight supports your body clock and mood, especially in dark months."
+    },
+    "reachOut": {
+      "title": "Message someone",
+      "why": "A small connection can lift the day.",
+      "howTo": "Send a short message to someone you like. \"Thinking of you\" is enough."
+    },
+    "move": {
+      "title": "Move with me",
+      "why": "Gentle movement releases tension and adds a little energy."
+    },
+    "fireplace": {
+      "title": "Fireplace",
+      "why": "Watching a slow fire helps the mind rest."
+    },
+    "fish": {
+      "title": "Fish in the lake",
+      "why": "Calm, slow movement gives busy thoughts a break."
+    },
+    "puzzle": {
+      "title": "Calm puzzle",
+      "why": "A gentle task can quiet busy thoughts. No timer, no mistakes."
+    },
+    "gratitude": {
+      "title": "One good thing",
+      "why": "Noticing small good moments supports recovery.",
+      "howTo": "Think of one small thing that went okay today. That's all."
+    }
+  },
+  "comfort": {
+    "title": "Comfort",
+    "subtitle": "Calm things to do, at your own pace.",
+    "open": "Start",
+    "feedbackQuestion": "Did this help?",
+    "helped": "Helped",
+    "neutral": "Not sure",
+    "notHelped": "Didn't help",
+    "thanks": "Thanks — noted.",
+    "breathing": {
+      "box": "Box 4-4-4-4",
+      "calm": "Calm 4-6",
+      "pattern": "Pattern",
+      "duration": "Duration",
+      "inhale": "Breathe in",
+      "hold": "Hold",
+      "exhale": "Breathe out",
+      "remaining": "{{time}} left",
+      "finished": "Nicely done. Notice how you feel."
+    },
+    "fireplace": {
+      "hint": "Just watch the flames. Stay as long as you like."
+    },
+    "fish": {
+      "hint": "Tap the water gently, or tilt your phone.",
+      "tiltOff": "Tilt is off because the movement sensor isn't enabled.",
+      "a11y": "A calm lake with fish swimming slowly. Tap to make ripples."
+    },
+    "puzzle": {
+      "hint": "Slide the tiles into order. No timer, no mistakes.",
+      "solved": "Solved! Take a slow breath.",
+      "shuffle": "New puzzle",
+      "tile": "Tile {{n}}",
+      "tileMovable": "Tile {{n}}, can move",
+      "moves_one": "{{count}} move",
+      "moves_other": "{{count}} moves"
+    },
+    "move": {
+      "hint": "Move in any way that feels good, for 2 minutes. Sway, stretch or dance.",
+      "beat": "Beat",
+      "movementOff": "The movement sensor is off — just move along with the beat.",
+      "activity": "Your movement",
+      "finished": "Lovely moving! {{minutes}} active minutes added to today."
+    },
+    "walk": {
+      "daylightToday": "Today has about {{hours}} hours of daylight.",
+      "locationOn": "Using approximate location to estimate time outside. Coordinates are never saved.",
+      "locationOff": "Location is off. Using Helsinki daylight, and you can log time outside yourself.",
+      "start": "Start walk",
+      "finish": "Finish walk",
+      "elapsed": "Time: {{time}}",
+      "outside": "Time outside so far: about {{minutes}} min",
+      "manualQuestion": "About how many minutes were you outside?",
+      "saved": "Saved {{minutes}} minutes of daylight. Well done.",
+      "permissionDenied": "Location permission wasn't given, so you can log time outside yourself."
+    }
+  },
+  "insights": {
+    "title": "Insights",
+    "subtitle": "Your last 14 days, in plain words.",
+    "mood": "Mood",
+    "sleep": "Sleep",
+    "activity": "Activity",
+    "reaction": "Reaction time",
+    "daylight": "Daylight",
+    "avgMood": "Average {{value}} of 5",
+    "avgHours": "Average {{value}} h a night",
+    "avgMinutes": "Average {{value}} min a day",
+    "avgMs": "Average {{value}} ms",
+    "reactionNote": "Lower is quicker. Slower days are common when tired.",
+    "noData": "No data yet",
+    "empty": "Not enough data yet. Check in a few times to see your trends.",
+    "helpsTitle": "What seems to help you",
+    "helpsBody": "Based on your ratings and how you felt the next day.",
+    "helpsEmpty": "Rate a few comfort activities and we'll show what helps you most.",
+    "rank": {
+      "top": "Helps you most",
+      "good": "Seems helpful",
+      "mixed": "Mixed so far",
+      "low": "Less helpful so far"
+    },
+    "tried_one": "Rated {{count}} time",
+    "tried_other": "Rated {{count}} times"
+  },
+  "care": {
+    "title": "Care",
+    "subtitle": "Your care team (fictional, for this demo).",
+    "speaks": "Speaks: {{list}}",
+    "nextSlot": "Next free time: {{time}}",
+    "noSlot": "No free times in the next 48 h",
+    "roles": {
+      "psychiatrist": "Psychiatrist",
+      "nurse": "Psychiatric nurse",
+      "psychologist": "Psychologist"
+    },
+    "requestCta": "Request a consultation",
+    "requestsTitle": "Your requests",
+    "noRequests": "No requests yet. You can ask for a chat anytime.",
+    "position": "Position in line: {{position}}",
+    "eta_one": "Expected reply within ~{{count}} hour",
+    "eta_other": "Expected reply within ~{{count}} hours",
+    "replied": "Your care team has replied and will contact you (simulated).",
+    "sent": "Sent {{time}}",
+    "urgentAlert": "Urgent alert sent {{time}}. Your care team was notified (simulated).",
+    "priorityLabel": "Priority: {{level}}",
+    "consult": {
+      "title": "Request a consultation",
+      "reasonQuestion": "What would you like to talk about?",
+      "reasons": {
+        "moodLower": "My mood is lower",
+        "sleep": "Sleep",
+        "worried": "I feel worried",
+        "treatment": "Questions about treatment",
+        "talk": "I'd just like to talk"
+      },
+      "urgencyQuestion": "How urgent does it feel?",
+      "urgency": {
+        "low": "It can wait a few days",
+        "medium": "Soon would be good",
+        "high": "As soon as possible"
+      },
+      "submit": "Send request",
+      "resultTitle": "Request sent",
+      "whyTitle": "What your care team will see",
+      "noReasons": "Nothing worrying stood out in your recent days.",
+      "unsafe": "If you feel unsafe, don't wait — call 112.",
+      "urgentRouted": "Because of today's safety answer, this went straight to your care team as urgent (simulated)."
+    }
+  },
+  "priority": {
+    "level": {
+      "low": "low",
+      "medium": "medium",
+      "high": "high"
+    },
+    "reasons": {
+      "moodDrop": "Your mood has been lower than the week before",
+      "lowMood": "Your mood has been low on several days",
+      "missedCheckIns": "There were several days without a check-in",
+      "activityDrop": "You've been moving less than usual",
+      "reactionSlower": "Your tap game has been slower than usual",
+      "shortSleep": "Several short nights (under 5 hours)",
+      "highAnxiety": "You've been feeling quite tense",
+      "perceivedUrgency": "You told us it feels urgent"
+    }
+  },
+  "risk": {
+    "reasons": {
+      "safetyAnswer": "Safety question answered \"yes\""
+    }
+  },
+  "privacy": {
+    "title": "Privacy center",
+    "intro": "In this version, your data stays on this phone. You decide what is collected.",
+    "whatTitle": "What we collect, and why",
+    "items": {
+      "checkins": "Check-ins: mood, energy, tension, sleep and optional notes — to show your trends.",
+      "reaction": "Tap game: only your average speed and accuracy — tiredness can show up here.",
+      "movement": "Movement: active minutes during exercises — never raw sensor data.",
+      "location": "Location: only whether you're outside during a walk. Coordinates are never saved.",
+      "where": "Where: only on this phone. No account and no cloud yet.",
+      "sharing": "Sharing: your care team only sees a summary when you request a consultation, or if a safety answer needs urgent help."
+    },
+    "sensorsTitle": "Sensors",
+    "export": "Export my data",
+    "exportBody": "Creates a file with everything stored, which you can save or send.",
+    "delete": "Delete all my data",
+    "deleteTitle": "Delete everything?",
+    "deleteBody": "This removes your check-ins, settings and history from this phone. It can't be undone.",
+    "deleteConfirm": "Delete"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "companion": "Companion",
+    "companionName": "Name",
+    "appearance": "Appearance",
+    "theme": {
+      "system": "System",
+      "light": "Light",
+      "dark": "Dark"
+    },
+    "accessibility": "Accessibility",
+    "largeText": "Larger text",
+    "largeTextDesc": "Makes text bigger, on top of your phone's text size.",
+    "reduceMotion": "Reduce motion",
+    "reduceMotionDesc": "Turns off strong animations.",
+    "vibration": "Vibration",
+    "vibrationDesc": "Gentle vibrations during guided exercises.",
+    "privacy": "Privacy center",
+    "about": "About",
+    "aboutBody": "{{app}} supports wellbeing after TMS treatment. It is not a medical device: it does not diagnose or treat, and it does not replace your care team. In an emergency, call 112.",
+    "version": "Version {{version}}",
+    "logo": "{{app}} logo"
+  },
+  "demo": {
+    "title": "Demo mode",
+    "subtitle": "For presentations. Uses synthetic data only.",
+    "seedGood": "Seed good week",
+    "seedDeclining": "Seed declining week",
+    "triggerUrgent": "Trigger urgent check-in",
+    "advanceDay": "Advance 1 day",
+    "reset": "Reset app",
+    "simulatedDate": "Simulated date: {{date}}",
+    "priorityNow": "Priority now: {{score}} / 100 ({{level}})",
+    "doneToast": "Done ✓"
+  }
+}
