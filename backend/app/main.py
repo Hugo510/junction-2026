@@ -1,0 +1,13 @@
+from fastapi import FastAPI
+
+from app.api.routes import auth, health
+from app.config import settings
+
+app = FastAPI(
+    title="Junction 2026 · Beyond the Clinic API",
+    version=settings.app_version,
+)
+
+API_PREFIX = "/api/v1"
+app.include_router(health.router, prefix=API_PREFIX)
+app.include_router(auth.router, prefix=API_PREFIX)
