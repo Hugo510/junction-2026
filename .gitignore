@@ -6,6 +6,7 @@ node_modules/
 venv/
 __pycache__/
 *.py[cod]
+app/api/__pycache__/
 
 # Build output
 dist/
