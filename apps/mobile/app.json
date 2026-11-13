@@ -1,18 +1,18 @@
-{
+﻿{
   "expo": {
-    "name": "mobile",
-    "slug": "mobile",
-    "version": "1.0.0",
+    "name": "Valo",
+    "slug": "valo-beyond-the-clinic",
+    "version": "0.1.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "mobile",
+    "scheme": "valo",
     "userInterfaceStyle": "automatic",
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
+        "backgroundColor": "#DCEADF",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
         "backgroundImage": "./assets/images/android-icon-background.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
@@ -21,7 +21,6 @@
     },
     "web": {
       "bundler": "metro",
-      "output": "server",
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
@@ -31,13 +30,10 @@
         {
           "image": "./assets/images/splash-icon.png",
           "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
+          "backgroundColor": "#F7F4EE"
         }
       ],
       "expo-localization"
-    ],
-    "experiments": {
-      "typedRoutes": true
-    }
+    ]
   }
 }
