@@ -1,55 +1,104 @@
-import { useFonts } from 'expo-font';
+import '../src/i18n';
+
 import { DarkTheme, DefaultTheme, Stack, ThemeProvider } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
+import { StatusBar } from 'expo-status-bar';
+import { useEffect, useMemo } from 'react';
+import { View } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { useTranslation } from 'react-i18next';
 
-import { useColorScheme } from '@/components/useColorScheme';
+import { applyLanguage, detectDeviceLanguage } from '../src/i18n';
+import { useData } from '../src/store/data';
+import { useSettings } from '../src/store/settings';
+import { AppThemeProvider, ErrorState, LoadingState, useTheme } from '../src/ui';
 
-export {
-  // Catch any errors thrown by the Layout component.
-  ErrorBoundary,
-} from 'expo-router';
+export { ErrorBoundary } from 'expo-router';
 
-export const unstable_settings = {
-  // Ensure that reloading on `/modal` keeps a back button present.
-  anchor: '(tabs)',
-};
-
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
+SplashScreen.preventAutoHideAsync().catch(() => undefined);
 
 export default function RootLayout() {
-  const [loaded, error] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
-
-  // Expo Router uses Error Boundaries to catch errors in the navigation tree.
-  useEffect(() => {
-    if (error) throw error;
-  }, [error]);
-
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
-
-  if (!loaded) {
-    return null;
-  }
-
-  return <RootLayoutNav />;
+  return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <SafeAreaProvider>
+        <AppThemeProvider>
+          <Bootstrap />
+        </AppThemeProvider>
+      </SafeAreaProvider>
+    </GestureHandlerRootView>
+  );
 }
 
-function RootLayoutNav() {
-  const colorScheme = useColorScheme();
+function Bootstrap() {
+  const { colors, scheme } = useTheme();
+  const { t } = useTranslation();
+  const hydrated = useSettings((s) => s.hydrated);
+  const language = useSettings((s) => s.language);
+  const setLanguage = useSettings((s) => s.setLanguage);
+  const status = useData((s) => s.status);
+  const load = useData((s) => s.load);
+
+  // First launch: device language (or English). Afterwards: the saved choice.
+  useEffect(() => {
+    if (!hydrated) return;
+    if (!language) setLanguage(detectDeviceLanguage());
+    else applyLanguage(language);
+  }, [hydrated, language, setLanguage]);
+
+  useEffect(() => {
+    if (hydrated && status === 'idle') void load();
+  }, [hydrated, status, load]);
+
+  const ready = hydrated && (status === 'ready' || status === 'error');
+  useEffect(() => {
+    if (ready) SplashScreen.hideAsync().catch(() => undefined);
+  }, [ready]);
+
+  const navTheme = useMemo(() => {
+    const base = scheme === 'dark' ? DarkTheme : DefaultTheme;
+    return {
+      ...base,
+      colors: { ...base.colors, background: colors.background, card: colors.background, text: colors.text, border: colors.border, primary: colors.primary },
+    };
+  }, [scheme, colors]);
+
+  if (!ready) {
+    return (
+      <View style={{ flex: 1, backgroundColor: colors.background }}>
+        <LoadingState />
+      </View>
+    );
+  }
+  if (status === 'error') {
+    return (
+      <View style={{ flex: 1, backgroundColor: colors.background }}>
+        <ErrorState onRetry={load} />
+      </View>
+    );
+  }
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
+    <ThemeProvider value={navTheme}>
+      <StatusBar style={scheme === 'dark' ? 'light' : 'dark'} />
+      <Stack
+        screenOptions={{
+          headerStyle: { backgroundColor: colors.background },
+          headerTintColor: colors.text,
+          headerShadowVisible: false,
+          headerTitleStyle: { fontWeight: '600' },
+          contentStyle: { backgroundColor: colors.background },
+        }}
+      >
+        <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="(onboarding)" options={{ headerShown: false }} />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
+        <Stack.Screen name="crisis" options={{ presentation: 'modal', title: t('crisis.title') }} />
+        <Stack.Screen name="consult" options={{ presentation: 'modal', title: t('care.consult.title') }} />
+        <Stack.Screen name="settings/index" options={{ title: t('settings.title') }} />
+        <Stack.Screen name="privacy/index" options={{ title: t('privacy.title') }} />
+        <Stack.Screen name="demo" options={{ title: t('demo.title') }} />
+        <Stack.Screen name="exercise" options={{ headerShown: false }} />
       </Stack>
     </ThemeProvider>
   );
