@@ -1,6 +1,6 @@
 import { StyleSheet, View, useWindowDimensions } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { AppText, Card, Screen, radii, spacing, useTheme } from '../../ui';
+import { AppText, Card, FeatureCard, Screen, radii, spacing, useTheme, type Category } from '../../ui';
 import type { ClinicianRow } from './clinicianViewModel';
 
 export function ClinicianView({ rows, date }: { rows: ClinicianRow[]; date: string }) {
@@ -9,21 +9,33 @@ export function ClinicianView({ rows, date }: { rows: ClinicianRow[]; date: stri
   const { width } = useWindowDimensions();
   const wide = width >= 1000;
   const compact = width < 600;
-  const summary = [
-    { key: 'total', value: rows.length, color: colors.text },
-    { key: 'high', value: rows.filter((r) => r.priority.level === 'high').length, color: colors.danger },
-    { key: 'lost', value: rows.filter((r) => r.lostContact).length, color: colors.accent },
+  const summary: { key: string; value: number; color: string; category: Category }[] = [
+    { key: 'total', value: rows.length, color: colors.text, category: 'sky' },
+    { key: 'high', value: rows.filter((r) => r.priority.level === 'high').length, color: colors.danger, category: 'rose' },
+    { key: 'lost', value: rows.filter((r) => r.lostContact).length, color: colors.accent, category: 'night' },
   ];
+  // Calm status colours: red only for "high"; low is green, never the brand ember.
+  const look = {
+    high: { color: colors.danger, soft: colors.categories.rose.bg },
+    medium: { color: colors.warning, soft: colors.categories.sun.bg },
+    low: { color: colors.success, soft: colors.categories.leaf.bg },
+  };
 
   return (
     <Screen contentStyle={styles.screen}>
       <View style={styles.content}>
-        <AppText variant="caption" tone="muted">{t('clinician.subtitle', { date })}</AppText>
+        <FeatureCard
+          size={compact ? 'md' : 'lg'}
+          category="sky"
+          art="clinic"
+          title={t('clinician.title')}
+          description={t('clinician.subtitle', { date })}
+        />
         <View style={styles.summary}>
           {summary.map((item) => (
-            <Card key={item.key} flat style={[styles.metric, compact && styles.metricCompact]}>
-              <AppText variant={compact ? "heading" : "title"} style={{ color: item.color }}>{item.value}</AppText>
-              <AppText variant={compact ? "caption" : "label"}>{t(`clinician.summary.${item.key}`)}</AppText>
+            <Card key={item.key} category={item.category} style={[styles.metric, compact && styles.metricCompact]}>
+              <AppText variant={compact ? 'title' : 'display'} style={{ color: item.color }}>{item.value}</AppText>
+              <AppText variant={compact ? 'caption' : 'label'}>{t(`clinician.summary.${item.key}`)}</AppText>
             </Card>
           ))}
         </View>
@@ -35,11 +47,13 @@ export function ClinicianView({ rows, date }: { rows: ClinicianRow[]; date: stri
           {rows.map((row) => {
             const name = row.name.replace(/\s*\(synthetic\)/gi, '').trim();
             const level = row.priority.level;
-            const color = level === 'high' ? colors.danger : level === 'medium' ? colors.accent : colors.primary;
-            const soft = level === 'high' ? colors.dangerSoft : level === 'medium' ? colors.accentSoft : colors.primarySoft;
+            const { color, soft } = look[level];
             return (
-              <Card key={row.id} style={[styles.patient, { flexBasis: wide ? '48%' : '100%', borderLeftColor: color }]}>
+              <Card key={row.id} style={[styles.patient, { flexBasis: wide ? '48%' : '100%' }]}>
                 <View style={styles.header}>
+                  <View style={[styles.initial, { backgroundColor: soft }]}>
+                    <AppText variant="heading" accessibilityRole="text" style={{ color }}>{name.charAt(0)}</AppText>
+                  </View>
                   <AppText variant="heading" style={styles.name}>{name}</AppText>
                   <View style={[styles.badge, { backgroundColor: soft }]}>
                     <AppText variant="label" style={{ color }}>{row.priority.score}/100 · {t(`priority.level.${level}`)}</AppText>
@@ -50,16 +64,19 @@ export function ClinicianView({ rows, date }: { rows: ClinicianRow[]; date: stri
                   accessibilityRole="progressbar"
                   accessibilityLabel={t('clinician.scoreLabel', { name, level: t(`priority.level.${level}`) })}
                   accessibilityValue={{ min: 0, max: 100, now: row.priority.score }}
-                  style={[styles.track, { backgroundColor: colors.border }]}
+                  style={[styles.track, { backgroundColor: colors.surfaceAlt }]}
                 >
-                  <View style={[styles.fill, { width: `${row.priority.score}%`, backgroundColor: color }]} />
+                  <View style={[styles.fill, { width: `${Math.max(row.priority.score, 3)}%`, backgroundColor: color }]} />
                 </View>
                 <View style={styles.reasons}>
                   {row.reasons.length ? row.reasons.map((reason) => (
-                    <AppText variant="caption" key={reason}>• {t(`clinician.reasonsText.${reason.replace('priority.reasons.', '')}`)}</AppText>
+                    <View key={reason} style={styles.reason}>
+                      <View style={[styles.dot, { backgroundColor: color }]} />
+                      <AppText variant="caption" style={styles.reasonText}>{t(`clinician.reasonsText.${reason.replace('priority.reasons.', '')}`)}</AppText>
+                    </View>
                   )) : <AppText variant="caption" tone="muted">{t('clinician.noReasons')}</AppText>}
                 </View>
-                <View style={[styles.details, { borderTopColor: colors.border }]}>
+                <View style={[styles.details, { backgroundColor: colors.surfaceAlt }]}>
                   <AppText variant="label">{row.latestPhq9 ? t('clinician.phq', { total: row.latestPhq9.total, date: row.latestPhq9.date }) : t('clinician.noPhq')}</AppText>
                   {row.lostContact ? (
                     <View style={[styles.badge, { backgroundColor: colors.accentSoft, alignSelf: 'flex-start' }]}>
@@ -86,16 +103,20 @@ const styles = StyleSheet.create({
   content: { width: '100%', maxWidth: 1120, alignSelf: 'center', gap: spacing.md },
   summary: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm },
   metric: { flexGrow: 1, flexBasis: 140, minWidth: 0, gap: spacing.xs, padding: spacing.md },
-  metricCompact: { flexBasis: 0, flexShrink: 1, padding: spacing.sm },
-  noteCompact: { padding: spacing.sm },
-  note: { borderRadius: radii.md, padding: spacing.md, gap: spacing.xs },
+  metricCompact: { flexBasis: 0, flexShrink: 1, padding: spacing.sm + spacing.xs },
+  noteCompact: { padding: spacing.sm + spacing.xs },
+  note: { borderRadius: radii.lg, padding: spacing.md, gap: spacing.xs },
   grid: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'flex-start', gap: spacing.md },
-  patient: { flexGrow: 1, minWidth: 0, borderLeftWidth: 4, gap: spacing.sm, padding: spacing.md },
-  header: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: spacing.sm },
-  name: { flexShrink: 1 },
-  badge: { maxWidth: '100%', borderRadius: radii.sm, paddingHorizontal: spacing.sm, paddingVertical: spacing.xs },
-  track: { height: 6, borderRadius: radii.pill, overflow: 'hidden' },
+  patient: { flexGrow: 1, minWidth: 0, gap: spacing.sm + spacing.xs, padding: spacing.md, borderRadius: radii.xl },
+  header: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', gap: spacing.sm },
+  initial: { width: 40, height: 40, borderRadius: 20, alignItems: 'center', justifyContent: 'center' },
+  name: { flexShrink: 1, flexGrow: 1 },
+  badge: { maxWidth: '100%', borderRadius: radii.pill, paddingHorizontal: spacing.sm + spacing.xs, paddingVertical: spacing.xs },
+  track: { height: 10, borderRadius: radii.pill, overflow: 'hidden' },
   fill: { height: '100%', borderRadius: radii.pill },
   reasons: { gap: spacing.xs },
-  details: { borderTopWidth: StyleSheet.hairlineWidth, paddingTop: spacing.sm, gap: spacing.xs },
+  reason: { flexDirection: 'row', alignItems: 'flex-start', gap: spacing.sm },
+  dot: { width: 8, height: 8, borderRadius: 4, marginTop: 6 },
+  reasonText: { flex: 1 },
+  details: { borderRadius: radii.md, padding: spacing.sm + spacing.xs, gap: spacing.xs },
 });
