@@ -9,16 +9,20 @@ import { Composer, QuickReplies, TypingIndicator } from '../src/features/chat/Co
 import { MessageItem } from '../src/features/chat/MessageItem';
 import { SideMenu } from '../src/features/chat/SideMenu';
 import { useChatViewModel, type ChatRow } from '../src/features/chat/useChatViewModel';
+import { Hearth } from '../src/features/hearth/Hearth';
+import { useEmbers } from '../src/features/hearth/useEmbers';
 import { capitalizeFirst, formatDate } from '../src/i18n';
 import { useData } from '../src/store/data';
-import { AppText, Avatar, HelpButton, Icon, MAX_FONT_SCALE, MIN_TOUCH, spacing, useTheme } from '../src/ui';
+import { AppText, Avatar, HelpButton, Icon, MAX_FONT_SCALE, MIN_TOUCH, spacing, useScreenFocused, useTheme } from '../src/ui';
 
 /** Home screen: talk to your companion. Everything else opens from here (cards, + sheet, ☰ menu). */
 export default function ChatScreen() {
   const { t } = useTranslation();
-  const { colors } = useTheme();
+  const { colors, reduceMotion } = useTheme();
   const patient = useData((s) => s.patient);
   const vm = useChatViewModel();
+  const embers = useEmbers();
+  const focused = useScreenFocused();
   const [menuOpen, setMenuOpen] = useState(false);
   const [actionsOpen, setActionsOpen] = useState(false);
 
@@ -95,10 +99,19 @@ export default function ChatScreen() {
           ListHeaderComponent={vm.typing ? <TypingIndicator name={name} /> : undefined}
           ListFooterComponent={
             <View style={styles.hero}>
-              <Avatar species={species} size={80} animated />
-              <AppText variant="title" align="center">
-                {name}
+              <Hearth
+                intensity={embers.level}
+                active={focused && !reduceMotion}
+                scale={0.62}
+                accessibilityLabel={`${t('embers.label', { state: t(`embers.state.${embers.state}`) })}. ${t('embers.hint')}`}
+              />
+              <AppText variant="caption" tone="muted" align="center">
+                {t('embers.label', { state: t(`embers.state.${embers.state}`) })} · {t('embers.hint')}
               </AppText>
+              <View style={styles.heroName}>
+                <Avatar species={species} size={32} />
+                <AppText variant="title">{name}</AppText>
+              </View>
               <AppText variant="caption" tone="muted" align="center">
                 {t('chat.heroSubtitle')}
               </AppText>
@@ -131,5 +144,6 @@ const styles = StyleSheet.create({
   list: { paddingHorizontal: spacing.md, paddingVertical: spacing.md, gap: spacing.md },
   hero: { alignItems: 'center', gap: spacing.xs, paddingVertical: spacing.lg, paddingHorizontal: spacing.lg },
   day: { marginVertical: spacing.xs },
+  heroName: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm, marginTop: spacing.sm },
   composerWrap: { paddingBottom: spacing.sm, paddingTop: spacing.xs },
 });
