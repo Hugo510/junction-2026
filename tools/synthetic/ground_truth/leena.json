@@ -1,0 +1,35 @@
+{
+  "synthetic": true,
+  "generatorVersion": "0.3",
+  "seed": 2026,
+  "personaId": "leena",
+  "firstDay": "2026-08-17",
+  "lastDay": "2026-11-14",
+  "demoDay": "2026-11-15",
+  "dayIndexToDate": "day i = firstDay + i days (0..89)",
+  "driftStartDay": null,
+  "helps": [
+    "gratitude",
+    "daylightWalk"
+  ],
+  "doesNotHelp": [],
+  "expectedAtDemoDay": "priority LOW, embers bright, no outreach",
+  "showsInDemo": "Quiet when you're well; the fire grows with self-care",
+  "trueEffects": {
+    "gratitude": {
+      "pThumbsUp": 0.75,
+      "pThumbsDown": 0.05,
+      "nextDayMoodLift": 0.1
+    },
+    "daylightWalk": {
+      "pThumbsUp": 0.7,
+      "pThumbsDown": 0.05,
+      "nextDayMoodLift": 0.1
+    },
+    "breathing": {
+      "pThumbsUp": 0.5,
+      "pThumbsDown": 0.1,
+      "nextDayMoodLift": 0.0
+    }
+  }
+}

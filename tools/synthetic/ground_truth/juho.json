@@ -1,0 +1,37 @@
+{
+  "synthetic": true,
+  "generatorVersion": "0.3",
+  "seed": 2026,
+  "personaId": "juho",
+  "firstDay": "2026-08-17",
+  "lastDay": "2026-11-14",
+  "demoDay": "2026-11-15",
+  "dayIndexToDate": "day i = firstDay + i days (0..89)",
+  "driftStartDay": 52,
+  "helps": [
+    "fireplace"
+  ],
+  "doesNotHelp": [
+    "daylightWalk"
+  ],
+  "expectedAtDemoDay": "priority LOW (recovered); 'learned' ranking: fireplace first, daylightWalk last",
+  "showsInDemo": "Learning per person: the opposite of Aino. 'fireplace' stands in for sound/music until a music id exists",
+  "trueEffects": {
+    "fireplace": {
+      "pThumbsUp": 0.85,
+      "pThumbsDown": 0.05,
+      "nextDayMoodLift": 0.6
+    },
+    "daylightWalk": {
+      "pThumbsUp": 0.15,
+      "pThumbsDown": 0.5,
+      "nextDayMoodLift": -0.2
+    },
+    "breathing": {
+      "pThumbsUp": 0.35,
+      "pThumbsDown": 0.2,
+      "nextDayMoodLift": 0.0
+    }
+  },
+  "driftStartDate": "2026-10-08"
+}
