@@ -70,4 +70,4 @@ The challenge booth may have a **portable EEG demo** ("brainwaves in real time";
 - **Medical-device (MDR) path** for the clinician view and relapse detection. It's part of the investment story.
 - Community-support actions (MIELI, Sekasin-chat), and the hologram / ember lamp if they don't happen this weekend.
 
-*Source docs: `docs/HIILLOS_BUILD_SPEC.md` (W0, C4, M4, W5, §4), `docs/HIILLOS_DECISIONS.md` (O25), signals research note (Junction project, `claude/junction2026_research_depression_symptoms_signals.md`). This brief is also in the Junction project as `claude/EEG_FOR_URIEL.md`.*
+*Source docs: `docs/BUILD_SPEC.md` (W0, C4, M4, W5, §4), `docs/DECISIONS.md` (O25), signals research note (Junction project, `claude/junction2026_research_depression_symptoms_signals.md`). This brief is also in the Junction project as `claude/EEG_FOR_URIEL.md`.*
