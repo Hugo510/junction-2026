@@ -2,7 +2,7 @@
 
 uvicorn app.main:app --reload --port 8000
 
-## 1. Get a patient Token
+## 1. Get a patient Token (Need to be done whenever we reload uvicorn)
 
 TOKEN=$(curl -s -X POST http://localhost:8000/api/v1/auth/demo-login \
   -H "Content-Type: application/json" \
@@ -69,3 +69,30 @@ curl -i -X PUT http://localhost:8000/api/v1/me/consents \
 
 ## 404: unknown route
 curl -i http://localhost:8000/api/v1/nope
+
+
+# CHECK IN Testing
+A normal check-in should return 201, with risk.level set to none and a priority score:
+
+```bash
+curl -s -X POST http://localhost:8000/api/v1/checkins \
+  -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -d '{"date": "2026-11-13", "mood": 4, "energy": 3, "anxiety": 2, "sleepHours": 7.5,
+       "safety": {"selfHarmThoughts": false}}'
+```
+The same day again should return 409 as a Problem response:
+
+```bash
+curl -i -X POST http://localhost:8000/api/v1/checkins \
+  -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -d '{"date": "2026-11-13", "mood": 4, "energy": 3, "anxiety": 2,
+       "safety": {"selfHarmThoughts": false}}'
+```
+The safety rule: this should return 201 with risk.level set to urgent, an alertId, and crisisResources:
+
+```bash
+curl -s -X POST http://localhost:8000/api/v1/checkins \
+  -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -d '{"date": "2026-11-14", "mood": 5, "energy": 5, "anxiety": 1,
+       "safety": {"selfHarmThoughts": true}}'
+```
