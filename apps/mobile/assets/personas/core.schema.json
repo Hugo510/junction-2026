@@ -91,7 +91,13 @@
           "bedtime": { "type": "string", "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$", "description": "Local time, 24 h" },
           "screenOffTime": { "type": "string", "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$", "description": "Local time the phone screen was last turned off at night, 24 h" },
           "steps": { "type": "integer", "minimum": 0 },
-          "nightPhoneMinutes": { "type": "number", "minimum": 0 }
+          "nightPhoneMinutes": { "type": "number", "minimum": 0 },
+          "nightHrvMs": { "type": "number", "minimum": 0, "maximum": 300, "description": "Wearable: night heart rate variability (RMSSD), ms. Night values sit on the date of the evening the night starts" },
+          "restingHr": { "type": "number", "minimum": 25, "maximum": 200, "description": "Wearable: resting heart rate, bpm" },
+          "sleepMinutes": { "type": "number", "minimum": 0, "maximum": 1440 },
+          "wakeTime": { "type": "string", "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$", "description": "Local wake-up time of the next morning, 24 h" },
+          "wearMinutes": { "type": "number", "minimum": 0, "maximum": 1440 },
+          "wearableSource": { "enum": ["watch", "ring"] }
         }
       }
     },

@@ -115,9 +115,20 @@ export interface SensorAggregate {
   screenOffTime?: string;
   steps?: number;
   nightPhoneMinutes?: number;
-  /** Measured by a connected wearable (simulated today): hours asleep and resting heart rate. */
-  sleepHours?: number;
+  /**
+   * Wearable (watch or ring), names from docs/MEMO_BODY_LOOP.md. Night values belong to the date of
+   * the EVENING the night starts, like bedtime and screenOffTime.
+   */
+  /** Night heart rate variability (RMSSD), in milliseconds. */
+  nightHrvMs?: number;
+  /** Resting heart rate, beats per minute. */
   restingHr?: number;
+  sleepMinutes?: number;
+  /** Local wake-up time of the next morning, "HH:mm". */
+  wakeTime?: string;
+  /** Minutes the device was worn that day (gaps = not worn, never "relapse"). */
+  wearMinutes?: number;
+  wearableSource?: 'watch' | 'ring';
 }
 
 /** PHQ-9 questionnaire: 9 items scored 0–3, total 0–27. Sensors only ask; questionnaires decide. */

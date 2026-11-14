@@ -91,6 +91,7 @@ export default function WearableScreen() {
   const usual = (m: WearableMetric, format: (v: number) => string) => (m.usual === undefined ? t('wearable.noUsual') : t('wearable.usual', { value: format(m.usual) }));
   const hours = (v: number) => t('wearable.sleepValue', { hours: v.toFixed(1) });
   const bpm = (v: number) => t('wearable.heartValue', { bpm: Math.round(v) });
+  const ms = (v: number) => t('wearable.recoveryValue', { ms: Math.round(v) });
   const count = (v: number) => Math.round(v).toLocaleString();
 
   if (!device) {
@@ -157,6 +158,12 @@ export default function WearableScreen() {
       </Metric>
       <Metric category="leaf" label={t('wearable.steps')} value={summary.steps.latest === undefined ? '–' : count(summary.steps.latest)} usual={usual(summary.steps, count)}>
         <BarChart values={summary.steps.week} color={colors.categories.leaf.art} height={56} accessibilityLabel={t('wearable.weekLabel', { metric: t('wearable.steps') })} />
+      </Metric>
+      <Metric category="ember" label={t('wearable.recovery')} value={summary.recovery.latest === undefined ? '–' : ms(summary.recovery.latest)} usual={usual(summary.recovery, ms)}>
+        <Sparkline values={summary.recovery.week} color={colors.categories.ember.art} height={48} accessibilityLabel={t('wearable.weekLabel', { metric: t('wearable.recovery') })} />
+        <AppText variant="caption" tone="muted">
+          {t('wearable.recoveryHint')}
+        </AppText>
       </Metric>
       <Metric category="rose" label={t('wearable.heart')} value={summary.heart.latest === undefined ? '–' : bpm(summary.heart.latest)} usual={usual(summary.heart, bpm)}>
         <Sparkline values={summary.heart.week} color={colors.categories.rose.art} height={48} accessibilityLabel={t('wearable.weekLabel', { metric: t('wearable.heart') })} />

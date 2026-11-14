@@ -757,7 +757,8 @@
       "bright": "bright"
     },
     "helps": "What helps you most lately: {{action}}",
-    "helpsOthers": "A starting point from what helped others: {{action}}"
+    "helpsOthers": "A starting point from what helped others: {{action}}",
+    "bodyReason": "On the nights after it, your night-time recovery was higher than your usual."
   },
   "phq": {
     "options": {
@@ -867,7 +868,7 @@
   "wearable": {
     "title": "Wearable",
     "menu": "Connect a wearable",
-    "menuDesc": "Sleep, steps and resting heart rate, measured for you",
+    "menuDesc": "Sleep, steps, heart rate and night-time recovery, measured for you",
     "intro": "A watch, ring or band can measure sleep and steps for you, so you have less to log.",
     "simulated": "Simulated for this demo: no real device is paired and all values are synthetic.",
     "choose": "Which one do you wear?",
@@ -881,7 +882,7 @@
     "found": "Found it. Connecting…",
     "connected": "Connected · simulated data",
     "disconnect": "Disconnect",
-    "reads": "Hiillos reads daily totals only: hours of sleep, steps and resting heart rate. Never raw signals and never location. Connecting is your consent; you can disconnect at any time.",
+    "reads": "Hiillos reads daily totals only: sleep, steps, resting heart rate and night-time recovery. Never raw signals and never location. Connecting is your consent; you can disconnect at any time.",
     "sleep": "Sleep last night",
     "sleepValue": "{{hours}} h",
     "steps": "Steps yesterday",
@@ -890,6 +891,9 @@
     "usual": "Your usual: {{value}}",
     "noUsual": "Still learning your usual",
     "weekLabel": "{{metric}}, last 7 days",
-    "use": "How Hiillos uses it: measured sleep fills in the nights you did not log. The rules stay the same, and sensors only make Hiillos ask a question."
+    "use": "How Hiillos uses it: measured sleep fills in the nights you did not log. The rules stay the same, and sensors only make Hiillos ask a question.",
+    "recovery": "Night-time recovery",
+    "recoveryValue": "{{ms}} ms",
+    "recoveryHint": "How steady your heart rhythm was while you slept. Compared only with your own usual."
   }
 }

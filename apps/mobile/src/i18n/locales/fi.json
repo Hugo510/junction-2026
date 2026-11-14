@@ -757,7 +757,8 @@
       "bright": "kirkas"
     },
     "helps": "Mikä auttaa sinua viime aikoina eniten: {{action}}",
-    "helpsOthers": "Lähtökohta siitä, mikä on auttanut muita: {{action}}"
+    "helpsOthers": "Lähtökohta siitä, mikä on auttanut muita: {{action}}",
+    "bodyReason": "Sen jälkeisinä öinä yöaikainen palautumisesi oli sinulle tavallista parempi."
   },
   "phq": {
     "options": {
@@ -867,7 +868,7 @@
   "wearable": {
     "title": "Puettava laite",
     "menu": "Yhdistä puettava laite",
-    "menuDesc": "Uni, askeleet ja leposyke mitattuna puolestasi",
+    "menuDesc": "Uni, askeleet, syke ja yöaikainen palautuminen mitattuna puolestasi",
     "intro": "Kello, sormus tai ranneke voi mitata unesi ja askeleesi, jotta sinun tarvitsee kirjata vähemmän.",
     "simulated": "Simuloitu tätä demoa varten: mitään oikeaa laitetta ei yhdistetä ja kaikki arvot ovat synteettisiä.",
     "choose": "Mitä näistä käytät?",
@@ -881,7 +882,7 @@
     "found": "Löytyi. Yhdistetään…",
     "connected": "Yhdistetty · simuloitu data",
     "disconnect": "Katkaise yhteys",
-    "reads": "Hiillos lukee vain päivän yhteissummat: unitunnit, askeleet ja leposykkeen. Ei koskaan raakasignaaleja eikä sijaintia. Yhdistäminen on suostumuksesi; voit katkaista yhteyden milloin tahansa.",
+    "reads": "Hiillos lukee vain päivän yhteissummat: unen, askeleet, leposykkeen ja yöaikaisen palautumisen. Ei koskaan raakasignaaleja eikä sijaintia. Yhdistäminen on suostumuksesi; voit katkaista yhteyden milloin tahansa.",
     "sleep": "Viime yön uni",
     "sleepValue": "{{hours}} h",
     "steps": "Eilisen askeleet",
@@ -890,6 +891,9 @@
     "usual": "Sinulle tavallista: {{value}}",
     "noUsual": "Opetellaan vielä, mikä on sinulle tavallista",
     "weekLabel": "{{metric}}, viimeiset 7 päivää",
-    "use": "Näin Hiillos käyttää sitä: mitattu uni täydentää yöt, joita et kirjannut. Säännöt pysyvät samoina, ja anturit saavat Hiilloksen vain kysymään."
+    "use": "Näin Hiillos käyttää sitä: mitattu uni täydentää yöt, joita et kirjannut. Säännöt pysyvät samoina, ja anturit saavat Hiilloksen vain kysymään.",
+    "recovery": "Yöaikainen palautuminen",
+    "recoveryValue": "{{ms}} ms",
+    "recoveryHint": "Kuinka tasainen sydämesi rytmi oli nukkuessasi. Verrataan vain siihen, mikä on sinulle tavallista."
   }
 }

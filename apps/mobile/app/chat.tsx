@@ -12,7 +12,7 @@ import { useChatViewModel, type ChatRow } from '../src/features/chat/useChatView
 import { Hearth } from '../src/features/hearth/Hearth';
 import { useEmbers } from '../src/features/hearth/useEmbers';
 import { useTopHelp } from '../src/features/insights/useInsightsViewModel';
-import { usePopulationHelp } from '../src/features/learning';
+import { useBodyReason, usePopulationHelp } from '../src/features/learning';
 import { capitalizeFirst, formatDate } from '../src/i18n';
 import { useData } from '../src/store/data';
 import { AppText, Avatar, HelpButton, Icon, MAX_FONT_SCALE, MIN_TOUCH, radii, spacing, useScreenFocused, useTheme } from '../src/ui';
@@ -26,6 +26,7 @@ export default function ChatScreen() {
   const embers = useEmbers();
   const topHelp = useTopHelp();
   const othersHelp = usePopulationHelp();
+  const bodyReason = useBodyReason(topHelp);
   const focused = useScreenFocused();
   const [menuOpen, setMenuOpen] = useState(false);
   const [actionsOpen, setActionsOpen] = useState(false);
@@ -116,7 +117,13 @@ export default function ChatScreen() {
                 <AppText variant="label" tone="primary" align="center">
                   {t('embers.helps', { action: t(`interventions.${topHelp}.title`) })}
                 </AppText>
-              ) : othersHelp ? (
+              ) : null}
+              {topHelp && bodyReason ? (
+                <AppText variant="caption" tone="muted" align="center">
+                  {t('embers.bodyReason')}
+                </AppText>
+              ) : null}
+              {topHelp ? null : othersHelp ? (
                 <AppText variant="label" tone="primary" align="center">
                   {t('embers.helpsOthers', { action: t(`interventions.${othersHelp}.title`) })}
                 </AppText>

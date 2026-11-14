@@ -757,7 +757,8 @@
       "bright": "klar"
     },
     "helps": "Det som hjälper dig mest just nu: {{action}}",
-    "helpsOthers": "En startpunkt från det som har hjälpt andra: {{action}}"
+    "helpsOthers": "En startpunkt från det som har hjälpt andra: {{action}}",
+    "bodyReason": "Nätterna efteråt var din nattliga återhämtning högre än ditt vanliga."
   },
   "phq": {
     "options": {
@@ -867,7 +868,7 @@
   "wearable": {
     "title": "Bärbar enhet",
     "menu": "Anslut en bärbar enhet",
-    "menuDesc": "Sömn, steg och vilopuls, mätt åt dig",
+    "menuDesc": "Sömn, steg, puls och nattlig återhämtning, mätt åt dig",
     "intro": "En klocka, ring eller ett armband kan mäta din sömn och dina steg, så att du behöver logga mindre.",
     "simulated": "Simulerat för den här demon: ingen riktig enhet ansluts och alla värden är syntetiska.",
     "choose": "Vilken använder du?",
@@ -881,7 +882,7 @@
     "found": "Hittad. Ansluter…",
     "connected": "Ansluten · simulerad data",
     "disconnect": "Koppla från",
-    "reads": "Hiillos läser bara dagliga summor: sömntimmar, steg och vilopuls. Aldrig råsignaler och aldrig plats. Att ansluta är ditt samtycke; du kan koppla från när som helst.",
+    "reads": "Hiillos läser bara dagliga summor: sömn, steg, vilopuls och nattlig återhämtning. Aldrig råsignaler och aldrig plats. Att ansluta är ditt samtycke; du kan koppla från när som helst.",
     "sleep": "Sömn i natt",
     "sleepValue": "{{hours}} h",
     "steps": "Steg i går",
@@ -890,6 +891,9 @@
     "usual": "Ditt vanliga: {{value}}",
     "noUsual": "Lär sig fortfarande ditt vanliga",
     "weekLabel": "{{metric}}, senaste 7 dagarna",
-    "use": "Så använder Hiillos det: uppmätt sömn fyller i de nätter du inte loggade. Reglerna är desamma, och sensorer får bara Hiillos att ställa en fråga."
+    "use": "Så använder Hiillos det: uppmätt sömn fyller i de nätter du inte loggade. Reglerna är desamma, och sensorer får bara Hiillos att ställa en fråga.",
+    "recovery": "Nattlig återhämtning",
+    "recoveryValue": "{{ms}} ms",
+    "recoveryHint": "Hur jämn din hjärtrytm var medan du sov. Jämförs bara med ditt eget vanliga."
   }
 }

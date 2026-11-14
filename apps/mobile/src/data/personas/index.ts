@@ -54,7 +54,7 @@ export function parsePersona(raw: unknown): Persona {
   }
   for (const s of p.sensors) {
     if (!DATE.test(s.date)) throw new Error(`Persona ${id}: invalid sensor date ${s.date}`);
-    for (const field of ['bedtime', 'screenOffTime'] as const) {
+    for (const field of ['bedtime', 'screenOffTime', 'wakeTime'] as const) {
       const value = s[field];
       if (value !== undefined && !TIME.test(value)) throw new Error(`Persona ${id}: ${field} must be "HH:mm" (${s.date})`);
     }

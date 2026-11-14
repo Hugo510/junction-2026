@@ -98,7 +98,7 @@ export const useBackend = create<BackendStore>()((set, get) => ({
             const period = { periodStart: `${d.date}T00:00:00Z`, periodEnd: `${d.date}T23:59:59Z`, source: 'synthetic' };
             return [
               // Steps are left out: on the server they belong to the movement consent.
-              { type: 'sleep', value: d.sleepHours, unit: 'hours', ...period },
+              { type: 'sleep', value: Math.round((d.sleepMinutes / 60) * 10) / 10, unit: 'hours', ...period },
               { type: 'resting_heart_rate', value: d.restingHr, unit: 'bpm', ...period },
             ];
           });

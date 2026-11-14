@@ -157,9 +157,17 @@ HealthKit, Health Connect or Bluetooth, so the daily totals are simulated and th
 
 - The person picks a watch, ring or band; a short pairing animation runs; connecting is the consent and
   disconnecting stops using the data at once.
-- `src/domain/wearable.ts` produces three daily totals (hours of sleep, steps, resting heart rate),
-  deterministically and shaped by the person's own data: later evenings give shorter nights, less movement
-  gives fewer steps. Never raw signals or location.
+- Field names follow `docs/MEMO_BODY_LOOP.md` (B1): `nightHrvMs`, `restingHr`, `sleepMinutes`, `wakeTime`,
+  `wearMinutes`, `wearableSource`, all optional on each day of `sensors`. **Night values sit on the date of
+  the evening the night starts**, like `bedtime` and `screenOffTime`.
+- Values in the persona files always win. Where a file has none, `src/domain/wearable.ts` simulates the
+  daily totals (sleep, steps, resting heart rate, night-time recovery), deterministically and shaped by the
+  person's own data: later evenings give shorter nights, less movement gives fewer steps. Never raw signals
+  or location.
+- **Body loop, "measure the response" (B4)**: `src/domain/bodyResponse.ts` compares night-time recovery on
+  the nights after a small step with the person's own previous 14 nights. When it is clearly higher, the
+  home screen adds one line under "What helps you". It describes what followed the step for this person; it
+  is not evidence of cause and says nothing about depression.
 - **Same rules, better data**: measured sleep only fills in nights the person did not log (what they
   reported always wins), and it goes through the existing two-sided sleep rule with the same weight. No new
   rule, and no clinic alert from sensors alone. A test checks that connecting a wearable does not move any

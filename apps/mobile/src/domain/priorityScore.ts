@@ -191,7 +191,12 @@ export function priorityScore(input: PriorityInput): PriorityResult {
 
   // Sleep (two-sided)
   // What the person reported wins; a connected wearable fills in the nights they did not log.
-  const sleep = values(recent, (d) => checks.get(d)?.sleepHours ?? sensors.get(d)?.sleepHours);
+  // (A check-in reports the night before, so the wearable row is the previous evening's.)
+  const measuredSleep = (d: ISODate) => {
+    const minutes = sensors.get(addDaysISO(d, -1))?.sleepMinutes;
+    return minutes === undefined ? undefined : minutes / 60;
+  };
+  const sleep = values(recent, (d) => checks.get(d)?.sleepHours ?? measuredSleep(d));
   if (sleep.filter((h) => h < SLEEP_SHORT_H).length >= 3) add(15, 'shortSleep');
   if (sleep.filter((h) => h >= SLEEP_LONG_H).length >= 3) add(15, 'longSleep');
 

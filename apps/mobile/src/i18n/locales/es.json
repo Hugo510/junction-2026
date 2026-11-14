@@ -757,7 +757,8 @@
       "bright": "brillantes"
     },
     "helps": "Lo que más te ayuda últimamente: {{action}}",
-    "helpsOthers": "Un punto de partida con lo que ayudó a otras personas: {{action}}"
+    "helpsOthers": "Un punto de partida con lo que ayudó a otras personas: {{action}}",
+    "bodyReason": "En las noches siguientes, tu recuperación nocturna fue más alta de lo habitual en ti."
   },
   "phq": {
     "options": {
@@ -867,7 +868,7 @@
   "wearable": {
     "title": "Dispositivo",
     "menu": "Conectar un dispositivo",
-    "menuDesc": "Sueño, pasos y pulso en reposo, medidos por ti",
+    "menuDesc": "Sueño, pasos, pulso y recuperación nocturna, medidos por ti",
     "intro": "Un reloj, anillo o pulsera puede medir tu sueño y tus pasos, para que tengas menos que registrar.",
     "simulated": "Simulado para esta demo: no se conecta ningún dispositivo real y todos los valores son sintéticos.",
     "choose": "¿Cuál usas?",
@@ -881,7 +882,7 @@
     "found": "Encontrado. Conectando…",
     "connected": "Conectado · datos simulados",
     "disconnect": "Desconectar",
-    "reads": "Hiillos lee solo totales diarios: horas de sueño, pasos y pulso en reposo. Nunca señales en bruto ni ubicación. Conectar es tu consentimiento; puedes desconectar cuando quieras.",
+    "reads": "Hiillos lee solo totales diarios: sueño, pasos, pulso en reposo y recuperación nocturna. Nunca señales en bruto ni ubicación. Conectar es tu consentimiento; puedes desconectar cuando quieras.",
     "sleep": "Sueño de anoche",
     "sleepValue": "{{hours}} h",
     "steps": "Pasos de ayer",
@@ -890,6 +891,9 @@
     "usual": "Lo habitual en ti: {{value}}",
     "noUsual": "Aún aprendiendo lo habitual en ti",
     "weekLabel": "{{metric}}, últimos 7 días",
-    "use": "Cómo lo usa Hiillos: el sueño medido completa las noches que no registraste. Las reglas no cambian, y los sensores solo hacen que Hiillos pregunte."
+    "use": "Cómo lo usa Hiillos: el sueño medido completa las noches que no registraste. Las reglas no cambian, y los sensores solo hacen que Hiillos pregunte.",
+    "recovery": "Recuperación nocturna",
+    "recoveryValue": "{{ms}} ms",
+    "recoveryHint": "Qué tan estable fue tu ritmo cardiaco mientras dormías. Solo se compara con lo habitual en ti."
   }
 }
