@@ -11,6 +11,7 @@ import { SideMenu } from '../src/features/chat/SideMenu';
 import { useChatViewModel, type ChatRow } from '../src/features/chat/useChatViewModel';
 import { Hearth } from '../src/features/hearth/Hearth';
 import { useEmbers } from '../src/features/hearth/useEmbers';
+import { useTopHelp } from '../src/features/insights/useInsightsViewModel';
 import { capitalizeFirst, formatDate } from '../src/i18n';
 import { useData } from '../src/store/data';
 import { AppText, Avatar, HelpButton, Icon, MAX_FONT_SCALE, MIN_TOUCH, spacing, useScreenFocused, useTheme } from '../src/ui';
@@ -22,6 +23,7 @@ export default function ChatScreen() {
   const patient = useData((s) => s.patient);
   const vm = useChatViewModel();
   const embers = useEmbers();
+  const topHelp = useTopHelp();
   const focused = useScreenFocused();
   const [menuOpen, setMenuOpen] = useState(false);
   const [actionsOpen, setActionsOpen] = useState(false);
@@ -108,6 +110,11 @@ export default function ChatScreen() {
               <AppText variant="caption" tone="muted" align="center">
                 {t('embers.label', { state: t(`embers.state.${embers.state}`) })} · {t('embers.hint')}
               </AppText>
+              {topHelp ? (
+                <AppText variant="label" tone="primary" align="center">
+                  {t('embers.helps', { action: t(`interventions.${topHelp}.title`) })}
+                </AppText>
+              ) : null}
               <View style={styles.heroName}>
                 <Avatar species={species} size={32} />
                 <AppText variant="title">{name}</AppText>

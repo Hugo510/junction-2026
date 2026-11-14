@@ -684,7 +684,8 @@
       "low": "glowing low",
       "steady": "steady",
       "bright": "bright"
-    }
+    },
+    "helps": "What helps you most lately: {{action}}"
   },
   "phq": {
     "options": {

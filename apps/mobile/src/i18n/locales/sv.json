@@ -684,7 +684,8 @@
       "low": "glöder svagt",
       "steady": "jämn",
       "bright": "klar"
-    }
+    },
+    "helps": "Det som hjälper dig mest just nu: {{action}}"
   },
   "phq": {
     "options": {

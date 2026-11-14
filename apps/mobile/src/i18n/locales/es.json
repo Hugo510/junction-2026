@@ -684,7 +684,8 @@
       "low": "brillan bajito",
       "steady": "estables",
       "bright": "brillantes"
-    }
+    },
+    "helps": "Lo que más te ayuda últimamente: {{action}}"
   },
   "phq": {
     "options": {

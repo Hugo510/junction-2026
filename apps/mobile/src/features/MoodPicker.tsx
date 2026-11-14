@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import type { Scale5 } from '../domain/entities';
 import { haptics } from '../services/haptics';
-import { AppText, MAX_FONT_SCALE, MIN_TOUCH, MoodFace, radii, spacing, useTheme } from '../ui';
+import { AppText, MAX_FONT_SCALE, MIN_TOUCH, MoodEmber, MoodFace, radii, spacing, useTheme } from '../ui';
 
 const LEVELS: Scale5[] = [1, 2, 3, 4, 5];
 
@@ -17,11 +17,14 @@ export function MoodPicker({
   onChange,
   compact = false,
   disabled = false,
+  glyph = 'face',
 }: {
   value: Scale5 | null;
   onChange: (mood: Scale5) => void;
   compact?: boolean;
   disabled?: boolean;
+  /** "ember" = the daily one-tap moment in the chat; "face" = journal and weekly check-in. */
+  glyph?: 'face' | 'ember';
 }) {
   const { t } = useTranslation();
   const { colors, textScale } = useTheme();
@@ -55,7 +58,11 @@ export function MoodPicker({
                 },
               ]}
             >
-              <MoodFace level={level} size={(compact ? 40 : 52) * textScale} />
+              {glyph === 'ember' ? (
+                <MoodEmber level={level} size={(compact ? 44 : 56) * textScale} />
+              ) : (
+                <MoodFace level={level} size={(compact ? 40 : 52) * textScale} />
+              )}
               {!compact ? (
                 <AppText variant="caption" align="center" maxFontSizeMultiplier={MAX_FONT_SCALE.dense}>
                   {label}

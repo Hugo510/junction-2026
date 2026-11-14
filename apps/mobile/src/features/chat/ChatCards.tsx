@@ -45,7 +45,7 @@ export const ChatCardView = memo(function ChatCardView({
 }) {
   switch (card.type) {
     case 'mood':
-      return <MoodPicker value={null} onChange={handlers.onMood} compact disabled={!active} />;
+      return <MoodPicker value={null} onChange={handlers.onMood} compact disabled={!active} glyph="ember" />;
     case 'emotions':
       return <EmotionsCard active={active} mood={mood} onDone={handlers.onEmotions} />;
     case 'safety':

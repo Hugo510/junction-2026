@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 
 import { lastNDates } from '../../domain/dates';
+import type { InterventionId } from '../../domain/entities';
 import { average, checkInsByDate, sensorsByDate, weeklyMoodTrend } from '../../domain/history';
 import { INTERVENTION_IDS } from '../../domain/interventions';
 import { rankInterventions, type ArmStats } from '../../domain/interventionPicker';
@@ -21,6 +22,16 @@ export function useMoodTrend() {
       trend: weeklyMoodTrend(checkIns, today).trend,
     };
   }, [checkIns, today]);
+}
+
+/** The one action that has helped this person most so far (null until there is real feedback). */
+export function useTopHelp(): InterventionId | null {
+  const checkIns = useData((s) => s.checkIns);
+  const feedback = useData((s) => s.feedback);
+  return useMemo(() => {
+    const top = rankInterventions(INTERVENTION_IDS, feedback, checkIns).find((r) => r.n > 0);
+    return top && top.mean > 0.3 ? top.id : null;
+  }, [checkIns, feedback]);
 }
 
 function rankLabel(s: ArmStats, index: number): RankLabel {
