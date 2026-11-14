@@ -1,5 +1,9 @@
 from datetime import datetime, timezone
 
+from datetime import date as CalendarDate
+from app.schemas.care import Alert
+from app.schemas.checkin import CheckIn
+
 from app.schemas.patient import (
     AppSettings,
     Companion,
@@ -8,6 +12,12 @@ from app.schemas.patient import (
     Language,
     Patient,
 )
+
+# user id -> {date -> check-in}
+CHECKINS: dict[str, dict[CalendarDate, CheckIn]] = {}
+
+# urgent alerts for the care team (filled by the self-harm rule)
+ALERTS: list[Alert] = []
 
 PATIENT_ID = "11111111-1111-4111-8111-111111111111"
 DOCTOR_ID = "22222222-2222-4222-8222-222222222222"

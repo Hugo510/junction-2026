@@ -9,3 +9,10 @@ class CamelModel(BaseModel):
         alias_generator=to_camel,
         populate_by_name=True,
     )
+    
+class Reason(CamelModel):
+    """Explains a score or recommendation. The app can translate `key` itself."""
+
+    key: str
+    text: str
+    weight: float | None = None
