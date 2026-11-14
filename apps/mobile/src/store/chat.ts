@@ -38,6 +38,8 @@ function echo(event: ChatEvent): Omit<ChatMessage, 'id' | 'createdAt'> | null {
         : { role: 'user', parts: [{ key: 'chat.quick.skip' }] };
     case 'safety':
       return { role: 'user', parts: [{ key: event.answer ? 'common.yes' : 'common.no' }] };
+    case 'phq':
+      return { role: 'user', parts: [{ key: `phq.options.${event.value}` }] };
     default:
       return null;
   }
@@ -94,6 +96,8 @@ export const useChat = create<ChatState>()((set, get) => {
           });
           savedId = checkIn.id;
           urgent = urgent || risk.level === 'urgent';
+        } else if (effect.type === 'savePhq') {
+          await data.addPhq(effect.items);
         } else if (effect.type === 'raiseAlert') {
           await data.raiseAlert('chat');
           urgent = true;

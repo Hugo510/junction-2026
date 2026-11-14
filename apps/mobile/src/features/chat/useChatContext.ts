@@ -9,6 +9,7 @@ import { checkInsByDate } from '../../domain/history';
 import { getIntervention, INTERVENTION_IDS } from '../../domain/interventions';
 import { rankInterventions } from '../../domain/interventionPicker';
 import { outreachLevel } from '../../domain/outreach';
+import { hasPhqConcern, isPhqDue } from '../../domain/phq';
 import { detectUpwardDrift } from '../../domain/priorityScore';
 import { now, timeOfDay, useToday } from '../../store/clock';
 import { useData } from '../../store/data';
@@ -23,6 +24,7 @@ export function useChatContext(): ChatContext | null {
   const plan = useData((s) => s.plan);
   const requests = useData((s) => s.requests);
   const sensors = useData((s) => s.sensors);
+  const phq9 = useData((s) => s.phq9);
   const trusted = useSettings((s) => s.trustedContact);
   const priority = usePriority();
   const today = useToday();
@@ -54,6 +56,9 @@ export function useChatContext(): ChatContext | null {
       outreach: outreachLevel(checkIns, today),
       trustedContactName: trusted?.name,
       upwardDrift: !!patient.bipolarFlag && detectUpwardDrift({ checkIns, sensors, today }),
+      phqDue: isPhqDue(priority.level, phq9, today),
+      phqConcern: hasPhqConcern(phq9, today),
+      weeklyDue: !checkIns.some((c) => (c.kind ?? 'full') === 'full' && daysBetween(c.date, today) < 7),
     };
-  }, [patient, checkIns, sensors, feedback, plan, requests, priority.level, today, trusted]);
+  }, [patient, checkIns, sensors, phq9, feedback, plan, requests, priority.level, today, trusted]);
 }

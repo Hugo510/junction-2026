@@ -12,7 +12,7 @@ export type ChatRow =
   | { kind: 'day'; id: string; date: string }
   | { kind: 'msg'; id: string; message: ChatMessage; showAvatar: boolean };
 
-const INTERACTIVE: InteractiveCard[] = ['mood', 'emotions', 'safety'];
+const INTERACTIVE: InteractiveCard[] = ['mood', 'emotions', 'safety', 'phq'];
 
 /**
  * View model for the chat screen: loading, daily greeting, sending events, list rows
@@ -56,6 +56,7 @@ export function useChatViewModel() {
       onEmotions: (emotions) => dispatch({ type: 'emotions', emotions }),
       onSafety: (answer) => dispatch({ type: 'safety', answer }),
       onQuick: (id) => dispatch({ type: 'quick', id }),
+      onPhq: (value) => dispatch({ type: 'phq', value }),
     }),
     [dispatch],
   );

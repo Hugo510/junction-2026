@@ -1,9 +1,10 @@
 import { router } from 'expo-router';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { PERSONAS } from '../src/data/personas';
 import { notificationKey } from '../src/domain/outreach';
+import { isPhqDue } from '../src/domain/phq';
 import { usePriority } from '../src/features/usePriority';
 import { formatDate } from '../src/i18n';
 import { haptics } from '../src/services/haptics';
@@ -29,6 +30,9 @@ export default function DemoScreen() {
   const dayOffset = useSettings((s) => s.dayOffset);
   const resetSettings = useSettings((s) => s.reset);
   const priority = usePriority();
+  // Latest value for async handlers (advance day → re-render → reach out).
+  const priorityRef = useRef(priority);
+  priorityRef.current = priority;
   const bipolar = useData((s) => s.patient?.bipolarFlag ?? false);
   const setBipolarFlag = useData((s) => s.setBipolarFlag);
   const checkSilence = useData((s) => s.checkSilence);
@@ -39,7 +43,8 @@ export default function DemoScreen() {
     const level = await checkSilence();
     const checkedInToday = useData.getState().checkIns.some((c) => c.date === todayISO());
     const contact = useSettings.getState().trustedContact;
-    useReachOut.getState().show({ key: notificationKey(level, checkedInToday, !!contact), params: { friend: contact?.name ?? '' } });
+    const drift = isPhqDue(priorityRef.current.level, useData.getState().phq9, todayISO());
+    useReachOut.getState().show({ key: notificationKey(level, checkedInToday, !!contact, drift), params: { friend: contact?.name ?? '' } });
   };
   const [busy, setBusy] = useState<string | null>(null);
   const [done, setDone] = useState<string | null>(null);

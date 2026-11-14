@@ -58,6 +58,8 @@ interface DataState {
   addSensorMinutes: (delta: Partial<Pick<SensorAggregate, 'activityMinutes' | 'daylightMinutes'>>) => Promise<void>;
   requestConsult: (reason: ConsultReason, urgency: PerceivedUrgency) => Promise<ConsultOutcome>;
   raiseAlert: (source: Alert['source'], level?: Alert['level']) => Promise<Alert>;
+  /** Saves a questionnaire: 2 answers = PHQ-2, 9 answers = full PHQ-9. */
+  addPhq: (items: number[]) => Promise<Phq9Entry>;
   /** Clinic-only flag (demo: toggled from demo mode). */
   setBipolarFlag: (on: boolean) => Promise<void>;
   /** Silence ladder: returns the level and (with consent) gently notifies the care team. */
@@ -224,6 +226,18 @@ export const useData = create<DataState>()((set, get) => {
       await r.care.createAlert(alert);
       set({ alerts: [...get().alerts, alert] });
       return alert;
+    },
+
+    addPhq: async (items) => {
+      const entry: Phq9Entry = {
+        date: todayISO(),
+        items,
+        total: items.reduce((a, b) => a + b, 0),
+        kind: items.length === 9 ? 'phq9' : 'phq2',
+      };
+      await r.phq9.add(entry);
+      set({ phq9: [...get().phq9, entry] });
+      return entry;
     },
 
     setBipolarFlag: async (on) => {

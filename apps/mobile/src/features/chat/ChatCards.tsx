@@ -24,6 +24,7 @@ export interface ChatCardHandlers {
   onEmotions: (emotions: EmotionId[]) => void;
   onSafety: (answer: boolean) => void;
   onQuick: (id: QuickReplyId) => void;
+  onPhq: (value: number) => void;
 }
 
 /**
@@ -61,6 +62,10 @@ export const ChatCardView = memo(function ChatCardView({
       return <CrisisCard />;
     case 'entry':
       return <EntryCard checkInId={card.checkInId} />;
+    case 'phq':
+      return active ? <PhqCard onAnswer={handlers.onPhq} /> : null;
+    case 'weekly':
+      return <WeeklyCard />;
     case 'friend':
       return <FriendCard />;
     case 'reconnect':
@@ -235,6 +240,28 @@ function EntryCard({ checkInId }: { checkInId: string }) {
       </View>
       <Button size="md" variant="secondary" title={t('chat.card.openJournal')} onPress={() => router.push('/progress')} />
       <Button size="md" variant="ghost" title={t('chat.card.fullCheckin')} onPress={() => router.push('/checkin')} />
+    </Card>
+  );
+}
+
+/** The four standard PHQ answers (0–3), full-width so they are easy to tap. */
+function PhqCard({ onAnswer }: { onAnswer: (value: number) => void }) {
+  const { t } = useTranslation();
+  return (
+    <View style={styles.gap} accessibilityRole="radiogroup">
+      {[0, 1, 2, 3].map((value) => (
+        <Button key={value} size="md" variant="secondary" title={t(`phq.options.${value}`)} onPress={() => onAnswer(value)} />
+      ))}
+    </View>
+  );
+}
+
+/** Invitation to the longer weekly check-in (sleep, energy, tap game). */
+function WeeklyCard() {
+  const { t } = useTranslation();
+  return (
+    <Card tone="sand" flat>
+      <Button size="md" variant="secondary" title={t('chat.card.weekly')} onPress={() => router.push('/checkin')} />
     </Card>
   );
 }

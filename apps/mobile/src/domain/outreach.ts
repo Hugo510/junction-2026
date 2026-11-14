@@ -34,10 +34,12 @@ export function outreachLevel(checkIns: CheckIn[], today: ISODate): OutreachLeve
 }
 
 /** i18n key of the "reaches out first" notification for the current situation. */
-export function notificationKey(level: OutreachLevel, checkedInToday: boolean, hasTrustedContact: boolean): string {
+export function notificationKey(level: OutreachLevel, checkedInToday: boolean, hasTrustedContact: boolean, drift = false): string {
   if (level === 'reconnect') return 'notify.reconnect';
   if (level === 'friend') return hasTrustedContact ? 'notify.friend' : 'notify.friendNoContact';
   if (level === 'warm') return 'notify.warm';
+  // Signals drifted (priority at least medium): ask two quick questions. Never a clinic alert by itself.
+  if (drift) return 'notify.drift';
   return checkedInToday ? 'notify.evening' : 'notify.daily';
 }
 
