@@ -9,7 +9,7 @@ export { Icon, type IconName } from './Icon';
 export { ListItem, Section } from './List';
 export { MoodEmber } from './MoodEmber';
 export { MoodFace, MOOD_COLORS } from './MoodFace';
-export { Screen } from './Screen';
+export { Screen, useScrollLock } from './Screen';
 export { AppSkeleton } from './Skeleton';
 export { Slider } from './Slider';
 export { EmptyState, ErrorState, LoadingState } from './StateViews';
