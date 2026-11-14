@@ -1,8 +1,13 @@
 {
+  "synthetic": true,
+  "generatorVersion": "0.1",
+  "seed": 2026,
   "persona": {
     "id": "aino",
-    "displayName": "Aino (synthetic)",
-    "story": "Drift, walks help → call list",
+    "path": "B",
+    "state": "B5",
+    "label": "Aino, 42, post-TMS",
+    "story": "Drift, walks help",
     "language": "fi",
     "companion": { "species": "cat", "name": "Kuu" },
     "bipolarFlag": false,
@@ -18,7 +23,7 @@
       "emotions": ["tired", "calm"],
       "energy": 3,
       "anxiety": 2,
-      "sleepHours": 7.5,
+      "sleepHours": 7.4,
       "reaction": { "meanMs": 340, "sdMs": 42, "accuracy": 0.9, "rounds": 8 },
       "safetyConcern": false
     },
@@ -34,12 +39,15 @@
     }
   ],
   "sensors": [
-    { "date": "2026-11-11", "activityMinutes": 35, "daylightMinutes": 40 },
-    { "date": "2026-11-12", "activityMinutes": 12, "daylightMinutes": 5 },
-    { "date": "2026-11-13", "activityMinutes": 8, "daylightMinutes": 0 }
+    { "date": "2026-11-11", "activityMinutes": 35, "daylightMinutes": 40, "homeMinutes": 820, "bedtime": "23:10", "steps": 6400, "nightPhoneMinutes": 12 },
+    { "date": "2026-11-12", "activityMinutes": 12, "daylightMinutes": 5, "homeMinutes": 1310, "bedtime": "01:40", "steps": 1900, "nightPhoneMinutes": 55 },
+    { "date": "2026-11-13", "activityMinutes": 8, "daylightMinutes": 0, "homeMinutes": 1440, "bedtime": "02:15", "steps": 700, "nightPhoneMinutes": 80 }
   ],
   "feedback": [
     { "id": "aino-fb-2026-11-11-walk", "interventionId": "daylightWalk", "date": "2026-11-11", "rating": 1 },
-    { "id": "aino-fb-2026-11-12-music", "interventionId": "fireplace", "date": "2026-11-12", "rating": 0 }
+    { "id": "aino-fb-2026-11-12-fire", "interventionId": "fireplace", "date": "2026-11-12", "rating": 0 }
+  ],
+  "phq9": [
+    { "date": "2026-11-11", "items": [0, 1, 0, 1, 0, 0, 1, 0, 0], "total": 3 }
   ]
 }

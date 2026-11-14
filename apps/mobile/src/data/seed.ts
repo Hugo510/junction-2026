@@ -5,6 +5,7 @@ import type {
   FeedbackRating,
   InterventionFeedback,
   InterventionId,
+  Phq9Entry,
   Scale5,
   SensorAggregate,
 } from '../domain/entities';
@@ -20,6 +21,7 @@ export interface SeedResult {
   checkIns: CheckIn[];
   sensors: SensorAggregate[];
   feedback: InterventionFeedback[];
+  phq9?: Phq9Entry[];
 }
 
 export const DEFAULT_SEED = 2026;

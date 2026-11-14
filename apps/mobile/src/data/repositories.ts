@@ -8,6 +8,7 @@ import type {
   Doctor,
   InterventionFeedback,
   Patient,
+  Phq9Entry,
   SensorAggregate,
 } from '../domain/entities';
 import type { SeedResult } from './seed';
@@ -47,6 +48,11 @@ export interface CareRepository {
   createAlert(alert: Alert): Promise<void>;
 }
 
+export interface Phq9Repository {
+  list(): Promise<Phq9Entry[]>;
+  add(entry: Phq9Entry): Promise<void>;
+}
+
 export interface ChatRepository {
   list(): Promise<ChatMessage[]>;
   /** Replaces the stored conversation (implementations may cap its length). */
@@ -70,5 +76,6 @@ export interface Repositories {
   interventions: InterventionRepository;
   care: CareRepository;
   chat: ChatRepository;
+  phq9: Phq9Repository;
   admin: DataAdminRepository;
 }

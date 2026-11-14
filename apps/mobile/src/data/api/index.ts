@@ -50,6 +50,10 @@ export function createApiRepositories(baseUrl = process.env.EXPO_PUBLIC_API_URL 
       save: (messages) => request('/v1/companion/messages', { method: 'PUT', body: JSON.stringify(messages) }),
       clear: () => request('/v1/companion/messages', { method: 'DELETE' }),
     },
+    phq9: {
+      list: () => request('/v1/phq9'),
+      add: (e) => post('/v1/phq9', e),
+    },
     admin: {
       exportAll: () => request('/v1/me/export'),
       deleteAll: () => request('/v1/me', { method: 'DELETE' }),

@@ -73,6 +73,19 @@ export interface SensorAggregate {
   date: ISODate;
   activityMinutes: number;
   daylightMinutes: number;
+  /** Optional passive signals (synthetic personas today; Health Connect / HealthKit later). */
+  homeMinutes?: number;
+  /** Local bedtime, "HH:mm". */
+  bedtime?: string;
+  steps?: number;
+  nightPhoneMinutes?: number;
+}
+
+/** PHQ-9 questionnaire: 9 items scored 0–3, total 0–27. Sensors only ask; questionnaires decide. */
+export interface Phq9Entry {
+  date: ISODate;
+  items: number[];
+  total: number;
 }
 
 export type InterventionId =

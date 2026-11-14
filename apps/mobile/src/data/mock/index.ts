@@ -7,6 +7,7 @@ import type {
   DailyPlan,
   InterventionFeedback,
   Patient,
+  Phq9Entry,
   SensorAggregate,
 } from '../../domain/entities';
 import type { Repositories } from '../repositories';
@@ -34,6 +35,7 @@ export function createMockRepositories(): Repositories {
         const all = await readJSON<SensorAggregate[]>(KEYS.sensors, []);
         const existing = all.find((s) => s.date === date) ?? { date, activityMinutes: 0, daylightMinutes: 0 };
         const updated: SensorAggregate = {
+          ...existing,
           date,
           activityMinutes: existing.activityMinutes + (delta.activityMinutes ?? 0),
           daylightMinutes: existing.daylightMinutes + (delta.daylightMinutes ?? 0),
@@ -66,6 +68,10 @@ export function createMockRepositories(): Repositories {
       save: (messages) => writeJSON(KEYS.chat, messages.slice(-MAX_CHAT_MESSAGES)),
       clear: () => writeJSON(KEYS.chat, []),
     },
+    phq9: {
+      list: () => readJSON<Phq9Entry[]>(KEYS.phq9, []),
+      add: (e) => append(KEYS.phq9, e),
+    },
     admin: {
       exportAll: async () => {
         const out: Record<string, unknown> = {};
@@ -81,6 +87,7 @@ export function createMockRepositories(): Repositories {
         await writeJSON(KEYS.requests, []);
         await writeJSON(KEYS.alerts, []);
         await writeJSON(KEYS.chat, []);
+        await writeJSON(KEYS.phq9, seed.phq9 ?? []);
       },
     },
   };

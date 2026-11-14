@@ -1,21 +1,23 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/Hugo510/junction-2026/apps/mobile/src/data/personas/core.schema.json",
-  "title": "Hiillos synthetic persona — core.json (SeedResult)",
-  "description": "SYNTHETIC data only. Same shape as SeedResult in src/data/seed.ts. Dates are local calendar days (YYYY-MM-DD) in Europe/Helsinki; the last day should be the day BEFORE the demo day.",
+  "$id": "https://github.com/Hugo510/junction-2026/apps/mobile/assets/personas/core.schema.json",
+  "title": "Hiillos synthetic persona: core.json",
+  "description": "SYNTHETIC data only. One file per persona at apps/mobile/assets/personas/<id>/core.json. Dates are real local calendar days (YYYY-MM-DD, Europe/Helsinki); when a persona is loaded the app moves all dates so the last day of the file becomes 'yesterday'. Unknown fields are ignored by the app.",
   "type": "object",
-  "required": ["checkIns", "sensors", "feedback"],
-  "additionalProperties": false,
+  "required": ["synthetic", "persona", "checkIns", "sensors", "feedback"],
   "properties": {
+    "synthetic": { "const": true, "description": "Required. The app refuses files without it." },
+    "generatorVersion": { "type": "string" },
+    "seed": { "type": "integer" },
     "persona": {
-      "description": "Optional metadata used by the demo persona picker.",
       "type": "object",
-      "required": ["id", "displayName"],
-      "additionalProperties": false,
+      "required": ["id", "label"],
       "properties": {
         "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
-        "displayName": { "type": "string", "description": "Fictional name, e.g. \"Aino (synthetic)\"" },
-        "story": { "type": "string", "description": "One line for the demo picker, e.g. \"Drift, walks help\"" },
+        "label": { "type": "string", "description": "Shown in the demo picker, e.g. \"Aino, 42, post-TMS\"" },
+        "path": { "type": "string", "description": "Scenario path from the spec (demo script only)" },
+        "state": { "type": "string", "description": "Scenario state from the spec (demo script only)" },
+        "story": { "type": "string", "description": "Optional one-liner for the picker, e.g. \"Drift, walks help\"" },
         "language": { "enum": ["en", "fi", "es", "sv"] },
         "companion": {
           "type": "object",
@@ -35,11 +37,10 @@
     },
     "checkIns": {
       "type": "array",
-      "description": "Zero or more entries per day. Missing days = no check-in (silence).",
+      "description": "Zero or more entries per day. A day without entries = silence.",
       "items": {
         "type": "object",
         "required": ["id", "date", "createdAt", "mood", "safetyConcern"],
-        "additionalProperties": false,
         "properties": {
           "id": { "type": "string", "description": "Unique, e.g. \"aino-2026-11-01\"" },
           "date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
@@ -54,7 +55,7 @@
           },
           "energy": { "type": "integer", "minimum": 1, "maximum": 5 },
           "anxiety": { "type": "integer", "minimum": 1, "maximum": 5 },
-          "sleepHours": { "type": "number", "minimum": 0, "maximum": 24, "description": "Total sleep incl. naps" },
+          "sleepHours": { "type": "number", "minimum": 0, "maximum": 24, "description": "Total sleep including naps" },
           "note": { "type": "string", "maxLength": 500 },
           "reaction": {
             "type": "object",
@@ -66,21 +67,24 @@
               "rounds": { "type": "integer", "minimum": 1 }
             }
           },
-          "safetyConcern": { "type": "boolean", "description": "Keep false in demo data unless the script needs the crisis path." }
+          "safetyConcern": { "type": "boolean", "description": "Keep false unless the demo script needs the crisis path." }
         }
       }
     },
     "sensors": {
       "type": "array",
-      "description": "One aggregate per day (no raw samples, no coordinates).",
+      "description": "One aggregate per day. No raw samples, no coordinates.",
       "items": {
         "type": "object",
         "required": ["date", "activityMinutes", "daylightMinutes"],
-        "additionalProperties": false,
         "properties": {
           "date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
           "activityMinutes": { "type": "number", "minimum": 0 },
-          "daylightMinutes": { "type": "number", "minimum": 0 }
+          "daylightMinutes": { "type": "number", "minimum": 0 },
+          "homeMinutes": { "type": "number", "minimum": 0, "maximum": 1440 },
+          "bedtime": { "type": "string", "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$", "description": "Local time, 24 h" },
+          "steps": { "type": "integer", "minimum": 0 },
+          "nightPhoneMinutes": { "type": "number", "minimum": 0 }
         }
       }
     },
@@ -90,12 +94,24 @@
       "items": {
         "type": "object",
         "required": ["id", "interventionId", "date", "rating"],
-        "additionalProperties": false,
         "properties": {
           "id": { "type": "string" },
           "interventionId": { "enum": ["breathing", "fireplace", "fish", "puzzle", "move", "daylightWalk", "reachOut", "gratitude"] },
           "date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
           "rating": { "enum": [1, 0, -1] }
+        }
+      }
+    },
+    "phq9": {
+      "type": "array",
+      "description": "PHQ-9 answers. 9 items scored 0-3; total must equal the sum.",
+      "items": {
+        "type": "object",
+        "required": ["date", "items", "total"],
+        "properties": {
+          "date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+          "items": { "type": "array", "minItems": 9, "maxItems": 9, "items": { "type": "integer", "minimum": 0, "maximum": 3 } },
+          "total": { "type": "integer", "minimum": 0, "maximum": 27 }
         }
       }
     }
