@@ -1,5 +1,5 @@
 import { PERSONAS, rebasePersona } from '../../data/personas';
-import { bodyResponse } from '../bodyResponse';
+import { bodyResponse, respondsWell } from '../bodyResponse';
 import { addDaysISO } from '../dates';
 import type { SensorAggregate } from '../entities';
 import { INTERVENTION_IDS } from '../interventions';
@@ -48,6 +48,21 @@ describe('smart-ring layer (generator v0.4) in the app', () => {
     const body = wearableSummary(simulateWearable({ checkIns: aino.checkIns, sensors: aino.sensors, today: TODAY }), TODAY);
     const week = body.recovery.week.reduce((a, b) => a + b, 0) / body.recovery.week.length;
     expect(week).toBeLessThan(body.recovery.usual as number);
+  });
+
+  it('generator v0.5: the body answers the step that truly helps, and only that one (demo step 3)', () => {
+    const response = (id: string, step: 'daylightWalk' | 'fireplace' | 'breathing') => {
+      const data = persona(id);
+      return bodyResponse(step, data.feedback, data.sensors);
+    };
+    // Aino: walks. Juho: the fireplace, and walks do nothing for him. Illustrative effect, not evidence.
+    expect(respondsWell(response('aino', 'daylightWalk'))).toBe(true);
+    expect(respondsWell(response('juho', 'fireplace'))).toBe(true);
+    expect(respondsWell(response('juho', 'daylightWalk'))).toBe(false);
+    // The others get no claim: their nights after their top step were ordinary.
+    expect(respondsWell(response('leena', 'daylightWalk'))).toBe(false);
+    expect(respondsWell(response('elias', 'daylightWalk'))).toBe(false);
+    expect(respondsWell(response('sara', 'breathing'))).toBe(false);
   });
 
   it('reports what the body-loop numbers are today (for the demo script)', () => {
