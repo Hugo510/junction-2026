@@ -206,3 +206,23 @@ curl -i -X POST http://localhost:8000/api/v1/sensors/aggregates \
   -d '{"items": [{"type": "steps", "periodStart": "2026-11-13T00:00:00Z",
        "periodEnd": "2026-11-13T23:59:59", "value": 4200, "unit": "steps"}]}'
 ```
+
+# GEMINI API Check Test
+
+## Status: llm should be true, voice false
+curl -s http://localhost:8000/api/v1/companion/status
+
+## Normal message: expect source "llm" and a short reply
+curl -s -X POST http://localhost:8000/api/v1/companion/reply \
+  -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -d '{"message": "I had a tiring day and could not sleep", "language": "fi"}'
+
+## Crisis wording: expect crisis true and source "safety". Gemini is never called.
+curl -s -X POST http://localhost:8000/api/v1/companion/reply \
+  -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -d '{"message": "I want to die", "language": "en"}'
+
+## Spanish crisis wording, to check the multilingual keywords
+curl -s -X POST http://localhost:8000/api/v1/companion/reply \
+  -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -d '{"message": "Quiero morir", "language": "es"}'
