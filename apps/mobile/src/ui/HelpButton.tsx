@@ -5,27 +5,43 @@ import { useTranslation } from 'react-i18next';
 import { AppText } from './AppText';
 import { Icon } from './Icon';
 import { useTheme } from './theme';
-import { radii, spacing } from './tokens';
+import { MIN_TOUCH, radii, spacing } from './tokens';
 
-/** Discreet but always-visible access to the crisis screen. */
-export function HelpButton({ compact = false }: { compact?: boolean }) {
+/**
+ * Always-available access to the crisis screen.
+ * - "icon" (headers): calm, neutral life-ring button — discoverable without constant alarm red.
+ * - "full" (menu, chat hero): labelled pill.
+ * Red is reserved for the crisis screen itself.
+ */
+export function HelpButton({ variant = 'icon' }: { variant?: 'icon' | 'full' }) {
   const { colors } = useTheme();
   const { t } = useTranslation();
+  const open = () => router.push('/crisis');
+
+  if (variant === 'icon') {
+    return (
+      <Pressable
+        accessibilityRole="button"
+        accessibilityLabel={t('common.needHelp')}
+        accessibilityHint={t('a11y.helpHint')}
+        onPress={open}
+        style={({ pressed }) => [styles.icon, { backgroundColor: pressed ? colors.surfaceAlt : 'transparent' }]}
+      >
+        <Icon name="help" color={colors.accent} />
+      </Pressable>
+    );
+  }
+
   return (
     <Pressable
       accessibilityRole="button"
       accessibilityLabel={t('common.needHelp')}
       accessibilityHint={t('a11y.helpHint')}
-      hitSlop={10}
-      onPress={() => router.push('/crisis')}
-      style={({ pressed }) => [
-        styles.pill,
-        { backgroundColor: colors.dangerSoft, borderColor: colors.danger, opacity: pressed ? 0.8 : 1 },
-        compact && styles.compact,
-      ]}
+      onPress={open}
+      style={({ pressed }) => [styles.pill, { backgroundColor: colors.accentSoft, opacity: pressed ? 0.85 : 1 }]}
     >
-      <Icon name="help" color={colors.danger} size={18} />
-      <AppText variant="caption" tone="danger" style={styles.text}>
+      <Icon name="help" color={colors.accent} size={18} />
+      <AppText variant="label" tone="accent">
         {t('common.needHelp')}
       </AppText>
     </Pressable>
@@ -33,16 +49,14 @@ export function HelpButton({ compact = false }: { compact?: boolean }) {
 }
 
 const styles = StyleSheet.create({
+  icon: { width: MIN_TOUCH, height: MIN_TOUCH, borderRadius: MIN_TOUCH / 2, alignItems: 'center', justifyContent: 'center' },
   pill: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: spacing.xs,
+    gap: spacing.sm,
     paddingHorizontal: spacing.md,
-    minHeight: 40,
+    minHeight: MIN_TOUCH,
     borderRadius: radii.pill,
-    borderWidth: 1,
     alignSelf: 'flex-start',
   },
-  compact: { paddingHorizontal: spacing.sm + 2, marginRight: spacing.sm },
-  text: { fontWeight: '600' },
 });

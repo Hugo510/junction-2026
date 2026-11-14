@@ -88,7 +88,7 @@ export function Slider({ label, value, min, max, step = 1, onChange, minLabel, m
 
 const styles = StyleSheet.create({
   wrap: { gap: spacing.sm },
-  track: { flexDirection: 'row', gap: 4 },
+  track: { flexDirection: 'row', gap: spacing.xs },
   segment: { flex: 1, minHeight: MIN_TOUCH, borderRadius: radii.sm, borderWidth: StyleSheet.hairlineWidth },
   ends: { flexDirection: 'row', justifyContent: 'space-between' },
 });

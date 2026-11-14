@@ -2,19 +2,22 @@ import type { ReactNode } from 'react';
 import { Pressable, StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native';
 
 import { useTheme } from './theme';
-import { radii, spacing } from './tokens';
+import { elevation, radii, spacing } from './tokens';
 
 export interface CardProps {
   children: ReactNode;
   tone?: 'surface' | 'soft' | 'accent' | 'sand' | 'danger';
+  /** "flat" = no shadow (for cards inside other surfaces, e.g. chat). */
+  flat?: boolean;
   onPress?: () => void;
   accessibilityLabel?: string;
   accessibilityHint?: string;
   style?: StyleProp<ViewStyle>;
 }
 
-export function Card({ children, tone = 'surface', onPress, accessibilityLabel, accessibilityHint, style }: CardProps) {
-  const { colors } = useTheme();
+/** Surface separated by tone and a soft shadow — no borders, less visual noise. */
+export function Card({ children, tone = 'surface', flat = false, onPress, accessibilityLabel, accessibilityHint, style }: CardProps) {
+  const { colors, scheme } = useTheme();
   const bg = {
     surface: colors.surface,
     soft: colors.primarySoft,
@@ -22,7 +25,8 @@ export function Card({ children, tone = 'surface', onPress, accessibilityLabel, 
     sand: colors.sand,
     danger: colors.dangerSoft,
   }[tone];
-  const cardStyle = [styles.card, { backgroundColor: bg, borderColor: colors.border }, style];
+  const shadow = flat || tone !== 'surface' || scheme === 'dark' ? elevation.none : elevation.low;
+  const cardStyle = [styles.card, { backgroundColor: bg }, shadow, style];
 
   if (onPress) {
     return (
@@ -43,8 +47,7 @@ export function Card({ children, tone = 'surface', onPress, accessibilityLabel, 
 const styles = StyleSheet.create({
   card: {
     borderRadius: radii.lg,
-    padding: spacing.md + 4,
-    borderWidth: StyleSheet.hairlineWidth,
+    padding: spacing.md,
     gap: spacing.sm,
   },
 });

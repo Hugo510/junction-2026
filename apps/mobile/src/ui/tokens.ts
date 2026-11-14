@@ -102,4 +102,27 @@ export const MIN_TOUCH = 48;
 /** Multiplier applied when "Larger text" is on (on top of the system font size). */
 export const LARGE_TEXT_FACTOR = 1.2;
 
-export const durations = { fast: 180, normal: 300, slow: 600 } as const;
+/** Motion tokens. Every animation uses these (and is skipped when reduce motion is on). */
+export const durations = { instant: 120, fast: 180, normal: 260, slow: 600 } as const;
+
+/** Elevation tokens: soft shadows instead of borders to separate surfaces. */
+export const elevation = {
+  none: {},
+  low: {
+    shadowColor: '#1E2621',
+    shadowOpacity: 0.06,
+    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 2 },
+    elevation: 1,
+  },
+  high: {
+    shadowColor: '#1E2621',
+    shadowOpacity: 0.14,
+    shadowRadius: 20,
+    shadowOffset: { width: 0, height: 8 },
+    elevation: 6,
+  },
+} as const;
+
+/** Upper bound for system font scaling on dense UI (headers, calendar cells). Body text allows 2×. */
+export const MAX_FONT_SCALE = { dense: 1.4, body: 2 } as const;
