@@ -168,6 +168,13 @@ HealthKit, Health Connect or Bluetooth, so the daily totals are simulated and th
   the nights after a small step with the person's own previous 14 nights. When it is clearly higher, the
   home screen adds one line under "What helps you". It describes what followed the step for this person; it
   is not evidence of cause and says nothing about depression.
+- **The body's answer in the learning score (B3)**: `rewardFor` in `src/domain/interventionPicker.ts` adds
+  `BODY_WEIGHT` (0.25, illustrative and adjustable) × that night's recovery against the person's own 14-night
+  baseline, in their own standard deviations, capped at ±2. Without wearable nights or a baseline nothing
+  changes, so today's persona files rank exactly as before (tested).
+- **Clinician screen (B5)**: each person shows a small trend of night-time recovery and sleep over the last
+  7 nights against their own usual, labelled synthetic and "context only". It never puts anyone on the call
+  list and never raises an alert.
 - **Same rules, better data**: measured sleep only fills in nights the person did not log (what they
   reported always wins), and it goes through the existing two-sided sleep rule with the same weight. No new
   rule, and no clinic alert from sensors alone. A test checks that connecting a wearable does not move any
