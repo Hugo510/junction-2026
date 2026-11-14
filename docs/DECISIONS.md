@@ -36,11 +36,15 @@
 | O30 | **C6 wind-down small step:** "Phone out of the bedroom tonight" in the action menu, offered only when screen-off drifts later than her own normal; no content tracking; only if trivial (~15 min). | Claude 11:15 (Meg asked for solution additions) | Hugo |
 | O31 | **Check the book's numbers before any slide** (≈€11 bn/yr ≈5% GDP, 1.5 M youth visits 2023, >40% of disability pensions) at THL / OECD / STM. Until then the pitch says "billions a year" without a figure. | Claude 11:15 | Meg |
 | O32 | **Radical frame for the pitch:** open and close with "Treatment doesn't end at discharge — it changes form." Creativity proof names four inversions (comes to you · fire belongs to you, not the risk score · quiet when well · proves its own false alarm). Radical in the idea, conservative in safety. Spec W2, W3, W7.1. | Claude 13:10 (Meg asked: radical or radically creative?) | Meg (pitch) |
+| O33 | **Body loop as the headline (memo `MEMO_BODY_LOOP.md` / `_ES.md`):** watch data (night heart rate variability, resting heart rate, sleep, steps) → small step → next-night body response vs her own baseline → learning score. **Ring:** add too? Build B1–B6 with owners in the memo; B6 live heart rate from a team member needs a team yes (spec said no real team data). Clinic loop stays as the safety net. | Meg 19:50 | Team (ring, B6) · Hugo (field names) |
 | O20 | **Optional wow (W12) — kept, not dropped (Meg 10:36):** prism hologram of the fire (C1, Meg) and Arduino ember lamp (C5) — after M1–M4, 1–2 h cap each, demo never depends on them. Who has hardware? | Meg | Team |
 
 ---
 
 ## Sat 14 Nov 2026
+
+**Decided (19:50, Meg, after talking to the challenge team)**
+- The challengers were not convinced by the closed *care* loop; their brief means a closed loop on the body/brain response to interventions, and names smart rings. **Hiillos now leads with the body loop** (sense → small step → measure the body's response that night → learn); the clinic loop stays as the safety net. **Watch added** (Hugo and Uriel ready). Ring proposed (O33). Memo in English and Spanish: `docs/MEMO_BODY_LOOP.md`, `docs/MEMO_BODY_LOOP_ES.md`.
 
 **Proposed (13:10, Meg asked)**
 - Honest read: Hiillos is **radically creative** in its design inversions but **not yet radical** as a system change; the radical part lives in the pitch frame. Proposal O32 adds the line "Treatment doesn't end at discharge — it changes form." No build change.
