@@ -152,20 +152,26 @@ export function handleEvent(event: ChatEvent, flow: ChatFlowState, ctx: ChatCont
 
   switch (event.type) {
     case 'open': {
-      const greeting: NewChatMessage = {
-        role: 'companion',
-        parts: greetingParts({
+      // One calm turn: greeting + invitation. A worrying trend only adds a gentle chip, not a card.
+      const suggestCare = ctx.priorityLevel !== 'low' && !ctx.hasOpenRequest;
+      const parts: TextPart[] = [
+        ...greetingParts({
           species: ctx.species,
           timeOfDay: ctx.timeOfDay,
           lastMood: ctx.lastMood,
           daysSinceLastCheckIn: ctx.daysSinceLastCheckIn,
           daylightHours: ctx.daylightHours,
         }),
+        { key: ctx.checkedInToday ? 'chat.open.done' : 'chat.open.invite' },
+      ];
+      if (suggestCare) parts.push({ key: 'chat.open.careHint' });
+      const base: QuickReplyId[] = ctx.checkedInToday ? ['relax', 'plan', 'progress'] : ['checkin', 'relax', 'low'];
+      const quickReplies: QuickReplyId[] = suggestCare ? [base[0], 'care', ...base.slice(1)] : [...base, ctx.checkedInToday ? 'care' : 'progress'];
+      return {
+        messages: [{ role: 'companion', parts, quickReplies }],
+        flow: { ...INITIAL_FLOW, relaxCount: flow.relaxCount },
+        effects: [],
       };
-      const invite = ctx.checkedInToday
-        ? say('chat.open.done', undefined, { quickReplies: ['relax', 'plan', 'progress', 'care'] })
-        : say('chat.open.invite', undefined, { quickReplies: ['checkin', 'relax', 'low', 'progress'] });
-      return { messages: [greeting, ...suggestConsult(ctx), invite], flow: { ...INITIAL_FLOW, relaxCount: flow.relaxCount }, effects: [] };
     }
 
     case 'mood':

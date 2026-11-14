@@ -75,8 +75,9 @@ export const useChat = create<ChatState>()((set, get) => {
 
     send: async (event, ctx) => {
       const userMessage = echo(event);
-      if (userMessage) set({ messages: [...get().messages, stamp(userMessage)] });
-      set({ typing: true });
+      // Taps on cards/chips get an instant answer; only typed messages show "typing…".
+      const isText = event.type === 'text';
+      set({ messages: userMessage ? [...get().messages, stamp(userMessage)] : get().messages, typing: isText });
 
       const result = handleEvent(event, get().flow, ctx);
       let urgent = false;
@@ -99,8 +100,8 @@ export const useChat = create<ChatState>()((set, get) => {
         }
       }
 
-      // Short, calm "typing" pause so replies don't feel abrupt.
-      await wait(urgent ? 200 : 650);
+      // Short pause proportional to what the user wrote (never for urgent paths).
+      if (isText && !urgent) await wait(Math.min(700, 280 + event.text.length * 6));
       const replies = result.messages.map((m) =>
         m.card?.type === 'entry' ? { ...m, card: { type: 'entry' as const, checkInId: savedId ?? '' } } : m,
       );

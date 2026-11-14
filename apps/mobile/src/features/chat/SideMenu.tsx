@@ -10,10 +10,8 @@ import { AppText, Avatar, HelpButton, Icon, MIN_TOUCH, radii, spacing, useTheme,
 
 const ITEMS: { key: string; icon: IconName; href: Href | null }[] = [
   { key: 'chat', icon: 'chat', href: null },
-  { key: 'today', icon: 'today', href: '/today' },
-  { key: 'journal', icon: 'journal', href: '/journal' },
+  { key: 'progress', icon: 'journal', href: '/progress' },
   { key: 'comfort', icon: 'comfort', href: '/comfort' },
-  { key: 'insights', icon: 'insights', href: '/insights' },
   { key: 'care', icon: 'care', href: '/care' },
   { key: 'settings', icon: 'settings', href: '/settings' },
 ];
@@ -81,7 +79,7 @@ export function SideMenu({ visible, onClose }: { visible: boolean; onClose: () =
             </View>
 
             <View style={styles.footer}>
-              <HelpButton />
+              <HelpButton variant="full" />
               <AppText variant="caption" tone="muted">
                 {t('common.notMedicalDevice')}
               </AppText>

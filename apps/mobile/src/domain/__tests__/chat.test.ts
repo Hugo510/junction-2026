@@ -65,10 +65,13 @@ describe('intents', () => {
 });
 
 describe('chat engine', () => {
-  it('opens with a greeting and an invitation to check in', () => {
+  it('opens with a single calm turn: greeting + invitation + chips', () => {
     const r = handleEvent({ type: 'open' }, INITIAL_FLOW, ctx);
+    expect(r.messages).toHaveLength(1);
     expect(r.messages[0].parts?.[0].key).toBe('companion.greeting.morning');
-    expect(r.messages[1].quickReplies).toContain('checkin');
+    expect(r.messages[0].parts?.map((p) => p.key)).toContain('chat.open.invite');
+    expect(r.messages[0].quickReplies).toContain('checkin');
+    expect(r.messages[0].quickReplies?.length).toBeLessThanOrEqual(4);
   });
 
   it('runs the guided check-in and saves a journal entry', () => {
@@ -103,8 +106,11 @@ describe('chat engine', () => {
 
   it('suggests (never creates) a consultation when priority is high', () => {
     const r = handleEvent({ type: 'open' }, INITIAL_FLOW, { ...ctx, priorityLevel: 'high' });
-    expect(r.messages.some((m) => m.card?.type === 'consult')).toBe(true);
+    expect(r.messages[0].quickReplies).toContain('care');
+    expect(r.messages[0].parts?.map((p) => p.key)).toContain('chat.open.careHint');
     expect(r.effects).toEqual([]);
+    const low = handleEvent({ type: 'quick', id: 'low' }, INITIAL_FLOW, { ...ctx, priorityLevel: 'high' });
+    expect(low.messages.some((m) => m.card?.type === 'consult')).toBe(true);
   });
 
   it('rotates calming options', () => {

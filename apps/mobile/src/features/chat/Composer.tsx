@@ -12,7 +12,13 @@ export function QuickReplies({ ids, onPick }: { ids: QuickReplyId[]; onPick: (id
   const { t } = useTranslation();
   if (!ids.length) return null;
   return (
-    <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.quick} keyboardShouldPersistTaps="handled">
+    <ScrollView
+      horizontal
+      showsHorizontalScrollIndicator={false}
+      style={styles.quickScroll}
+      contentContainerStyle={styles.quick}
+      keyboardShouldPersistTaps="handled"
+    >
       {ids.map((id) => (
         <Chip key={id} role="button" label={t(`chat.quick.${id}`)} onPress={() => onPick(id)} />
       ))}
@@ -20,7 +26,18 @@ export function QuickReplies({ ids, onPick }: { ids: QuickReplyId[]; onPick: (id
   );
 }
 
-export function Composer({ name, disabled, onSend }: { name: string; disabled: boolean; onSend: (text: string) => void }) {
+export function Composer({
+  name,
+  disabled,
+  onSend,
+  onPlus,
+}: {
+  name: string;
+  disabled: boolean;
+  onSend: (text: string) => void;
+  /** Opens the quick-actions sheet (like ChatGPT's attachments button). */
+  onPlus: () => void;
+}) {
   const { t } = useTranslation();
   const { colors, textScale } = useTheme();
   const [text, setText] = useState('');
@@ -35,6 +52,15 @@ export function Composer({ name, disabled, onSend }: { name: string; disabled: b
 
   return (
     <View style={[styles.composer, { backgroundColor: colors.surface, borderColor: colors.border }]}>
+      <Pressable
+        accessibilityRole="button"
+        accessibilityLabel={t('chat.actions.open')}
+        onPress={onPlus}
+        hitSlop={6}
+        style={[styles.send, { backgroundColor: colors.surfaceAlt }]}
+      >
+        <Icon name="plus" color={colors.text} size={20} />
+      </Pressable>
       <TextInput
         accessibilityLabel={t('chat.placeholder', { name })}
         placeholder={t('chat.placeholder', { name })}
@@ -88,20 +114,21 @@ export function TypingIndicator({ name }: { name: string }) {
 }
 
 const styles = StyleSheet.create({
-  quick: { gap: spacing.sm, paddingHorizontal: spacing.md, paddingVertical: spacing.xs },
+  /** Never grow vertically: chips keep their natural height. */
+  quickScroll: { flexGrow: 0, flexShrink: 0 },
+  quick: { gap: spacing.sm, paddingHorizontal: spacing.md, paddingVertical: spacing.xs, alignItems: 'center' },
   composer: {
     flexDirection: 'row',
     alignItems: 'flex-end',
     marginHorizontal: spacing.md,
     borderWidth: 1,
     borderRadius: radii.lg + 4,
-    paddingLeft: spacing.md,
-    paddingRight: spacing.xs + 2,
-    paddingVertical: spacing.xs + 2,
+    paddingHorizontal: spacing.xs,
+    paddingVertical: spacing.xs,
     gap: spacing.sm,
   },
-  input: { flex: 1, minHeight: 40, maxHeight: 140, paddingTop: 9, paddingBottom: 9 },
+  input: { flex: 1, minHeight: 40, maxHeight: 140, paddingTop: spacing.sm, paddingBottom: spacing.sm },
   send: { width: 40, height: 40, borderRadius: 20, alignItems: 'center', justifyContent: 'center', minWidth: 40 },
-  typing: { flexDirection: 'row', alignItems: 'center', gap: 5, paddingVertical: spacing.sm, minHeight: MIN_TOUCH / 2 },
+  typing: { flexDirection: 'row', alignItems: 'center', gap: spacing.xs, paddingVertical: spacing.sm, minHeight: MIN_TOUCH / 2 },
   dot: { width: 7, height: 7, borderRadius: 4 },
 });
