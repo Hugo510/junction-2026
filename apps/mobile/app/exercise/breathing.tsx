@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import { ExerciseShell } from '../../src/features/ExerciseShell';
 import { haptics } from '../../src/services/haptics';
-import { AppText, Button, Chip, ChipGroup, spacing, useTheme } from '../../src/ui';
+import { AppText, Button, Chip, ChipGroup, spacing, useScreenFocused, useTheme } from '../../src/ui';
 
 type Phase = 'inhale' | 'hold' | 'exhale' | 'holdOut';
 type PatternId = 'box' | 'calm';
@@ -36,6 +36,7 @@ export default function BreathingScreen() {
   const [phaseIndex, setPhaseIndex] = useState(0);
   const [remaining, setRemaining] = useState(0);
   const scale = useSharedValue(0.6);
+  const focused = useScreenFocused();
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
 
   const steps = PATTERNS[pattern];
@@ -47,6 +48,14 @@ export default function BreathingScreen() {
   };
 
   useEffect(() => () => clear(), []);
+
+  // Leaving the screen stops the session (no haptics in the background).
+  useEffect(() => {
+    if (!focused) {
+      clear();
+      setRunning(false);
+    }
+  }, [focused]);
 
   // Countdown
   useEffect(() => {

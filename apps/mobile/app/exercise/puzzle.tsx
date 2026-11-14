@@ -109,6 +109,6 @@ export default function PuzzleScreen() {
 
 const styles = StyleSheet.create({
   board: { width: '100%', borderRadius: radii.lg, borderWidth: StyleSheet.hairlineWidth, position: 'relative', marginTop: spacing.sm },
-  tileWrap: { position: 'absolute', padding: 4 },
+  tileWrap: { position: 'absolute', padding: spacing.xs },
   tile: { flex: 1, borderRadius: radii.md, alignItems: 'center', justifyContent: 'center', borderWidth: 2 },
 });

@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { ExerciseShell } from '../../src/features/ExerciseShell';
 import { subscribeAccelerometer } from '../../src/services/sensors/movement';
 import { useSettings } from '../../src/store/settings';
-import { AppText, radii, useTheme } from '../../src/ui';
+import { AppText, radii, useScreenFocused, useTheme } from '../../src/ui';
 
 interface Fish {
   x: number;
@@ -57,6 +57,7 @@ export default function FishScreen() {
   const { t } = useTranslation();
   const { colors, reduceMotion } = useTheme();
   const tiltAllowed = useSettings((s) => s.consents.movement);
+  const focused = useScreenFocused();
 
   const width = useSharedValue(300);
   const height = useSharedValue(LAKE_HEIGHT);
@@ -68,14 +69,14 @@ export default function FishScreen() {
   const rippleOpacity = useSharedValue(0);
 
   useEffect(() => {
-    if (!tiltAllowed) return;
+    if (!tiltAllowed || !focused) return;
     return subscribeAccelerometer(({ x, y }) => {
       tiltX.value = x;
       tiltY.value = y;
     }, 100);
-  }, [tiltAllowed, tiltX, tiltY]);
+  }, [tiltAllowed, focused, tiltX, tiltY]);
 
-  useFrameCallback((frame) => {
+  const frameCallback = useFrameCallback((frame) => {
     'worklet';
     const dt = Math.min(0.05, (frame.timeSincePreviousFrame ?? 16) / 1000);
     const w = width.value;
@@ -116,7 +117,12 @@ export default function FishScreen() {
       }
       return { x, y, vx, vy, phase: f.phase + dt };
     });
-  }, !reduceMotion);
+  }, false);
+
+  // Run the simulation only while visible and when motion is allowed.
+  useEffect(() => {
+    frameCallback.setActive(focused && !reduceMotion);
+  }, [focused, reduceMotion, frameCallback]);
 
   const onLayout = (e: LayoutChangeEvent) => {
     const { width: w, height: h } = e.nativeEvent.layout;

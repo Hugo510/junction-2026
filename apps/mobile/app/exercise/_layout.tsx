@@ -11,7 +11,7 @@ export default function ExerciseLayout() {
         headerTintColor: colors.text,
         headerShadowVisible: false,
         contentStyle: { backgroundColor: colors.background },
-        headerRight: () => <HelpButton compact />,
+        headerRight: () => <HelpButton />,
       }}
     />
   );

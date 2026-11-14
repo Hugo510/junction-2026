@@ -15,7 +15,7 @@ import Svg, { Defs, Ellipse, LinearGradient, Path, Rect, Stop } from 'react-nati
 import { useTranslation } from 'react-i18next';
 
 import { ExerciseShell } from '../../src/features/ExerciseShell';
-import { radii, useTheme } from '../../src/ui';
+import { radii, useScreenFocused, useTheme } from '../../src/ui';
 
 const FLAMES = [
   { x: 70, w: 70, h: 120, color: '#F2A65A', delay: 0, dur: 1300 },
@@ -87,7 +87,9 @@ function Ember({ i, active }: { i: number; active: boolean }) {
 export default function FireplaceScreen() {
   const { t } = useTranslation();
   const { reduceMotion } = useTheme();
-  const active = !reduceMotion;
+  const focused = useScreenFocused();
+  // Pause when the screen is not visible (battery + smoothness).
+  const active = !reduceMotion && focused;
   return (
     <ExerciseShell id="fireplace" hint={t('comfort.fireplace.hint')}>
       <View style={styles.scene} accessible accessibilityRole="image" accessibilityLabel={t('interventions.fireplace.title')}>

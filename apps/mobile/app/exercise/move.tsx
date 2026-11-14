@@ -9,7 +9,7 @@ import { haptics } from '../../src/services/haptics';
 import { useMovement } from '../../src/services/sensors/movement';
 import { useData } from '../../src/store/data';
 import { useSettings } from '../../src/store/settings';
-import { AppText, Avatar, Button, radii, spacing, useTheme } from '../../src/ui';
+import { AppText, Avatar, Button, radii, spacing, useScreenFocused, useTheme } from '../../src/ui';
 
 const SESSION_SECONDS = 120;
 const BPM = 92;
@@ -23,6 +23,7 @@ export default function MoveScreen() {
   const ctx = useCompanionContext();
   const addSensorMinutes = useData((s) => s.addSensorMinutes);
   const movementAllowed = useSettings((s) => s.consents.movement);
+  const focused = useScreenFocused();
 
   const [state, setState] = useState<'idle' | 'running' | 'done'>('idle');
   const [elapsed, setElapsed] = useState(0);
@@ -30,7 +31,7 @@ export default function MoveScreen() {
   const [addedMinutes, setAddedMinutes] = useState(0);
   const activeSeconds = useRef(0);
   const beat = useSharedValue(1);
-  const movement = useMovement(movementAllowed && state === 'running');
+  const movement = useMovement(movementAllowed && state === 'running' && focused);
   const movingRef = useRef(false);
   movingRef.current = movement.isMoving;
 
@@ -39,9 +40,9 @@ export default function MoveScreen() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Metronome
+  // Metronome (paused while the screen is not visible)
   useEffect(() => {
-    if (state !== 'running') return;
+    if (state !== 'running' || !focused) return;
     let n = 0;
     const id = setInterval(() => {
       n += 1;
@@ -49,7 +50,7 @@ export default function MoveScreen() {
       if (n % 2 === 0) haptics.pulse();
     }, 60_000 / BPM);
     return () => clearInterval(id);
-  }, [state, reduceMotion, beat]);
+  }, [state, focused, reduceMotion, beat]);
 
   // Session clock + encouragement
   useEffect(() => {
