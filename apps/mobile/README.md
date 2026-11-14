@@ -31,7 +31,7 @@ npx expo-doctor         # Expo dependency/config health
 ## Chat-first experience
 
 The home screen is a **conversation with the companion** the patient chose (ChatGPT-like: plain
-companion messages, soft user bubbles, suggestion chips, composer at the bottom, ☰ side menu).
+companion messages, soft user bubbles, suggestion chips, a composer with a **+** quick-actions sheet, ☰ side menu).
 Everything else opens *from* the chat as cards or from the menu:
 
 - **Guided check-in in the chat**: mood faces → feelings → optional note → safety question →
@@ -53,8 +53,9 @@ and every entry (from check-ins, chat or the journal itself).
 app/                      Expo Router routes
   chat.tsx                home: conversation with the companion + side menu
   (onboarding)/           start (language) → welcome → consent → companion → baseline
-  today, checkin, comfort, insights, care   secondary screens (opened from chat/menu)
-  journal/                index (calendar, milestones, entries) and new (quick entry)
+  progress.tsx            Journal | Trends (segmented)
+  checkin, comfort, care  secondary screens (opened from chat cards, + sheet or ☰ menu)
+  journal/new.tsx         quick journal entry
   exercise/               breathing, fireplace, fish, puzzle, move, walk
   settings/, privacy/     settings and privacy center
   crisis.tsx              crisis screen (reachable from every screen via "Need help now?")
@@ -67,9 +68,11 @@ src/
   data/                   repositories.ts (interfaces), mock/ (AsyncStorage), api/ (stub), seed.ts
   services/               companion/ (CompanionService, Mock, Gemini stub), sensors/, haptics
   store/                  zustand: settings (persisted), data (cache over repositories), clock
-  features/               screen building blocks (check-in flow, reaction game, feedback…)
+  features/               feature modules: view-model hooks (useChatViewModel, useJournalViewModel,
+                          useInsightsViewModel) + presentational components; screens only render
   i18n/                   i18next config + locales/en|fi|es|sv.json
-  ui/                     design system: tokens, AppText, Button, Card, Chip, Slider, Screen,
+  ui/                     design system: tokens (color, 8-pt spacing, type, elevation, motion),
+                          AppText, Button, Card, Section/ListItem, Chip, Slider, Screen, AppSkeleton,
                           Avatar, MoodFace, Sparkline/BarChart, Icon, empty/loading/error states
   config/crisisResources.ts
 scripts/i18n-check.js
@@ -90,7 +93,7 @@ Suggested 2-minute script:
 2. *Seed declining week* → mood, sleep, activity and reaction time get worse; priority jumps (≈ 85/100).
    The chat now opens with the companion **suggesting** a consultation.
 3. Tap *Request a consultation* in the chat card → high priority, readable reasons, 1st in line.
-4. Open ☰ → Journal: calendar of moods, feelings and the entry just saved from the chat.
+4. Open ☰ → Progress → Journal: calendar of moods, feelings and the entry just saved from the chat.
 5. Type a crisis phrase in the chat (or *Trigger urgent check-in*) → crisis screen opens immediately
    and an urgent alert is created (never enters the normal queue).
 
