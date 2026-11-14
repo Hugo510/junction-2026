@@ -40,10 +40,23 @@ def bootstrap(template: list[dict], pid: str, fn, start: date, seed: int) -> lis
     mean = {k: st.mean([n[k] for n in t if num(n.get(k)) is not None]) for k in
             ["total", "average_hrv", "hr_lowest", "respiratory_rate"] if any(num(n.get(k)) for n in t)}
     seq = []
-    while len(seq) < g.DAYS:
-        s = rng.randrange(0, len(t) - 6)
-        seq.extend(t[s:s + 7])
-    seq = seq[:g.DAYS]
+    if len(t) >= 14:  # enough nights: 7-night blocks keep weekly rhythm
+        while len(seq) < g.DAYS:
+            s = rng.randrange(0, len(t) - 6)
+            seq.extend(t[s:s + 7])
+        seq = seq[:g.DAYS]
+    else:  # short template (e.g. 9 demo nights): resample single nights + jitter within the template's spread
+        sd = {k: (st.pstdev([n[k] for n in t if num(n.get(k)) is not None]) if sum(num(n.get(k)) is not None for n in t) > 1 else 0)
+              for k in ["duration", "total", "awake", "light", "deep", "rem", "latency", "efficiency",
+                        "hr_lowest", "hr_average", "average_hrv", "respiratory_rate", "temperature_delta"]}
+        for _ in range(g.DAYS):
+            src = dict(rng.choice(t))
+            for k, s_k in sd.items():
+                if num(src.get(k)) is not None and s_k:
+                    src[k] = src[k] + rng.gauss(0, 0.5 * s_k)
+            src["average_hrv"] = max(5.0, src["average_hrv"])
+            src["total"] = max(3 * 3600, src["total"])
+            seq.append(src)
     b = g.RING_BASE[pid]
     out = []
     for i, src in enumerate(seq):
