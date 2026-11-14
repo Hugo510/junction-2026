@@ -1,7 +1,12 @@
 {
+ "synthetic": true,
+ "generatorVersion": "0.3",
+ "seed": 2026,
  "persona": {
   "id": "juho",
-  "displayName": "Juho (synthetic)",
+  "label": "Juho (synthetic)",
+  "path": "B",
+  "state": "B5",
   "story": "Sound helps, walks don't",
   "language": "fi",
   "companion": {

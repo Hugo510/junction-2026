@@ -1,7 +1,12 @@
 {
+ "synthetic": true,
+ "generatorVersion": "0.3",
+ "seed": 2026,
  "persona": {
   "id": "sara",
-  "displayName": "Sara (synthetic)",
+  "label": "Sara (synthetic)",
+  "path": "B",
+  "state": "B5",
   "story": "Goes quiet: silence ladder",
   "language": "sv",
   "companion": {
@@ -165,7 +170,7 @@
    "date": "2026-08-28",
    "createdAt": "2026-08-28T19:25:00.000Z",
    "kind": "full",
-   "mood": 5,
+   "mood": 4,
    "emotions": [
     "content",
     "calm"
@@ -857,337 +862,513 @@
   {
    "date": "2026-08-17",
    "activityMinutes": 18,
-   "daylightMinutes": 68
+   "daylightMinutes": 68,
+   "homeMinutes": 921,
+   "screenOffTime": "23:00"
   },
   {
    "date": "2026-08-18",
    "activityMinutes": 30,
-   "daylightMinutes": 74
+   "daylightMinutes": 74,
+   "homeMinutes": 850,
+   "screenOffTime": "22:58"
   },
   {
    "date": "2026-08-19",
    "activityMinutes": 49,
-   "daylightMinutes": 58
+   "daylightMinutes": 58,
+   "homeMinutes": 949,
+   "screenOffTime": "22:49"
   },
   {
    "date": "2026-08-20",
    "activityMinutes": 20,
-   "daylightMinutes": 65
+   "daylightMinutes": 65,
+   "homeMinutes": 943,
+   "screenOffTime": "22:55"
   },
   {
    "date": "2026-08-21",
    "activityMinutes": 43,
-   "daylightMinutes": 75
+   "daylightMinutes": 75,
+   "homeMinutes": 927,
+   "screenOffTime": "22:31"
   },
   {
    "date": "2026-08-22",
    "activityMinutes": 41,
-   "daylightMinutes": 41
+   "daylightMinutes": 41,
+   "homeMinutes": 904,
+   "screenOffTime": "22:28"
   },
   {
    "date": "2026-08-23",
    "activityMinutes": 40,
-   "daylightMinutes": 69
+   "daylightMinutes": 69,
+   "homeMinutes": 891,
+   "screenOffTime": "23:05"
   },
   {
    "date": "2026-08-24",
    "activityMinutes": 49,
-   "daylightMinutes": 40
+   "daylightMinutes": 40,
+   "homeMinutes": 902,
+   "screenOffTime": "23:09"
   },
   {
    "date": "2026-08-25",
    "activityMinutes": 49,
-   "daylightMinutes": 58
+   "daylightMinutes": 58,
+   "homeMinutes": 903,
+   "screenOffTime": "23:14"
   },
   {
    "date": "2026-08-26",
    "activityMinutes": 54,
-   "daylightMinutes": 79
+   "daylightMinutes": 79,
+   "homeMinutes": 1015,
+   "screenOffTime": "22:03"
   },
   {
    "date": "2026-08-27",
    "activityMinutes": 24,
-   "daylightMinutes": 52
+   "daylightMinutes": 52,
+   "homeMinutes": 911,
+   "screenOffTime": "23:21"
   },
   {
    "date": "2026-08-28",
    "activityMinutes": 35,
-   "daylightMinutes": 45
+   "daylightMinutes": 45,
+   "homeMinutes": 968,
+   "screenOffTime": "23:23"
   },
   {
    "date": "2026-08-29",
    "activityMinutes": 28,
-   "daylightMinutes": 89
+   "daylightMinutes": 89,
+   "homeMinutes": 988,
+   "screenOffTime": "23:05"
   },
   {
    "date": "2026-08-30",
    "activityMinutes": 36,
-   "daylightMinutes": 74
+   "daylightMinutes": 74,
+   "homeMinutes": 912,
+   "screenOffTime": "23:07"
   },
   {
    "date": "2026-08-31",
    "activityMinutes": 20,
-   "daylightMinutes": 49
+   "daylightMinutes": 49,
+   "homeMinutes": 933,
+   "screenOffTime": "22:45"
   },
   {
    "date": "2026-09-01",
    "activityMinutes": 37,
-   "daylightMinutes": 39
+   "daylightMinutes": 39,
+   "homeMinutes": 907,
+   "screenOffTime": "23:01"
   },
   {
    "date": "2026-09-03",
    "activityMinutes": 35,
-   "daylightMinutes": 66
+   "daylightMinutes": 66,
+   "homeMinutes": 940,
+   "screenOffTime": "22:43"
   },
   {
    "date": "2026-09-05",
    "activityMinutes": 37,
-   "daylightMinutes": 79
+   "daylightMinutes": 79,
+   "homeMinutes": 843,
+   "screenOffTime": "23:01"
   },
   {
    "date": "2026-09-06",
    "activityMinutes": 47,
-   "daylightMinutes": 70
+   "daylightMinutes": 70,
+   "homeMinutes": 910,
+   "screenOffTime": "22:29"
   },
   {
    "date": "2026-09-07",
    "activityMinutes": 40,
-   "daylightMinutes": 68
+   "daylightMinutes": 68,
+   "homeMinutes": 829,
+   "screenOffTime": "23:12"
   },
   {
    "date": "2026-09-08",
    "activityMinutes": 27,
-   "daylightMinutes": 36
+   "daylightMinutes": 36,
+   "homeMinutes": 823,
+   "screenOffTime": "22:33"
   },
   {
    "date": "2026-09-09",
    "activityMinutes": 36,
-   "daylightMinutes": 49
+   "daylightMinutes": 49,
+   "homeMinutes": 944,
+   "screenOffTime": "22:52"
   },
   {
    "date": "2026-09-10",
    "activityMinutes": 37,
-   "daylightMinutes": 89
+   "daylightMinutes": 89,
+   "homeMinutes": 964,
+   "screenOffTime": "22:44"
   },
   {
    "date": "2026-09-11",
    "activityMinutes": 34,
-   "daylightMinutes": 74
+   "daylightMinutes": 74,
+   "homeMinutes": 855,
+   "screenOffTime": "22:56"
   },
   {
    "date": "2026-09-12",
    "activityMinutes": 35,
-   "daylightMinutes": 43
+   "daylightMinutes": 43,
+   "homeMinutes": 902,
+   "screenOffTime": "22:59"
   },
   {
    "date": "2026-09-13",
    "activityMinutes": 41,
-   "daylightMinutes": 67
+   "daylightMinutes": 67,
+   "homeMinutes": 916,
+   "screenOffTime": "22:40"
   },
   {
    "date": "2026-09-14",
    "activityMinutes": 35,
-   "daylightMinutes": 56
+   "daylightMinutes": 56,
+   "homeMinutes": 892,
+   "screenOffTime": "22:51"
   },
   {
    "date": "2026-09-15",
    "activityMinutes": 33,
-   "daylightMinutes": 59
+   "daylightMinutes": 59,
+   "homeMinutes": 795,
+   "screenOffTime": "23:00"
   },
   {
    "date": "2026-09-16",
    "activityMinutes": 39,
-   "daylightMinutes": 56
+   "daylightMinutes": 56,
+   "homeMinutes": 900,
+   "screenOffTime": "23:06"
   },
   {
    "date": "2026-09-17",
    "activityMinutes": 35,
-   "daylightMinutes": 64
+   "daylightMinutes": 64,
+   "homeMinutes": 940,
+   "screenOffTime": "23:02"
   },
   {
    "date": "2026-09-18",
    "activityMinutes": 40,
-   "daylightMinutes": 62
+   "daylightMinutes": 62,
+   "homeMinutes": 870,
+   "screenOffTime": "22:50"
   },
   {
    "date": "2026-09-19",
    "activityMinutes": 37,
-   "daylightMinutes": 38
+   "daylightMinutes": 38,
+   "homeMinutes": 885,
+   "screenOffTime": "22:48"
   },
   {
    "date": "2026-09-20",
    "activityMinutes": 53,
-   "daylightMinutes": 58
+   "daylightMinutes": 58,
+   "homeMinutes": 917,
+   "screenOffTime": "23:00"
   },
   {
    "date": "2026-09-21",
    "activityMinutes": 32,
-   "daylightMinutes": 71
+   "daylightMinutes": 71,
+   "homeMinutes": 923,
+   "screenOffTime": "23:29"
   },
   {
    "date": "2026-09-22",
    "activityMinutes": 23,
-   "daylightMinutes": 49
+   "daylightMinutes": 49,
+   "homeMinutes": 987,
+   "screenOffTime": "22:52"
   },
   {
    "date": "2026-09-23",
    "activityMinutes": 50,
-   "daylightMinutes": 42
+   "daylightMinutes": 42,
+   "homeMinutes": 967,
+   "screenOffTime": "23:24"
   },
   {
    "date": "2026-09-24",
    "activityMinutes": 43,
-   "daylightMinutes": 57
+   "daylightMinutes": 57,
+   "homeMinutes": 907,
+   "screenOffTime": "23:15"
   },
   {
    "date": "2026-09-25",
    "activityMinutes": 52,
-   "daylightMinutes": 55
+   "daylightMinutes": 55,
+   "homeMinutes": 963,
+   "screenOffTime": "22:27"
   },
   {
    "date": "2026-09-26",
    "activityMinutes": 33,
-   "daylightMinutes": 53
+   "daylightMinutes": 53,
+   "homeMinutes": 878,
+   "screenOffTime": "22:48"
   },
   {
    "date": "2026-09-27",
    "activityMinutes": 47,
-   "daylightMinutes": 52
+   "daylightMinutes": 52,
+   "homeMinutes": 932,
+   "screenOffTime": "23:21"
   },
   {
    "date": "2026-09-28",
    "activityMinutes": 45,
-   "daylightMinutes": 50
+   "daylightMinutes": 50,
+   "homeMinutes": 885,
+   "screenOffTime": "22:39"
   },
   {
    "date": "2026-09-29",
    "activityMinutes": 30,
-   "daylightMinutes": 60
+   "daylightMinutes": 60,
+   "homeMinutes": 897,
+   "screenOffTime": "23:01"
   },
   {
    "date": "2026-10-01",
    "activityMinutes": 60,
-   "daylightMinutes": 41
+   "daylightMinutes": 41,
+   "homeMinutes": 867,
+   "screenOffTime": "22:38"
   },
   {
    "date": "2026-10-02",
    "activityMinutes": 55,
-   "daylightMinutes": 56
+   "daylightMinutes": 56,
+   "homeMinutes": 940,
+   "screenOffTime": "22:08"
   },
   {
    "date": "2026-10-03",
    "activityMinutes": 50,
-   "daylightMinutes": 35
+   "daylightMinutes": 35,
+   "homeMinutes": 831,
+   "screenOffTime": "22:28"
   },
   {
    "date": "2026-10-04",
    "activityMinutes": 48,
-   "daylightMinutes": 54
+   "daylightMinutes": 54,
+   "homeMinutes": 923,
+   "screenOffTime": "22:57"
   },
   {
    "date": "2026-10-05",
    "activityMinutes": 41,
-   "daylightMinutes": 61
+   "daylightMinutes": 61,
+   "homeMinutes": 891,
+   "screenOffTime": "22:45"
   },
   {
    "date": "2026-10-06",
    "activityMinutes": 34,
-   "daylightMinutes": 58
+   "daylightMinutes": 58,
+   "homeMinutes": 888,
+   "screenOffTime": "23:10"
   },
   {
    "date": "2026-10-07",
    "activityMinutes": 24,
-   "daylightMinutes": 30
+   "daylightMinutes": 30,
+   "homeMinutes": 925,
+   "screenOffTime": "22:59"
   },
   {
    "date": "2026-10-08",
    "activityMinutes": 20,
-   "daylightMinutes": 51
+   "daylightMinutes": 51,
+   "homeMinutes": 859,
+   "screenOffTime": "22:43"
   },
   {
    "date": "2026-10-13",
    "activityMinutes": 22,
-   "daylightMinutes": 31
+   "daylightMinutes": 31,
+   "homeMinutes": 845,
+   "screenOffTime": "23:25"
   },
   {
    "date": "2026-10-14",
    "activityMinutes": 31,
-   "daylightMinutes": 60
+   "daylightMinutes": 60,
+   "homeMinutes": 888,
+   "screenOffTime": "22:28"
   },
   {
    "date": "2026-10-15",
    "activityMinutes": 25,
-   "daylightMinutes": 28
+   "daylightMinutes": 28,
+   "homeMinutes": 824,
+   "screenOffTime": "23:01"
   },
   {
    "date": "2026-10-16",
    "activityMinutes": 39,
-   "daylightMinutes": 61
+   "daylightMinutes": 61,
+   "homeMinutes": 793,
+   "screenOffTime": "23:20"
   },
   {
    "date": "2026-10-17",
    "activityMinutes": 48,
-   "daylightMinutes": 45
+   "daylightMinutes": 45,
+   "homeMinutes": 850,
+   "screenOffTime": "22:54"
   },
   {
    "date": "2026-10-18",
    "activityMinutes": 37,
-   "daylightMinutes": 55
+   "daylightMinutes": 55,
+   "homeMinutes": 953,
+   "screenOffTime": "23:08"
   },
   {
    "date": "2026-10-19",
    "activityMinutes": 26,
-   "daylightMinutes": 36
+   "daylightMinutes": 36,
+   "homeMinutes": 927,
+   "screenOffTime": "23:02"
   },
   {
    "date": "2026-10-20",
    "activityMinutes": 41,
-   "daylightMinutes": 35
+   "daylightMinutes": 35,
+   "homeMinutes": 947,
+   "screenOffTime": "22:54"
   },
   {
    "date": "2026-10-23",
    "activityMinutes": 52,
-   "daylightMinutes": 46
+   "daylightMinutes": 46,
+   "homeMinutes": 851,
+   "screenOffTime": "23:44"
   },
   {
    "date": "2026-10-24",
    "activityMinutes": 28,
-   "daylightMinutes": 44
+   "daylightMinutes": 44,
+   "homeMinutes": 942,
+   "screenOffTime": "22:47"
   },
   {
    "date": "2026-10-26",
    "activityMinutes": 36,
-   "daylightMinutes": 27
+   "daylightMinutes": 27,
+   "homeMinutes": 994,
+   "screenOffTime": "23:19"
   },
   {
    "date": "2026-10-29",
    "activityMinutes": 37,
-   "daylightMinutes": 36
+   "daylightMinutes": 36,
+   "homeMinutes": 901,
+   "screenOffTime": "23:16"
   },
   {
    "date": "2026-11-01",
    "activityMinutes": 50,
-   "daylightMinutes": 25
+   "daylightMinutes": 25,
+   "homeMinutes": 979,
+   "screenOffTime": "23:20"
   },
   {
    "date": "2026-11-02",
    "activityMinutes": 41,
-   "daylightMinutes": 21
+   "daylightMinutes": 21,
+   "homeMinutes": 809,
+   "screenOffTime": "23:21"
   },
   {
    "date": "2026-11-04",
    "activityMinutes": 57,
-   "daylightMinutes": 15
+   "daylightMinutes": 15,
+   "homeMinutes": 816,
+   "screenOffTime": "23:35"
   },
   {
    "date": "2026-11-05",
    "activityMinutes": 27,
-   "daylightMinutes": 41
+   "daylightMinutes": 41,
+   "homeMinutes": 858,
+   "screenOffTime": "22:17"
   },
   {
    "date": "2026-11-06",
    "activityMinutes": 28,
-   "daylightMinutes": 37
+   "daylightMinutes": 37,
+   "homeMinutes": 904,
+   "screenOffTime": "23:13"
+  },
+  {
+   "date": "2026-11-09",
+   "activityMinutes": 27,
+   "daylightMinutes": 27,
+   "homeMinutes": 1035,
+   "screenOffTime": "23:28"
+  },
+  {
+   "date": "2026-11-10",
+   "activityMinutes": 23,
+   "daylightMinutes": 22,
+   "homeMinutes": 952,
+   "screenOffTime": "23:50"
+  },
+  {
+   "date": "2026-11-11",
+   "activityMinutes": 22,
+   "daylightMinutes": 18,
+   "homeMinutes": 1048,
+   "screenOffTime": "23:55"
+  },
+  {
+   "date": "2026-11-12",
+   "activityMinutes": 35,
+   "daylightMinutes": 20,
+   "homeMinutes": 1074,
+   "screenOffTime": "23:47"
+  },
+  {
+   "date": "2026-11-13",
+   "activityMinutes": 26,
+   "daylightMinutes": 10,
+   "homeMinutes": 981,
+   "screenOffTime": "00:08"
+  },
+  {
+   "date": "2026-11-14",
+   "activityMinutes": 25,
+   "daylightMinutes": 18,
+   "homeMinutes": 913,
+   "screenOffTime": "23:51"
   }
  ],
  "feedback": [
@@ -1195,25 +1376,25 @@
    "id": "sara-fb-2026-08-27-daylightWalk",
    "interventionId": "daylightWalk",
    "date": "2026-08-27",
-   "rating": 1
+   "rating": 0
   },
   {
    "id": "sara-fb-2026-09-02-breathing",
    "interventionId": "breathing",
    "date": "2026-09-02",
-   "rating": 0
+   "rating": 1
   },
   {
    "id": "sara-fb-2026-09-08-daylightWalk",
    "interventionId": "daylightWalk",
    "date": "2026-09-08",
-   "rating": 1
+   "rating": -1
   },
   {
    "id": "sara-fb-2026-09-26-breathing",
    "interventionId": "breathing",
    "date": "2026-09-26",
-   "rating": 1
+   "rating": 0
   },
   {
    "id": "sara-fb-2026-10-02-daylightWalk",
@@ -1225,13 +1406,75 @@
    "id": "sara-fb-2026-10-14-daylightWalk",
    "interventionId": "daylightWalk",
    "date": "2026-10-14",
-   "rating": 1
+   "rating": -1
   },
   {
    "id": "sara-fb-2026-10-20-breathing",
    "interventionId": "breathing",
    "date": "2026-10-20",
-   "rating": 0
+   "rating": 1
+  }
+ ],
+ "phq9": [
+  {
+   "date": "2026-08-17",
+   "items": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "total": 0
+  },
+  {
+   "date": "2026-08-31",
+   "items": [
+    0,
+    1,
+    2,
+    0,
+    1,
+    0,
+    2,
+    1,
+    0
+   ],
+   "total": 7
+  },
+  {
+   "date": "2026-09-14",
+   "items": [
+    0,
+    0,
+    1,
+    1,
+    1,
+    0,
+    1,
+    1,
+    0
+   ],
+   "total": 5
+  },
+  {
+   "date": "2026-09-28",
+   "items": [
+    0,
+    0,
+    1,
+    1,
+    1,
+    0,
+    1,
+    1,
+    0
+   ],
+   "total": 5
   }
  ]
 }

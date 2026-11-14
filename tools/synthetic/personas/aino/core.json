@@ -1,7 +1,12 @@
 {
+ "synthetic": true,
+ "generatorVersion": "0.3",
+ "seed": 2026,
  "persona": {
   "id": "aino",
-  "displayName": "Aino (synthetic)",
+  "label": "Aino, 42, post-TMS (synthetic)",
+  "path": "B",
+  "state": "B5",
   "story": "Drift caught early, walks help -> call list",
   "language": "fi",
   "companion": {

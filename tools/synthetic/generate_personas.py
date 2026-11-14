@@ -5,14 +5,15 @@ Hiillos — synthetic persona generator (Junction 2026, SISU Lab).
 ALL DATA IS SYNTHETIC. Effect sizes are illustrative, not calibrated to real patients.
 
 Writes, for each of 5 personas x 90 days:
-  <out>/<id>.json                 -> read by the app (schema: apps/mobile/src/data/personas/core.schema.json)
+  <out>/<id>/core.json            -> read by the app (schema: apps/mobile/assets/personas/core.schema.json)
   <truth>/<id>.json               -> ground truth for tests and the pitch (NOT read by the app)
 
 Dates are local calendar days (Europe/Helsinki). The last day is --end (default 2026-11-14),
 i.e. the day BEFORE the demo day (Sun 15 Nov), as the schema asks.
 
 Usage:
-  python3 generate_personas.py --out apps/mobile/src/data/personas --truth tools/synthetic/ground_truth
+  python3 tools/synthetic/generate_personas.py --out tools/synthetic/personas --truth tools/synthetic/ground_truth
+  (then copy tools/synthetic/personas/* to apps/mobile/assets/personas/)
   python3 generate_personas.py --end 2026-11-13   # shift everything if the demo day changes
 """
 from __future__ import annotations
@@ -23,7 +24,7 @@ import random
 from datetime import date, timedelta
 from pathlib import Path
 
-GENERATOR_VERSION = "0.2"
+GENERATOR_VERSION = "0.3"
 SEED = 2026
 DAYS = 90
 
@@ -107,7 +108,9 @@ def sara(i: int) -> Day:
         return Day(mood=3.8, energy=3.3, anxiety=2.3, sleep=7.1, activity=36,
                    daylight=seasonal_daylight(i, 65, 30), checkin_p=0.4, sensor_p=0.5,
                    emotions=["calm", "tired"])
-    return Day(checkin_p=0.0, sensor_p=0.0)  # silent from day 84 (last check-in is day 83 at the latest)
+    # silent from day 84: no check-ins, but the phone keeps logging (so the app's date rebasing keeps the silence)
+    return Day(mood=3.6, activity=22, daylight=seasonal_daylight(i, 65, 30) * 0.6, checkin_p=0.0, sensor_p=1.0,
+               home=1050, screen_off=23.8)
 
 
 def elias(i: int) -> Day:
@@ -150,7 +153,7 @@ def phq9_items(total: int, rng: random.Random) -> list[int]:
 PERSONAS = [
     {
         "fn": aino,
-        "meta": {"id": "aino", "displayName": "Aino (synthetic)", "story": "Drift caught early, walks help -> call list",
+        "meta": {"id": "aino", "label": "Aino, 42, post-TMS (synthetic)", "path": "B", "state": "B5", "story": "Drift caught early, walks help -> call list",
                  "language": "fi", "companion": {"species": "cat", "name": "Kuu"}, "bipolarFlag": False,
                  "trustedContact": {"name": "Mika (synthetic)", "phone": "+358 40 000 0001"}},
         "feedback_from": 60, "feedback_every": 2,
@@ -160,7 +163,7 @@ PERSONAS = [
     },
     {
         "fn": leena,
-        "meta": {"id": "leena", "displayName": "Leena (synthetic)", "story": "Stays well, Hiillos stays quiet",
+        "meta": {"id": "leena", "label": "Leena (synthetic)", "path": "B", "state": "B5", "story": "Stays well, Hiillos stays quiet",
                  "language": "sv", "companion": {"species": "bird", "name": "Sol"}, "bipolarFlag": False,
                  "trustedContact": {"name": "Anna (synthetic)", "phone": "+358 40 000 0002"}},
         "feedback_from": 5, "feedback_every": 4,
@@ -170,7 +173,7 @@ PERSONAS = [
     },
     {
         "fn": juho,
-        "meta": {"id": "juho", "displayName": "Juho (synthetic)", "story": "Sound helps, walks don't",
+        "meta": {"id": "juho", "label": "Juho (synthetic)", "path": "B", "state": "B5", "story": "Sound helps, walks don't",
                  "language": "fi", "companion": {"species": "dog", "name": "Repe"}, "bipolarFlag": False,
                  "trustedContact": {"name": "Sanna (synthetic)", "phone": "+358 40 000 0003"}},
         "feedback_from": 52, "feedback_every": 2,
@@ -180,7 +183,7 @@ PERSONAS = [
     },
     {
         "fn": sara,
-        "meta": {"id": "sara", "displayName": "Sara (synthetic)", "story": "Goes quiet: silence ladder",
+        "meta": {"id": "sara", "label": "Sara (synthetic)", "path": "B", "state": "B5", "story": "Goes quiet: silence ladder",
                  "language": "sv", "companion": {"species": "bee", "name": "Humla"}, "bipolarFlag": False,
                  "trustedContact": {"name": "Johan (synthetic)", "phone": "+358 40 000 0004"}},
         "feedback_from": 10, "feedback_every": 6,
@@ -191,7 +194,7 @@ PERSONAS = [
     },
     {
         "fn": elias,
-        "meta": {"id": "elias", "displayName": "Elias (synthetic)", "story": "Flu week: false alarm, no clinic alert",
+        "meta": {"id": "elias", "label": "Elias (synthetic)", "path": "B", "state": "B5", "story": "Flu week: false alarm, no clinic alert",
                  "language": "en", "companion": {"species": "dog", "name": "Otso"}, "bipolarFlag": False,
                  "trustedContact": {"name": "Leo (synthetic)", "phone": "+358 40 000 0005"}},
         "feedback_from": 8, "feedback_every": 4,
@@ -272,7 +275,8 @@ def generate(p: dict, end: date, rng: random.Random, extended: bool = False) -> 
                 if c["date"] == iso(start + timedelta(days=nxt)):
                     c["mood"] = new
 
-    core = {"persona": p["meta"], "checkIns": check_ins, "sensors": sensors, "feedback": feedback}
+    core = {"synthetic": True, "generatorVersion": GENERATOR_VERSION, "seed": SEED,
+            "persona": p["meta"], "checkIns": check_ins, "sensors": sensors, "feedback": feedback}
     if extended:
         phq = []
         for i in PHQ9_DAYS[pid]:
@@ -302,8 +306,8 @@ def main():
     ap.add_argument("--end", default="2026-11-14", help="last data day = day before the demo (YYYY-MM-DD)")
     ap.add_argument("--out", default="out/personas")
     ap.add_argument("--truth", default="out/ground_truth")
-    ap.add_argument("--extended", action="store_true",
-                    help="also write homeMinutes, screenOffTime (sensors) and phq9 (needs the schema/entities change)")
+    ap.add_argument("--minimal", action="store_true",
+                    help="leave out homeMinutes, screenOffTime and phq9 (older app format)")
     a = ap.parse_args()
     end = date.fromisoformat(a.end)
     out, truth_dir = Path(a.out), Path(a.truth)
@@ -311,8 +315,9 @@ def main():
     truth_dir.mkdir(parents=True, exist_ok=True)
     for n, p in enumerate(PERSONAS):
         rng = random.Random(SEED + n)
-        core, truth = generate(p, end, rng, a.extended)
-        (out / f"{p['meta']['id']}.json").write_text(json.dumps(core, ensure_ascii=False, indent=1) + "\n")
+        core, truth = generate(p, end, rng, not a.minimal)
+        (out / p['meta']['id']).mkdir(parents=True, exist_ok=True)
+        (out / p['meta']['id'] / "core.json").write_text(json.dumps(core, ensure_ascii=False, indent=1) + "\n")
         (truth_dir / f"{p['meta']['id']}.json").write_text(json.dumps(truth, ensure_ascii=False, indent=2) + "\n")
         print(f"{p['meta']['id']:6s} check-ins {len(core['checkIns']):3d}  sensors {len(core['sensors']):3d}  feedback {len(core['feedback']):3d}")
 

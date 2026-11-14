@@ -23,7 +23,6 @@
 | O13 | **Take load off Hugo:** proposal is that Uriel builds the clinician view, the "learned" card and the PHQ-9 screens, and Owais does the merge, the README, the 409 fix and the backup recording. | Meg (v3) | Team |
 | O14 | **Companion animals vs the fire:** two mascots dilute the one image judges should remember. Proposal: the fire is the home screen; the animal, if kept, is a small voice beside it, not a second hero. | Meg (v3) | Hugo |
 | O16 | **Safety question cadence** in the new daily moment: proposal = when mood tap is 1–2, in every PHQ-9 (item 9) and in the weekly check-in; not daily on good days. | Claude (spec W8.1) | **Meg** |
-| O17 | **Schema extension:** `homeMinutes`, `screenOffTime` on `SensorAggregate` + `phq9[]`; data ready in `tools/synthetic/personas_extended/`. | Meg (W9) | Hugo |
 | O18 | **Cross-person learning:** bandit starts from a population prior per action, then personal data takes over; consent + aggregated scores only. This weekend: pitch + maybe the prior in code. | Meg (W9) | Uriel |
 | O19 | **When a person dies / care ends (W11):** ladder quiet after 30 days; clinic-only "care ended" status stops all outreach; neutral lock-screen text; legal check before any pitch claim. | Meg | Hugo (texts), Owais (data) |
 | O22 | **Owais, when back from rest — in order:** (1) push the check-ins / self-harm / priority-score code (GitHub has only health, auth, `/me`, last push 08:40); (2) merge both branches to `main` + README; (3) backup demo recording. The demo does not depend on the backend (app runs on local data). | Repo check 10:25 · Meg 10:21 | Owais |
@@ -36,6 +35,10 @@
 ---
 
 ## Sat 14 Nov 2026
+
+**Done (10:50 repo check)**
+- **Hugo shipped** M2 one-tap daily moment, M3 drift reach-out (PHQ-2 → PHQ-9), persona picker, and the schema fields `homeMinutes`, `screenOffTime`, `phq9` (closes O17). M3 had been Uriel's; Uriel now has M4 only.
+- **Personas v0.3** regenerated in Hugo's new format (`personas/<id>/core.json`, `"synthetic": true`) and checked with the app's own loader, date rebasing and PHQ rules. Sara's phone now keeps logging through her silent week, so rebasing keeps the silence ladder visible.
 
 **Decided (10:40, Meg)**
 - **Docs go straight to `main`:** changes to `docs/` (spec, decisions, personas) and `tools/synthetic/` are pushed directly to `main` the moment they are made, so the team always sees the latest. App code still goes through pull requests (CONTRIBUTING.md). PR #1 merged 10:39.
