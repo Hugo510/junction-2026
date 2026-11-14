@@ -5,16 +5,7 @@ import { parseISODate, type ISODate } from '../../domain/dates';
 import type { CheckIn, Scale5 } from '../../domain/entities';
 import { emotionEmoji, monthGrid } from '../../domain/journal';
 import { capitalizeFirst, formatDate } from '../../i18n';
-import { AppText, Icon, MIN_TOUCH, MoodFace, radii, spacing, useTheme } from '../../ui';
-
-/** Same palette as MoodFace, for calendar dots. */
-export const MOOD_COLORS: Record<Scale5, string> = {
-  1: '#C9C6E8',
-  2: '#D6D9EE',
-  3: '#E6E1D3',
-  4: '#CFE3D4',
-  5: '#B5D8BF',
-};
+import { AppText, Icon, MAX_FONT_SCALE, MIN_TOUCH, MOOD_COLORS, MoodFace, spacing, useTheme } from '../../ui';
 
 /** A Monday used to print localized weekday initials. */
 const A_MONDAY = '2026-11-16';
@@ -62,7 +53,7 @@ export function MoodCalendar({
       </View>
       <View style={styles.week}>
         {weekdays.map((w, i) => (
-          <AppText key={i} variant="caption" tone="muted" align="center" style={styles.cell}>
+          <AppText key={i} variant="caption" tone="muted" align="center" maxFontSizeMultiplier={MAX_FONT_SCALE.dense} style={styles.weekday}>
             {w}
           </AppText>
         ))}
@@ -93,7 +84,7 @@ export function MoodCalendar({
                     },
                   ]}
                 >
-                  <AppText variant="caption" style={{ color: mood ? '#2B2B2B' : colors.textMuted }}>
+                  <AppText variant="caption" maxFontSizeMultiplier={MAX_FONT_SCALE.dense} style={{ color: mood ? '#2B2B2B' : colors.textMuted }}>
                     {Number(date.slice(8))}
                   </AppText>
                 </View>
@@ -108,10 +99,9 @@ export function MoodCalendar({
 
 export function EntryRow({ entry }: { entry: CheckIn }) {
   const { t } = useTranslation();
-  const { colors } = useTheme();
   const kind = entry.kind ?? 'full';
   return (
-    <View style={[styles.entry, { borderColor: colors.border }]}>
+    <View style={styles.entry}>
       <MoodFace level={entry.mood} size={40} />
       <View style={{ flex: 1, gap: 2 }}>
         <View style={styles.entryHead}>
@@ -137,8 +127,10 @@ const styles = StyleSheet.create({
   monthRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   navButton: { width: MIN_TOUCH, height: MIN_TOUCH, alignItems: 'center', justifyContent: 'center' },
   week: { flexDirection: 'row' },
-  cell: { flex: 1, alignItems: 'center', justifyContent: 'center', minHeight: 44 },
-  dot: { width: 38, height: 38, borderRadius: 19, alignItems: 'center', justifyContent: 'center' },
-  entry: { flexDirection: 'row', gap: spacing.md, paddingVertical: spacing.sm, borderTopWidth: StyleSheet.hairlineWidth, borderRadius: radii.sm },
+  weekday: { flex: 1, textAlign: 'center' },
+  /** Whole cell is the touch target (≥ 48 dp); the dot is only visual. */
+  cell: { flex: 1, alignItems: 'center', justifyContent: 'center', minHeight: MIN_TOUCH },
+  dot: { width: 40, height: 40, borderRadius: 20, alignItems: 'center', justifyContent: 'center' },
+  entry: { flexDirection: 'row', gap: spacing.md, padding: spacing.md },
   entryHead: { flexDirection: 'row', justifyContent: 'space-between', gap: spacing.sm, flexWrap: 'wrap' },
 });
