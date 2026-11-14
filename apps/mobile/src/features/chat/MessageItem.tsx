@@ -6,7 +6,10 @@ import { useTranslation } from 'react-i18next';
 import type { ChatMessage } from '../../domain/chat/types';
 import type { CompanionSpecies, Scale5 } from '../../domain/entities';
 import { AppText, Avatar, radii, spacing, useTheme } from '../../ui';
+import { useBackend } from '../../store/backend';
+import { useSettings } from '../../store/settings';
 import { ChatCardView, type ChatCardHandlers } from './ChatCards';
+import { ListenButton } from './ListenButton';
 
 export function messageText(m: ChatMessage, t: TFunction): string {
   if (m.text) return m.text;
@@ -34,6 +37,10 @@ export const MessageItem = memo(
     const { t } = useTranslation();
     const { colors } = useTheme();
     const text = messageText(message, t);
+    // Voice is opt-in and only for what the companion says (never the crisis message).
+    const voiceWanted = useSettings((s) => s.companionVoice);
+    const voiceReady = useBackend((s) => s.voice);
+    const canListen = voiceWanted && voiceReady && message.role === 'companion' && !!text && message.card?.type !== 'crisis' && !message.parts?.some((p) => p.key === 'chat.reply.crisis');
 
     if (message.role === 'user') {
       return (
@@ -50,6 +57,12 @@ export const MessageItem = memo(
         <View style={{ width: AVATAR }}>{showAvatar ? <Avatar species={species} size={AVATAR} /> : null}</View>
         <View style={styles.companionContent}>
           {text ? <AppText>{text}</AppText> : null}
+          {message.ai ? (
+            <AppText variant="caption" tone="muted">
+              {t('chat.aiLabel')}
+            </AppText>
+          ) : null}
+          {canListen ? <ListenButton text={text} /> : null}
           {message.card ? <ChatCardView card={message.card} active={cardActive} mood={cardActive ? draftMood : undefined} handlers={handlers} /> : null}
         </View>
       </View>

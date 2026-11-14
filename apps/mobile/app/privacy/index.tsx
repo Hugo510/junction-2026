@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import { repositories } from '../../src/data';
 import { ConsentToggles } from '../../src/features/ConsentToggles';
+import { useBackend } from '../../src/store/backend';
 import { useChat } from '../../src/store/chat';
 import { useData } from '../../src/store/data';
 import { useSettings } from '../../src/store/settings';
@@ -17,6 +18,14 @@ export default function PrivacyScreen() {
   const resetSettings = useSettings((s) => s.reset);
   const discreet = useSettings((s) => s.discreetNotifications);
   const setDiscreet = useSettings((s) => s.setDiscreetNotifications);
+  const ai = useSettings((s) => s.aiCompanion);
+  const setAi = useSettings((s) => s.setAiCompanion);
+  const voice = useSettings((s) => s.companionVoice);
+  const setVoice = useSettings((s) => s.setCompanionVoice);
+  const shared = useSettings((s) => s.sharedLearning);
+  const setShared = useSettings((s) => s.setSharedLearning);
+  const llmReady = useBackend((s) => s.llm);
+  const voiceReady = useBackend((s) => s.voice);
 
   const exportData = async () => {
     const data = await repositories.admin.exportAll();
@@ -69,6 +78,18 @@ export default function PrivacyScreen() {
       <Section title={t('privacy.notificationsTitle')}>
         <View style={{ paddingHorizontal: spacing.md, paddingVertical: spacing.sm }}>
           <ToggleRow label={t('privacy.discreet')} description={t('privacy.discreetDesc')} value={discreet} onChange={setDiscreet} />
+        </View>
+      </Section>
+      {/* Both are opt-in and off by default. Without a server they stay off and the built-in companion answers. */}
+      <Section title={t('privacy.ai.title')} footer={llmReady && voiceReady ? undefined : t('privacy.ai.unavailable')}>
+        <View style={{ paddingHorizontal: spacing.md, paddingVertical: spacing.sm }}>
+          <ToggleRow label={t('privacy.ai.llm')} description={t('privacy.ai.llmDesc')} value={ai && llmReady} onChange={setAi} disabled={!llmReady} />
+          <ToggleRow label={t('privacy.ai.voice')} description={t('privacy.ai.voiceDesc')} value={voice && voiceReady} onChange={setVoice} disabled={!voiceReady} />
+        </View>
+      </Section>
+      <Section title={t('privacy.shared.title')}>
+        <View style={{ paddingHorizontal: spacing.md, paddingVertical: spacing.sm }}>
+          <ToggleRow label={t('privacy.shared.label')} description={t('privacy.shared.desc')} value={shared} onChange={setShared} />
         </View>
       </Section>
 

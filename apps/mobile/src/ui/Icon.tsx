@@ -19,7 +19,9 @@ export type IconName =
   | 'chat'
   | 'chevronLeft'
   | 'chevronRight'
-  | 'info';
+  | 'info'
+  | 'speaker'
+  | 'stop';
 
 /** Small original line icons drawn with react-native-svg. Decorative: labels live on the controls. */
 export function Icon({ name, color, size = 24 }: { name: IconName; color: ColorValue; size?: number }) {
@@ -84,6 +86,8 @@ export function Icon({ name, color, size = 24 }: { name: IconName; color: ColorV
           <Path d="M12 11v5M12 8h.01" {...p} />
         </>
       )}
+      {name === 'speaker' && <Path d="M4 9.5h3.5L12 6v12l-4.5-3.5H4zM15.5 9.5a3.5 3.5 0 0 1 0 5M18 7a7 7 0 0 1 0 10" {...p} />}
+      {name === 'stop' && <Path d="M7.5 7.5h9v9h-9z" {...p} />}
     </Svg>
     </View>
   );

@@ -40,7 +40,7 @@ const AFTER_STEP: QuickReplyId[] = ['relax', 'plan', 'progress'];
 
 const reset = (flow: ChatFlowState): ChatFlowState => ({ ...INITIAL_FLOW, relaxCount: flow.relaxCount });
 
-function crisis(flow: ChatFlowState, effects: EngineResult['effects']): EngineResult {
+export function crisis(flow: ChatFlowState, effects: EngineResult['effects']): EngineResult {
   return { messages: [say('chat.reply.crisis'), card({ type: 'crisis' })], flow: reset(flow), effects };
 }
 

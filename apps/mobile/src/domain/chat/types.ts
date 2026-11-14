@@ -46,6 +46,8 @@ export interface ChatMessage {
   joiner?: string;
   card?: ChatCard;
   quickReplies?: QuickReplyId[];
+  /** Written by the optional AI companion (shown with a small label). */
+  ai?: boolean;
 }
 
 export type NewChatMessage = Omit<ChatMessage, 'id' | 'createdAt'>;

@@ -38,6 +38,12 @@ interface SettingsData {
   /** Notification previews never mention mood or health (others may see the phone). */
   discreetNotifications: boolean;
   carePath: CarePath | null;
+  /** Opt-in: typed chat messages may be sent to our server and an AI service for a reply. */
+  aiCompanion: boolean;
+  /** Opt-in: the companion's own messages can be read aloud by a voice service. */
+  companionVoice: boolean;
+  /** Opt-in: start from what helped other people (aggregated scores only). */
+  sharedLearning: boolean;
 }
 
 interface SettingsState extends SettingsData {
@@ -52,6 +58,9 @@ interface SettingsState extends SettingsData {
   setTrustedContact: (contact: TrustedContact | null) => void;
   setDiscreetNotifications: (on: boolean) => void;
   setCarePath: (path: CarePath) => void;
+  setAiCompanion: (on: boolean) => void;
+  setCompanionVoice: (on: boolean) => void;
+  setSharedLearning: (on: boolean) => void;
   reset: () => void;
 }
 
@@ -68,6 +77,9 @@ const defaults: SettingsData = {
   trustedContact: null,
   discreetNotifications: true,
   carePath: null,
+  aiCompanion: false,
+  companionVoice: false,
+  sharedLearning: false,
 };
 
 export const SETTINGS_STORAGE_KEY = 'btc:settings';
@@ -87,6 +99,9 @@ export const useSettings = create<SettingsState>()(
       setTrustedContact: (trustedContact) => set({ trustedContact }),
       setDiscreetNotifications: (discreetNotifications) => set({ discreetNotifications }),
       setCarePath: (carePath) => set({ carePath }),
+      setAiCompanion: (aiCompanion) => set({ aiCompanion }),
+      setCompanionVoice: (companionVoice) => set({ companionVoice }),
+      setSharedLearning: (sharedLearning) => set({ sharedLearning }),
       reset: () => set({ ...defaults }),
     }),
     {
@@ -104,6 +119,9 @@ export const useSettings = create<SettingsState>()(
           trustedContact: rest.trustedContact,
           discreetNotifications: rest.discreetNotifications,
           carePath: rest.carePath,
+          aiCompanion: rest.aiCompanion ?? false,
+          companionVoice: rest.companionVoice ?? false,
+          sharedLearning: rest.sharedLearning ?? false,
         };
         return data;
       },

@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next';
 
 import { ReachOutBanner } from '../src/features/outreach/ReachOutBanner';
 import { applyLanguage, detectDeviceLanguage } from '../src/i18n';
+import { useBackend } from '../src/store/backend';
 import { useData } from '../src/store/data';
 import { useSettings } from '../src/store/settings';
 import { AppSkeleton, AppThemeProvider, ErrorState, HelpButton, useTheme } from '../src/ui';
@@ -50,6 +51,15 @@ function Bootstrap() {
   useEffect(() => {
     if (hydrated && status === 'idle') void load();
   }, [hydrated, status, load]);
+
+  // Optional backend: ask what it offers and keep consents mirrored. The app never waits for it.
+  useEffect(() => {
+    if (!hydrated) return;
+    void useBackend.getState().connect();
+    return useSettings.subscribe((s, prev) => {
+      if (s.consents !== prev.consents) useBackend.getState().mirrorConsents(s.consents);
+    });
+  }, [hydrated]);
 
   const ready = hydrated && fontsReady && (status === 'ready' || status === 'error');
   // Hide the native splash as soon as settings are read; the skeleton covers the data load.

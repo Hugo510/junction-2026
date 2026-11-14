@@ -10,12 +10,13 @@ export interface ToggleRowProps {
   description?: string;
   value: boolean;
   onChange: (value: boolean) => void;
+  disabled?: boolean;
 }
 
-export function ToggleRow({ label, description, value, onChange }: ToggleRowProps) {
+export function ToggleRow({ label, description, value, onChange, disabled }: ToggleRowProps) {
   const { colors } = useTheme();
   return (
-    <View style={styles.row}>
+    <View style={[styles.row, disabled && { opacity: 0.55 }]}>
       <View style={styles.text}>
         <AppText variant="label">{label}</AppText>
         {description ? (
@@ -28,6 +29,7 @@ export function ToggleRow({ label, description, value, onChange }: ToggleRowProp
         accessibilityLabel={label}
         accessibilityHint={description}
         value={value}
+        disabled={disabled}
         onValueChange={(v) => {
           haptics.tap();
           onChange(v);

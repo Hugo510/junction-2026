@@ -9,6 +9,7 @@ import { priorityScore } from '../src/domain/priorityScore';
 import { usePriority } from '../src/features/usePriority';
 import { formatDate } from '../src/i18n';
 import { haptics } from '../src/services/haptics';
+import { useBackend } from '../src/store/backend';
 import { now, todayISO } from '../src/store/clock';
 import { useChat } from '../src/store/chat';
 import { useData } from '../src/store/data';
@@ -37,6 +38,7 @@ export default function DemoScreen() {
   const loadPersona = useData((s) => s.loadPersona);
   const careEnded = useData((s) => s.patient?.careEnded ?? false);
   const setCareEnded = useData((s) => s.setCareEnded);
+  const backend = useBackend();
 
   /** Show the simulated notification that matches the current silence level. */
   const reachOut = async () => {
@@ -136,6 +138,22 @@ export default function DemoScreen() {
         <AppText variant="label" key={dayOffset}>
           {t('demo.priorityNow', { score: priority.score, level: t(`priority.level.${priority.level}`) })}
         </AppText>
+      </Card>
+      <Card tone="accent">
+        <AppText variant="label">
+          {t('demo.backend.title')}: {t(`demo.backend.${backend.state}`)}
+        </AppText>
+        {backend.state === 'online' ? (
+          <AppText variant="caption" tone="muted">
+            {t('demo.backend.features', { llm: t(backend.llm ? 'demo.backend.yes' : 'demo.backend.no'), voice: t(backend.voice ? 'demo.backend.yes' : 'demo.backend.no') })}
+          </AppText>
+        ) : null}
+        {backend.lastMirrored ? (
+          <AppText variant="caption" tone="muted">
+            {t('demo.backend.mirrored', { date: backend.lastMirrored })}
+          </AppText>
+        ) : null}
+        {backend.state !== 'off' ? <Button size="md" variant="secondary" title={t('demo.backend.retry')} onPress={() => void backend.connect()} /> : null}
       </Card>
       {actions.map(({ key, variant, action }) => (
         <Button

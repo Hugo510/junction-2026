@@ -1,12 +1,16 @@
 import { create } from 'zustand';
 
 import { repositories } from '../data';
-import { handleEvent } from '../domain/chat/engine';
+import { crisis, handleEvent } from '../domain/chat/engine';
 import { INITIAL_FLOW, type ChatContext, type ChatEvent, type ChatFlowState, type ChatMessage, type NewChatMessage, type TextPart } from '../domain/chat/types';
 import { toISODate } from '../domain/dates';
 import type { NoticeKind } from '../domain/outreach';
+import { detectCrisisLanguage } from '../domain/riskRules';
+import i18n, { currentLanguage } from '../i18n';
+import { requestCompanionReply, useBackend, type CompanionTurn } from './backend';
 import { now } from './clock';
 import { useData } from './data';
+import { useSettings } from './settings';
 
 interface ChatState {
   loaded: boolean;
@@ -33,6 +37,21 @@ const NOTICE_MESSAGES: Partial<Record<NoticeKind, NewChatMessage>> = {
 
 const newId = () => `msg-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 7)}`;
 const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+/** The template the engine uses when it has nothing specific to say: the only place AI may answer. */
+const FALLBACK_KEY = 'chat.reply.fallback';
+
+/** Last few turns as plain text (cards and empty messages are skipped). */
+function recentTurns(messages: ChatMessage[], max = 6): CompanionTurn[] {
+  return messages
+    .map<CompanionTurn>((m) => ({
+      role: m.role,
+      text: (m.text ?? (m.parts ?? []).map((p) => i18n.t(p.key, p.params ?? {})).join(m.joiner ?? ' ')).trim().slice(0, 1000),
+    }))
+    // Crisis wording never leaves the phone, not even as history.
+    .filter((turn) => turn.text.length > 0 && !detectCrisisLanguage(turn.text))
+    .slice(-max);
+}
 
 /** What the user "said" for each event, shown as their bubble. */
 function echo(event: ChatEvent): Omit<ChatMessage, 'id' | 'createdAt'> | null {
@@ -115,12 +134,39 @@ export const useChat = create<ChatState>()((set, get) => {
         }
       }
 
-      // Short pause proportional to what the user wrote (never for urgent paths).
-      if (isText && !urgent) await wait(Math.min(700, 280 + event.text.length * 6));
-      const replies = result.messages.map((m) =>
+      let replies: NewChatMessage[] = result.messages.map((m) =>
         m.card?.type === 'entry' ? { ...m, card: { type: 'entry' as const, checkInId: savedId ?? '' } } : m,
       );
-      set({ messages: [...get().messages, ...replies.map(stamp)], flow: result.flow, typing: false });
+      let flow = result.flow;
+
+      // Optional AI reply: opt-in, only for free text the engine had no specific answer for,
+      // and only after the crisis rule above has already let the message through.
+      const fallback = result.messages.length === 1 && result.messages[0].parts?.[0]?.key === FALLBACK_KEY;
+      const aiOn = useSettings.getState().aiCompanion && useBackend.getState().llm;
+      let answeredByAi = false;
+      if (isText && !urgent && fallback && aiOn && !detectCrisisLanguage(event.text)) {
+        try {
+          const history = recentTurns(get().messages.slice(0, -1));
+          const ai = await requestCompanionReply({ message: event.text.trim().slice(0, 1000), language: currentLanguage(), companionName: ctx.companionName, history });
+          if (ai.crisis) {
+            // The server's fixed rule caught something ours did not: same path as on the phone.
+            await data.raiseAlert('chat');
+            urgent = true;
+            const safe = crisis(get().flow, []);
+            replies = safe.messages;
+            flow = safe.flow;
+          } else if (ai.reply) {
+            replies = [{ role: 'companion', text: ai.reply, ai: true, quickReplies: result.messages[0].quickReplies }];
+          }
+          answeredByAi = true;
+        } catch {
+          // No network, no key or a slow model: the built-in companion answers instead.
+        }
+      }
+
+      // Short pause proportional to what the user wrote (never for urgent paths or after waiting for AI).
+      if (isText && !urgent && !answeredByAi) await wait(Math.min(700, 280 + event.text.length * 6));
+      set({ messages: [...get().messages, ...replies.map(stamp)], flow, typing: false });
       await persist();
       return { urgent };
     },
