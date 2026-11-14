@@ -37,6 +37,9 @@
 
 ## Sat 14 Nov 2026
 
+**Decided (10:40, Meg)**
+- **Docs go straight to `main`:** changes to `docs/` (spec, decisions, personas) and `tools/synthetic/` are pushed directly to `main` the moment they are made, so the team always sees the latest. App code still goes through pull requests (CONTRIBUTING.md). PR #1 merged 10:39.
+
 **Decided (10:36, Uriel)**
 - **Uriel owns the clinician view** (confirmed 10:36): in-app demo screen with the 5 synthetic patients — priority level and score, top two reasons, latest PHQ-9, lost-contact status. Reuses the existing `priorityScore` logic and the persona data; **no separate implementation**. (Closes O21.)
 
