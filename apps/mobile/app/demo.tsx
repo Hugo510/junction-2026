@@ -6,6 +6,7 @@ import { usePriority } from '../src/features/usePriority';
 import { formatDate } from '../src/i18n';
 import { haptics } from '../src/services/haptics';
 import { now } from '../src/store/clock';
+import { useChat } from '../src/store/chat';
 import { useData } from '../src/store/data';
 import { useSettings } from '../src/store/settings';
 import { AppText, Button, Card, Screen } from '../src/ui';
@@ -41,8 +42,8 @@ export default function DemoScreen() {
   };
 
   const actions: { key: string; variant?: 'primary' | 'secondary' | 'danger'; action: () => Promise<void> | void }[] = [
-    { key: 'seedGood', action: () => seedScenario('good') },
-    { key: 'seedDeclining', action: () => seedScenario('declining') },
+    { key: 'seedGood', action: () => seedScenario('good').then(() => useChat.getState().reset()) },
+    { key: 'seedDeclining', action: () => seedScenario('declining').then(() => useChat.getState().reset()) },
     {
       key: 'triggerUrgent',
       variant: 'danger',
@@ -64,6 +65,7 @@ export default function DemoScreen() {
       variant: 'secondary',
       action: async () => {
         await deleteEverything();
+        await useChat.getState().reset();
         resetSettings();
         await useSettings.persist.clearStorage();
         if (router.canDismiss()) router.dismissAll();

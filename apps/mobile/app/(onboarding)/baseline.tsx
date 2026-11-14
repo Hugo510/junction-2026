@@ -12,7 +12,7 @@ export default function BaselineStep() {
 
   const onSubmitted = ({ risk }: CheckInResult) => {
     setOnboarded(true);
-    router.replace('/today');
+    router.replace('/chat');
     if (risk.level === 'urgent') router.push({ pathname: '/crisis', params: { urgent: '1' } });
   };
 

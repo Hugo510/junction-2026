@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import { repositories } from '../../src/data';
 import { ConsentToggles } from '../../src/features/ConsentToggles';
+import { useChat } from '../../src/store/chat';
 import { useData } from '../../src/store/data';
 import { useSettings } from '../../src/store/settings';
 import { AppText, Button, Card, Screen, spacing } from '../../src/ui';
@@ -40,6 +41,7 @@ export default function PrivacyScreen() {
         style: 'destructive',
         onPress: async () => {
           await deleteEverything();
+          await useChat.getState().reset();
           resetSettings();
           await useSettings.persist.clearStorage();
           if (router.canDismiss()) router.dismissAll();

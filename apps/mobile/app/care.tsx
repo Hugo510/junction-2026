@@ -2,10 +2,10 @@ import { router } from 'expo-router';
 import { View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
-import { QueueStatus } from '../../src/features/QueueStatus';
-import { formatDate } from '../../src/i18n';
-import { useData } from '../../src/store/data';
-import { AppText, Avatar, Button, Card, Screen, spacing } from '../../src/ui';
+import { QueueStatus } from '../src/features/QueueStatus';
+import { formatDate } from '../src/i18n';
+import { useData } from '../src/store/data';
+import { AppText, Avatar, Button, Card, Screen, spacing } from '../src/ui';
 
 export default function CareScreen() {
   const { t } = useTranslation();

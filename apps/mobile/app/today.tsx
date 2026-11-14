@@ -3,14 +3,14 @@ import { useEffect, useMemo, useState } from 'react';
 import { View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
-import { daysBetween, lastNDates } from '../../src/domain/dates';
-import { checkInsByDate, weeklyMoodTrend } from '../../src/domain/history';
-import { PlanItemCard } from '../../src/features/PlanItemCard';
-import { usePriority } from '../../src/features/usePriority';
-import { useCompanionMessage } from '../../src/services/companion';
-import { useToday } from '../../src/store/clock';
-import { useData } from '../../src/store/data';
-import { AppText, Avatar, Button, Card, EmptyState, Screen, Sparkline, spacing, useTheme } from '../../src/ui';
+import { daysBetween, lastNDates } from '../src/domain/dates';
+import { checkInsByDate, weeklyMoodTrend } from '../src/domain/history';
+import { PlanItemCard } from '../src/features/PlanItemCard';
+import { usePriority } from '../src/features/usePriority';
+import { useCompanionMessage } from '../src/services/companion';
+import { useToday } from '../src/store/clock';
+import { useData } from '../src/store/data';
+import { AppText, Avatar, Button, Card, EmptyState, Screen, Sparkline, spacing, useTheme } from '../src/ui';
 
 export default function TodayScreen() {
   const { t } = useTranslation();

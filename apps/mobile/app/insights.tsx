@@ -2,13 +2,13 @@ import { useMemo } from 'react';
 import { View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
-import { lastNDates } from '../../src/domain/dates';
-import { average, checkInsByDate, sensorsByDate } from '../../src/domain/history';
-import { INTERVENTION_IDS } from '../../src/domain/interventions';
-import { rankInterventions, type ArmStats } from '../../src/domain/interventionPicker';
-import { useToday } from '../../src/store/clock';
-import { useData } from '../../src/store/data';
-import { AppText, BarChart, Card, EmptyState, Screen, Sparkline, spacing, useTheme } from '../../src/ui';
+import { lastNDates } from '../src/domain/dates';
+import { average, checkInsByDate, sensorsByDate } from '../src/domain/history';
+import { INTERVENTION_IDS } from '../src/domain/interventions';
+import { rankInterventions, type ArmStats } from '../src/domain/interventionPicker';
+import { useToday } from '../src/store/clock';
+import { useData } from '../src/store/data';
+import { AppText, BarChart, Card, EmptyState, Screen, Sparkline, spacing, useTheme } from '../src/ui';
 
 const round1 = (v: number) => Math.round(v * 10) / 10;
 

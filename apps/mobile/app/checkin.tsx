@@ -3,15 +3,15 @@ import { useMemo, useState } from 'react';
 import { View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
-import type { InterventionId } from '../../src/domain/entities';
-import { INTERVENTION_IDS } from '../../src/domain/interventions';
-import { rankInterventions } from '../../src/domain/interventionPicker';
-import { CheckInFlow, type CheckInResult } from '../../src/features/CheckInFlow';
-import { interventionRoute } from '../../src/features/routes';
-import { useCompanionMessage } from '../../src/services/companion';
-import { useToday } from '../../src/store/clock';
-import { useData } from '../../src/store/data';
-import { AppText, Avatar, Button, Card, Screen, spacing } from '../../src/ui';
+import type { InterventionId } from '../src/domain/entities';
+import { INTERVENTION_IDS } from '../src/domain/interventions';
+import { rankInterventions } from '../src/domain/interventionPicker';
+import { CheckInFlow, type CheckInResult } from '../src/features/CheckInFlow';
+import { interventionRoute } from '../src/features/routes';
+import { useCompanionMessage } from '../src/services/companion';
+import { useToday } from '../src/store/clock';
+import { useData } from '../src/store/data';
+import { AppText, Avatar, Button, Card, Screen, spacing } from '../src/ui';
 
 export default function CheckInScreen() {
   const { t } = useTranslation();
@@ -52,7 +52,7 @@ export default function CheckInScreen() {
   if (result) {
     const route = interventionRoute(suggestion);
     return (
-      <Screen footer={<Button title={t('checkin.backToday')} onPress={() => router.navigate('/today')} />}>
+      <Screen footer={<Button title={t('checkin.backToday')} onPress={() => (router.canGoBack() ? router.back() : router.replace('/chat'))} />}>
         <AppText variant="title">{t('checkin.doneTitle')}</AppText>
         {patient ? (
           <Card tone="soft">

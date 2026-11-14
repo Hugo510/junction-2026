@@ -2,10 +2,10 @@ import { router } from 'expo-router';
 import { View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
-import { INTERVENTIONS } from '../../src/domain/interventions';
-import { FeedbackBar } from '../../src/features/FeedbackBar';
-import { interventionRoute } from '../../src/features/routes';
-import { AppText, Button, Card, Screen, spacing } from '../../src/ui';
+import { INTERVENTIONS } from '../src/domain/interventions';
+import { FeedbackBar } from '../src/features/FeedbackBar';
+import { interventionRoute } from '../src/features/routes';
+import { AppText, Button, Card, Screen, spacing } from '../src/ui';
 
 /** Library of calming interventions. Each one: duration, why it helps, start, "Did this help?". */
 export default function ComfortScreen() {

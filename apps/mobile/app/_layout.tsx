@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next';
 import { applyLanguage, detectDeviceLanguage } from '../src/i18n';
 import { useData } from '../src/store/data';
 import { useSettings } from '../src/store/settings';
-import { AppThemeProvider, ErrorState, LoadingState, useTheme } from '../src/ui';
+import { AppThemeProvider, ErrorState, HelpButton, LoadingState, useTheme } from '../src/ui';
 
 export { ErrorBoundary } from 'expo-router';
 
@@ -88,12 +88,20 @@ function Bootstrap() {
           headerShadowVisible: false,
           headerTitleStyle: { fontWeight: '600' },
           contentStyle: { backgroundColor: colors.background },
+          headerRight: () => <HelpButton compact />,
         }}
       >
         <Stack.Screen name="index" options={{ headerShown: false }} />
         <Stack.Screen name="(onboarding)" options={{ headerShown: false }} />
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="crisis" options={{ presentation: 'modal', title: t('crisis.title') }} />
+        <Stack.Screen name="chat" options={{ headerShown: false }} />
+        <Stack.Screen name="today" options={{ title: t('menu.today') }} />
+        <Stack.Screen name="checkin" options={{ title: t('checkin.title') }} />
+        <Stack.Screen name="journal/index" options={{ title: t('journal.title') }} />
+        <Stack.Screen name="journal/new" options={{ presentation: 'modal', title: t('journal.newTitle') }} />
+        <Stack.Screen name="comfort" options={{ title: t('menu.comfort') }} />
+        <Stack.Screen name="insights" options={{ title: t('menu.insights') }} />
+        <Stack.Screen name="care" options={{ title: t('menu.care') }} />
+        <Stack.Screen name="crisis" options={{ presentation: 'modal', title: t('crisis.title'), headerRight: () => null }} />
         <Stack.Screen name="consult" options={{ presentation: 'modal', title: t('care.consult.title') }} />
         <Stack.Screen name="settings/index" options={{ title: t('settings.title') }} />
         <Stack.Screen name="privacy/index" options={{ title: t('privacy.title') }} />

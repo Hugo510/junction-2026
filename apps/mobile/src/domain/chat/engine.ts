@@ -165,7 +165,7 @@ export function handleEvent(event: ChatEvent, flow: ChatFlowState, ctx: ChatCont
       const invite = ctx.checkedInToday
         ? say('chat.open.done', undefined, { quickReplies: ['relax', 'plan', 'progress', 'care'] })
         : say('chat.open.invite', undefined, { quickReplies: ['checkin', 'relax', 'low', 'progress'] });
-      return { messages: [greeting, invite, ...suggestConsult(ctx)], flow: { ...INITIAL_FLOW, relaxCount: flow.relaxCount }, effects: [] };
+      return { messages: [greeting, ...suggestConsult(ctx), invite], flow: { ...INITIAL_FLOW, relaxCount: flow.relaxCount }, effects: [] };
     }
 
     case 'mood':
