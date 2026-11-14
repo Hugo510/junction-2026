@@ -47,6 +47,14 @@ curl -X POST "$API/api/v1/companion/speech" \
 `ELEVENLABS_VOICE_ID`, `ELEVENLABS_MODEL` (default `eleven_multilingual_v2`),
 `CORS_ORIGINS` (default `*`).
 
+## Where the keys go
+
+- **Local run:** create `backend/.env` (ignored by git) with `GEMINI_API_KEY=...` and
+  `ELEVENLABS_API_KEY=...`, then start the server from `backend/`. Real environment variables
+  win over the file.
+- **Modal:** a Secret named `hiillos-ai` with the same two names (see `modal_app.py`).
+- **Never** in the app, in `EXPO_PUBLIC_*` variables, in the repo or in a chat.
+
 ## Deploy
 
 See the header of `modal_app.py`.
