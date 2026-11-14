@@ -2,11 +2,13 @@ import type { ReactNode } from 'react';
 import { Pressable, StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native';
 
 import { useTheme } from './theme';
-import { elevation, radii, spacing } from './tokens';
+import { elevation, radii, spacing, type Category } from './tokens';
 
 export interface CardProps {
   children: ReactNode;
   tone?: 'surface' | 'soft' | 'accent' | 'sand' | 'danger';
+  /** Tints the card with one of the area colours (wins over tone). */
+  category?: Category;
   /** "flat" = no shadow (for cards inside other surfaces, e.g. chat). */
   flat?: boolean;
   onPress?: () => void;
@@ -16,16 +18,18 @@ export interface CardProps {
 }
 
 /** Surface separated by tone and a soft shadow — no borders, less visual noise. */
-export function Card({ children, tone = 'surface', flat = false, onPress, accessibilityLabel, accessibilityHint, style }: CardProps) {
+export function Card({ children, tone = 'surface', category, flat = false, onPress, accessibilityLabel, accessibilityHint, style }: CardProps) {
   const { colors, scheme } = useTheme();
-  const bg = {
-    surface: colors.surface,
-    soft: colors.primarySoft,
-    accent: colors.accentSoft,
-    sand: colors.sand,
-    danger: colors.dangerSoft,
-  }[tone];
-  const shadow = flat || tone !== 'surface' || scheme === 'dark' ? elevation.none : elevation.low;
+  const bg = category
+    ? colors.categories[category].bg
+    : {
+        surface: colors.surface,
+        soft: colors.primarySoft,
+        accent: colors.accentSoft,
+        sand: colors.sand,
+        danger: colors.dangerSoft,
+      }[tone];
+  const shadow = flat || category || tone !== 'surface' || scheme === 'dark' ? elevation.none : elevation.low;
   const cardStyle = [styles.card, { backgroundColor: bg }, shadow, style];
 
   if (onPress) {
@@ -35,7 +39,7 @@ export function Card({ children, tone = 'surface', flat = false, onPress, access
         accessibilityLabel={accessibilityLabel}
         accessibilityHint={accessibilityHint}
         onPress={onPress}
-        style={({ pressed }) => [cardStyle, pressed && { opacity: 0.9 }]}
+        style={({ pressed }) => [cardStyle, pressed && { opacity: 0.9, transform: [{ scale: 0.99 }] }]}
       >
         {children}
       </Pressable>
@@ -47,7 +51,7 @@ export function Card({ children, tone = 'surface', flat = false, onPress, access
 const styles = StyleSheet.create({
   card: {
     borderRadius: radii.lg,
-    padding: spacing.md,
+    padding: spacing.md + spacing.xs,
     gap: spacing.sm,
   },
 });

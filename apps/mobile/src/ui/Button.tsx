@@ -37,12 +37,13 @@ export function Button({
   haptic = variant === 'primary',
 }: ButtonProps) {
   const { colors } = useTheme();
+  // Primary = the glowing ember (dark text on top: 6.9:1). One per screen.
   const palette = {
-    primary: { bg: colors.primary, fg: 'onPrimary' as const, border: colors.primary },
-    accent: { bg: colors.accent, fg: 'onAccent' as const, border: colors.accent },
-    secondary: { bg: colors.surface, fg: 'primary' as const, border: colors.border },
-    ghost: { bg: 'transparent', fg: 'primary' as const, border: 'transparent' },
-    danger: { bg: colors.danger, fg: 'onDanger' as const, border: colors.danger },
+    primary: { bg: colors.cta, fg: 'onCta' as const, spinner: colors.onCta },
+    accent: { bg: colors.accent, fg: 'onAccent' as const, spinner: colors.onAccent },
+    secondary: { bg: colors.primarySoft, fg: 'primary' as const, spinner: colors.primary },
+    ghost: { bg: 'transparent', fg: 'primary' as const, spinner: colors.primary },
+    danger: { bg: colors.danger, fg: 'onDanger' as const, spinner: colors.onDanger },
   }[variant];
 
   return (
@@ -61,14 +62,14 @@ export function Button({
         {
           minHeight: size === 'lg' ? 56 : MIN_TOUCH,
           backgroundColor: palette.bg,
-          borderColor: palette.border,
           opacity: disabled ? 0.5 : pressed ? 0.85 : 1,
+          transform: [{ scale: pressed ? 0.98 : 1 }],
         },
         style,
       ]}
     >
       {loading ? (
-        <ActivityIndicator color={colors.onPrimary} />
+        <ActivityIndicator color={palette.spinner} />
       ) : (
         <View style={styles.row}>
           {icon}
@@ -84,7 +85,6 @@ export function Button({
 const styles = StyleSheet.create({
   base: {
     borderRadius: radii.pill,
-    borderWidth: 1.5,
     paddingHorizontal: spacing.lg,
     paddingVertical: spacing.sm,
     alignItems: 'center',
