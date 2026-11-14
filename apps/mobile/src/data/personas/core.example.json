@@ -1,0 +1,45 @@
+{
+  "persona": {
+    "id": "aino",
+    "displayName": "Aino (synthetic)",
+    "story": "Drift, walks help → call list",
+    "language": "fi",
+    "companion": { "species": "cat", "name": "Kuu" },
+    "bipolarFlag": false,
+    "trustedContact": { "name": "Mika (synthetic)", "phone": "+358 40 000 0000" }
+  },
+  "checkIns": [
+    {
+      "id": "aino-2026-11-11",
+      "date": "2026-11-11",
+      "createdAt": "2026-11-11T19:30:00.000Z",
+      "kind": "full",
+      "mood": 3,
+      "emotions": ["tired", "calm"],
+      "energy": 3,
+      "anxiety": 2,
+      "sleepHours": 7.5,
+      "reaction": { "meanMs": 340, "sdMs": 42, "accuracy": 0.9, "rounds": 8 },
+      "safetyConcern": false
+    },
+    {
+      "id": "aino-2026-11-13",
+      "date": "2026-11-13",
+      "createdAt": "2026-11-13T08:10:00.000Z",
+      "kind": "chat",
+      "mood": 2,
+      "emotions": ["sad", "lonely"],
+      "note": "Dark morning, stayed in.",
+      "safetyConcern": false
+    }
+  ],
+  "sensors": [
+    { "date": "2026-11-11", "activityMinutes": 35, "daylightMinutes": 40 },
+    { "date": "2026-11-12", "activityMinutes": 12, "daylightMinutes": 5 },
+    { "date": "2026-11-13", "activityMinutes": 8, "daylightMinutes": 0 }
+  ],
+  "feedback": [
+    { "id": "aino-fb-2026-11-11-walk", "interventionId": "daylightWalk", "date": "2026-11-11", "rating": 1 },
+    { "id": "aino-fb-2026-11-12-music", "interventionId": "fireplace", "date": "2026-11-12", "rating": 0 }
+  ]
+}

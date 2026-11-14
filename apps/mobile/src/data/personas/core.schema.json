@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Hugo510/junction-2026/apps/mobile/src/data/personas/core.schema.json",
+  "title": "Hiillos synthetic persona — core.json (SeedResult)",
+  "description": "SYNTHETIC data only. Same shape as SeedResult in src/data/seed.ts. Dates are local calendar days (YYYY-MM-DD) in Europe/Helsinki; the last day should be the day BEFORE the demo day.",
+  "type": "object",
+  "required": ["checkIns", "sensors", "feedback"],
+  "additionalProperties": false,
+  "properties": {
+    "persona": {
+      "description": "Optional metadata used by the demo persona picker.",
+      "type": "object",
+      "required": ["id", "displayName"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+        "displayName": { "type": "string", "description": "Fictional name, e.g. \"Aino (synthetic)\"" },
+        "story": { "type": "string", "description": "One line for the demo picker, e.g. \"Drift, walks help\"" },
+        "language": { "enum": ["en", "fi", "es", "sv"] },
+        "companion": {
+          "type": "object",
+          "required": ["species", "name"],
+          "properties": {
+            "species": { "enum": ["bee", "cat", "dog", "bird", "person"] },
+            "name": { "type": "string", "maxLength": 24 }
+          }
+        },
+        "bipolarFlag": { "type": "boolean", "description": "Set by the clinic only. Enables the upwardDrift rule." },
+        "trustedContact": {
+          "type": "object",
+          "required": ["name", "phone"],
+          "properties": { "name": { "type": "string" }, "phone": { "type": "string", "description": "FICTIONAL number" } }
+        }
+      }
+    },
+    "checkIns": {
+      "type": "array",
+      "description": "Zero or more entries per day. Missing days = no check-in (silence).",
+      "items": {
+        "type": "object",
+        "required": ["id", "date", "createdAt", "mood", "safetyConcern"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "description": "Unique, e.g. \"aino-2026-11-01\"" },
+          "date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+          "createdAt": { "type": "string", "format": "date-time" },
+          "kind": { "enum": ["full", "chat", "journal"], "default": "full" },
+          "mood": { "type": "integer", "minimum": 1, "maximum": 5 },
+          "emotions": {
+            "type": "array",
+            "items": {
+              "enum": ["calm", "content", "grateful", "hopeful", "proud", "tired", "sad", "anxious", "irritable", "lonely", "overwhelmed", "numb"]
+            }
+          },
+          "energy": { "type": "integer", "minimum": 1, "maximum": 5 },
+          "anxiety": { "type": "integer", "minimum": 1, "maximum": 5 },
+          "sleepHours": { "type": "number", "minimum": 0, "maximum": 24, "description": "Total sleep incl. naps" },
+          "note": { "type": "string", "maxLength": 500 },
+          "reaction": {
+            "type": "object",
+            "required": ["meanMs", "sdMs", "accuracy", "rounds"],
+            "properties": {
+              "meanMs": { "type": "number", "minimum": 0 },
+              "sdMs": { "type": "number", "minimum": 0 },
+              "accuracy": { "type": "number", "minimum": 0, "maximum": 1 },
+              "rounds": { "type": "integer", "minimum": 1 }
+            }
+          },
+          "safetyConcern": { "type": "boolean", "description": "Keep false in demo data unless the script needs the crisis path." }
+        }
+      }
+    },
+    "sensors": {
+      "type": "array",
+      "description": "One aggregate per day (no raw samples, no coordinates).",
+      "items": {
+        "type": "object",
+        "required": ["date", "activityMinutes", "daylightMinutes"],
+        "additionalProperties": false,
+        "properties": {
+          "date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+          "activityMinutes": { "type": "number", "minimum": 0 },
+          "daylightMinutes": { "type": "number", "minimum": 0 }
+        }
+      }
+    },
+    "feedback": {
+      "type": "array",
+      "description": "\"Did this help?\" ratings that train the intervention picker.",
+      "items": {
+        "type": "object",
+        "required": ["id", "interventionId", "date", "rating"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string" },
+          "interventionId": { "enum": ["breathing", "fireplace", "fish", "puzzle", "move", "daylightWalk", "reachOut", "gratitude"] },
+          "date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+          "rating": { "enum": [1, 0, -1] }
+        }
+      }
+    }
+  }
+}
