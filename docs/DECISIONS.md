@@ -30,11 +30,16 @@
 | O24 | **Mentor check today** (Ilmoniemi/Lioumis group): PHQ-2/9 cadence + safety question, "consider a booster review" wording, the lab ask. | Claude (spec W0) | Meg |
 | O25 | **EEG:** in the clinic loop (pitch) + C4 research card on Meg's `eeg_rest_openneuro.py` (ds003478, CC0); no headset, no "EEG detects relapse" claims; ask mentors about one real minute from the booth EEG. | Meg 10:34 | Meg · Uriel |
 | O26 | **Body map S6** ("Where is your fire today?"), Aalto bodily-maps method, self-report only; replaces the emotions step in the weekly check-in. | Claude (Meg agreed 10:35) | Hugo · Claude (persona data) |
+| O27 | **Who meets the challenge partner (Aalto TMS group) today?** Proposal: Meg (domain, mentor check O24, the lab ask) + one builder (Uriel — clinician view questions); the others keep building. Times: check the Junction app/Discord. | Claude 10:55 | Meg |
+| O28 | **PHQ-9 wording in fi / sv / es:** Hugo wrote the nine items himself in `apps/mobile/src/i18n/locales/*.json` (`phq.items`). Check against the officially validated translations before the demo (PHQ instruments are free to use; use the published wording, not our own). | Claude 10:55 | Meg (fi, sv) |
 | O20 | **Optional wow (W12) — kept, not dropped (Meg 10:36):** prism hologram of the fire (C1, Meg) and Arduino ember lamp (C5) — after M1–M4, 1–2 h cap each, demo never depends on them. Who has hardware? | Meg | Team |
 
 ---
 
 ## Sat 14 Nov 2026
+
+**Team logistics (Meg 10:53)**
+- Meg is resting until 13:00 (sleep debt after the night). The team meets in person at Junction at 13:00 (lunch).
 
 **Done (10:50 repo check)**
 - **Hugo shipped** M2 one-tap daily moment, M3 drift reach-out (PHQ-2 → PHQ-9), persona picker, and the schema fields `homeMinutes`, `screenOffTime`, `phq9` (closes O17). M3 had been Uriel's; Uriel now has M4 only.
