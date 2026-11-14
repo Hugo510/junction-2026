@@ -15,7 +15,7 @@ def evaluate_risk(body: CheckInCreate) -> RiskLevel:
     # Hard rule from the contract: self-harm thoughts are always urgent
     if body.safety.self_harm_thoughts:
         return RiskLevel.urgent
-    if body.mood <= 2 or body.anxiety >= 4:
+    if body.mood <= 2 or (body.anxiety is not None and body.anxiety >= 4):
         return RiskLevel.watch
     return RiskLevel.none
 
@@ -33,7 +33,7 @@ def compute_priority(history: list[CheckIn]) -> tuple[Priority, bool]:
     score = 0.0
 
     avg_mood = mean(c.mood for c in history)
-    avg_anxiety = mean(c.anxiety for c in history)
+    anxieties = [c.anxiety for c in history if c.anxiety is not None]
     sleeps = [c.sleep_hours for c in history if c.sleep_hours is not None]
 
     # Low mood: up to 40 points
@@ -46,15 +46,17 @@ def compute_priority(history: list[CheckIn]) -> tuple[Priority, bool]:
             weight=round(mood_points),
         ))
 
-    # High anxiety: up to 30 points
-    anxiety_points = (avg_anxiety - 1) / 4 * 30
-    if anxiety_points >= 5:
-        score += anxiety_points
-        reasons.append(Reason(
-            key="reason.high_anxiety_avg",
-            text=f"Average anxiety over the last week is {avg_anxiety:.1f} out of 5",
-            weight=round(anxiety_points),
-        ))
+    # High anxiety: up to 30 points (only if anxiety was reported)
+    if anxieties:
+        avg_anxiety = mean(anxieties)
+        anxiety_points = (avg_anxiety - 1) / 4 * 30
+        if anxiety_points >= 5:
+            score += anxiety_points
+            reasons.append(Reason(
+                key="reason.high_anxiety_avg",
+                text=f"Average anxiety over the last week is {avg_anxiety:.1f} out of 5",
+                weight=round(anxiety_points),
+            ))
 
     # Short sleep: 15 points
     if sleeps and mean(sleeps) < 6:
@@ -65,7 +67,7 @@ def compute_priority(history: list[CheckIn]) -> tuple[Priority, bool]:
             weight=15,
         ))
 
-    # Recent mood drop: compare the last 3 days with the earlier days in the window
+    # Recent mood drop: last 3 days versus earlier in the window
     ref = history[0].date
     recent = [c.mood for c in history if (ref - c.date).days < 3]
     earlier = [c.mood for c in history if (ref - c.date).days >= 3]

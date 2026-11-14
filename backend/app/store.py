@@ -13,8 +13,8 @@ from app.schemas.patient import (
     Patient,
 )
 
-# user id -> {date -> check-in}
-CHECKINS: dict[str, dict[CalendarDate, CheckIn]] = {}
+# user id -> list of check-ins (several per day are allowed)
+CHECKINS: dict[str, list[CheckIn]] = {}
 
 # urgent alerts for the care team (filled by the self-harm rule)
 ALERTS: list[Alert] = []
