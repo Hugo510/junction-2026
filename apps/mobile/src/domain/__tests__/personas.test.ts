@@ -44,7 +44,9 @@ describe('the five demo personas on demo day', () => {
 
   it('Sara: lost contact (silence ladder), low priority, embers at the floor but not out', () => {
     const sara = byId('sara');
-    expect(priority('sara')).toMatchObject({ score: 15, level: 'low' });
+    // v0.3: her phone keeps logging while she is silent → missed check-ins + activity drop, no mood alarm
+    expect(priority('sara')).toMatchObject({ score: 25, level: 'low' });
+    expect(priority('sara').reasons).toEqual(['priority.reasons.missedCheckIns', 'priority.reasons.activityDrop']);
     expect(outreachLevel(sara.checkIns, DEMO_DAY)).toBe('reconnect');
     const level = emberLevel(sara.checkIns, sara.sensors, sara.feedback, DEMO_DAY);
     expect(level).toBeGreaterThanOrEqual(EMBER_FLOOR);

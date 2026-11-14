@@ -1,20 +1,20 @@
 #!/usr/bin/env node
 /**
  * Copies the generated persona files into the app:
- *   <source>/<id>.json  →  assets/personas/<id>/core.json
+ *   <source>/<id>/core.json  (or <source>/<id>.json)  →  assets/personas/<id>/core.json
  *
  * Usage: npm run personas:sync [-- <source dir>]
- * Default source: ../../tools/synthetic/personas_extended (generator output, repo root).
+ * Default source: ../../tools/synthetic/personas (generator output, repo root).
  *
- * The app only loads files marked `"synthetic": true`. The generator's ABOUT.md states that all
- * personas are synthetic, so the flag is stamped here when the generator did not write it.
+ * Files must already carry `"synthetic": true` (the generator writes it since v0.3); files
+ * without it are skipped with an error, because the app refuses them.
  * ground_truth/ is never copied: the app must not read it.
  */
 const fs = require('fs');
 const path = require('path');
 
 const appRoot = path.join(__dirname, '..');
-const source = path.resolve(process.argv[2] ?? path.join(appRoot, '..', '..', 'tools', 'synthetic', 'personas_extended'));
+const source = path.resolve(process.argv[2] ?? path.join(appRoot, '..', '..', 'tools', 'synthetic', 'personas'));
 const target = path.join(appRoot, 'assets', 'personas');
 
 if (!fs.existsSync(source)) {
@@ -22,20 +22,43 @@ if (!fs.existsSync(source)) {
   process.exit(1);
 }
 
-const files = fs.readdirSync(source).filter((f) => f.endsWith('.json'));
-if (files.length === 0) {
-  console.error(`No .json files in ${source}`);
+/** Supports one folder per persona (<id>/core.json) and flat files (<id>.json). */
+const inputs = fs
+  .readdirSync(source, { withFileTypes: true })
+  .map((entry) => {
+    if (entry.isDirectory()) {
+      const file = path.join(source, entry.name, 'core.json');
+      return fs.existsSync(file) ? file : null;
+    }
+    return entry.name.endsWith('.json') ? path.join(source, entry.name) : null;
+  })
+  .filter(Boolean);
+
+if (inputs.length === 0) {
+  console.error(`No persona files in ${source}`);
   process.exit(1);
 }
 
-for (const file of files) {
-  const raw = JSON.parse(fs.readFileSync(path.join(source, file), 'utf8').replace(/^﻿/, ''));
-  const id = raw.persona?.id ?? path.basename(file, '.json');
-  const { synthetic: _ignored, ...rest } = raw;
-  const out = { synthetic: true, ...rest };
+let failed = false;
+for (const file of inputs) {
+  const text = fs.readFileSync(file, 'utf8').replace(/^﻿/, '');
+  const data = JSON.parse(text);
+  const id = data.persona?.id;
+  if (!id) {
+    console.error(`✗ ${file}: missing persona.id`);
+    failed = true;
+    continue;
+  }
+  if (data.synthetic !== true) {
+    console.error(`✗ ${id}: "synthetic": true is missing, not copied`);
+    failed = true;
+    continue;
+  }
   const dir = path.join(target, id);
   fs.mkdirSync(dir, { recursive: true });
-  fs.writeFileSync(path.join(dir, 'core.json'), JSON.stringify(out) + '\n', 'utf8');
-  console.log(`✓ ${id}: ${raw.checkIns?.length ?? 0} check-ins, ${raw.sensors?.length ?? 0} days, ${raw.phq9?.length ?? 0} PHQ-9`);
+  fs.writeFileSync(path.join(dir, 'core.json'), JSON.stringify(data) + '\n', 'utf8');
+  console.log(`✓ ${id} (v${data.generatorVersion ?? '?'}): ${data.checkIns?.length ?? 0} check-ins, ${data.sensors?.length ?? 0} days, ${data.phq9?.length ?? 0} PHQ-9`);
 }
-console.log(`\n${files.length} personas copied to assets/personas/<id>/core.json`);
+
+if (failed) process.exit(1);
+console.log(`\n${inputs.length} personas copied to assets/personas/<id>/core.json`);
