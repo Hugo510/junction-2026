@@ -7,6 +7,8 @@ CONSENT_FOR_SENSOR: dict[SensorType, str] = {
     SensorType.steps: "motion",
     SensorType.outdoor_daylight: "approximate_location",
     SensorType.screen_engagement: "touch_pattern",
+    SensorType.sleep: "wearable",
+    SensorType.resting_heart_rate: "wearable",
 }
 
 

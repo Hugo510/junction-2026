@@ -41,7 +41,7 @@ async def companion_speech(body: SpeechRequest, user: dict = Depends(get_current
         raise HTTPException(status_code=422, detail="This text is not read aloud")
 
     try:
-        audio = await synthesize(body.text)
+        audio = await synthesize(body.text, body.companion)
     except SpeechUnavailable as exc:
         raise HTTPException(status_code=503, detail=str(exc)) from exc
     return SpeechResponse(audio_base64=audio)

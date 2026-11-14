@@ -24,6 +24,9 @@ class Settings(BaseSettings):
     elevenlabs_api_key: str = ""
     elevenlabs_voice_id: str = "JBFqnCBsd6RMkjVDRZzb"
     elevenlabs_model: str = "eleven_multilingual_v2"
+    # Optional: one voice per companion, e.g. "cat=VOICE_ID,dog=VOICE_ID,bird=VOICE_ID".
+    # A companion without an entry uses elevenlabs_voice_id.
+    elevenlabs_voices: str = ""
 
     # Comma-separated list of allowed origins for browsers ("*" for the demo).
     cors_origins: str = "*"
