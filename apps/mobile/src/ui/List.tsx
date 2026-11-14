@@ -18,7 +18,7 @@ export function Section({ title, footer, children }: { title?: string; footer?: 
           {title}
         </AppText>
       ) : null}
-      <View style={[styles.group, { backgroundColor: colors.surface }, scheme === 'dark' ? null : elevation.low]}>
+      <View style={[styles.group, { backgroundColor: colors.surface, borderColor: colors.border }, scheme === 'dark' ? null : elevation.low]}>
         {items.map((child, i) => (
           <Fragment key={i}>
             {i > 0 ? <View style={[styles.separator, { backgroundColor: colors.border }]} /> : null}
@@ -81,7 +81,7 @@ export function ListItem({ title, subtitle, leading, trailing, onPress, chevron,
 const styles = StyleSheet.create({
   section: { gap: spacing.sm },
   sectionTitle: { paddingHorizontal: spacing.xs },
-  group: { borderRadius: radii.lg, overflow: 'hidden' },
+  group: { borderRadius: radii.lg, borderWidth: StyleSheet.hairlineWidth * 2, overflow: 'hidden' },
   separator: { height: StyleSheet.hairlineWidth, marginLeft: spacing.md },
   row: { flexDirection: 'row', alignItems: 'center', gap: spacing.md, minHeight: MIN_TOUCH + 8, paddingHorizontal: spacing.md, paddingVertical: spacing.sm },
   texts: { flex: 1, gap: 2 },

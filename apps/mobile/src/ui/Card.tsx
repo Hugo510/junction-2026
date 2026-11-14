@@ -7,7 +7,7 @@ import { elevation, radii, spacing, type Category } from './tokens';
 export interface CardProps {
   children: ReactNode;
   tone?: 'surface' | 'soft' | 'accent' | 'sand' | 'danger';
-  /** Tints the card with one of the area colours (wins over tone). */
+  /** Area of the app. All areas share the same quiet card (kept for call sites and illustrations). */
   category?: Category;
   /** "flat" = no shadow (for cards inside other surfaces, e.g. chat). */
   flat?: boolean;
@@ -17,9 +17,13 @@ export interface CardProps {
   style?: StyleProp<ViewStyle>;
 }
 
-/** Surface separated by tone and a soft shadow — no borders, less visual noise. */
+/**
+ * One card for the whole app: white surface, hairline border, a very soft shadow.
+ * Tinted tones (soft / accent / sand / danger) are flat fills for notes and warnings.
+ */
 export function Card({ children, tone = 'surface', category, flat = false, onPress, accessibilityLabel, accessibilityHint, style }: CardProps) {
   const { colors, scheme } = useTheme();
+  const plain = !!category || tone === 'surface';
   const bg = category
     ? colors.categories[category].bg
     : {
@@ -29,8 +33,8 @@ export function Card({ children, tone = 'surface', category, flat = false, onPre
         sand: colors.sand,
         danger: colors.dangerSoft,
       }[tone];
-  const shadow = flat || category || tone !== 'surface' || scheme === 'dark' ? elevation.none : elevation.low;
-  const cardStyle = [styles.card, { backgroundColor: bg }, shadow, style];
+  const shadow = flat || !plain || scheme === 'dark' ? elevation.none : elevation.low;
+  const cardStyle = [styles.card, { backgroundColor: bg, borderColor: plain ? colors.border : 'transparent' }, shadow, style];
 
   if (onPress) {
     return (
@@ -51,6 +55,7 @@ export function Card({ children, tone = 'surface', category, flat = false, onPre
 const styles = StyleSheet.create({
   card: {
     borderRadius: radii.lg,
+    borderWidth: StyleSheet.hairlineWidth * 2,
     padding: spacing.md + spacing.xs,
     gap: spacing.sm,
   },

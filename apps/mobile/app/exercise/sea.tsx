@@ -30,7 +30,7 @@ export default function SeaScreen() {
   const playing = status.playing;
   return (
     <ExerciseShell id="seaSounds" hint={t('comfort.sea.hint')}>
-      <View style={[styles.scene, { backgroundColor: colors.categories.sky.bg }]}>
+      <View style={[styles.scene, { backgroundColor: colors.surface, borderColor: colors.border }]}>
         <Illustration name="waves" category="sky" size={200} />
       </View>
       <Button
@@ -46,5 +46,5 @@ export default function SeaScreen() {
 }
 
 const styles = StyleSheet.create({
-  scene: { alignItems: 'center', justifyContent: 'center', borderRadius: radii.xl, paddingVertical: spacing.lg },
+  scene: { alignItems: 'center', justifyContent: 'center', borderRadius: radii.xl, borderWidth: StyleSheet.hairlineWidth * 2, paddingVertical: spacing.lg },
 });

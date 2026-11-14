@@ -56,11 +56,24 @@ and every entry (from check-ins, chat or the journal itself).
 
 ## Look and feel
 
-Hiillos has its own "embers" identity (`src/ui/tokens.ts`): warm cream surfaces, a glowing ember as the brand
-colour, the rounded Nunito typeface (SIL Open Font License) and one soft colour per area of the app. Places and
-exercises are **hub cards** (`FeatureCard`): text on the left, a simple original illustration on the right
-(`Illustration`, drawn in SVG). The layout idea is inspired by calm wellbeing apps; colours, shapes and drawings are ours.
-Every text/background pair is checked against WCAG AA in light and dark mode (`src/ui/__tests__/contrast.test.ts`).
+Hiillos uses a minimal "one ember" system (`src/ui/tokens.ts`): a near-white background, white cards with a
+hairline border and a very soft shadow, charcoal text, and **one accent, the ember**. Colour is spent only
+where it means something: the main action, the selected state and three status colours (red is reserved for
+danger). The rounded Nunito typeface (SIL Open Font License) carries the hierarchy through size and weight.
+
+Design rules the components follow:
+
+- **Visual hierarchy**: one display or title per screen, then headings, body and captions; the main action is
+  the only bright element.
+- **Consistency**: one card, one button set, one chip and one icon style everywhere (`Card`, `FeatureCard`,
+  `Button`, `Chip`, `Section`).
+- **Fitts's law**: primary actions are full-width, 56 dp tall and sit in the footer near the thumb; every
+  touch target is at least 48 dp.
+- **Proximity**: a label sits with its value, and related rows share one group.
+- **Contrast**: every text/background pair is checked against WCAG AA (4.5:1) in light and dark mode
+  (`src/ui/__tests__/contrast.test.ts`).
+- **Less is more**: places and exercises are **hub cards** with one simple original illustration
+  (`Illustration`, SVG) in ember tones; no decorative colour.
 
 ## Structure
 

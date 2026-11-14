@@ -11,7 +11,7 @@ export default function WelcomeStep() {
   const { colors } = useTheme();
   return (
     <OnboardingFrame step={2} title={t('onboarding.welcome.title')} onContinue={() => router.push('/path')}>
-      <View style={[styles.hero, { backgroundColor: colors.categories.ember.bg }]}>
+      <View style={[styles.hero, { backgroundColor: colors.surface, borderColor: colors.border }]}>
         <View style={styles.art}>
           <Illustration name="ember" category="ember" size={132} />
           <View style={styles.companion}>
@@ -38,7 +38,7 @@ export default function WelcomeStep() {
 }
 
 const styles = StyleSheet.create({
-  hero: { alignItems: 'center', gap: spacing.xs, borderRadius: radii.xl, paddingVertical: spacing.lg, paddingHorizontal: spacing.md },
+  hero: { alignItems: 'center', gap: spacing.xs, borderRadius: radii.xl, borderWidth: StyleSheet.hairlineWidth * 2, paddingVertical: spacing.lg, paddingHorizontal: spacing.md },
   art: { width: 180, height: 136, alignItems: 'center', justifyContent: 'center' },
   companion: { position: 'absolute', right: 0, bottom: 0 },
 });

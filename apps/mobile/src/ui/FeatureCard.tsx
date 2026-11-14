@@ -4,7 +4,7 @@ import { haptics } from '../services/haptics';
 import { AppText } from './AppText';
 import { Illustration, type IllustrationName } from './Illustration';
 import { useTheme } from './theme';
-import { radii, spacing, type Category } from './tokens';
+import { elevation, radii, spacing, type Category } from './tokens';
 
 export interface FeatureCardProps {
   title: string;
@@ -27,11 +27,15 @@ const ART = { lg: 104, md: 84, sm: 60 } as const;
  * The whole card is one button (title + description are read together).
  */
 export function FeatureCard({ title, description, eyebrow, category, art, onPress, size = 'md', accessibilityHint }: FeatureCardProps) {
-  const { colors } = useTheme();
+  const { colors, scheme } = useTheme();
   const tint = colors.categories[category];
   const artSize = ART[size];
   const pad = size === 'sm' ? spacing.sm + spacing.xs : spacing.md;
-  const base = [styles.card, { backgroundColor: tint.bg, minHeight: artSize + pad * 2, paddingVertical: pad, borderRadius: size === 'sm' ? radii.lg : radii.xl }];
+  const base = [
+    styles.card,
+    { backgroundColor: tint.bg, borderColor: colors.border, minHeight: artSize + pad * 2, paddingVertical: pad, borderRadius: size === 'sm' ? radii.lg : radii.xl },
+    scheme === 'dark' ? elevation.none : elevation.low,
+  ];
 
   const content = (
     <>
@@ -79,7 +83,7 @@ const styles = StyleSheet.create({
     gap: spacing.md,
     paddingLeft: spacing.md + spacing.xs,
     paddingRight: spacing.md,
-    overflow: 'hidden',
+    borderWidth: StyleSheet.hairlineWidth * 2,
   },
   texts: { flex: 1, gap: spacing.xs },
   eyebrow: { textTransform: 'uppercase', letterSpacing: 0.6, fontSize: 12, lineHeight: 16 },

@@ -1,16 +1,19 @@
 /**
- * Hiillos design tokens — "embers" identity.
+ * Hiillos design tokens — minimal "one ember" system.
  *
- * Warm cream surfaces, a glowing ember as the brand colour and one soft colour per area of the app
- * (hub style: a tinted card with a simple illustration). Text/background pairs meet WCAG AA
- * (≥ 4.5:1 for body text); see src/ui/__tests__/contrast.test.ts.
+ * Neutral base (near-white background, white cards, charcoal text) and ONE accent: the ember.
+ * Colour is spent only where it carries meaning: the main action, the selected state, and the
+ * three status colours (red is reserved for danger). Everything else is neutral, so hierarchy
+ * comes from size, weight and position, not from decoration.
+ *
+ * Text/background pairs meet WCAG AA (≥ 4.5:1); see src/ui/__tests__/contrast.test.ts.
  */
 
-/** One soft colour family per area of the app. */
+/** Areas of the app. They used to have one colour each; now they share the same quiet card. */
 export type Category = 'ember' | 'night' | 'leaf' | 'sky' | 'sun' | 'rose';
 
 export interface CategoryColors {
-  /** Tinted card background. */
+  /** Card background. */
   bg: string;
   /** Illustration / large shapes (never used for small text). */
   art: string;
@@ -24,13 +27,14 @@ export interface ThemeColors {
   surfaceAlt: string;
   text: string;
   textMuted: string;
-  /** Brand colour dark enough for text, icons and selected states. */
+  /** The ember, dark enough for text, icons and selected states. */
   primary: string;
   onPrimary: string;
   primarySoft: string;
   /** Bright ember for the main call-to-action button (dark text on top). */
   cta: string;
   onCta: string;
+  /** Neutral emphasis (notes, the help button). Not a second brand colour. */
   accent: string;
   onAccent: string;
   accentSoft: string;
@@ -40,8 +44,10 @@ export interface ThemeColors {
   onDanger: string;
   dangerSoft: string;
   success: string;
+  successSoft: string;
   /** Amber for "keep an eye on it" states (text-safe). */
   warning: string;
+  warningSoft: string;
   chartMood: string;
   chartSleep: string;
   chartActivity: string;
@@ -52,94 +58,88 @@ export interface ThemeColors {
   categories: Record<Category, CategoryColors>;
 }
 
+/** Every area uses the same card and the same ember tones: one system, no rainbow. */
+const sameForAll = (c: CategoryColors): Record<Category, CategoryColors> => ({ ember: c, night: c, leaf: c, sky: c, sun: c, rose: c });
+
 export const lightColors: ThemeColors = {
-  background: '#FBF5EC',
+  background: '#F7F7F5',
   surface: '#FFFFFF',
-  surfaceAlt: '#F3EADC',
-  text: '#2B211C',
-  textMuted: '#6B5B52',
+  surfaceAlt: '#F0EFEC',
+  text: '#1F1B18',
+  textMuted: '#625C57',
   primary: '#A93C16',
   onPrimary: '#FFFFFF',
-  primarySoft: '#FBE3D2',
+  primarySoft: '#FBEDE5',
   cta: '#F5894A',
   onCta: '#2B1608',
-  accent: '#4A45A8',
+  accent: '#3F3A36',
   onAccent: '#FFFFFF',
-  accentSoft: '#E3E1F7',
-  sand: '#F3EADC',
-  border: '#E6D9C8',
+  accentSoft: '#EFEEEB',
+  sand: '#F0EFEC',
+  border: '#E4E2DD',
   danger: '#B3261E',
   onDanger: '#FFFFFF',
-  dangerSoft: '#F8DAD6',
+  dangerSoft: '#FBE9E7',
   success: '#246B41',
+  successSoft: '#E6F2EA',
   warning: '#8A5A00',
+  warningSoft: '#FBF1D6',
   chartMood: '#D9622B',
-  chartSleep: '#6C63C7',
-  chartActivity: '#4E9A6B',
-  chartReaction: '#9B5BA5',
-  chartDaylight: '#D9A21B',
+  chartSleep: '#5B5F6B',
+  chartActivity: '#8C8780',
+  chartReaction: '#B0AAA2',
+  chartDaylight: '#E8A15E',
   lakeTop: '#CFE3EC',
   lakeBottom: '#8DB5C7',
-  categories: {
-    ember: { bg: '#FBE3D2', art: '#F28C38', artSoft: '#FFD27A' },
-    night: { bg: '#E3E1F7', art: '#6C63C7', artSoft: '#B9B4F0' },
-    leaf: { bg: '#DDEEDD', art: '#4E9A6B', artSoft: '#A9D6B8' },
-    sky: { bg: '#D9ECF5', art: '#3F8FB8', artSoft: '#A5D2E8' },
-    sun: { bg: '#FCEFC4', art: '#E8B93A', artSoft: '#F7DE8F' },
-    rose: { bg: '#F8DAD6', art: '#D9695C', artSoft: '#F0AFA7' },
-  },
+  categories: sameForAll({ bg: '#FFFFFF', art: '#F28C38', artSoft: '#FAD9C0' }),
 };
 
 export const darkColors: ThemeColors = {
-  background: '#1B1512',
-  surface: '#261D19',
-  surfaceAlt: '#31261F',
-  text: '#F5EBE0',
-  textMuted: '#C9B8A9',
+  background: '#141312',
+  surface: '#1E1C1A',
+  surfaceAlt: '#282522',
+  text: '#F2EFEA',
+  textMuted: '#B8B1A8',
   primary: '#FFB083',
   onPrimary: '#3A1505',
-  primarySoft: '#4A2A1A',
+  primarySoft: '#3A2418',
   cta: '#F5894A',
   onCta: '#2B1608',
-  accent: '#BDB8FF',
-  onAccent: '#1C1946',
-  accentSoft: '#322F5C',
-  sand: '#3A2E24',
-  border: '#45372D',
+  accent: '#E6E1DA',
+  onAccent: '#1E1C1A',
+  accentSoft: '#2C2926',
+  sand: '#282522',
+  border: '#3A3632',
   danger: '#FFA79C',
   onDanger: '#3B0B07',
-  dangerSoft: '#4A2320',
+  dangerSoft: '#40211E',
   success: '#8FD3A6',
+  successSoft: '#1F3327',
   warning: '#F0C95A',
+  warningSoft: '#3A3118',
   chartMood: '#FFB083',
-  chartSleep: '#BDB8FF',
-  chartActivity: '#8FD3A6',
-  chartReaction: '#DDB3E2',
-  chartDaylight: '#F0C95A',
+  chartSleep: '#A9ADB8',
+  chartActivity: '#8C8780',
+  chartReaction: '#6E6962',
+  chartDaylight: '#E8A15E',
   lakeTop: '#1D3540',
   lakeBottom: '#0E1F27',
-  categories: {
-    ember: { bg: '#4A2A1A', art: '#F28C38', artSoft: '#FFD27A' },
-    night: { bg: '#2C2A52', art: '#9D96F0', artSoft: '#5E58A8' },
-    leaf: { bg: '#22392B', art: '#6FBF8D', artSoft: '#3F7A56' },
-    sky: { bg: '#1F3644', art: '#6FB6DA', artSoft: '#3C7391' },
-    sun: { bg: '#44391A', art: '#F0C95A', artSoft: '#9A7F2C' },
-    rose: { bg: '#4A2320', art: '#F0897D', artSoft: '#9A4A42' },
-  },
+  categories: sameForAll({ bg: '#1E1C1A', art: '#F28C38', artSoft: '#7A4A26' }),
 };
 
 /** 8-pt grid. */
 export const spacing = { xs: 4, sm: 8, md: 16, lg: 24, xl: 32, xxl: 48 } as const;
-/** Generous, friendly corners. */
-export const radii = { sm: 10, md: 16, lg: 24, xl: 32, pill: 999 } as const;
+/** Calm, modern corners (cards 18–24, controls fully round). */
+export const radii = { sm: 8, md: 12, lg: 18, xl: 24, pill: 999 } as const;
 
 export type TextVariant = 'display' | 'title' | 'heading' | 'body' | 'label' | 'caption';
 export type FontWeight = '400' | '600' | '700' | '800';
 
+/** Hierarchy by size and weight: one display, one title, then quieter steps. */
 export const typeScale: Record<TextVariant, { fontSize: number; lineHeight: number; fontWeight: FontWeight }> = {
-  display: { fontSize: 32, lineHeight: 39, fontWeight: '800' },
-  title: { fontSize: 25, lineHeight: 32, fontWeight: '800' },
-  heading: { fontSize: 19, lineHeight: 26, fontWeight: '700' },
+  display: { fontSize: 32, lineHeight: 38, fontWeight: '800' },
+  title: { fontSize: 24, lineHeight: 30, fontWeight: '800' },
+  heading: { fontSize: 18, lineHeight: 25, fontWeight: '700' },
   body: { fontSize: 17, lineHeight: 25, fontWeight: '400' },
   label: { fontSize: 15, lineHeight: 21, fontWeight: '700' },
   caption: { fontSize: 14, lineHeight: 20, fontWeight: '400' },
@@ -161,20 +161,20 @@ export const LARGE_TEXT_FACTOR = 1.2;
 /** Motion tokens. Every animation uses these (and is skipped when reduce motion is on). */
 export const durations = { instant: 120, fast: 180, normal: 260, slow: 600 } as const;
 
-/** Elevation tokens: soft warm shadows instead of borders to separate surfaces. */
+/** Elevation tokens: one very soft neutral shadow; cards also carry a hairline border. */
 export const elevation = {
   none: {},
   low: {
-    shadowColor: '#5A3A22',
-    shadowOpacity: 0.08,
-    shadowRadius: 10,
-    shadowOffset: { width: 0, height: 3 },
+    shadowColor: '#1F1B18',
+    shadowOpacity: 0.05,
+    shadowRadius: 12,
+    shadowOffset: { width: 0, height: 4 },
     elevation: 1,
   },
   high: {
-    shadowColor: '#5A3A22',
-    shadowOpacity: 0.16,
-    shadowRadius: 22,
+    shadowColor: '#1F1B18',
+    shadowOpacity: 0.14,
+    shadowRadius: 24,
     shadowOffset: { width: 0, height: 8 },
     elevation: 6,
   },

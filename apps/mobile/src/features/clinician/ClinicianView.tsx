@@ -17,9 +17,9 @@ export function ClinicianView({ rows, date, onToggleSign }: { rows: ClinicianRow
   ];
   // Calm status colours: red only for "high"; low is green, never the brand ember.
   const look = {
-    high: { color: colors.danger, soft: colors.categories.rose.bg },
-    medium: { color: colors.warning, soft: colors.categories.sun.bg },
-    low: { color: colors.success, soft: colors.categories.leaf.bg },
+    high: { color: colors.danger, soft: colors.dangerSoft },
+    medium: { color: colors.warning, soft: colors.warningSoft },
+    low: { color: colors.success, soft: colors.successSoft },
   };
 
   return (

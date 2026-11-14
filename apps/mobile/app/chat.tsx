@@ -103,7 +103,7 @@ export default function ChatScreen() {
           removeClippedSubviews={Platform.OS === 'android'}
           ListHeaderComponent={vm.typing ? <TypingIndicator name={name} /> : undefined}
           ListFooterComponent={
-            <View style={[styles.hero, { backgroundColor: colors.categories.ember.bg }]}>
+            <View style={[styles.hero, { backgroundColor: colors.surface, borderColor: colors.border }]}>
               <Hearth
                 intensity={embers.level}
                 active={focused && !reduceMotion}
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
   iconButton: { width: MIN_TOUCH, height: MIN_TOUCH, alignItems: 'center', justifyContent: 'center' },
   title: { flex: 1, flexDirection: 'row', alignItems: 'center', gap: spacing.sm, minHeight: MIN_TOUCH },
   list: { paddingHorizontal: spacing.md, paddingVertical: spacing.md, gap: spacing.md },
-  hero: { alignItems: 'center', gap: spacing.xs, paddingVertical: spacing.lg, paddingHorizontal: spacing.lg, borderRadius: radii.xl, marginBottom: spacing.sm },
+  hero: { alignItems: 'center', gap: spacing.xs, paddingVertical: spacing.lg, paddingHorizontal: spacing.lg, borderRadius: radii.xl, borderWidth: StyleSheet.hairlineWidth * 2, marginBottom: spacing.sm },
   day: { marginVertical: spacing.xs },
   heroName: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm, marginTop: spacing.sm },
   composerWrap: { paddingBottom: spacing.sm, paddingTop: spacing.xs },
