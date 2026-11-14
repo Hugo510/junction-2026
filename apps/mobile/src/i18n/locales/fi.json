@@ -158,7 +158,17 @@
     "suggestion": "Jotain, mikä voisi auttaa nyt",
     "alreadyDone": "Olet jo kertonut tämän päivän kuulumiset. Jos jokin muuttui, voit tehdä sen uudelleen.",
     "again": "Kerro kuulumiset uudelleen",
-    "backToday": "Takaisin keskusteluun"
+    "backToday": "Takaisin keskusteluun",
+    "restless": {
+      "question": "Kuinka levoton tai ärtynyt olosi on ollut?",
+      "low": "Ei lainkaan",
+      "high": "Hyvin"
+    },
+    "worry": {
+      "question": "Kuinka paljon olet murehtinut?",
+      "low": "Tuskin lainkaan",
+      "high": "Paljon"
+    }
   },
   "crisis": {
     "title": "Et ole yksin",
@@ -455,7 +465,11 @@
       "longSleep": "Useita hyvin pitkiä öitä tai päiviä sängyssä (10 tuntia tai enemmän)",
       "upwardDrift": "Vähän unta ja poikkeuksellisen paljon energiaa tai liikettä (klinikan merkintä)",
       "homeMore": "Enemmän aikaa kotona kuin sinulle on tavallista",
-      "laterNights": "Illat venyvät myöhempään kuin sinulle on tavallista"
+      "laterNights": "Illat venyvät myöhempään kuin sinulle on tavallista",
+      "lowSteps": "Alle 5 000 askelta useimpina viime päivinä",
+      "activitySwings": "Liikkumisesi on vaihdellut päivästä toiseen enemmän kuin sinulle on tavallista",
+      "irregularNights": "Iltasi ovat olleet epäsäännöllisempiä kuin sinulle on tavallista",
+      "restless": "Olosi on ollut levoton tai ärtynyt"
     }
   },
   "risk": {
@@ -811,15 +825,19 @@
       "belowBaseline": "Mieliala henkilökohtaisen lähtötason alapuolella",
       "lowMood": "Matala mieliala viime viikon aikana",
       "missedCheckIns": "Useita puuttuvia päivittäisiä kirjauksia",
-      "activityDrop": "Aktiivisuuden lasku edelliseen viikkoon verrattuna",
+      "activityDrop": "Aktiivisuus alle henkilökohtaisen vaihteluvälin (tasoitettu trendi, 3 viimeisestä 5 päivästä)",
       "reactionSlower": "Hitaampi reaktioaika edelliseen viikkoon verrattuna",
       "shortSleep": "Vähintään kolme yötä alle 5 tunnin unella",
       "longSleep": "Vähintään kolme päivää, joina unta vähintään 10 tuntia",
       "highAnxiety": "Potilaan ilmoittama kohonnut ahdistuneisuus",
       "perceivedUrgency": "Potilaan kokema kiireellisyys",
       "upwardDrift": "Lyhyt uni ja lisääntynyt energia tai aktiivisuus (klinikan merkintä)",
-      "homeMore": "Enemmän aikaa kotona henkilökohtaiseen lähtötasoon verrattuna",
-      "laterNights": "Näytön sammutus myöhemmin henkilökohtaiseen lähtötasoon verrattuna"
+      "homeMore": "Kotona vietetty aika yli henkilökohtaisen vaihteluvälin (tasoitettu trendi, 3 viimeisestä 5 päivästä)",
+      "laterNights": "Näytön sammutus henkilökohtaista vaihteluväliä myöhemmin (tasoitettu trendi, 3 viimeisestä 5 päivästä)",
+      "lowSteps": "Alle 5 000 askelta päivässä vähintään 5 päivänä viimeisestä 7:stä (väestötason tarkistus)",
+      "activitySwings": "Aktiivisuuden päivittäinen vaihtelu vähintään 1,5-kertainen henkilön tavalliseen verrattuna",
+      "irregularNights": "Näytön sammutusajan vaihtelu öiden välillä vähintään 1,5-kertainen henkilön tavalliseen verrattuna",
+      "restless": "Raportoitu levottomuus tai ärtyneisyys"
     },
     "quiet": "Pitkittynyt hiljaisuus · yhteydenottoviestit keskeytetty (vähintään 30 päivää)",
     "signs": {
@@ -901,5 +919,57 @@
     "recovery": "Yöaikainen palautuminen",
     "recoveryValue": "{{ms}} ms",
     "recoveryHint": "Kuinka tasainen sydämesi rytmi oli nukkuessasi. Verrataan vain siihen, mikä on sinulle tavallista."
+  },
+  "baseline": {
+    "screenTitle": "Sinulle tavallinen",
+    "title": "Näin Hiillos oppii, mikä on sinulle tavallista",
+    "linkHint": "Vaiheet ja kunkin signaalin tilanne tänään",
+    "intro": "Hiillos vertaa sinua vain itseesi. Kestää muutaman viikon oppia, mikä on sinulle tavallista.",
+    "simulated": "Tämän demon tiedot ovat simuloituja.",
+    "phasesTitle_one": "Päivä {{count}} Hiilloksen kanssa",
+    "phasesTitle_other": "Päivä {{count}} Hiilloksen kanssa",
+    "now": "nyt",
+    "phases": {
+      "0": {
+        "title": "Hoidon aikana",
+        "body": "Klinikkasi kanssa. Ei lasketa sinulle tavalliseksi, koska päivittäiset käynnit muuttavat rutiiniasi. Ei vielä tässä sovelluksessa."
+      },
+      "1": {
+        "title": "Keskiarvot",
+        "body": "Päivät 1–14. Hiillos oppii tavalliset askeleesi, unesi ja kotona vietetyn aikasi, arkipäivät ja viikonloput erikseen."
+      },
+      "2": {
+        "title": "Varhainen muutos",
+        "body": "Viikot 3–8. Tasoitettua trendiä verrataan omaan vaihteluväliisi. Säännöllisyyttä opetellaan vielä."
+      },
+      "3": {
+        "title": "Koko henkilökohtainen kuva",
+        "body": "Noin viikosta 8 alkaen. Myös säännöllisyys (kuinka paljon päiväsi eroavat) on luotettava."
+      },
+      "4": {
+        "title": "Jatkuva",
+        "body": "Sinulle tavallinen päivittyy vain jaksoista, jotka kysely on vahvistanut hyviksi."
+      }
+    },
+    "shareTitle": "Lähtökuva",
+    "share": "{{percent}} % on omaa dataasi. Loppu on yleinen lähtökohta.",
+    "referenceTitle": "Sinulle tavallinen",
+    "reference": "{{start}} – {{end}} ({{count}} päivää).",
+    "referenceRule": "Se ei koskaan vain seuraa viimeisimpiä viikkojasi, joten vaikea jakso ei voi muuttua uudeksi normaaliksesi.",
+    "learning": "Opetellaan vielä. Hiillos tarvitsee noin kolme viikkoa ennen kuin se vertaa sinua itseesi.",
+    "trendsTitle": "Kunkin signaalin tilanne",
+    "trendsHint": "Viiva on tasoitettu trendi neljältä viime viikolta. Keskikohta on sinulle tavallinen.",
+    "signals": {
+      "mood": "Mieliala",
+      "activity": "Aktiivisuus",
+      "home": "Aika kotona",
+      "screenOff": "Näytön sammutus illalla"
+    },
+    "inside": "Tavallisen vaihteluvälisi sisällä",
+    "outside_one": "Tavallisen vaihteluvälisi ulkopuolella {{count}} päivänä viimeisestä 5:stä",
+    "outside_other": "Tavallisen vaihteluvälisi ulkopuolella {{count}} päivänä viimeisestä 5:stä",
+    "variabilityOn": "Säännöllisyys on käytössä: vertailujaksosi on riittävän pitkä.",
+    "variabilityLearning": "Säännöllisyys tarvitsee noin kahdeksan viikkoa omaa dataasi. Opetellaan vielä.",
+    "note": "Anturit saavat Hiilloksen vain kysymään. Kysely ratkaisee, ja ihminen vahvistaa."
   }
 }

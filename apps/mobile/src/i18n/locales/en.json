@@ -158,7 +158,17 @@
     "suggestion": "Something that might help now",
     "alreadyDone": "You've already checked in today. If something changed, you can check in again.",
     "again": "Check in again",
-    "backToday": "Back to chat"
+    "backToday": "Back to chat",
+    "restless": {
+      "question": "How restless or irritable have you felt?",
+      "low": "Not at all",
+      "high": "Very"
+    },
+    "worry": {
+      "question": "How much have you been worrying?",
+      "low": "Hardly",
+      "high": "A lot"
+    }
   },
   "crisis": {
     "title": "You're not alone",
@@ -455,7 +465,11 @@
       "longSleep": "Several very long nights or days in bed (10 hours or more)",
       "upwardDrift": "Short sleep with unusually high energy or activity (clinic flag)",
       "homeMore": "More time at home than is usual for you",
-      "laterNights": "Evenings ending later than is usual for you"
+      "laterNights": "Evenings ending later than is usual for you",
+      "lowSteps": "Fewer than 5,000 steps on most recent days",
+      "activitySwings": "Your activity has been swinging more from day to day than is usual for you",
+      "irregularNights": "Your evenings have been more irregular than is usual for you",
+      "restless": "You've been feeling restless or irritable"
     }
   },
   "risk": {
@@ -811,15 +825,19 @@
       "belowBaseline": "Mood below the personal baseline",
       "lowMood": "Low mood during the recent week",
       "missedCheckIns": "Several missed check-ins",
-      "activityDrop": "Reduced activity compared with the previous week",
+      "activityDrop": "Activity below the personal range (smoothed trend, 3 of the last 5 days)",
       "reactionSlower": "Slower reaction times compared with the previous week",
       "shortSleep": "At least three nights with under 5 hours of sleep",
       "longSleep": "At least three days with 10 or more hours of sleep",
       "highAnxiety": "Elevated reported anxiety",
       "perceivedUrgency": "Patient-reported urgency",
       "upwardDrift": "Short sleep with increased energy or activity (clinic flag)",
-      "homeMore": "More time at home than the personal baseline",
-      "laterNights": "Later screen-off time than the personal baseline"
+      "homeMore": "Time at home above the personal range (smoothed trend, 3 of the last 5 days)",
+      "laterNights": "Screen-off time later than the personal range (smoothed trend, 3 of the last 5 days)",
+      "lowSteps": "Under 5,000 steps a day on at least 5 of the last 7 days (population check)",
+      "activitySwings": "Day-to-day activity variability at least 1.5 times the personal usual",
+      "irregularNights": "Night-to-night variability in screen-off time at least 1.5 times the personal usual",
+      "restless": "Reported restlessness or irritability"
     },
     "quiet": "Prolonged silence · outreach paused (30 days or more)",
     "signs": {
@@ -901,5 +919,57 @@
     "recovery": "Night-time recovery",
     "recoveryValue": "{{ms}} ms",
     "recoveryHint": "How steady your heart rhythm was while you slept. Compared only with your own usual."
+  },
+  "baseline": {
+    "screenTitle": "Your normal",
+    "title": "How Hiillos learns your normal",
+    "linkHint": "The phases, and where each signal stands today",
+    "intro": "Hiillos compares you only with yourself. It takes a few weeks to learn what is usual for you.",
+    "simulated": "The data in this demo is simulated.",
+    "phasesTitle_one": "Day {{count}} with Hiillos",
+    "phasesTitle_other": "Day {{count}} with Hiillos",
+    "now": "now",
+    "phases": {
+      "0": {
+        "title": "During treatment",
+        "body": "With your clinic. Not counted as your normal, because daily visits change your routine. Not in this app yet."
+      },
+      "1": {
+        "title": "Averages",
+        "body": "Days 1 to 14. Hiillos learns your usual steps, sleep and time at home, with weekdays and weekends apart."
+      },
+      "2": {
+        "title": "Early drift",
+        "body": "Weeks 3 to 8. A smoothed trend is compared with your own range. Regularity is still being learned."
+      },
+      "3": {
+        "title": "Full personal picture",
+        "body": "From about week 8. Regularity (how much your days differ) is reliable too."
+      },
+      "4": {
+        "title": "Ongoing",
+        "body": "Your usual is updated only from periods a questionnaire confirmed as well."
+      }
+    },
+    "shareTitle": "Starting picture",
+    "share": "{{percent}} % is your own data. The rest is a general starting point.",
+    "referenceTitle": "Your usual",
+    "reference": "From {{start}} to {{end}} ({{count}} days).",
+    "referenceRule": "It never just follows your latest weeks, so a hard stretch cannot become your new normal.",
+    "learning": "Still learning. Hiillos needs about three weeks before it compares you with yourself.",
+    "trendsTitle": "Where each signal stands",
+    "trendsHint": "The line is a smoothed trend of the last four weeks. The middle is your usual.",
+    "signals": {
+      "mood": "Mood",
+      "activity": "Activity",
+      "home": "Time at home",
+      "screenOff": "Evening screen-off"
+    },
+    "inside": "Inside your usual range",
+    "outside_one": "Outside your usual range on {{count}} of the last 5 days",
+    "outside_other": "Outside your usual range on {{count}} of the last 5 days",
+    "variabilityOn": "Regularity is being used: your reference is long enough.",
+    "variabilityLearning": "Regularity needs about eight weeks of your own data. Still learning.",
+    "note": "Sensors only make Hiillos ask a question. A questionnaire decides, and a person confirms."
   }
 }

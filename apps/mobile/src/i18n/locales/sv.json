@@ -158,7 +158,17 @@
     "suggestion": "Något som kan hjälpa nu",
     "alreadyDone": "Du har redan checkat in idag. Om något har ändrats kan du checka in igen.",
     "again": "Checka in igen",
-    "backToday": "Tillbaka till chatten"
+    "backToday": "Tillbaka till chatten",
+    "restless": {
+      "question": "Hur rastlös eller irriterad har du känt dig?",
+      "low": "Inte alls",
+      "high": "Mycket"
+    },
+    "worry": {
+      "question": "Hur mycket har du oroat dig?",
+      "low": "Knappt alls",
+      "high": "Mycket"
+    }
   },
   "crisis": {
     "title": "Du är inte ensam",
@@ -455,7 +465,11 @@
       "longSleep": "Flera mycket långa nätter eller dagar i sängen (10 timmar eller mer)",
       "upwardDrift": "Lite sömn med ovanligt hög energi eller aktivitet (klinikens markering)",
       "homeMore": "Mer tid hemma än vad som är vanligt för dig",
-      "laterNights": "Kvällarna slutar senare än vad som är vanligt för dig"
+      "laterNights": "Kvällarna slutar senare än vad som är vanligt för dig",
+      "lowSteps": "Färre än 5 000 steg de flesta av de senaste dagarna",
+      "activitySwings": "Din aktivitet har varierat mer från dag till dag än vad som är vanligt för dig",
+      "irregularNights": "Dina kvällar har varit mer oregelbundna än vad som är vanligt för dig",
+      "restless": "Du har känt dig rastlös eller irriterad"
     }
   },
   "risk": {
@@ -811,15 +825,19 @@
       "belowBaseline": "Stämningsläge under den personliga baslinjen",
       "lowMood": "Lågt stämningsläge under den senaste veckan",
       "missedCheckIns": "Flera uteblivna dagliga registreringar",
-      "activityDrop": "Minskad aktivitet jämfört med föregående vecka",
+      "activityDrop": "Aktivitet under det personliga intervallet (utjämnad trend, 3 av de senaste 5 dagarna)",
       "reactionSlower": "Långsammare reaktionstid jämfört med föregående vecka",
       "shortSleep": "Minst tre nätter med mindre än 5 timmars sömn",
       "longSleep": "Minst tre dagar med minst 10 timmars sömn",
       "highAnxiety": "Förhöjd ångest rapporterad av patienten",
       "perceivedUrgency": "Brådska upplevd av patienten",
       "upwardDrift": "Kort sömn med ökad energi eller aktivitet (klinikmarkering)",
-      "homeMore": "Mer tid hemma jämfört med den personliga baslinjen",
-      "laterNights": "Senare skärmavstängning jämfört med den personliga baslinjen"
+      "homeMore": "Tid hemma över det personliga intervallet (utjämnad trend, 3 av de senaste 5 dagarna)",
+      "laterNights": "Skärmen släcks senare än det personliga intervallet (utjämnad trend, 3 av de senaste 5 dagarna)",
+      "lowSteps": "Under 5 000 steg per dag minst 5 av de senaste 7 dagarna (befolkningskontroll)",
+      "activitySwings": "Aktivitetens variation från dag till dag minst 1,5 gånger personens vanliga",
+      "irregularNights": "Variationen mellan nätter i när skärmen släcks minst 1,5 gånger personens vanliga",
+      "restless": "Rapporterad rastlöshet eller irritabilitet"
     },
     "quiet": "Långvarig tystnad · kontaktmeddelanden pausade (minst 30 dagar)",
     "signs": {
@@ -901,5 +919,57 @@
     "recovery": "Nattlig återhämtning",
     "recoveryValue": "{{ms}} ms",
     "recoveryHint": "Hur jämn din hjärtrytm var medan du sov. Jämförs bara med ditt eget vanliga."
+  },
+  "baseline": {
+    "screenTitle": "Ditt vanliga",
+    "title": "Så lär sig Hiillos vad som är vanligt för dig",
+    "linkHint": "Faserna och hur varje signal ser ut i dag",
+    "intro": "Hiillos jämför dig bara med dig själv. Det tar några veckor att lära sig vad som är vanligt för dig.",
+    "simulated": "Uppgifterna i den här demon är simulerade.",
+    "phasesTitle_one": "Dag {{count}} med Hiillos",
+    "phasesTitle_other": "Dag {{count}} med Hiillos",
+    "now": "nu",
+    "phases": {
+      "0": {
+        "title": "Under behandlingen",
+        "body": "Med din klinik. Räknas inte som ditt vanliga, eftersom dagliga besök ändrar din rutin. Finns inte i den här appen än."
+      },
+      "1": {
+        "title": "Medelvärden",
+        "body": "Dag 1–14. Hiillos lär sig dina vanliga steg, din sömn och din tid hemma, med vardagar och helger var för sig."
+      },
+      "2": {
+        "title": "Tidig förändring",
+        "body": "Vecka 3–8. En utjämnad trend jämförs med ditt eget intervall. Regelbundenheten lärs fortfarande in."
+      },
+      "3": {
+        "title": "Hela den personliga bilden",
+        "body": "Från ungefär vecka 8. Även regelbundenheten (hur mycket dina dagar skiljer sig) är tillförlitlig."
+      },
+      "4": {
+        "title": "Löpande",
+        "body": "Ditt vanliga uppdateras bara från perioder som ett frågeformulär har bekräftat som bra."
+      }
+    },
+    "shareTitle": "Startbild",
+    "share": "{{percent}} % är dina egna data. Resten är en allmän startpunkt.",
+    "referenceTitle": "Ditt vanliga",
+    "reference": "Från {{start}} till {{end}} ({{count}} dagar).",
+    "referenceRule": "Det följer aldrig bara dina senaste veckor, så en tung period kan inte bli ditt nya normala.",
+    "learning": "Lär sig fortfarande. Hiillos behöver ungefär tre veckor innan det jämför dig med dig själv.",
+    "trendsTitle": "Hur varje signal ser ut",
+    "trendsHint": "Linjen är en utjämnad trend för de senaste fyra veckorna. Mitten är ditt vanliga.",
+    "signals": {
+      "mood": "Humör",
+      "activity": "Aktivitet",
+      "home": "Tid hemma",
+      "screenOff": "När skärmen släcks på kvällen"
+    },
+    "inside": "Inom ditt vanliga intervall",
+    "outside_one": "Utanför ditt vanliga intervall {{count}} av de senaste 5 dagarna",
+    "outside_other": "Utanför ditt vanliga intervall {{count}} av de senaste 5 dagarna",
+    "variabilityOn": "Regelbundenheten används: din referens är tillräckligt lång.",
+    "variabilityLearning": "Regelbundenheten behöver ungefär åtta veckor av dina egna data. Lär sig fortfarande.",
+    "note": "Sensorer får bara Hiillos att ställa en fråga. Ett frågeformulär avgör, och en människa bekräftar."
   }
 }

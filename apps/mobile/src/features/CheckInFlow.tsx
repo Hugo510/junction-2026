@@ -14,11 +14,11 @@ import { EmotionPicker } from './EmotionPicker';
 import { MoodPicker } from './MoodPicker';
 import { ReactionGame } from './ReactionGame';
 
-type Step = 'mood' | 'emotions' | 'body' | 'energy' | 'sleep' | 'game' | 'safety' | 'note';
+type Step = 'mood' | 'emotions' | 'body' | 'energy' | 'signs' | 'sleep' | 'game' | 'safety' | 'note';
 
 const STEPS: Record<'full' | 'baseline', Step[]> = {
   // Weekly check-in: the body map ("Where is your fire today?") takes the place of the feelings list.
-  full: ['mood', 'body', 'energy', 'sleep', 'game', 'safety', 'note'],
+  full: ['mood', 'body', 'energy', 'signs', 'sleep', 'game', 'safety', 'note'],
   baseline: ['mood', 'emotions', 'sleep', 'safety'],
 };
 
@@ -48,6 +48,9 @@ export function CheckInFlow({ variant, onSubmitted }: CheckInFlowProps) {
   const usualMap = useMemo(() => usualBodyMap(history), [history]);
   const [energy, setEnergy] = useState<Scale5>(3);
   const [anxiety, setAnxiety] = useState<Scale5>(2);
+  // Early signs: restlessness / irritability and worry (1 = not at all).
+  const [restlessness, setRestlessness] = useState<Scale5>(1);
+  const [worry, setWorry] = useState<Scale5>(1);
   const [sleepHours, setSleepHours] = useState(7);
   const [reaction, setReaction] = useState<ReactionAggregate | undefined>();
   const [note, setNote] = useState('');
@@ -68,6 +71,8 @@ export function CheckInFlow({ variant, onSubmitted }: CheckInFlowProps) {
         bodyMap: isEmptyBodyMap(bodyMap) ? undefined : bodyMap,
         energy,
         anxiety,
+        restlessness,
+        worry,
         sleepHours,
         reaction,
         note: note.trim() || undefined,
@@ -119,6 +124,35 @@ export function CheckInFlow({ variant, onSubmitted }: CheckInFlowProps) {
           <AppText variant="title">{t('bodyMap.title')}</AppText>
           <AppText tone="muted">{t('bodyMap.hint')}</AppText>
           <BodyMapEditor value={bodyMap} onChange={setBodyMap} usual={usualMap} />
+        </View>
+      )}
+
+      {step === 'signs' && (
+        <View style={styles.block}>
+          <AppText variant="title">{t('checkin.restless.question')}</AppText>
+          <Slider
+            label={t('checkin.restless.question')}
+            value={restlessness}
+            min={1}
+            max={5}
+            onChange={(v) => setRestlessness(v as Scale5)}
+            minLabel={t('checkin.restless.low')}
+            maxLabel={t('checkin.restless.high')}
+            formatValue={(v) => t('checkin.scaleValue', { value: v })}
+          />
+          <AppText variant="heading" style={{ marginTop: spacing.md }}>
+            {t('checkin.worry.question')}
+          </AppText>
+          <Slider
+            label={t('checkin.worry.question')}
+            value={worry}
+            min={1}
+            max={5}
+            onChange={(v) => setWorry(v as Scale5)}
+            minLabel={t('checkin.worry.low')}
+            maxLabel={t('checkin.worry.high')}
+            formatValue={(v) => t('checkin.scaleValue', { value: v })}
+          />
         </View>
       )}
 

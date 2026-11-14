@@ -115,6 +115,7 @@ function Bootstrap() {
         <Stack.Screen name="consult" options={{ presentation: 'modal', title: t('care.consult.title') }} />
         <Stack.Screen name="settings/index" options={{ title: t('settings.title') }} />
         <Stack.Screen name="privacy/index" options={{ title: t('privacy.title') }} />
+        <Stack.Screen name="baseline" options={{ title: t('baseline.screenTitle') }} />
         <Stack.Screen name="wearable" options={{ title: t('wearable.title') }} />
         <Stack.Screen name="clinician" options={{ title: t('clinician.title') }} />
         <Stack.Screen name="demo" options={{ title: t('demo.title') }} />

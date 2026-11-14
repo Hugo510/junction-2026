@@ -1,3 +1,4 @@
+import { router } from 'expo-router';
 import { View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
@@ -35,6 +36,9 @@ export function InsightsView() {
   return (
     <View style={{ gap: spacing.lg }}>
       <AppText tone="muted">{t('insights.subtitle')}</AppText>
+      <Section>
+        <ListItem title={t('baseline.title')} subtitle={t('baseline.linkHint')} chevron onPress={() => router.push('/baseline')} />
+      </Section>
       {metrics.map((m) => {
         const label = `${t('a11y.chart', { label: t(`insights.${m.key}`) })}. ${summary[m.key] ?? ''}`;
         return (

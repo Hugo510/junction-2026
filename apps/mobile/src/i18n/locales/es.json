@@ -158,7 +158,17 @@
     "suggestion": "Algo que podría ayudarte ahora",
     "alreadyDone": "Ya hiciste tu check-in de hoy. Si algo cambió, puedes hacer otro.",
     "again": "Hacer otro check-in",
-    "backToday": "Volver al chat"
+    "backToday": "Volver al chat",
+    "restless": {
+      "question": "¿Qué tanta inquietud o irritabilidad has sentido?",
+      "low": "Nada",
+      "high": "Mucha"
+    },
+    "worry": {
+      "question": "¿Qué tanto te has estado preocupando?",
+      "low": "Casi nada",
+      "high": "Mucho"
+    }
   },
   "crisis": {
     "title": "Hay ayuda para ti",
@@ -455,7 +465,11 @@
       "longSleep": "Varias noches muy largas o días en cama (10 horas o más)",
       "upwardDrift": "Poco sueño con energía o actividad inusualmente altas (indicador de la clínica)",
       "homeMore": "Más tiempo en casa de lo habitual en ti",
-      "laterNights": "Las noches terminan más tarde de lo habitual en ti"
+      "laterNights": "Las noches terminan más tarde de lo habitual en ti",
+      "lowSteps": "Menos de 5,000 pasos en la mayoría de los días recientes",
+      "activitySwings": "Tu actividad ha variado más de un día a otro de lo habitual en ti",
+      "irregularNights": "Tus noches han sido más irregulares de lo habitual en ti",
+      "restless": "Has sentido inquietud o irritabilidad"
     }
   },
   "risk": {
@@ -811,15 +825,19 @@
       "belowBaseline": "Estado de ánimo por debajo de la referencia personal",
       "lowMood": "Estado de ánimo bajo durante la semana reciente",
       "missedCheckIns": "Varios registros diarios ausentes",
-      "activityDrop": "Descenso de actividad respecto a la semana anterior",
+      "activityDrop": "Actividad por debajo del rango personal (tendencia suavizada, 3 de los últimos 5 días)",
       "reactionSlower": "Tiempo de reacción más lento respecto a la semana anterior",
       "shortSleep": "Al menos tres noches con menos de 5 horas de sueño",
       "longSleep": "Al menos tres días con 10 horas de sueño o más",
       "highAnxiety": "Ansiedad elevada comunicada por el paciente",
       "perceivedUrgency": "Urgencia percibida comunicada por el paciente",
       "upwardDrift": "Sueño corto con aumento de energía o actividad (marca clínica)",
-      "homeMore": "Más tiempo en casa respecto a la referencia personal",
-      "laterNights": "Apagado de pantalla más tardío respecto a la referencia personal"
+      "homeMore": "Tiempo en casa por encima del rango personal (tendencia suavizada, 3 de los últimos 5 días)",
+      "laterNights": "Apagado de pantalla más tardío que el rango personal (tendencia suavizada, 3 de los últimos 5 días)",
+      "lowSteps": "Menos de 5,000 pasos al día en al menos 5 de los últimos 7 días (comprobación poblacional)",
+      "activitySwings": "Variabilidad diaria de la actividad de al menos 1.5 veces la habitual de la persona",
+      "irregularNights": "Variabilidad entre noches del apagado de pantalla de al menos 1.5 veces la habitual de la persona",
+      "restless": "Inquietud o irritabilidad reportada"
     },
     "quiet": "Silencio prolongado · avisos detenidos (30 días o más)",
     "signs": {
@@ -901,5 +919,57 @@
     "recovery": "Recuperación nocturna",
     "recoveryValue": "{{ms}} ms",
     "recoveryHint": "Qué tan estable fue tu ritmo cardiaco mientras dormías. Solo se compara con lo habitual en ti."
+  },
+  "baseline": {
+    "screenTitle": "Lo habitual en ti",
+    "title": "Cómo aprende Hiillos lo habitual en ti",
+    "linkHint": "Las fases y cómo va cada señal hoy",
+    "intro": "Hiillos solo te compara contigo. Tarda unas semanas en aprender qué es lo habitual en ti.",
+    "simulated": "Los datos de esta demo son simulados.",
+    "phasesTitle_one": "Día {{count}} con Hiillos",
+    "phasesTitle_other": "Día {{count}} con Hiillos",
+    "now": "ahora",
+    "phases": {
+      "0": {
+        "title": "Durante el tratamiento",
+        "body": "Con tu clínica. No cuenta como lo habitual en ti, porque las visitas diarias cambian tu rutina. Aún no está en esta app."
+      },
+      "1": {
+        "title": "Promedios",
+        "body": "Días 1 a 14. Hiillos aprende tus pasos, sueño y tiempo en casa habituales, separando entre semana y fin de semana."
+      },
+      "2": {
+        "title": "Deriva temprana",
+        "body": "Semanas 3 a 8. Una tendencia suavizada se compara con tu propio rango. La regularidad aún se está aprendiendo."
+      },
+      "3": {
+        "title": "Imagen personal completa",
+        "body": "Desde la semana 8, aproximadamente. La regularidad (cuánto cambian tus días) también es confiable."
+      },
+      "4": {
+        "title": "Continuo",
+        "body": "Lo habitual en ti solo se actualiza con periodos que un cuestionario confirmó como buenos."
+      }
+    },
+    "shareTitle": "Punto de partida",
+    "share": "El {{percent}} % son tus propios datos. El resto es un punto de partida general.",
+    "referenceTitle": "Lo habitual en ti",
+    "reference": "Del {{start}} al {{end}} ({{count}} días).",
+    "referenceRule": "Nunca sigue solo tus últimas semanas, así una mala racha no se vuelve tu nueva normalidad.",
+    "learning": "Aún aprendiendo. Hiillos necesita unas tres semanas antes de compararte contigo.",
+    "trendsTitle": "Cómo va cada señal",
+    "trendsHint": "La línea es una tendencia suavizada de las últimas cuatro semanas. El centro es lo habitual en ti.",
+    "signals": {
+      "mood": "Ánimo",
+      "activity": "Actividad",
+      "home": "Tiempo en casa",
+      "screenOff": "Apagado de pantalla por la noche"
+    },
+    "inside": "Dentro de tu rango habitual",
+    "outside_one": "Fuera de tu rango habitual en {{count}} de los últimos 5 días",
+    "outside_other": "Fuera de tu rango habitual en {{count}} de los últimos 5 días",
+    "variabilityOn": "La regularidad ya se usa: tu referencia es lo bastante larga.",
+    "variabilityLearning": "La regularidad necesita unas ocho semanas de tus propios datos. Aún aprendiendo.",
+    "note": "Los sensores solo hacen que Hiillos pregunte. Un cuestionario decide y una persona confirma."
   }
 }
