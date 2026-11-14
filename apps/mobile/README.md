@@ -28,12 +28,33 @@ npm run i18n:check      # every locale has exactly the keys of en.json
 npx expo-doctor         # Expo dependency/config health
 ```
 
+## Chat-first experience
+
+The home screen is a **conversation with the companion** the patient chose (ChatGPT-like: plain
+companion messages, soft user bubbles, suggestion chips, composer at the bottom, ☰ side menu).
+Everything else opens *from* the chat as cards or from the menu:
+
+- **Guided check-in in the chat**: mood faces → feelings → optional note → safety question →
+  saved to the journal (same `CheckIn` model the priority score uses).
+- Free text is routed by small, transparent intents (en/fi/es/sv) to calming exercises, today's plan,
+  trends, the care team or the journal. It is a **simulated companion**, not an LLM:
+  `src/domain/chat/engine.ts` is pure and unit-tested; `GeminiCompanionService` is the future hook.
+- **Crisis language** typed anywhere (chat or journal note) or a "yes" to the safety question →
+  crisis screen + urgent alert, always.
+- When the trend looks worrying, the companion **suggests** a consultation; it never creates one.
+
+**Journal** (Duolingo/Mindspace-inspired, but kind): "days noticed" only grows (no streak that resets),
+small milestones (1, 3, 7, 14, 30 days), a monthly mood calendar, most frequent feelings (14 days)
+and every entry (from check-ins, chat or the journal itself).
+
 ## Structure
 
 ```
 app/                      Expo Router routes
+  chat.tsx                home: conversation with the companion + side menu
   (onboarding)/           start (language) → welcome → consent → companion → baseline
-  (tabs)/                 today, checkin, comfort, insights, care
+  today, checkin, comfort, insights, care   secondary screens (opened from chat/menu)
+  journal/                index (calendar, milestones, entries) and new (quick entry)
   exercise/               breathing, fireplace, fish, puzzle, move, walk
   settings/, privacy/     settings and privacy center
   crisis.tsx              crisis screen (reachable from every screen via "Need help now?")
@@ -41,7 +62,8 @@ app/                      Expo Router routes
   demo.tsx                hidden demo mode
 src/
   domain/                 pure TS (no React/RN): entities, priorityScore, riskRules,
-                          consultQueue, interventionPicker, daylight, reaction + __tests__
+                          consultQueue, interventionPicker, journal, chat/ (engine, intents),
+                          daylight, reaction + __tests__
   data/                   repositories.ts (interfaces), mock/ (AsyncStorage), api/ (stub), seed.ts
   services/               companion/ (CompanionService, Mock, Gemini stub), sensors/, haptics
   store/                  zustand: settings (persisted), data (cache over repositories), clock
@@ -64,13 +86,13 @@ Buttons: *Seed good week*, *Seed declining week*, *Trigger urgent check-in*, *Ad
 
 Suggested 2-minute script:
 
-1. *Seed good week* → Today and Insights look calm; priority is low.
-2. *Seed declining week* → mood, sleep, activity and reaction time get worse. The demo screen shows the
-   priority jump (≈ 80/100, high); Today shows the companion **suggesting** a consultation.
-3. Care → *Request a consultation* → high priority, readable reasons, 1st in line; the queue moves over time.
-4. *Advance 1 day* → missed check-ins push the score further.
-5. *Trigger urgent check-in* → crisis screen opens immediately and an urgent alert is created
-   (never enters the normal queue).
+1. *Seed good week* → back to the chat: a calm greeting; tap *Check in with me* and answer in the chat.
+2. *Seed declining week* → mood, sleep, activity and reaction time get worse; priority jumps (≈ 85/100).
+   The chat now opens with the companion **suggesting** a consultation.
+3. Tap *Request a consultation* in the chat card → high priority, readable reasons, 1st in line.
+4. Open ☰ → Journal: calendar of moods, feelings and the entry just saved from the chat.
+5. Type a crisis phrase in the chat (or *Trigger urgent check-in*) → crisis screen opens immediately
+   and an urgent alert is created (never enters the normal queue).
 
 ## Languages
 
