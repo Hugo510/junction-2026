@@ -129,7 +129,18 @@ Suggested 2-minute script:
 
 - **Priority score** (`src/domain/priorityScore.ts`): mood, two-sided sleep, activity, reaction time and, when the phone
   provides them, **time at home** and **last screen-off of the evening**. Every signal is compared with the person's own
-  baseline (days 15–60), never with other people. `signalDrift()` returns the deltas for the clinician view.
+  usual, never with other people. The method follows `docs/research/` (design choices, not validated cut-offs):
+  - **Anchored baseline** (`src/domain/baseline.ts`): the reference is the "last known well" period, the first two
+    weeks after treatment plus later two-week blocks **only when a questionnaire confirms the person was well**. It is
+    never a rolling window, so a relapse cannot become the new normal. Weekdays and weekends are kept apart.
+  - **Staged**: averages are used from week 3; variability (irregular evenings, activity swings) only from about
+    week 8 and with at least 42 reference days.
+  - **Smoothed trend** (`src/domain/drift.ts`): an EWMA control chart per signal (weight 0.2, limit 3 sigma) against
+    the person's own limit; a rule fires when the trend is outside on 3 of the last 5 days. Days without data never
+    count. Backup population check: under 5,000 steps on 5 of the last 7 days.
+  - **Early signs in the check-in**: the longer check-in asks about restlessness / irritability and about worry.
+  - **"Your normal" screen** (`app/baseline.tsx`, from Progress → Trends and from demo mode): the phases, the reference
+    period and each signal's trend, labelled as simulated data.
 - **Silence ladder** (`src/domain/outreach.ts`): 2 / 4 / 7 days, then one gentle message a week, **quiet after 30 days**.
   The clinic-only status **care ended** stops all outreach. Silence is never treated as relapse or death.
 - **Discreet notifications** (default on): previews only say "A message from Hiillos".
