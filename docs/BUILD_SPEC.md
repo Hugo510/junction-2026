@@ -1,12 +1,85 @@
 # Hiillos — build spec for the Junction demo
 
 *SISU Lab · Junction 2026 · challenge "Beyond the Clinic" (Aalto)*
-*v3.2 — ~10:30: repo check of all branches (§0), "learned" card found on the Insights screen, clinician-screen proposal for Owais (O21). v3.1 — Sat 14 Nov 2026, ~10:25: W3 status corrected against the app code (7-step check-in, sensing = activity + daylight only, no clinician screen, reach-out only on silence); new W8 four fixes, W9 sensing per person + across people, W10 clinical cleverness, W11 when a person dies, W12 optional wow; guardrails 8–9; personas v0.2 generated and checked. v3 — ~10:00: **new §W "How we win"** (vision, mission, the four criteria → four proofs, re-ranked build order, cut list, pitch skeleton). §0, §3, §4, §9, §10 updated to match. Backend found on branch `owais/backend`; `main` is still empty (see W6). v2.2 (~10:15) added the 5th persona and §13. v2.1 (~10:05) added the repo check §12. v1 was 07:40.*
-*Read §W first (3 min). The rest is the reference spec.*
+*v4 — ~10:35: **new W0 "Win strategy on one page"** — three loops (person, clinic, many people), updated vision/mission/promises, now-vs-target per criterion, must/should/could adjustments with owners, non-code adjustments, timeline to Sun 10:00. v3.2 — ~10:30: repo check of all branches (§0), "learned" card found on the Insights screen, clinician-screen proposal for Owais (O21). v3.1 — Sat 14 Nov 2026, ~10:25: W3 status corrected against the app code (7-step check-in, sensing = activity + daylight only, no clinician screen, reach-out only on silence); new W8 four fixes, W9 sensing per person + across people, W10 clinical cleverness, W11 when a person dies, W12 optional wow; guardrails 8–9; personas v0.2 generated and checked. v3 — ~10:00: **new §W "How we win"** (vision, mission, the four criteria → four proofs, re-ranked build order, cut list, pitch skeleton). §0, §3, §4, §9, §10 updated to match. Backend found on branch `owais/backend`; `main` is still empty (see W6). v2.2 (~10:15) added the 5th persona and §13. v2.1 (~10:05) added the repo check §12. v1 was 07:40.*
+*Read W0 first (2 min). The rest of §W is the reasoning; the rest of the file is the reference spec.*
 
 ---
 
 ## W. How we win
+
+### W0. Win strategy on one page (v4 — Sat 10:35)
+
+**The idea in one line (for judges):** *Hiillos is a companion that speaks first, learns what helps you, and calls the clinic only when it matters.*
+
+**Our angle against 49 teams.** Most teams will build a tracker you have to feed. Hiillos is a **guide that gives back**, built as **three closed loops**, which is the brief's own language ("sense → respond → learn"):
+
+| Loop | How often | What happens | Criteria it earns |
+|---|---|---|---|
+| **1. Person** | daily | Hiillos senses her day against *her own* normal → speaks first → one tap → one small step → learns what helps *her* | Ease · Smart sensing · Creativity |
+| **2. Clinic** | when it matters | Drift → PHQ-2/PHQ-9 → clinician screen with a one-line reason → the clinic decides (e.g. a booster review). False alarms stop at step 2 | Usefulness |
+| **3. Many people** | over time | With consent, aggregated scores only: a new person starts from what helped people like them; the clinic and the lab see what happens between discharge and relapse | Smart sensing · Usefulness (vision) |
+
+Loops 1 and 2 are **demoed live**. Loop 3 is **shown once** (Juho's "learned" card starting from a population prior, if built) and **pitched as the vision**.
+
+**Vision:** Nobody falls out of care just because they went home.
+
+**Mission:** Hiillos is an active guide that keeps people inside a closed care loop after depression treatment, so they get more out of the treatment they had, stay connected to their life and their clinic, and stay well. The clinic tells Hiillos what to watch. Hiillos learns each person's own normal and what helps them, starting from what helped people like them, speaks first with one small step when the days drift, and brings in a human only when it matters.
+
+**Three promises**
+- **To the person:** You don't have to remember Hiillos. Hiillos remembers you. One tap, one small step, and the embers never go out.
+- **To the clinic:** Only the calls that matter, each with a reason. You set what to watch; you make every decision.
+- **To the lab (the "most promising idea" prize):** a first, person-by-person picture of what happens between discharge and relapse, and which home steps help whom. *Wording to check with a mentor.*
+
+**Where we stand vs where we need to be** *(Claude's judgement from the code at 10:25; we have not seen other teams)*
+
+| Criterion | Now | After the must-fixes | What closes the gap |
+|---|---|---|---|
+| Usefulness | Medium | Strong | Clinician screen with reasons; false-alarm persona; clinic sets the early signs |
+| Ease of use | Medium-weak (7-step form) | Strong | Guiding daily moment: Hiillos speaks, one tap, one step; full check-in weekly |
+| Smart sensing | Weak (activity + daylight only; reach-out on silence only) | Medium-strong | Reach out on drift; home time + screen-off; "learned" line on home; population prior |
+| Creativity | Medium | Medium-strong | Fire as the one hero image; quiet when well; name story; optional hologram |
+
+**Solution adjustments, ranked** (owners as of 10:30; Owais is resting)
+
+| # | Must (by ~15:00) | Owner | ~h |
+|---|---|---|---|
+| M1 | Register the 5 persona files + persona picker in demo mode (unblocks the demo) | Hugo | 0.5–1 |
+| M2 | **Guiding daily moment:** Hiillos speaks first → 5-ember mood tap → one small step from the bandit. 7-step check-in becomes weekly / on "medium" | Hugo | 2 |
+| M3 | **Reach out on drift** when the score hits medium → PHQ-2 → PHQ-9 if needed; never a clinic alert from sensors alone | Uriel | 1–1.5 |
+| M4 | **Clinician screen:** 5 personas, level, top 2 reasons in plain words, last PHQ-9, lost-contact tag | Uriel | 2–3 |
+
+| # | Should (by ~19:00) | Owner | ~h |
+|---|---|---|---|
+| S1 | Schema + types for `homeMinutes`, `screenOffTime`, `phq9` → switch to `personas_extended/` (Aino's reason becomes "home time +40 %, bedtime +1h40 vs her normal") | Hugo | 1 |
+| S2 | "What helps you" top line under the fire on home | Hugo | 0.5 |
+| S3 | **Clinic sets the early signs:** 2–3 checkboxes on the clinician screen / onboarding (sleeps later, stays home, irritable…); drift reasons name *those* | Uriel | 1 |
+| S4 | **Population prior** in the bandit (`PRIOR_MEAN` per action from the other personas) → loop 3 visible | Uriel | 1 |
+| S5 | Calm lock-screen text ("A message from Hiillos"); silence ladder quiet after 30 days | Hugo | 0.5 |
+
+| # | Could (only if ahead) | Owner |
+|---|---|---|
+| C1 | Prism hologram of the fire for the booth and the pitch photo | Meg |
+| C2 | Owais's web clinician page (embeddable) | Owais |
+| C3 | Sea sounds as an action (CC0) | Hugo |
+
+**Not this weekend:** PostgreSQL, FHIR, Path C, EEG, LLM chat, real push, camera pulse, Arduino (unless hardware turns up and M1–M4 are done).
+
+**Other adjustments (not code)**
+1. **Book a mentor check today** (Ilmoniemi/Lioumis group): PHQ-2/PHQ-9 cadence and the safety question, "consider a booster review" wording, the lab ask. It improves the content *and* starts the relationship the "most promising idea" prize depends on.
+2. **Pitch built on the three loops:** name story → Aino live (loop 1 → loop 2) → Elias, the false alarm → Juho, the opposite learning → loop 3 vision → safety and ethics in one slide (not a medical device yet, synthetic data, never infers death, consent) → closing slide with the four criteria and our proofs.
+3. **Demo in English, with a two-second switch to Finnish or Swedish** to show it is built for people here.
+4. **Submission text** rewritten from W0 on Saturday evening (Friday's says "Hiilos", face tracking, bee/cat).
+5. **Deck** outside Lovable to save credits (Claude can build it as Slides).
+6. **Team energy:** Owais slept after the night; Hugo and Uriel need a sleep window tonight; Meg sleeps before the pitch. The pitcher's clarity is worth more than one more feature.
+
+**Timeline to Sun 10:00** *(pitch time and format still to confirm on the Junction schedule)*
+- **10:30–15:00** Must M1–M4 · Meg: mentor booking, PHQ-2/9 wording fi/sv/en, copy for the daily moment.
+- **15:00–19:00** Should S1–S5 · Meg: pitch script + deck draft.
+- **19:00–21:00** Merge to `main`, README, two full demo run-throughs on a phone.
+- **21:00 feature freeze.** After that only bug fixes.
+- **Evening** Meg: submission text; hologram if wanted. Owais (rested): push his code, backup demo recording.
+- **Sun 07:30–09:30** Rehearse with a stopwatch ×3, final recording, **submit by 09:30** (30 min buffer).
 
 ### W1. The situation
 

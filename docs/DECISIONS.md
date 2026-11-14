@@ -28,6 +28,8 @@
 | O19 | **When a person dies / care ends (W11):** ladder quiet after 30 days; clinic-only "care ended" status stops all outreach; neutral lock-screen text; legal check before any pitch claim. | Meg | Hugo (texts), Owais (data) |
 | O21 | **Clinician screen → Uriel, in-app demo screen** (Owais resting after working all night, 10:21). Owais's web version only as an extra if time allows. Scores must match the fixtures in `tools/synthetic/ABOUT.md`. | Meg 10:21 | Uriel |
 | O22 | **Owais, when back from rest — in order:** (1) push the check-ins / self-harm / priority-score code (GitHub has only health, auth, `/me`, last push 08:40); (2) merge both branches to `main` + README; (3) backup demo recording. The demo does not depend on the backend (app runs on local data). | Repo check 10:25 · Meg 10:21 | Owais |
+| O23 | **Win strategy v4 (spec W0):** three loops; must M1–M4 by ~15:00, should S1–S5 by ~19:00, **feature freeze 21:00**, submit by **Sun 09:30**. | Claude (spec W0) | Meg + team |
+| O24 | **Mentor check today** (Ilmoniemi/Lioumis group): PHQ-2/9 cadence + safety question, "consider a booster review" wording, the lab ask. | Claude (spec W0) | Meg |
 | O20 | **Optional wow (W12):** prism hologram of the fire (Meg) and/or Arduino ember lamp — only after the W8 fixes, 1–2 h timebox, demo never depends on it. Who has hardware? | Meg | Team |
 
 ---
