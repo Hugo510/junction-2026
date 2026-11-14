@@ -10,7 +10,8 @@ import esT from './locales/es.json';
 import fiT from './locales/fi.json';
 import svT from './locales/sv.json';
 
-export const SUPPORTED_LANGUAGES: readonly SupportedLanguage[] = ['en', 'fi', 'es', 'sv'];
+/** Display order in the language pickers: English, Finnish, Swedish, Spanish. */
+export const SUPPORTED_LANGUAGES: readonly SupportedLanguage[] = ['en', 'fi', 'sv', 'es'];
 
 const isSupported = (code: string | null | undefined): code is SupportedLanguage =>
   !!code && (SUPPORTED_LANGUAGES as readonly string[]).includes(code);

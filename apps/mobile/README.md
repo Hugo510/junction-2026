@@ -134,7 +134,7 @@ moves every date so the last day becomes "yesterday". The app never reads `groun
 
 ## Languages
 
-English (default), Suomi, Español, Svenska. Device language is detected on first launch
+English (default), Suomi, Svenska, Español. Device language is detected on first launch
 (fallback English), can be changed on the first onboarding screen and anytime in Settings
 (no restart, persisted). Dates use date-fns locales; plurals use i18next. Companion messages follow
 the active language. Finnish and Swedish texts should be reviewed by native speakers before the demo.
