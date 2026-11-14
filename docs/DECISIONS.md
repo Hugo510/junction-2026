@@ -30,6 +30,8 @@
 | O22 | **Owais, when back from rest — in order:** (1) push the check-ins / self-harm / priority-score code (GitHub has only health, auth, `/me`, last push 08:40); (2) merge both branches to `main` + README; (3) backup demo recording. The demo does not depend on the backend (app runs on local data). | Repo check 10:25 · Meg 10:21 | Owais |
 | O23 | **Win strategy v4 (spec W0):** three loops; must M1–M4 by ~15:00, should S1–S5 by ~19:00, **feature freeze 21:00**, submit by **Sun 09:30**. | Claude (spec W0) | Meg + team |
 | O24 | **Mentor check today** (Ilmoniemi/Lioumis group): PHQ-2/9 cadence + safety question, "consider a booster review" wording, the lab ask. | Claude (spec W0) | Meg |
+| O25 | **EEG:** in the clinic loop (pitch) + C4 research card on Meg's `eeg_rest_openneuro.py` (ds003478, CC0); no headset, no "EEG detects relapse" claims; ask mentors about one real minute from the booth EEG. | Meg 10:34 | Meg · Uriel |
+| O26 | **Body map S6** ("Where is your fire today?"), Aalto bodily-maps method, self-report only; replaces the emotions step in the weekly check-in. | Claude (Meg agreed 10:35) | Hugo · Claude (persona data) |
 | O20 | **Optional wow (W12):** prism hologram of the fire (Meg) and/or Arduino ember lamp — only after the W8 fixes, 1–2 h timebox, demo never depends on it. Who has hardware? | Meg | Team |
 
 ---

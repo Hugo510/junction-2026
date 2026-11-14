@@ -1,7 +1,7 @@
 # Hiillos — build spec for the Junction demo
 
 *SISU Lab · Junction 2026 · challenge "Beyond the Clinic" (Aalto)*
-*v4 — ~10:35: **new W0 "Win strategy on one page"** — three loops (person, clinic, many people), updated vision/mission/promises, now-vs-target per criterion, must/should/could adjustments with owners, non-code adjustments, timeline to Sun 10:00. v3.2 — ~10:30: repo check of all branches (§0), "learned" card found on the Insights screen, clinician-screen proposal for Owais (O21). v3.1 — Sat 14 Nov 2026, ~10:25: W3 status corrected against the app code (7-step check-in, sensing = activity + daylight only, no clinician screen, reach-out only on silence); new W8 four fixes, W9 sensing per person + across people, W10 clinical cleverness, W11 when a person dies, W12 optional wow; guardrails 8–9; personas v0.2 generated and checked. v3 — ~10:00: **new §W "How we win"** (vision, mission, the four criteria → four proofs, re-ranked build order, cut list, pitch skeleton). §0, §3, §4, §9, §10 updated to match. Backend found on branch `owais/backend`; `main` is still empty (see W6). v2.2 (~10:15) added the 5th persona and §13. v2.1 (~10:05) added the repo check §12. v1 was 07:40.*
+*v4.1 — ~10:40: EEG plan (clinic loop + C4 card on Meg's existing OpenNeuro ds003478 example), body map S6 (Aalto bodily maps). v4 — ~10:35: **new W0 "Win strategy on one page"** — three loops (person, clinic, many people), updated vision/mission/promises, now-vs-target per criterion, must/should/could adjustments with owners, non-code adjustments, timeline to Sun 10:00. v3.2 — ~10:30: repo check of all branches (§0), "learned" card found on the Insights screen, clinician-screen proposal for Owais (O21). v3.1 — Sat 14 Nov 2026, ~10:25: W3 status corrected against the app code (7-step check-in, sensing = activity + daylight only, no clinician screen, reach-out only on silence); new W8 four fixes, W9 sensing per person + across people, W10 clinical cleverness, W11 when a person dies, W12 optional wow; guardrails 8–9; personas v0.2 generated and checked. v3 — ~10:00: **new §W "How we win"** (vision, mission, the four criteria → four proofs, re-ranked build order, cut list, pitch skeleton). §0, §3, §4, §9, §10 updated to match. Backend found on branch `owais/backend`; `main` is still empty (see W6). v2.2 (~10:15) added the 5th persona and §13. v2.1 (~10:05) added the repo check §12. v1 was 07:40.*
 *Read W0 first (2 min). The rest of §W is the reasoning; the rest of the file is the reference spec.*
 
 ---
@@ -56,14 +56,18 @@ Loops 1 and 2 are **demoed live**. Loop 3 is **shown once** (Juho's "learned" ca
 | S3 | **Clinic sets the early signs:** 2–3 checkboxes on the clinician screen / onboarding (sleeps later, stays home, irritable…); drift reasons name *those* | Uriel | 1 |
 | S4 | **Population prior** in the bandit (`PRIOR_MEAN` per action from the other personas) → loop 3 visible | Uriel | 1 |
 | S5 | Calm lock-screen text ("A message from Hiillos"); silence ladder quiet after 30 days | Hugo | 0.5 |
+| S6 | **Body map "Where is your fire today?"** — paint warm / cold on a body silhouette with one finger; replaces the "emotions" step in the weekly check-in; today's map vs her own usual map. Method from Aalto: *Bodily maps of emotions*, Nummenmaa, Glerean, Hari, Hietanen, PNAS 2014, doi 10.1073/pnas.1321664111 (701 participants coloured where they felt activity increase or decrease). Self-report, **never** a diagnosis. Claude can add body maps to the 5 personas | Hugo (UI) · Claude (data) | 2–3 |
 
 | # | Could (only if ahead) | Owner |
 |---|---|---|
 | C1 | Prism hologram of the fire for the booth and the pitch photo | Meg |
 | C2 | Owais's web clinician page (embeddable) | Owais |
 | C3 | Sea sounds as an action (CC0) | Hugo |
+| C4 | **EEG card in the clinician screen ("research layer, not an alarm")**, built on Meg's existing `healthdeeptech-starter/examples/eeg_rest_openneuro.py` (OpenNeuro ds003478 "EEG: Depression rest", Cavanagh, CC0, doi 10.18112/openneuro.ds003478.v1.1.0): band power delta/theta/alpha/beta per channel, eyes closed. Meg exports 2–3 subjects to CSV on her laptop; the screen shows one as "example EEG at discharge — open research recording, not this person". Shown honestly: students aged 18–24, not post-TMS, one visit each, no relapse labels, **no validated EEG biomarker for depression** | Meg (data) · Uriel (card) |
 
-**Not this weekend:** PostgreSQL, FHIR, Path C, EEG, LLM chat, real push, camera pulse, Arduino (unless hardware turns up and M1–M4 are done).
+**Not this weekend:** PostgreSQL, FHIR, Path C, live EEG from a headset, LLM chat, real push, camera pulse, Arduino (unless hardware turns up and M1–M4 are done).
+
+**EEG, our way (decided 10:35):** a phone cannot record EEG, and the judges are the TMS–EEG experts, so we do not fake it. EEG enters **loop 2, the clinic**: the clinic's own EEG / TMS–EEG from treatment is part of her starting point, and when Hiillos sees drift at home the clinician screen can say "consider an EEG check or booster review". In the app, EEG appears only as the C4 research card from open data. Ask the mentors whether the booth's portable EEG could give us one real minute for the demo.
 
 **Other adjustments (not code)**
 1. **Book a mentor check today** (Ilmoniemi/Lioumis group): PHQ-2/PHQ-9 cadence and the safety question, "consider a booster review" wording, the lab ask. It improves the content *and* starts the relationship the "most promising idea" prize depends on.
