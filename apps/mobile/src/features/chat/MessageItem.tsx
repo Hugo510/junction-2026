@@ -38,7 +38,7 @@ export const MessageItem = memo(
     if (message.role === 'user') {
       return (
         <View style={styles.userRow}>
-          <View style={[styles.userBubble, { backgroundColor: colors.surfaceAlt }]}>
+          <View style={[styles.userBubble, { backgroundColor: colors.primarySoft }]}>
             <AppText>{text}</AppText>
           </View>
         </View>
@@ -66,7 +66,7 @@ export const MessageItem = memo(
 
 const styles = StyleSheet.create({
   userRow: { flexDirection: 'row', justifyContent: 'flex-end', paddingLeft: spacing.xxl },
-  userBubble: { borderRadius: radii.lg, paddingHorizontal: spacing.md, paddingVertical: spacing.sm, maxWidth: '100%' },
+  userBubble: { borderRadius: radii.lg, borderBottomRightRadius: radii.sm, paddingHorizontal: spacing.md, paddingVertical: spacing.sm + 2, maxWidth: '100%' },
   companionRow: { flexDirection: 'row', gap: spacing.sm, alignItems: 'flex-start' },
   companionContent: { flex: 1, gap: spacing.sm, paddingTop: 2 },
 });

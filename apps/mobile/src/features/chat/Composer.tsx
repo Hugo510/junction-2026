@@ -39,7 +39,7 @@ export function Composer({
   onPlus: () => void;
 }) {
   const { t } = useTranslation();
-  const { colors, textScale } = useTheme();
+  const { colors, textScale, font } = useTheme();
   const [text, setText] = useState('');
   const canSend = text.trim().length > 0 && !disabled;
 
@@ -69,7 +69,7 @@ export function Composer({
         onChangeText={setText}
         multiline
         maxLength={1000}
-        style={[styles.input, { color: colors.text, fontSize: 17 * textScale }]}
+        style={[styles.input, font('400'), { color: colors.text, fontSize: 17 * textScale }]}
       />
       <Pressable
         accessibilityRole="button"
@@ -78,9 +78,9 @@ export function Composer({
         disabled={!canSend}
         onPress={send}
         hitSlop={6}
-        style={[styles.send, { backgroundColor: canSend ? colors.primary : colors.border }]}
+        style={[styles.send, { backgroundColor: canSend ? colors.cta : colors.border }]}
       >
-        <Icon name="send" color={canSend ? colors.onPrimary : colors.textMuted} size={20} />
+        <Icon name="send" color={canSend ? colors.onCta : colors.textMuted} size={20} />
       </Pressable>
     </View>
   );
@@ -121,8 +121,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-end',
     marginHorizontal: spacing.md,
-    borderWidth: 1,
-    borderRadius: radii.lg + 4,
+    borderWidth: 1.5,
+    borderRadius: radii.xl,
     paddingHorizontal: spacing.xs,
     paddingVertical: spacing.xs,
     gap: spacing.sm,

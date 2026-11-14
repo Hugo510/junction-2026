@@ -530,7 +530,12 @@
     "care": "Equipo de salud",
     "settings": "Ajustes",
     "close": "Cerrar menú",
-    "progress": "Progreso"
+    "progress": "Progreso",
+    "hints": {
+      "progress": "Tu diario y tus tendencias",
+      "comfort": "Pequeñas cosas que calman",
+      "care": "Personas que te apoyan"
+    }
   },
   "emotions": {
     "calm": "En calma",

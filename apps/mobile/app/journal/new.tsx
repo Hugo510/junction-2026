@@ -16,7 +16,7 @@ import { AppText, Button, Chip, ChipGroup, Screen, radii, spacing, useTheme } fr
  */
 export default function NewJournalEntry() {
   const { t } = useTranslation();
-  const { colors, textScale } = useTheme();
+  const { colors, textScale, font } = useTheme();
   const submitCheckIn = useData((s) => s.submitCheckIn);
   const [mood, setMood] = useState<Scale5 | null>(null);
   const [emotions, setEmotions] = useState<EmotionId[]>([]);
@@ -72,9 +72,10 @@ export default function NewJournalEntry() {
           multiline
           maxLength={2000}
           style={{
+            ...font('400'),
             minHeight: 140,
-            borderWidth: 1,
-            borderRadius: radii.md,
+            borderWidth: 1.5,
+            borderRadius: radii.lg,
             padding: spacing.md,
             textAlignVertical: 'top',
             color: colors.text,

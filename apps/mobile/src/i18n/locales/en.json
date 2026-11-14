@@ -530,7 +530,12 @@
     "care": "Care team",
     "settings": "Settings",
     "close": "Close menu",
-    "progress": "Progress"
+    "progress": "Progress",
+    "hints": {
+      "progress": "Your journal and trends",
+      "comfort": "Small things that calm",
+      "care": "People who support you"
+    }
   },
   "emotions": {
     "calm": "Calm",

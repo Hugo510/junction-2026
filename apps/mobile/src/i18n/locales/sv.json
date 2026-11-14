@@ -530,7 +530,12 @@
     "care": "Vårdteam",
     "settings": "Inställningar",
     "close": "Stäng menyn",
-    "progress": "Framsteg"
+    "progress": "Framsteg",
+    "hints": {
+      "progress": "Din dagbok och dina trender",
+      "comfort": "Små saker som lugnar",
+      "care": "Människor som stöttar dig"
+    }
   },
   "emotions": {
     "calm": "Lugn",

@@ -122,14 +122,14 @@ export default function SettingsScreen() {
 /** Someone the person trusts: stays only on this phone, used by the silence ladder for one-tap contact. */
 function TrustedContactSection() {
   const { t } = useTranslation();
-  const { colors, textScale } = useTheme();
+  const { colors, textScale, font } = useTheme();
   const contact = useSettings((st) => st.trustedContact);
   const setTrustedContact = useSettings((st) => st.setTrustedContact);
   const [name, setName] = useState(contact?.name ?? '');
   const [phone, setPhone] = useState(contact?.phone ?? '');
   const changed = name.trim() !== (contact?.name ?? '') || phone.trim() !== (contact?.phone ?? '');
   const valid = name.trim().length > 0 && /[0-9]{5,}/.test(phone.replace(/\D/g, ''));
-  const inputStyle = [styles.input, { color: colors.text, borderColor: colors.border, backgroundColor: colors.background, fontSize: 17 * textScale }];
+  const inputStyle = [styles.input, font('400'), { color: colors.text, borderColor: colors.border, backgroundColor: colors.background, fontSize: 17 * textScale }];
 
   return (
     <Section title={t('settings.trusted.title')} footer={t('settings.trusted.desc')}>

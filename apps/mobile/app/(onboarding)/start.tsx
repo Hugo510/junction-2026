@@ -61,8 +61,8 @@ const styles = StyleSheet.create({
   list: { gap: spacing.sm },
   option: {
     minHeight: MIN_TOUCH + 12,
-    borderRadius: radii.md,
-    borderWidth: 1.5,
+    borderRadius: radii.lg,
+    borderWidth: 2,
     paddingHorizontal: spacing.md,
     flexDirection: 'row',
     alignItems: 'center',

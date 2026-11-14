@@ -530,7 +530,12 @@
     "care": "Hoitotiimi",
     "settings": "Asetukset",
     "close": "Sulje valikko",
-    "progress": "Edistyminen"
+    "progress": "Edistyminen",
+    "hints": {
+      "progress": "Päiväkirjasi ja kehityksesi",
+      "comfort": "Pieniä rauhoittavia hetkiä",
+      "care": "Ihmiset tukenasi"
+    }
   },
   "emotions": {
     "calm": "Rauhallinen",

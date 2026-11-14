@@ -35,7 +35,7 @@ export interface CheckInFlowProps {
 /** Step-by-step check-in: one question per screen, calm and short. */
 export function CheckInFlow({ variant, onSubmitted }: CheckInFlowProps) {
   const { t } = useTranslation();
-  const { colors, textScale } = useTheme();
+  const { colors, textScale, font } = useTheme();
   const submitCheckIn = useData((s) => s.submitCheckIn);
   const tapsAllowed = useSettings((s) => s.consents.taps);
   const steps = STEPS[variant];
@@ -213,6 +213,7 @@ export function CheckInFlow({ variant, onSubmitted }: CheckInFlowProps) {
             maxLength={500}
             style={[
               styles.input,
+              font('400'),
               { color: colors.text, borderColor: colors.border, backgroundColor: colors.surface, fontSize: 17 * textScale },
             ]}
           />

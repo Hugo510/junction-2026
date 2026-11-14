@@ -9,7 +9,7 @@ import { haptics } from '../../services/haptics';
 import { AppText, Chip, ChipGroup, spacing, useScrollLock, useTheme } from '../../ui';
 
 const WARM = '#F28C38';
-const COOL = '#7FA3CC';
+const COOL = '#6FA9CF';
 type Brush = BodyHeat | 0;
 
 /** Spoken / written summary of a map, e.g. "Warm: chest, head. Cool: left leg." */

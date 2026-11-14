@@ -33,7 +33,7 @@ export default function ProgressScreen() {
               }}
               style={[styles.segment, selected && { backgroundColor: colors.surface }]}
             >
-              <AppText variant="label" tone={selected ? 'default' : 'muted'}>
+              <AppText variant="label" tone={selected ? 'primary' : 'muted'}>
                 {t(`progress.tabs.${key}`)}
               </AppText>
             </Pressable>

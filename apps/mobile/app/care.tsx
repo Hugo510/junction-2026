@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { QueueStatus } from '../src/features/QueueStatus';
 import { formatDate } from '../src/i18n';
 import { useData } from '../src/store/data';
-import { AppText, Avatar, Button, Card, ListItem, Screen, Section, spacing } from '../src/ui';
+import { AppText, Avatar, Button, Card, FeatureCard, ListItem, Screen, Section, spacing } from '../src/ui';
 
 /** Care team (fictional) + the patient's requests, as grouped lists. */
 export default function CareScreen() {
@@ -16,7 +16,7 @@ export default function CareScreen() {
 
   return (
     <Screen footer={<Button title={t('care.requestCta')} onPress={() => router.push('/consult')} />}>
-      <AppText tone="muted">{t('care.subtitle')}</AppText>
+      <FeatureCard category="leaf" art="care" title={t('menu.care')} description={t('care.subtitle')} />
 
       {lastAlert ? (
         <Card tone="danger">

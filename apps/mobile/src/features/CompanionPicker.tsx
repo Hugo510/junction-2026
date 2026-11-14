@@ -16,7 +16,7 @@ export interface CompanionPickerProps {
 
 export function CompanionPicker({ species, name, onSpecies, onName }: CompanionPickerProps) {
   const { t } = useTranslation();
-  const { colors, textScale } = useTheme();
+  const { colors, textScale, font } = useTheme();
   return (
     <View style={{ gap: spacing.lg }}>
       <View style={styles.grid} accessibilityRole="radiogroup">
@@ -52,7 +52,7 @@ export function CompanionPicker({ species, name, onSpecies, onName }: CompanionP
           placeholder={t('onboarding.companion.namePlaceholder')}
           placeholderTextColor={colors.textMuted}
           maxLength={24}
-          style={[styles.input, { color: colors.text, borderColor: colors.border, backgroundColor: colors.surface, fontSize: 17 * textScale }]}
+          style={[styles.input, font('400'), { color: colors.text, borderColor: colors.border, backgroundColor: colors.surface, fontSize: 17 * textScale }]}
         />
       </View>
     </View>
