@@ -1,5 +1,6 @@
 from datetime import date as CalendarDate, datetime
 from enum import Enum
+from typing import Any
 from uuid import UUID
 
 from pydantic import Field
@@ -19,13 +20,22 @@ class Safety(CamelModel):
     self_harm_thoughts: bool
 
 
+class CheckInKind(str, Enum):
+    full = "full"
+    chat = "chat"
+    journal = "journal"
+
+
 class CheckInCreate(CamelModel):
     date: CalendarDate
     mood: int = Field(ge=1, le=5)
-    energy: int = Field(ge=1, le=5)
-    anxiety: int = Field(ge=1, le=5)
+    energy: int | None = Field(default=None, ge=1, le=5)
+    anxiety: int | None = Field(default=None, ge=1, le=5)
     sleep_hours: float | None = Field(default=None, ge=0, le=24)
     note: str | None = Field(default=None, max_length=1000)
+    emotions: list[str] | None = Field(default=None, max_length=20)
+    kind: CheckInKind = CheckInKind.full
+    body_map: dict[str, Any] | None = None
     reaction_game: ReactionGameResult | None = None
     safety: Safety
 

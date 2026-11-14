@@ -34,6 +34,8 @@ class SpeechRequest(CamelModel):
 
     text: str = Field(min_length=1, max_length=600)
     language: Language = Language.en
+    # Which companion is speaking ("cat", "dog", ...), so each can have its own voice.
+    companion: str | None = Field(default=None, max_length=20)
 
 
 class SpeechResponse(CamelModel):

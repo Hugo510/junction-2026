@@ -40,6 +40,9 @@ class Consents(CamelModel):
     touch_pattern: bool
     approximate_location: bool
     vibration: bool
+    care_team_after_silence: bool = False
+    # Daily totals from a connected wearable (sleep, resting heart rate). Off until connected.
+    wearable: bool = False
     updated_at: datetime | None = None
 
 
@@ -72,9 +75,11 @@ class PatientUpdate(CamelModel):
         return self
 
 class ConsentsUpdate(CamelModel):
-    """Client sends all four flags. updatedAt is set by the server."""
+    """Client sends the flags. updatedAt is set by the server."""
 
     motion: bool
     touch_pattern: bool
     approximate_location: bool
     vibration: bool
+    care_team_after_silence: bool = False
+    wearable: bool = False

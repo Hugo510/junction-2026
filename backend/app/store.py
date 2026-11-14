@@ -4,6 +4,8 @@ from datetime import date as CalendarDate
 from app.schemas.care import Alert
 from app.schemas.checkin import CheckIn
 
+from app.schemas.sensors import SensorAggregate, SensorType
+
 from app.schemas.patient import (
     AppSettings,
     Companion,
@@ -13,8 +15,8 @@ from app.schemas.patient import (
     Patient,
 )
 
-# user id -> {date -> check-in}
-CHECKINS: dict[str, dict[CalendarDate, CheckIn]] = {}
+# user id -> list of check-ins (several per day are allowed)
+CHECKINS: dict[str, list[CheckIn]] = {}
 
 # urgent alerts for the care team (filled by the self-harm rule)
 ALERTS: list[Alert] = []
@@ -41,3 +43,6 @@ PATIENTS: dict[str, Patient] = {
         created_at=datetime(2026, 11, 1, 9, 0, tzinfo=timezone.utc),
     ),
 }
+
+# user id -> {(sensor type, period start) -> aggregate}. Upserted on that key.
+SENSOR_AGGREGATES: dict[str, dict[tuple[SensorType, datetime], SensorAggregate]] = {}

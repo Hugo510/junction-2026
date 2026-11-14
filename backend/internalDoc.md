@@ -96,3 +96,143 @@ curl -s -X POST http://localhost:8000/api/v1/checkins \
   -d '{"date": "2026-11-14", "mood": 5, "energy": 5, "anxiety": 1,
        "safety": {"selfHarmThoughts": true}}'
 ```
+
+
+## New Updates After Recommended Changes
+
+Consents with the new field (should return careTeamAfterSilence: true):
+
+```bash
+curl -s -X PUT http://localhost:8000/api/v1/me/consents \
+  -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -d '{"motion": true, "touchPattern": false, "approximateLocation": false, "vibration": true, "careTeamAfterSilence": true}'
+```
+
+Minimal check-in with only the required fields (should return 201):
+```bash
+curl -s -X POST http://localhost:8000/api/v1/checkins \
+  -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -d '{"date": "2026-11-13", "mood": 4, "safety": {"selfHarmThoughts": false}}'
+```
+
+
+Full check-in with the new fields (should return 201):
+
+```bash
+curl -s -X POST http://localhost:8000/api/v1/checkins \
+  -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -d '{"date": "2026-11-12", "mood": 2, "energy": 2, "anxiety": 4, "sleepHours": 5,
+       "note": "Long day", "emotions": ["tired", "worried"], "kind": "journal",
+       "bodyMap": {"chest": 3, "stomach": 2},
+       "safety": {"selfHarmThoughts": false}}'
+```
+
+Second normal check-in on the same day (should return 409):
+
+```bash
+curl -i -X POST http://localhost:8000/api/v1/checkins \
+  -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -d '{"date": "2026-11-13", "mood": 3, "safety": {"selfHarmThoughts": false}}'
+```
+
+Self-harm report on that same day (should return 201, with risk.level = urgent and an alertId):
+
+```bash
+curl -s -X POST http://localhost:8000/api/v1/checkins \
+  -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -d '{"date": "2026-11-13", "mood": 5, "safety": {"selfHarmThoughts": true}}'
+```
+
+List check-ins (should show all entries, including two for 2026-11-13):
+
+```bash
+curl -s "http://localhost:8000/api/v1/checkins?from=2026-11-01&to=2026-11-14" \
+  -H "Authorization: Bearer $TOKEN"
+```
+
+
+## Safety reports are never overwritten (added by Hugo, NOT RUN YET)
+
+These checks follow the ones above (2026-11-13 already has one ordinary check-in and one
+self-harm report).
+
+Replace the ordinary check-in of that day (should return 200). The list must still show the
+self-harm report for 2026-11-13 with selfHarmThoughts: true:
+
+```bash
+curl -s -X PUT http://localhost:8000/api/v1/checkins/2026-11-13 \
+  -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -d '{"date": "2026-11-13", "mood": 3, "safety": {"selfHarmThoughts": false}}'
+```
+
+A day that only has a self-harm report: PUT must be refused (409), and an ordinary POST must
+be accepted (201), because the report does not count as the day's check-in:
+
+```bash
+curl -s -X POST http://localhost:8000/api/v1/checkins \
+  -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -d '{"date": "2026-11-10", "mood": 2, "safety": {"selfHarmThoughts": true}}'
+
+curl -i -X PUT http://localhost:8000/api/v1/checkins/2026-11-10 \
+  -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -d '{"date": "2026-11-10", "mood": 4, "safety": {"selfHarmThoughts": false}}'
+
+curl -i -X POST http://localhost:8000/api/v1/checkins \
+  -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -d '{"date": "2026-11-10", "mood": 4, "safety": {"selfHarmThoughts": false}}'
+```
+
+## Alerts for the care team (added by Hugo, NOT RUN YET)
+
+Log in as the doctor and list the urgent alerts (should show one per self-harm report above).
+The patient token must get 403:
+
+```bash
+DOCTOR=$(curl -s -X POST http://localhost:8000/api/v1/auth/demo-login \
+  -H "Content-Type: application/json" -d '{"role": "doctor"}' | python -c "import sys, json; print(json.load(sys.stdin)['token'])")
+
+curl -s http://localhost:8000/api/v1/alerts -H "Authorization: Bearer $DOCTOR"
+curl -i http://localhost:8000/api/v1/alerts -H "Authorization: Bearer $TOKEN"
+```
+
+## Sensor dates need a timezone (added by Hugo, NOT RUN YET)
+
+A period without a timezone should return 422 (it used to be able to return 500 when mixed
+with a value that had one). Turn the motion consent on first:
+
+```bash
+curl -i -X POST http://localhost:8000/api/v1/sensors/aggregates \
+  -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -d '{"items": [{"type": "steps", "periodStart": "2026-11-13T00:00:00Z",
+       "periodEnd": "2026-11-13T23:59:59", "value": 4200, "unit": "steps"}]}'
+```
+
+# GEMINI API Check Test
+
+## Status: llm should be true, voice false
+curl -s http://localhost:8000/api/v1/companion/status
+
+## Normal message: expect source "llm" and a short reply
+curl -s -X POST http://localhost:8000/api/v1/companion/reply \
+  -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -d '{"message": "I had a tiring day and could not sleep", "language": "fi"}'
+
+## Crisis wording: expect crisis true and source "safety". Gemini is never called.
+curl -s -X POST http://localhost:8000/api/v1/companion/reply \
+  -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -d '{"message": "I want to die", "language": "en"}'
+
+## Spanish crisis wording, to check the multilingual keywords
+curl -s -X POST http://localhost:8000/api/v1/companion/reply \
+  -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -d '{"message": "Quiero morir", "language": "es"}'
+
+
+# ELEVEN LAB Test
+
+curl -s -X POST http://localhost:8000/api/v1/companion/speech \
+  -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -d '{"text": "Take a slow breath with me.", "language": "en"}' > speech.json
+
+
+python3 -c "import json, base64; open('test.mp3','wb').write(base64.b64decode(json.load(open('speech.json'))['audioBase64']))"
