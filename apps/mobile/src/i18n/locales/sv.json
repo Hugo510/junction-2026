@@ -32,13 +32,6 @@
     "es": "Español",
     "sv": "Svenska"
   },
-  "tabs": {
-    "today": "Idag",
-    "checkin": "Incheckning",
-    "comfort": "Lugn",
-    "insights": "Översikt",
-    "care": "Vård"
-  },
   "a11y": {
     "increase": "Öka",
     "decrease": "Minska",
@@ -154,7 +147,7 @@
     "suggestion": "Något som kan hjälpa nu",
     "alreadyDone": "Du har redan checkat in idag. Om något har ändrats kan du checka in igen.",
     "again": "Checka in igen",
-    "backToday": "Tillbaka till Idag"
+    "backToday": "Tillbaka till chatten"
   },
   "crisis": {
     "title": "Du är inte ensam",
@@ -432,7 +425,8 @@
   },
   "risk": {
     "reasons": {
-      "safetyAnswer": "Säkerhetsfrågan besvarades med \"ja\""
+      "safetyAnswer": "Säkerhetsfrågan besvarades med \"ja\"",
+      "crisisLanguage": "Ord i ett meddelande tydde på att du kan vara i fara"
     }
   },
   "privacy": {
@@ -490,5 +484,123 @@
     "simulatedDate": "Simulerat datum: {{date}}",
     "priorityNow": "Prioritet nu: {{score}} / 100 ({{level}})",
     "doneToast": "Klart ✓"
+  },
+  "menu": {
+    "chat": "Chatt",
+    "today": "Din dag",
+    "journal": "Dagbok",
+    "comfort": "Lugn",
+    "insights": "Översikt",
+    "care": "Vårdteam",
+    "settings": "Inställningar",
+    "close": "Stäng menyn"
+  },
+  "emotions": {
+    "calm": "Lugn",
+    "content": "Nöjd",
+    "grateful": "Tacksam",
+    "hopeful": "Hoppfull",
+    "proud": "Stolt",
+    "tired": "Trött",
+    "sad": "Ledsen",
+    "anxious": "Orolig",
+    "irritable": "Irriterad",
+    "lonely": "Ensam",
+    "overwhelmed": "Överväldigad",
+    "numb": "Tom"
+  },
+  "chat": {
+    "placeholder": "Skriv till {{name}}…",
+    "send": "Skicka",
+    "disclaimer": "{{name}} är en stödjande följeslagare, inte en terapeut. Vid nödsituation, ring 112.",
+    "typing": "{{name}} skriver…",
+    "menu": "Öppna menyn",
+    "heroSubtitle": "Här för att lyssna, checka in med dig och hjälpa dig hitta små saker som hjälper.",
+    "quick": {
+      "checkin": "Checka in med mig",
+      "relax": "Hjälp mig slappna av",
+      "low": "Jag känner mig nere",
+      "anxious": "Jag känner mig orolig",
+      "progress": "Hur går det för mig?",
+      "care": "Prata med mitt vårdteam",
+      "plan": "Idéer för idag",
+      "skip": "Hoppa över"
+    },
+    "open": {
+      "invite": "Ska vi checka in? Det tar bara en minut.",
+      "done": "Du har redan checkat in idag. Jag finns här om du vill prata."
+    },
+    "flow": {
+      "askMood": "Hur känner du dig just nu?",
+      "askEmotions": "Vilka ord passar bäst? Välj så många du vill.",
+      "askNote": "Vill du berätta mer om det? Skriv fritt eller hoppa över.",
+      "askSafety": "En fråga vi ställer till alla: har du de senaste dagarna haft tankar på att skada dig själv?",
+      "didntGetMood": "Du kan trycka på ett ansikte eller skriva en siffra från 1 till 5.",
+      "suggestion": "Något litet som kan hjälpa:"
+    },
+    "reply": {
+      "greeting": "Hej! Jag är här. Vad skulle hjälpa just nu?",
+      "low": "Vad tråkigt att det känns tungt. Du behöver inte lösa allt idag — vi hittar en liten, snäll sak.",
+      "anxious": "Det låter obehagligt. Låt oss sakta ner tillsammans en stund.",
+      "tired": "Trötthet gör allt tyngre. Något mjukt kan hjälpa.",
+      "positive": "Vad roligt att höra! Vill du spara det här ögonblicket i din dagbok?",
+      "thanks": "Alltid. Jag finns här när du behöver.",
+      "fallback": "Tack för att du berättar. Jag är en enkel följeslagare och förstår inte allt, men jag kan hjälpa dig att anteckna hur du mår, hitta något lugnande, visa hur det går eller nå ditt vårdteam.",
+      "relax": "Här är något lugnande. Fråga igen för ett annat alternativ.",
+      "progress": "Så här ser dina senaste två veckor ut.",
+      "care": "Ditt vårdteam finns för dig. Du kan be om ett samtal — det är ditt val.",
+      "careOpen": "Du har redan en förfrågan i kön. Så här ser den ut.",
+      "plan": "Här är några små idéer för idag. Vilken som helst räknas.",
+      "crisis": "Jag är verkligen glad att du berättade. Du förtjänar hjälp nu. Ring 112 eller en krisjour. Jag har meddelat ditt vårdteam (simulerat)."
+    },
+    "card": {
+      "start": "Starta",
+      "openDay": "Öppna din dag",
+      "seeTrends": "Se alla trender",
+      "openCare": "Öppna vårdteamet",
+      "openHelp": "Fler hjälpalternativ",
+      "savedTitle": "Sparat i din dagbok",
+      "openJournal": "Öppna dagboken",
+      "fullCheckin": "Lägg till sömn och energi"
+    }
+  },
+  "journal": {
+    "title": "Dagbok",
+    "subtitle": "Lägg märke till hur du mår. Varje anteckning räknas — det finns inget fel sätt.",
+    "daysLogged_one": "{{count}} dag antecknad",
+    "daysLogged_other": "{{count}} dagar antecknade",
+    "daysLoggedHint": "Det här talet bara växer. Det gör inget att missa dagar.",
+    "milestonesTitle": "Små milstolpar",
+    "milestone": {
+      "1": "Första anteckningen",
+      "3": "3 dagar",
+      "7": "1 vecka",
+      "14": "2 veckor",
+      "30": "1 månad"
+    },
+    "unlocked": "uppnått",
+    "locked": "inte än",
+    "prevMonth": "Föregående månad",
+    "nextMonth": "Nästa månad",
+    "noEntry": "Ingen anteckning",
+    "topEmotions": "Känslor du antecknat mest (14 dagar)",
+    "noEmotions": "Inga känslor antecknade än.",
+    "entries": "Senaste anteckningar",
+    "empty": "Din dagbok är tom. Anteckna hur du mår idag eller checka in med {{name}} i chatten.",
+    "add": "Lägg till anteckning",
+    "newTitle": "Ny anteckning",
+    "moodQuestion": "Hur mår du?",
+    "emotionsQuestion": "Vad känner du?",
+    "pleasant": "Behagliga",
+    "difficult": "Svåra",
+    "noteQuestion": "Vill du skriva om det?",
+    "notePlaceholder": "Skriv fritt (frivilligt)",
+    "save": "Spara anteckning",
+    "dayTitle": "Anteckningar för {{date}}",
+    "kind": {
+      "full": "Incheckning",
+      "chat": "Chatt",
+      "journal": "Dagbok"
+    }
   }
 }

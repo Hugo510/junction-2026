@@ -32,13 +32,6 @@
     "es": "Español",
     "sv": "Svenska"
   },
-  "tabs": {
-    "today": "Today",
-    "checkin": "Check-in",
-    "comfort": "Comfort",
-    "insights": "Insights",
-    "care": "Care"
-  },
   "a11y": {
     "increase": "Increase",
     "decrease": "Decrease",
@@ -154,7 +147,7 @@
     "suggestion": "Something that might help now",
     "alreadyDone": "You've already checked in today. If something changed, you can check in again.",
     "again": "Check in again",
-    "backToday": "Back to Today"
+    "backToday": "Back to chat"
   },
   "crisis": {
     "title": "You're not alone",
@@ -432,7 +425,8 @@
   },
   "risk": {
     "reasons": {
-      "safetyAnswer": "Safety question answered \"yes\""
+      "safetyAnswer": "Safety question answered \"yes\"",
+      "crisisLanguage": "Words in a message suggested you may be at risk"
     }
   },
   "privacy": {
@@ -490,5 +484,123 @@
     "simulatedDate": "Simulated date: {{date}}",
     "priorityNow": "Priority now: {{score}} / 100 ({{level}})",
     "doneToast": "Done ✓"
+  },
+  "menu": {
+    "chat": "Chat",
+    "today": "Your day",
+    "journal": "Journal",
+    "comfort": "Comfort",
+    "insights": "Insights",
+    "care": "Care team",
+    "settings": "Settings",
+    "close": "Close menu"
+  },
+  "emotions": {
+    "calm": "Calm",
+    "content": "Content",
+    "grateful": "Grateful",
+    "hopeful": "Hopeful",
+    "proud": "Proud",
+    "tired": "Tired",
+    "sad": "Sad",
+    "anxious": "Anxious",
+    "irritable": "Irritable",
+    "lonely": "Lonely",
+    "overwhelmed": "Overwhelmed",
+    "numb": "Empty"
+  },
+  "chat": {
+    "placeholder": "Message {{name}}…",
+    "send": "Send",
+    "disclaimer": "{{name}} is a supportive companion, not a therapist. In an emergency, call 112.",
+    "typing": "{{name}} is writing…",
+    "menu": "Open menu",
+    "heroSubtitle": "Here to listen, check in with you and help you find small things that help.",
+    "quick": {
+      "checkin": "Check in with me",
+      "relax": "Help me relax",
+      "low": "I'm feeling low",
+      "anxious": "I feel anxious",
+      "progress": "How am I doing?",
+      "care": "Talk to my care team",
+      "plan": "Ideas for today",
+      "skip": "Skip"
+    },
+    "open": {
+      "invite": "Shall we check in? It only takes a minute.",
+      "done": "You've already checked in today. I'm here if you want to talk."
+    },
+    "flow": {
+      "askMood": "How are you feeling right now?",
+      "askEmotions": "Which words fit best? Pick as many as you like.",
+      "askNote": "Anything you'd like to tell me about it? Write freely, or skip.",
+      "askSafety": "One question we ask everyone: in the last few days, have you had thoughts of harming yourself?",
+      "didntGetMood": "You can tap a face, or type a number from 1 to 5.",
+      "suggestion": "Something small that might help:"
+    },
+    "reply": {
+      "greeting": "Hi! I'm here. What would help right now?",
+      "low": "I'm sorry it feels heavy. You don't have to fix everything today — let's find one small, kind thing.",
+      "anxious": "That sounds uncomfortable. Let's slow down together for a moment.",
+      "tired": "Being tired makes everything harder. Something gentle might help.",
+      "positive": "That's lovely to hear! Would you like to save this moment in your journal?",
+      "thanks": "Anytime. I'm here whenever you need me.",
+      "fallback": "Thank you for telling me. I'm a simple companion, so I can't fully understand everything — but I can help you note how you feel, find something calming, show your progress or reach your care team.",
+      "relax": "Here's something calming. Ask again for another option.",
+      "progress": "Here's how your last two weeks look.",
+      "care": "Your care team is there for you. You can ask for a chat — it's your choice.",
+      "careOpen": "You already have a request in line. Here's where it stands.",
+      "plan": "Here are a few small ideas for today. Any one of them counts.",
+      "crisis": "I'm really glad you told me. You deserve help right now. Please call 112 or a crisis line. I've let your care team know (simulated)."
+    },
+    "card": {
+      "start": "Start",
+      "openDay": "Open your day",
+      "seeTrends": "See all trends",
+      "openCare": "Open care team",
+      "openHelp": "More help options",
+      "savedTitle": "Saved to your journal",
+      "openJournal": "Open journal",
+      "fullCheckin": "Add sleep & energy"
+    }
+  },
+  "journal": {
+    "title": "Journal",
+    "subtitle": "Notice how you feel. Every entry counts — there's no wrong way.",
+    "daysLogged_one": "{{count}} day noticed",
+    "daysLogged_other": "{{count}} days noticed",
+    "daysLoggedHint": "This number only grows. Missing days is okay.",
+    "milestonesTitle": "Small milestones",
+    "milestone": {
+      "1": "First entry",
+      "3": "3 days",
+      "7": "1 week",
+      "14": "2 weeks",
+      "30": "1 month"
+    },
+    "unlocked": "reached",
+    "locked": "not yet",
+    "prevMonth": "Previous month",
+    "nextMonth": "Next month",
+    "noEntry": "No entry",
+    "topEmotions": "Feelings you noted most (14 days)",
+    "noEmotions": "No feelings noted yet.",
+    "entries": "Recent entries",
+    "empty": "Your journal is empty. Add how you feel today, or check in with {{name}} in the chat.",
+    "add": "Add entry",
+    "newTitle": "New entry",
+    "moodQuestion": "How do you feel?",
+    "emotionsQuestion": "What are you feeling?",
+    "pleasant": "Pleasant",
+    "difficult": "Difficult",
+    "noteQuestion": "Want to write about it?",
+    "notePlaceholder": "Write freely (optional)",
+    "save": "Save entry",
+    "dayTitle": "Entries for {{date}}",
+    "kind": {
+      "full": "Check-in",
+      "chat": "Chat",
+      "journal": "Journal"
+    }
   }
 }

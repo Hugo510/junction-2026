@@ -32,13 +32,6 @@
     "es": "Español",
     "sv": "Svenska"
   },
-  "tabs": {
-    "today": "Tänään",
-    "checkin": "Kuulumiset",
-    "comfort": "Rauhoitu",
-    "insights": "Kehitys",
-    "care": "Hoito"
-  },
   "a11y": {
     "increase": "Lisää",
     "decrease": "Vähennä",
@@ -154,7 +147,7 @@
     "suggestion": "Jotain, mikä voisi auttaa nyt",
     "alreadyDone": "Olet jo kertonut tämän päivän kuulumiset. Jos jokin muuttui, voit tehdä sen uudelleen.",
     "again": "Kerro kuulumiset uudelleen",
-    "backToday": "Takaisin Tänään-näkymään"
+    "backToday": "Takaisin keskusteluun"
   },
   "crisis": {
     "title": "Et ole yksin",
@@ -432,7 +425,8 @@
   },
   "risk": {
     "reasons": {
-      "safetyAnswer": "Turvallisuuskysymykseen vastattiin \"kyllä\""
+      "safetyAnswer": "Turvallisuuskysymykseen vastattiin \"kyllä\"",
+      "crisisLanguage": "Viestin sanat viittasivat siihen, että saatat olla vaarassa"
     }
   },
   "privacy": {
@@ -490,5 +484,123 @@
     "simulatedDate": "Simuloitu päivä: {{date}}",
     "priorityNow": "Kiireellisyys nyt: {{score}} / 100 ({{level}})",
     "doneToast": "Valmis ✓"
+  },
+  "menu": {
+    "chat": "Keskustelu",
+    "today": "Päiväsi",
+    "journal": "Päiväkirja",
+    "comfort": "Rauhoitu",
+    "insights": "Kehitys",
+    "care": "Hoitotiimi",
+    "settings": "Asetukset",
+    "close": "Sulje valikko"
+  },
+  "emotions": {
+    "calm": "Rauhallinen",
+    "content": "Tyytyväinen",
+    "grateful": "Kiitollinen",
+    "hopeful": "Toiveikas",
+    "proud": "Ylpeä",
+    "tired": "Väsynyt",
+    "sad": "Surullinen",
+    "anxious": "Ahdistunut",
+    "irritable": "Ärtynyt",
+    "lonely": "Yksinäinen",
+    "overwhelmed": "Kuormittunut",
+    "numb": "Tyhjä"
+  },
+  "chat": {
+    "placeholder": "Kirjoita {{name}}lle…",
+    "send": "Lähetä",
+    "disclaimer": "{{name}} on tukeva kumppani, ei terapeutti. Hätätilanteessa soita 112.",
+    "typing": "{{name}} kirjoittaa…",
+    "menu": "Avaa valikko",
+    "heroSubtitle": "Täällä kuuntelemassa, kysymässä kuulumisia ja auttamassa löytämään pieniä asioita, jotka auttavat.",
+    "quick": {
+      "checkin": "Kerrotaan kuulumiset",
+      "relax": "Auta minua rentoutumaan",
+      "low": "Mieleni on maassa",
+      "anxious": "Minua ahdistaa",
+      "progress": "Miten minulla menee?",
+      "care": "Puhu hoitotiimini kanssa",
+      "plan": "Ideoita tälle päivälle",
+      "skip": "Ohita"
+    },
+    "open": {
+      "invite": "Kerrotaanko kuulumiset? Se vie vain minuutin.",
+      "done": "Olet jo kertonut tämän päivän kuulumiset. Olen täällä, jos haluat jutella."
+    },
+    "flow": {
+      "askMood": "Miltä sinusta tuntuu juuri nyt?",
+      "askEmotions": "Mitkä sanat sopivat parhaiten? Valitse niin monta kuin haluat.",
+      "askNote": "Haluatko kertoa siitä lisää? Kirjoita vapaasti tai ohita.",
+      "askSafety": "Kysymys, jonka kysymme kaikilta: onko sinulla viime päivinä ollut ajatuksia itsesi vahingoittamisesta?",
+      "didntGetMood": "Voit napauttaa kasvoja tai kirjoittaa numeron 1–5.",
+      "suggestion": "Jotain pientä, mikä voisi auttaa:"
+    },
+    "reply": {
+      "greeting": "Hei! Olen tässä. Mikä auttaisi juuri nyt?",
+      "low": "Ikävää, että olo on raskas. Kaikkea ei tarvitse ratkaista tänään — etsitään yksi pieni, lempeä asia.",
+      "anxious": "Se kuulostaa epämukavalta. Hidastetaan hetkeksi yhdessä.",
+      "tired": "Väsymys tekee kaikesta raskaampaa. Jokin lempeä voisi auttaa.",
+      "positive": "Ihana kuulla! Haluatko tallentaa tämän hetken päiväkirjaasi?",
+      "thanks": "Milloin vain. Olen täällä aina kun tarvitset.",
+      "fallback": "Kiitos, että kerroit. Olen yksinkertainen kumppani enkä ymmärrä kaikkea, mutta voin auttaa kirjaamaan tunteesi, löytämään jotain rauhoittavaa, näyttämään kehityksesi tai ottamaan yhteyttä hoitotiimiisi.",
+      "relax": "Tässä jotain rauhoittavaa. Pyydä uudelleen, niin näytän toisen vaihtoehdon.",
+      "progress": "Tältä kaksi viime viikkoasi näyttävät.",
+      "care": "Hoitotiimisi on tukenasi. Voit pyytää keskustelua — valinta on sinun.",
+      "careOpen": "Sinulla on jo pyyntö jonossa. Tässä sen tilanne.",
+      "plan": "Tässä muutama pieni idea tälle päivälle. Mikä tahansa niistä riittää.",
+      "crisis": "Olen todella iloinen, että kerroit. Ansaitset apua heti. Soita 112 tai kriisipuhelimeen. Ilmoitin hoitotiimillesi (simuloitu)."
+    },
+    "card": {
+      "start": "Aloita",
+      "openDay": "Avaa päiväsi",
+      "seeTrends": "Näytä kaikki kehitystiedot",
+      "openCare": "Avaa hoitotiimi",
+      "openHelp": "Lisää apua",
+      "savedTitle": "Tallennettu päiväkirjaan",
+      "openJournal": "Avaa päiväkirja",
+      "fullCheckin": "Lisää uni ja energia"
+    }
+  },
+  "journal": {
+    "title": "Päiväkirja",
+    "subtitle": "Huomaa, miltä sinusta tuntuu. Jokainen merkintä on tärkeä — väärää tapaa ei ole.",
+    "daysLogged_one": "{{count}} päivä kirjattu",
+    "daysLogged_other": "{{count}} päivää kirjattu",
+    "daysLoggedHint": "Tämä luku vain kasvaa. Päivien väliin jääminen on ihan okei.",
+    "milestonesTitle": "Pieniä virstanpylväitä",
+    "milestone": {
+      "1": "Ensimmäinen merkintä",
+      "3": "3 päivää",
+      "7": "1 viikko",
+      "14": "2 viikkoa",
+      "30": "1 kuukausi"
+    },
+    "unlocked": "saavutettu",
+    "locked": "ei vielä",
+    "prevMonth": "Edellinen kuukausi",
+    "nextMonth": "Seuraava kuukausi",
+    "noEntry": "Ei merkintää",
+    "topEmotions": "Useimmin kirjaamasi tunteet (14 päivää)",
+    "noEmotions": "Tunteita ei ole vielä kirjattu.",
+    "entries": "Viimeisimmät merkinnät",
+    "empty": "Päiväkirjasi on tyhjä. Kirjaa tämän päivän tunteesi tai kerro kuulumisesi {{name}}lle keskustelussa.",
+    "add": "Lisää merkintä",
+    "newTitle": "Uusi merkintä",
+    "moodQuestion": "Miltä sinusta tuntuu?",
+    "emotionsQuestion": "Mitä tunnet?",
+    "pleasant": "Miellyttävät",
+    "difficult": "Vaikeat",
+    "noteQuestion": "Haluatko kirjoittaa siitä?",
+    "notePlaceholder": "Kirjoita vapaasti (vapaaehtoinen)",
+    "save": "Tallenna merkintä",
+    "dayTitle": "Merkinnät: {{date}}",
+    "kind": {
+      "full": "Kuulumiset",
+      "chat": "Keskustelu",
+      "journal": "Päiväkirja"
+    }
   }
 }
