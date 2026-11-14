@@ -8,9 +8,11 @@
     "scheme": "hiillos",
     "userInterfaceStyle": "automatic",
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.sisulab.hiillos"
     },
     "android": {
+      "package": "com.sisulab.hiillos",
       "adaptiveIcon": {
         "backgroundColor": "#F7F7F5",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
