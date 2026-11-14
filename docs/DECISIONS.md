@@ -38,6 +38,12 @@
 
 ## Sat 14 Nov 2026
 
+**Done (Hugo 10:58)**
+- **M1 done:** the 5 personas v0.3 are in the app (`apps/mobile/assets/personas/<id>/core.json`) and load from the persona picker; all pass the loader. Hugo's tests match `tools/synthetic/ABOUT.md` for demo day (Aino 70 high with `hasPhqConcern` true; Sara 25 low with reconnect; Leena, Juho, Elias 0; walks first for Aino, fireplace first for Juho).
+- **`npm run personas:sync`** copies the files from `tools/synthetic/personas/` and **refuses any file without `"synthetic": true`**.
+- **S2 done** ("what helps you" under the fire, five-ember mood tap) and S1 types done.
+- **Hugo next:** full run on a real phone in Expo Go → S5 calm lock-screen text + silence ladder quiet after 30 days.
+
 **Team logistics (Meg 10:53)**
 - Meg is resting until 13:00 (sleep debt after the night). The team meets in person at Junction at 13:00 (lunch).
 
