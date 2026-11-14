@@ -51,17 +51,25 @@ export const useBackend = create<BackendStore>()((set, get) => ({
   mirrorCheckIn: (checkIn) => {
     if (!backendConfigured) return;
     void (async () => {
-      const body = toBackendCheckIn(checkIn);
-      try {
+      const send = async (body: ReturnType<typeof toBackendCheckIn>) => {
         try {
           await api('/checkins', { method: 'POST', body });
         } catch (e) {
-          // One check-in per day on the server: a second one (e.g. a safety answer later
-          // the same day) replaces it, so a safety report is never dropped.
+          // A second ordinary check-in on the same day replaces the first (the server accepts a
+          // safety report directly; this also covers an older server that answers 409 to it).
           if (!(e instanceof ApiError) || e.status !== 409) throw e;
           await api(`/checkins/${body.date}`, { method: 'PUT', body });
         }
-        set({ state: 'online', lastMirrored: body.date });
+      };
+      try {
+        try {
+          await send(toBackendCheckIn(checkIn));
+        } catch (e) {
+          // An older server still requires energy and anxiety: retry once with the midpoint.
+          if (!(e instanceof ApiError) || e.status !== 422) throw e;
+          await send(toBackendCheckIn(checkIn, { legacy: true }));
+        }
+        set({ state: 'online', lastMirrored: checkIn.date });
       } catch {
         set({ state: 'offline' });
       }

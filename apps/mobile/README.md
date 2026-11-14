@@ -133,10 +133,12 @@ optional things (copy `.env.example` to `.env`; the URL is the only value, never
 EXPO_PUBLIC_API_URL=https://<your-modal-app>.modal.run
 ```
 
-- **Mirror ("one live call")**: each check-in and the four sensor consents are copied to the backend
-  (`src/store/backend.ts`). Numbers only: notes, feelings and the body map never leave the phone
-  (`src/data/api/mapping.ts`, tested). A second check-in on the same day replaces the first, so a safety
-  answer is never dropped. Demo mode shows the connection state.
+- **Mirror ("one live call")**: each check-in and the consents (four sensors + contact after silence) are
+  copied to the backend (`src/store/backend.ts`). Numbers and the entry kind only: notes, feelings and the
+  body map never leave the phone, even though the backend has optional fields for them
+  (`src/data/api/mapping.ts`, tested). Energy and anxiety are sent only when the person answered them. The
+  server accepts a safety report even when the day already has a check-in; an ordinary second check-in
+  replaces the first. Demo mode shows the connection state.
 - **AI replies (opt-in, off by default)**: Privacy → *AI replies in the chat*. Only free text the built-in
   companion has no specific answer for is sent, after the crisis rule on the phone has let it through; the
   server runs the same fixed rule again before the model. No network, no key or a slow model → the built-in

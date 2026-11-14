@@ -1,12 +1,15 @@
-import type { CheckIn } from '../../domain/entities';
+import type { CheckIn, CheckInKind } from '../../domain/entities';
 
 /** Body of POST /api/v1/checkins on our backend (camelCase, see backend/app/schemas/checkin.py). */
 export interface BackendCheckIn {
   date: string;
   mood: number;
-  energy: number;
-  anxiety: number;
+  /** Optional since the backend's 14 Nov contract; sent only when the person answered it. */
+  energy?: number;
+  anxiety?: number;
   sleepHours?: number;
+  /** Where the entry came from (full form, chat or journal). */
+  kind: CheckInKind;
   reactionGame?: { rounds: number; meanMs: number; sdMs: number; accuracy: number };
   safety: { selfHarmThoughts: boolean };
 }
@@ -17,25 +20,33 @@ export interface BackendConsents {
   touchPattern: boolean;
   approximateLocation: boolean;
   vibration: boolean;
+  careTeamAfterSilence: boolean;
 }
 
-/** The backend requires energy and anxiety; the one-tap daily moment has neither. */
+/** Midpoint used only for an older server that still requires energy and anxiety. */
 export const NEUTRAL_SCALE = 3;
 
 /**
  * App check-in → backend check-in.
  *
- * Privacy: free text (the note) NEVER leaves the phone, and neither do feelings or the body map.
- * Only numbers the server needs to keep its own queue in step are sent.
+ * Privacy: free text (the note), feelings and the body map NEVER leave the phone, even though
+ * the backend now has optional fields for them. Only the numbers the server needs are sent.
+ *
+ * `legacy` = fill energy/anxiety with the midpoint, for a server on the old contract that
+ * rejects a check-in without them (the one-tap daily moment has neither). The current
+ * contract makes them optional, so by default nothing is invented.
  */
-export function toBackendCheckIn(c: CheckIn): BackendCheckIn {
+export function toBackendCheckIn(c: CheckIn, { legacy = false }: { legacy?: boolean } = {}): BackendCheckIn {
   const body: BackendCheckIn = {
     date: c.date,
     mood: c.mood,
-    energy: c.energy ?? NEUTRAL_SCALE,
-    anxiety: c.anxiety ?? NEUTRAL_SCALE,
+    kind: c.kind ?? 'full',
     safety: { selfHarmThoughts: c.safetyConcern },
   };
+  const energy = c.energy ?? (legacy ? NEUTRAL_SCALE : undefined);
+  const anxiety = c.anxiety ?? (legacy ? NEUTRAL_SCALE : undefined);
+  if (energy !== undefined) body.energy = energy;
+  if (anxiety !== undefined) body.anxiety = anxiety;
   if (typeof c.sleepHours === 'number') body.sleepHours = Math.min(24, Math.max(0, c.sleepHours));
   if (c.reaction && c.reaction.rounds >= 1) {
     body.reactionGame = {
@@ -48,6 +59,12 @@ export function toBackendCheckIn(c: CheckIn): BackendCheckIn {
   return body;
 }
 
-export function toBackendConsents(c: { movement: boolean; taps: boolean; location: boolean; vibration: boolean }): BackendConsents {
-  return { motion: c.movement, touchPattern: c.taps, approximateLocation: c.location, vibration: c.vibration };
+export function toBackendConsents(c: { movement: boolean; taps: boolean; location: boolean; vibration: boolean; careTeamAfterSilence?: boolean }): BackendConsents {
+  return {
+    motion: c.movement,
+    touchPattern: c.taps,
+    approximateLocation: c.location,
+    vibration: c.vibration,
+    careTeamAfterSilence: !!c.careTeamAfterSilence,
+  };
 }

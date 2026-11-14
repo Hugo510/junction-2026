@@ -112,21 +112,31 @@ describe('backend mirror mapping', () => {
   it('never sends free text, feelings or the body map', () => {
     const body = toBackendCheckIn({ ...base, bodyMap: { chest: 1 } });
     expect(JSON.stringify(body)).not.toContain('private words');
-    expect(Object.keys(body).sort()).toEqual(['anxiety', 'date', 'energy', 'mood', 'safety']);
+    expect(Object.keys(body).sort()).toEqual(['date', 'kind', 'mood', 'safety']);
+    expect(body).not.toHaveProperty('note');
+    expect(body).not.toHaveProperty('emotions');
+    expect(body).not.toHaveProperty('bodyMap');
   });
 
-  it('keeps the safety answer and fills the fields the server requires', () => {
-    expect(toBackendCheckIn(base)).toEqual({ date: TODAY, mood: 2, energy: 3, anxiety: 3, safety: { selfHarmThoughts: true } });
-    const full = toBackendCheckIn({ ...base, energy: 1, anxiety: 5, sleepHours: 30, reaction: { meanMs: 400, sdMs: 50, accuracy: 0.9, rounds: 8 } });
-    expect(full).toMatchObject({ energy: 1, anxiety: 5, sleepHours: 24, reactionGame: { rounds: 8, meanMs: 400, sdMs: 50, accuracy: 0.9 } });
+  it('keeps the safety answer and does not invent energy or anxiety', () => {
+    expect(toBackendCheckIn(base)).toEqual({ date: TODAY, mood: 2, kind: 'full', safety: { selfHarmThoughts: true } });
+    const full = toBackendCheckIn({ ...base, kind: 'chat', energy: 1, anxiety: 5, sleepHours: 30, reaction: { meanMs: 400, sdMs: 50, accuracy: 0.9, rounds: 8 } });
+    expect(full).toMatchObject({ kind: 'chat', energy: 1, anxiety: 5, sleepHours: 24, reactionGame: { rounds: 8, meanMs: 400, sdMs: 50, accuracy: 0.9 } });
   });
 
-  it('maps the four sensor consents and nothing else', () => {
-    expect(toBackendConsents({ movement: true, taps: false, location: true, vibration: false })).toEqual({
+  it('fills the midpoint only for an older server that requires both fields', () => {
+    expect(toBackendCheckIn(base, { legacy: true })).toMatchObject({ energy: 3, anxiety: 3 });
+    expect(toBackendCheckIn({ ...base, energy: 5 }, { legacy: true })).toMatchObject({ energy: 5, anxiety: 3 });
+  });
+
+  it('maps the sensor consents and the contact-after-silence consent', () => {
+    expect(toBackendConsents({ movement: true, taps: false, location: true, vibration: false, careTeamAfterSilence: true })).toEqual({
       motion: true,
       touchPattern: false,
       approximateLocation: true,
       vibration: false,
+      careTeamAfterSilence: true,
     });
+    expect(toBackendConsents({ movement: false, taps: false, location: false, vibration: false }).careTeamAfterSilence).toBe(false);
   });
 });
