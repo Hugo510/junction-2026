@@ -32,11 +32,17 @@
 | O26 | **Body map S6** ("Where is your fire today?"), Aalto bodily-maps method, self-report only; replaces the emotions step in the weekly check-in. | Claude (Meg agreed 10:35) | Hugo · Claude (persona data) |
 | O27 | **Who meets the challenge partner (Aalto TMS group) today?** Proposal: Meg (domain, mentor check O24, the lab ask) + one builder (Uriel — clinician view questions); the others keep building. Times: check the Junction app/Discord. | Claude 10:55 | Meg |
 | O28 | **PHQ-9 wording in fi / sv / es:** Hugo wrote the nine items himself in `apps/mobile/src/i18n/locales/*.json` (`phq.items`). Check against the officially validated translations before the demo (PHQ instruments are free to use; use the published wording, not our own). | Claude 10:55 | Meg (fi, sv) |
+| O29 | **Pitch frame from *Radikaalit ratkaisut* (Mero & Ojanperä):** W7.1 optional line on why people fall back (feed, pressure, loneliness, fragmented care) and W7.5 "Hiillos is the follow-up loop of a one-door system" (their Mieli 360 idea; their recovery story = our loop). Research: `docs/research/sources_of_ill_being.md`. | Meg 11:10 | Meg (pitch) |
+| O30 | **C6 wind-down small step:** "Phone out of the bedroom tonight" in the action menu, offered only when screen-off drifts later than her own normal; no content tracking; only if trivial (~15 min). | Claude 11:15 (Meg asked for solution additions) | Hugo |
+| O31 | **Check the book's numbers before any slide** (≈€11 bn/yr ≈5% GDP, 1.5 M youth visits 2023, >40% of disability pensions) at THL / OECD / STM. Until then the pitch says "billions a year" without a figure. | Claude 11:15 | Meg |
 | O20 | **Optional wow (W12) — kept, not dropped (Meg 10:36):** prism hologram of the fire (C1, Meg) and Arduino ember lamp (C5) — after M1–M4, 1–2 h cap each, demo never depends on them. Who has hardware? | Meg | Team |
 
 ---
 
 ## Sat 14 Nov 2026
+
+**Added (11:15, Meg)**
+- Research note `docs/research/sources_of_ill_being.md`: why people fall ill (digital environment, pressure, family strain, loneliness, inequality, fragmented services; girls inward / boys outward) and the book's one-door "Mieli 360" solution. **Framing source, not evidence.** Spec v4.6 adds it to the pitch (proposals O29–O31). Build plan M1–M4 / S1–S6 unchanged.
 
 **Done (Hugo 10:58)**
 - **M1 done:** the 5 personas v0.3 are in the app (`apps/mobile/assets/personas/<id>/core.json`) and load from the persona picker; all pass the loader. Hugo's tests match `tools/synthetic/ABOUT.md` for demo day (Aino 70 high with `hasPhqConcern` true; Sara 25 low with reconnect; Leena, Juho, Elias 0; walks first for Aino, fireplace first for Juho).

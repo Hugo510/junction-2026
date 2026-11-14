@@ -1,7 +1,7 @@
 # Hiillos — build spec for the Junction demo
 
 *SISU Lab · Junction 2026 · challenge "Beyond the Clinic" (Aalto)*
-*v4.5 — ~11:00: M1 and S2 done (Hugo 10:45/10:54); Hugo next: real-phone run in Expo Go, then S5. v4.4 — ~10:55: repo check 10:50 — Hugo shipped M2 (one-tap daily moment), M3 (drift reach-out with PHQ-2 → PHQ-9) and the schema fields (S1); persona picker built; personas regenerated in his new format (v0.3). v4.3 — ~10:50: Uriel confirmed the clinician view (M4). v4.2 — ~10:45: W0 now lists **every** agreed idea and where it lives (nothing dropped): hologram C1 + ember lamp C5 (W12), care-ended status in S5 (W11), booster/EEG-check line in M4. v4.1 — ~10:40: EEG plan (clinic loop + C4 card on Meg's existing OpenNeuro ds003478 example), body map S6 (Aalto bodily maps). v4 — ~10:35: **new W0 "Win strategy on one page"** — three loops (person, clinic, many people), updated vision/mission/promises, now-vs-target per criterion, must/should/could adjustments with owners, non-code adjustments, timeline to Sun 10:00. v3.2 — ~10:30: repo check of all branches (§0), "learned" card found on the Insights screen, clinician-screen proposal for Owais (O21). v3.1 — Sat 14 Nov 2026, ~10:25: W3 status corrected against the app code (7-step check-in, sensing = activity + daylight only, no clinician screen, reach-out only on silence); new W8 four fixes, W9 sensing per person + across people, W10 clinical cleverness, W11 when a person dies, W12 optional wow; guardrails 8–9; personas v0.2 generated and checked. v3 — ~10:00: **new §W "How we win"** (vision, mission, the four criteria → four proofs, re-ranked build order, cut list, pitch skeleton). §0, §3, §4, §9, §10 updated to match. Backend found on branch `owais/backend`; `main` is still empty (see W6). v2.2 (~10:15) added the 5th persona and §13. v2.1 (~10:05) added the repo check §12. v1 was 07:40.*
+*v4.6 — ~11:15: **why people fall ill + one-door frame** added from *Radikaalit ratkaisut* (Mero & Ojanperä), research in `docs/research/sources_of_ill_being.md`: pitch W7.1 and W7.5, optional wind-down step C6, §8, open O29–O31. No change to M1–M4 or S1–S6. v4.5 — ~11:00: M1 and S2 done (Hugo 10:45/10:54); Hugo next: real-phone run in Expo Go, then S5. v4.4 — ~10:55: repo check 10:50 — Hugo shipped M2 (one-tap daily moment), M3 (drift reach-out with PHQ-2 → PHQ-9) and the schema fields (S1); persona picker built; personas regenerated in his new format (v0.3). v4.3 — ~10:50: Uriel confirmed the clinician view (M4). v4.2 — ~10:45: W0 now lists **every** agreed idea and where it lives (nothing dropped): hologram C1 + ember lamp C5 (W12), care-ended status in S5 (W11), booster/EEG-check line in M4. v4.1 — ~10:40: EEG plan (clinic loop + C4 card on Meg's existing OpenNeuro ds003478 example), body map S6 (Aalto bodily maps). v4 — ~10:35: **new W0 "Win strategy on one page"** — three loops (person, clinic, many people), updated vision/mission/promises, now-vs-target per criterion, must/should/could adjustments with owners, non-code adjustments, timeline to Sun 10:00. v3.2 — ~10:30: repo check of all branches (§0), "learned" card found on the Insights screen, clinician-screen proposal for Owais (O21). v3.1 — Sat 14 Nov 2026, ~10:25: W3 status corrected against the app code (7-step check-in, sensing = activity + daylight only, no clinician screen, reach-out only on silence); new W8 four fixes, W9 sensing per person + across people, W10 clinical cleverness, W11 when a person dies, W12 optional wow; guardrails 8–9; personas v0.2 generated and checked. v3 — ~10:00: **new §W "How we win"** (vision, mission, the four criteria → four proofs, re-ranked build order, cut list, pitch skeleton). §0, §3, §4, §9, §10 updated to match. Backend found on branch `owais/backend`; `main` is still empty (see W6). v2.2 (~10:15) added the 5th persona and §13. v2.1 (~10:05) added the repo check §12. v1 was 07:40.*
 *Read W0 first (2 min). The rest of §W is the reasoning; the rest of the file is the reference spec.*
 
 ---
@@ -64,6 +64,7 @@ Loops 1 and 2 are **demoed live**. Loop 3 is **shown once** (Juho's "learned" ca
 | C5 | **Ember lamp (W12)** — Arduino + LED glowing with self-care; light or motion sensor = a real sensor in the home (brief's "smart home" direction). Only if someone has the hardware; 1–2 h cap; the demo never depends on it | whoever has the hardware |
 | C2 | Owais's web clinician page (embeddable) | Owais |
 | C3 | Sea sounds as an action (CC0) | Hugo |
+| C6 | **Wind-down small step** *(proposal O30)*: add "Phone out of the bedroom tonight" to the action menu, offered **only** when screen-off has drifted later than her own normal; "no thanks" always fine; never reads what she watches. Config + one line of copy, ~15 min, only if trivial | Hugo · Meg (copy) |
 | C4 | **EEG card in the clinician screen ("research layer, not an alarm")**, built on Meg's existing `healthdeeptech-starter/examples/eeg_rest_openneuro.py` (OpenNeuro ds003478 "EEG: Depression rest", Cavanagh, CC0, doi 10.18112/openneuro.ds003478.v1.1.0): band power delta/theta/alpha/beta per channel, eyes closed. Meg exports 2–3 subjects to CSV on her laptop; the screen shows one as "example EEG at discharge — open research recording, not this person". Shown honestly: students aged 18–24, not post-TMS, one visit each, no relapse labels, **no validated EEG biomarker for depression** | Meg (data) · Uriel (card) |
 
 **Not this weekend:** PostgreSQL, FHIR, Path C, live EEG from a headset, LLM chat, real push, camera pulse. (Hologram and ember lamp are **not** dropped: they are C1 and C5.)
@@ -90,6 +91,9 @@ Loops 1 and 2 are **demoed live**. Loop 3 is **shown once** (Juho's "learned" ca
 | Prism hologram of the fire | W12 | C1 |
 | Ember lamp (Arduino) | W12 | C5 |
 | Mentor check, three-loop pitch, language switch, submission text, deck, sleep plan | W0 | "Other adjustments" below |
+| Why people fall ill (digital environment, pressure, loneliness, family strain, fragmented services) | research `sources_of_ill_being.md` | pitch W7.1, Q&A |
+| Hiillos as the follow-up loop of a one-door system (book's "Mieli 360"); cost of doing nothing | research `sources_of_ill_being.md` | pitch W7.5 (numbers only after O31) |
+| Wind-down small step (phone out of the bedroom) | §8 | C6 |
 
 **EEG, our way (decided 10:35):** a phone cannot record EEG, and the judges are the TMS–EEG experts, so we do not fake it. EEG enters **loop 2, the clinic**: the clinic's own EEG / TMS–EEG from treatment is part of her starting point, and when Hiillos sees drift at home the clinician screen can say "consider an EEG check or booster review". In the app, EEG appears only as the C4 research card from open data. Ask the mentors whether the booth's portable EEG could give us one real minute for the demo.
 
@@ -100,6 +104,7 @@ Loops 1 and 2 are **demoed live**. Loop 3 is **shown once** (Juho's "learned" ca
 4. **Submission text** rewritten from W0 on Saturday evening (Friday's says "Hiilos", face tracking, bee/cat).
 5. **Deck** outside Lovable to save credits (Claude can build it as Slides).
 6. **Team energy:** Owais slept after the night; Hugo and Uriel need a sleep window tonight; Meg sleeps before the pitch. The pitcher's clarity is worth more than one more feature.
+7. **Pitch frame from *Radikaalit ratkaisut* (O29):** one line on why people fall ill, and Hiillos as the follow-up loop of a one-door system. Book numbers go on a slide only after Meg checks them at THL / OECD / STM (O31).
 
 **Timeline to Sun 10:00** *(pitch time and format still to confirm on the Junction schedule)*
 - **10:30–15:00** Must M1–M4 · Meg: mentor booking, PHQ-2/9 wording fi/sv/en, copy for the daily moment.
@@ -182,11 +187,11 @@ PostgreSQL (in-memory is fine for the demo) · FHIR layer 2 (one line on the roa
 
 ### W7. Pitch skeleton (fit to the official time once known)
 
-1. **Hook — the name story** (W2). The problem in one line: treatment ends, the daily contact ends, and that's when the risk returns.
+1. **Hook — the name story** (W2). The problem in one line: treatment ends, the daily contact ends, and that's when the risk returns. *Optional second line (O29), why people fall back:* "Home is where the pressure is: the feed that never ends, money worries, loneliness, nobody holding the whole picture. Hiillos can't fix that, but it sees its traces in your day — and answers with one small step."
 2. **Aino's 90 days, live** — usefulness + smart sensing + ease, in that order (demo steps §3).
 3. **Elias — the false alarm that never reaches the clinic.** "We don't flood clinicians."
 4. **The loop on one slide:** Sense → Ask → Act → Learn → Clinic only when it matters. Same words as the brief.
-5. **Why us / what's next:** the 4 care paths (not just TMS), the roadmap (real sensors via Health Connect / HealthKit, FHIR, MDR path), architecture that's extendable, integrable, embeddable, scalable.
+5. **Why us / what's next:** **Hiillos is the follow-up loop of a one-door system** — the kind of national "one door" model Mero & Ojanperä call Mieli 360 in *Radikaalit ratkaisut*; their own recovery story (daily check-in + home neurostimulation with results to the doctor) is the loop we built, with Sooma/Flow as plug-in partners. The cost of doing nothing (book: ~€11 bn a year — **only after O31 check**). Then: the 4 care paths (not just TMS), the roadmap (real sensors via Health Connect / HealthKit, FHIR, MDR path), architecture that's extendable, integrable, embeddable, scalable.
 6. **The ask to the lab (for "most promising idea"):** Hiillos can give the lab something it doesn't have today — what happens between discharge and relapse, person by person, and which home actions help which people. *Wording to check with the mentors before the pitch.*
 7. **Closing slide = the four criteria with our four proofs** (W3), so judges can score us straight from the slide.
 
@@ -367,7 +372,7 @@ Every alert carries a **one-line human-readable reason**. Priority weights are "
 
 ## 8. Actions (pre-approved menu)
 
-Walk outside / short exercise and **behavioural activation** (best evidence) · message the trusted friend · sea sounds / nature video · music · light *(clinician-configured only)* · short game *(partner later, e.g. Soihtu)* · **"no prompt"** (needed for honest learning). Evidence for brief actions *preventing relapse* is thin — we pitch the loop, not a cure.
+Walk outside / short exercise and **behavioural activation** (best evidence) · message the trusted friend · **wind-down: phone out of the bedroom tonight** *(C6, only when bedtime drifts; no content tracking)* · sea sounds / nature video · music · light *(clinician-configured only)* · short game *(partner later, e.g. Soihtu)* · **"no prompt"** (needed for honest learning). Evidence for brief actions *preventing relapse* is thin — we pitch the loop, not a cure.
 
 ## 9. Who does what (v3 — items numbered as in §W4)
 
@@ -394,7 +399,7 @@ Walk outside / short exercise and **behavioural activation** (best evidence) · 
 
 ## 11. Sources
 
-`docs/research/` — signals evidence, patient paths & Finnish care pathway, beyond-the-app (EHR/Kanta, players), actions evidence (written under the old name "Kajo" = Hiillos). Synthea licence: [Synthea DPG wiki](https://github.com/synthetichealth/synthea/wiki/DPG). Submission counts and judging criteria: Junction Discord announcement, 14 Nov 2026.
+`docs/research/` — **sources of ill-being + one-door frame (`sources_of_ill_being.md`, from *Radikaalit ratkaisut*, popular non-fiction: framing, not evidence)**, signals evidence, patient paths & Finnish care pathway, beyond-the-app (EHR/Kanta, players), actions evidence (written under the old name "Kajo" = Hiillos). Synthea licence: [Synthea DPG wiki](https://github.com/synthetichealth/synthea/wiki/DPG). Submission counts and judging criteria: Junction Discord announcement, 14 Nov 2026.
 
 ---
 
