@@ -1,0 +1,37 @@
+{
+  "synthetic": true,
+  "generatorVersion": "0.2",
+  "seed": 2026,
+  "personaId": "aino",
+  "firstDay": "2026-08-17",
+  "lastDay": "2026-11-14",
+  "demoDay": "2026-11-15",
+  "dayIndexToDate": "day i = firstDay + i days (0..89)",
+  "driftStartDay": 60,
+  "helps": [
+    "daylightWalk"
+  ],
+  "doesNotHelp": [
+    "fireplace"
+  ],
+  "expectedAtDemoDay": "priority HIGH (call list): mood well below her own baseline, long sleep, activity drop",
+  "showsInDemo": "Main story: reach out on drift, walk helps for a while, clinic gets a one-line reason",
+  "trueEffects": {
+    "daylightWalk": {
+      "pThumbsUp": 0.85,
+      "pThumbsDown": 0.05,
+      "nextDayMoodLift": 0.6
+    },
+    "fireplace": {
+      "pThumbsUp": 0.25,
+      "pThumbsDown": 0.25,
+      "nextDayMoodLift": 0.0
+    },
+    "breathing": {
+      "pThumbsUp": 0.4,
+      "pThumbsDown": 0.15,
+      "nextDayMoodLift": 0.1
+    }
+  },
+  "driftStartDate": "2026-10-16"
+}

@@ -1,0 +1,39 @@
+{
+  "synthetic": true,
+  "generatorVersion": "0.2",
+  "seed": 2026,
+  "personaId": "elias",
+  "firstDay": "2026-08-17",
+  "lastDay": "2026-11-14",
+  "demoDay": "2026-11-15",
+  "dayIndexToDate": "day i = firstDay + i days (0..89)",
+  "driftStartDay": 72,
+  "driftEndDay": 78,
+  "cause": "flu (not mood)",
+  "helps": [
+    "move",
+    "daylightWalk"
+  ],
+  "doesNotHelp": [],
+  "expectedAtDemoDay": "priority LOW (signals back to normal)",
+  "showsInDemo": "Set the demo date to day 79 to see Hiillos reach out during the flu week; mood stays near normal, so no call list",
+  "trueEffects": {
+    "move": {
+      "pThumbsUp": 0.7,
+      "pThumbsDown": 0.05,
+      "nextDayMoodLift": 0.2
+    },
+    "daylightWalk": {
+      "pThumbsUp": 0.65,
+      "pThumbsDown": 0.1,
+      "nextDayMoodLift": 0.2
+    },
+    "fireplace": {
+      "pThumbsUp": 0.4,
+      "pThumbsDown": 0.1,
+      "nextDayMoodLift": 0.1
+    }
+  },
+  "driftStartDate": "2026-10-28",
+  "driftEndDate": "2026-11-03"
+}

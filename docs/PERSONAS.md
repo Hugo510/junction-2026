@@ -22,3 +22,17 @@
 | 5 | **Elias — false alarm** | One week of flu / travel / a deadline: time at home and bedtime move out of his range. Hiillos reaches out; PHQ-9 stays low; signals return to normal. | "Sensors only ask, questionnaires decide, humans confirm": reach out + extra PHQ-9, kind reply, **no clinician alert**. Shows we don't flood clinicians. |
 
 **Safety path** (PHQ-9 item 9 > 0 → crisis screen + clinician alert) is shown as a separate **simulated** 10-second step in the demo, not built into a persona's 90 days.
+
+## Generated (v0.2, Sat 14 Nov 10:20)
+
+Files follow Hugo's `apps/mobile/src/data/personas/core.schema.json`. Generator: `tools/synthetic/generate_personas.py` (seed 2026, deterministic). 90 days: 2026-08-17 → 2026-11-14; demo day 2026-11-15.
+
+| Persona | Language · companion | Checked with the app's own rules on demo day |
+|---|---|---|
+| Aino | fi · cat Kuu | priority **70 high** (mood drop, below baseline, low mood, activity drop, long sleep); medium 30 on 24 Oct; learned: walks > breathing > fireplace |
+| Leena | sv · bird Sol | 0 low all 90 days; embers bright |
+| Juho | fi · dog Repe | medium 30–35 on 18–24 Oct, then recovered (0 low); learned: **fireplace (sound) > breathing > walks** |
+| Sara | sv · bee Humla | 15 low (missed check-ins only); outreach **reconnect** (silent since 6 Nov); embers at the floor |
+| Elias | en · dog Otso | medium 35 on 4 Nov (flu week), never high; 0 low on demo day |
+
+Extended files (`tools/synthetic/personas_extended/`) add `homeMinutes`, `screenOffTime` and `phq9` (Aino 6 → 11 → 12). They need the schema change in DECISIONS O17. `fireplace` stands in for sound/music until a music intervention id exists.

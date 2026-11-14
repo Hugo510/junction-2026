@@ -13,7 +13,6 @@
 | O2 | **Crisis number: API-only vs cached in the app.** Owais: show it only from the API, remove the hardcoded number. Meg: API stays the source of truth, but the app keeps a cached copy with 112 built in, in case the network or server is down at that moment. *Note: the app already has `config/crisisResources.ts` with 112 + MIELI lines (repo check 10:05) — so the question is only whether the API overrides it when reachable.* | Meg / Owais | Owais + Hugo |
 | O3 | **Embers never go out.** Fire follows self-care (decided), but needs a floor so it can glow low and never die, and it changes slowly. | Meg | Hugo |
 | O4 | **Silence ladder wording + consent.** Day 7 reads as "we lost touch, here's how to reach us", not crisis language. Contacting the care team after silence needs consent given at onboarding (checkbox on the consent screen). | Meg | Hugo |
-| O5 | **`core.json` format** for the 5 personas. Draft schema read from the app repo (BUILD_SPEC §12.3) — Hugo to confirm or correct. | Hugo asked for files | Hugo |
 | O9 | App repo `Hugo510/junction-2026` still says **"Valo"** (`app.json`, locales, README) → rename to Hiillos. *Backend found 10:30: same repo, branch `owais/backend`; app on `hugo/mobile`; `main` is empty (see O11).* | Repo check 10:05 | Hugo |
 | O6 | **Two scoring systems to reconcile.** Backend has a 7-day priority score with reasons. Build spec has a PHQ-9 rule engine (thresholds below). Decide: does the priority score order the clinician queue, and the PHQ-9 rules decide who lands on the "call" list? | Meg | Owais + Uriel |
 | O7 | Confirm the crisis line on mieli.fi before the demo, then set `verified: true`. | Owais | Anyone, Sun morning |
@@ -23,11 +22,32 @@
 | O12 | **v3 build order and cut list** (BUILD_SPEC W4/W5): fire as home screen, clinician view and a "what Hiillos has learned" card become P0; PostgreSQL, FHIR layer 2, Path C and EEG move to the roadmap slide. | Meg (v3) | Team |
 | O13 | **Take load off Hugo:** proposal is that Uriel builds the clinician view, the "learned" card and the PHQ-9 screens, and Owais does the merge, the README, the 409 fix and the backup recording. | Meg (v3) | Team |
 | O14 | **Companion animals vs the fire:** two mascots dilute the one image judges should remember. Proposal: the fire is the home screen; the animal, if kept, is a small voice beside it, not a second hero. | Meg (v3) | Hugo |
-| O15 | **Synthetic dates:** day offsets (day 0–89) that the app maps to "today" — fits the *Advance 1 day* demo button. Generator starts now on the §12.3 draft schema; adjusted if Hugo changes it. | Meg | Hugo |
+| O16 | **Safety question cadence** in the new daily moment: proposal = when mood tap is 1–2, in every PHQ-9 (item 9) and in the weekly check-in; not daily on good days. | Claude (spec W8.1) | **Meg** |
+| O17 | **Schema extension:** `homeMinutes`, `screenOffTime` on `SensorAggregate` + `phq9[]`; data ready in `tools/synthetic/personas_extended/`. | Meg (W9) | Hugo |
+| O18 | **Cross-person learning:** bandit starts from a population prior per action, then personal data takes over; consent + aggregated scores only. This weekend: pitch + maybe the prior in code. | Meg (W9) | Uriel |
+| O19 | **When a person dies / care ends (W11):** ladder quiet after 30 days; clinic-only "care ended" status stops all outreach; neutral lock-screen text; legal check before any pitch claim. | Meg | Hugo (texts), Owais (data) |
+| O22 | **Owais, when back from rest — in order:** (1) push the check-ins / self-harm / priority-score code (GitHub has only health, auth, `/me`, last push 08:40); (2) merge both branches to `main` + README; (3) backup demo recording. The demo does not depend on the backend (app runs on local data). | Repo check 10:25 · Meg 10:21 | Owais |
+| O23 | **Win strategy v4 (spec W0):** three loops; must M1–M4 by ~15:00, should S1–S5 by ~19:00, **feature freeze 21:00**, submit by **Sun 09:30**. | Claude (spec W0) | Meg + team |
+| O24 | **Mentor check today** (Ilmoniemi/Lioumis group): PHQ-2/9 cadence + safety question, "consider a booster review" wording, the lab ask. | Claude (spec W0) | Meg |
+| O25 | **EEG:** in the clinic loop (pitch) + C4 research card on Meg's `eeg_rest_openneuro.py` (ds003478, CC0); no headset, no "EEG detects relapse" claims; ask mentors about one real minute from the booth EEG. | Meg 10:34 | Meg · Uriel |
+| O26 | **Body map S6** ("Where is your fire today?"), Aalto bodily-maps method, self-report only; replaces the emotions step in the weekly check-in. | Claude (Meg agreed 10:35) | Hugo · Claude (persona data) |
+| O20 | **Optional wow (W12) — kept, not dropped (Meg 10:36):** prism hologram of the fire (C1, Meg) and Arduino ember lamp (C5) — after M1–M4, 1–2 h cap each, demo never depends on them. Who has hardware? | Meg | Team |
 
 ---
 
 ## Sat 14 Nov 2026
+
+**Decided (10:36, Uriel)**
+- **Uriel owns the clinician view** (confirmed 10:36): in-app demo screen with the 5 synthetic patients — priority level and score, top two reasons, latest PHQ-9, lost-contact status. Reuses the existing `priorityScore` logic and the persona data; **no separate implementation**. (Closes O21.)
+
+**Decided (10:16, Meg)**
+- **The four fixes (spec W8) are the priority:** (1) guiding daily moment — Hiillos speaks first, one tap, one small step; the 7-step check-in becomes weekly or on change; (2) reach out on drift when the score hits medium, not only on silence; (3) "What Hiillos has learned" card; (4) clinician screen (agreed already Fri).
+- **Smart sensing story:** value is in the aggregate, per person **and across people**, with consent (W9). Pull more from clinical practice (W10).
+- **Persona data:** Hugo's `core.schema.json` is the format. v0.2 generated (5 × 90 days) and checked against the app's own rules: Aino high (70) on demo day, Elias medium in his flu week only, Juho's learning is the opposite of Aino's, Sara reaches "reconnect".
+
+**Facts (10:25 repo check)**
+- App: rename, embers on home, silence ladder, reach-out demo, trusted person done (10:01). "What seems to help you" already exists on the Insights screen. Still missing: persona picker, drift reach-out, clinician screen, PHQ-9.
+- Backend on GitHub: health, auth, `/me` only; last push 08:40.
 
 **Facts (10:30)**
 - Preliminary submissions: Beyond the Clinic has **49 projects**, one of the most crowded challenges. Judging is 4 × 25%: usefulness, ease of use, smart sensing, creativity. Strategy in BUILD_SPEC v3 §W (proposals O10–O15 above).

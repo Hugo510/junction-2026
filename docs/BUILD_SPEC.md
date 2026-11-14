@@ -1,12 +1,113 @@
 # Hiillos — build spec for the Junction demo
 
 *SISU Lab · Junction 2026 · challenge "Beyond the Clinic" (Aalto)*
-*v3 — Sat 14 Nov 2026, ~10:30: **new §W "How we win"** (vision, mission, the four criteria → four proofs, re-ranked build order, cut list, pitch skeleton). §0, §3, §4, §9, §10 updated to match. Backend found on branch `owais/backend`; `main` is still empty (see W6). v2.2 (~10:15) added the 5th persona and §13. v2.1 (~10:05) added the repo check §12. v1 was 07:40.*
-*Read §W first (3 min). The rest is the reference spec.*
+*v4.3 — ~10:50: Uriel confirmed the clinician view (M4). v4.2 — ~10:45: W0 now lists **every** agreed idea and where it lives (nothing dropped): hologram C1 + ember lamp C5 (W12), care-ended status in S5 (W11), booster/EEG-check line in M4. v4.1 — ~10:40: EEG plan (clinic loop + C4 card on Meg's existing OpenNeuro ds003478 example), body map S6 (Aalto bodily maps). v4 — ~10:35: **new W0 "Win strategy on one page"** — three loops (person, clinic, many people), updated vision/mission/promises, now-vs-target per criterion, must/should/could adjustments with owners, non-code adjustments, timeline to Sun 10:00. v3.2 — ~10:30: repo check of all branches (§0), "learned" card found on the Insights screen, clinician-screen proposal for Owais (O21). v3.1 — Sat 14 Nov 2026, ~10:25: W3 status corrected against the app code (7-step check-in, sensing = activity + daylight only, no clinician screen, reach-out only on silence); new W8 four fixes, W9 sensing per person + across people, W10 clinical cleverness, W11 when a person dies, W12 optional wow; guardrails 8–9; personas v0.2 generated and checked. v3 — ~10:00: **new §W "How we win"** (vision, mission, the four criteria → four proofs, re-ranked build order, cut list, pitch skeleton). §0, §3, §4, §9, §10 updated to match. Backend found on branch `owais/backend`; `main` is still empty (see W6). v2.2 (~10:15) added the 5th persona and §13. v2.1 (~10:05) added the repo check §12. v1 was 07:40.*
+*Read W0 first (2 min). The rest of §W is the reasoning; the rest of the file is the reference spec.*
 
 ---
 
 ## W. How we win
+
+### W0. Win strategy on one page (v4 — Sat 10:35)
+
+**The idea in one line (for judges):** *Hiillos is a companion that speaks first, learns what helps you, and calls the clinic only when it matters.*
+
+**Our angle against 49 teams.** Most teams will build a tracker you have to feed. Hiillos is a **guide that gives back**, built as **three closed loops**, which is the brief's own language ("sense → respond → learn"):
+
+| Loop | How often | What happens | Criteria it earns |
+|---|---|---|---|
+| **1. Person** | daily | Hiillos senses her day against *her own* normal → speaks first → one tap → one small step → learns what helps *her* | Ease · Smart sensing · Creativity |
+| **2. Clinic** | when it matters | Drift → PHQ-2/PHQ-9 → clinician screen with a one-line reason → the clinic decides (e.g. a booster review). False alarms stop at step 2 | Usefulness |
+| **3. Many people** | over time | With consent, aggregated scores only: a new person starts from what helped people like them; the clinic and the lab see what happens between discharge and relapse | Smart sensing · Usefulness (vision) |
+
+Loops 1 and 2 are **demoed live**. Loop 3 is **shown once** (Juho's "learned" card starting from a population prior, if built) and **pitched as the vision**.
+
+**Vision:** Nobody falls out of care just because they went home.
+
+**Mission:** Hiillos is an active guide that keeps people inside a closed care loop after depression treatment, so they get more out of the treatment they had, stay connected to their life and their clinic, and stay well. The clinic tells Hiillos what to watch. Hiillos learns each person's own normal and what helps them, starting from what helped people like them, speaks first with one small step when the days drift, and brings in a human only when it matters.
+
+**Three promises**
+- **To the person:** You don't have to remember Hiillos. Hiillos remembers you. One tap, one small step, and the embers never go out.
+- **To the clinic:** Only the calls that matter, each with a reason. You set what to watch; you make every decision.
+- **To the lab (the "most promising idea" prize):** a first, person-by-person picture of what happens between discharge and relapse, and which home steps help whom. *Wording to check with a mentor.*
+
+**Where we stand vs where we need to be** *(Claude's judgement from the code at 10:25; we have not seen other teams)*
+
+| Criterion | Now | After the must-fixes | What closes the gap |
+|---|---|---|---|
+| Usefulness | Medium | Strong | Clinician screen with reasons; false-alarm persona; clinic sets the early signs |
+| Ease of use | Medium-weak (7-step form) | Strong | Guiding daily moment: Hiillos speaks, one tap, one step; full check-in weekly |
+| Smart sensing | Weak (activity + daylight only; reach-out on silence only) | Medium-strong | Reach out on drift; home time + screen-off; "learned" line on home; population prior |
+| Creativity | Medium | Medium-strong | Fire as the one hero image; quiet when well; name story; optional hologram |
+
+**Solution adjustments, ranked** (owners as of 10:30; Owais is resting)
+
+| # | Must (by ~15:00) | Owner | ~h |
+|---|---|---|---|
+| M1 | Register the 5 persona files + persona picker in demo mode (unblocks the demo) | Hugo | 0.5–1 |
+| M2 | **Guiding daily moment:** Hiillos speaks first → 5-ember mood tap → one small step from the bandit. 7-step check-in becomes weekly / on "medium" | Hugo | 2 |
+| M3 | **Reach out on drift** when the score hits medium → PHQ-2 → PHQ-9 if needed; never a clinic alert from sensors alone | Uriel | 1–1.5 |
+| M4 | **Clinician screen** *(Uriel confirmed 10:36; reuses `priorityScore` + persona data)*: 5 personas, level, top 2 reasons in plain words, last PHQ-9, lost-contact tag; for the "call" list a "consider a review (e.g. booster, EEG check)" line — the decision stays with the clinic | Uriel | 2–3 |
+
+| # | Should (by ~19:00) | Owner | ~h |
+|---|---|---|---|
+| S1 | Schema + types for `homeMinutes`, `screenOffTime`, `phq9` → switch to `personas_extended/` (Aino's reason becomes "home time +40 %, bedtime +1h40 vs her normal") | Hugo | 1 |
+| S2 | "What helps you" top line under the fire on home | Hugo | 0.5 |
+| S3 | **Clinic sets the early signs:** 2–3 checkboxes on the clinician screen / onboarding (sleeps later, stays home, irritable…); drift reasons name *those* | Uriel | 1 |
+| S4 | **Population prior** in the bandit (`PRIOR_MEAN` per action from the other personas) → loop 3 visible | Uriel | 1 |
+| S5 | **When a person dies / care ends (W11):** calm lock-screen text ("A message from Hiillos"); silence ladder quiet after 30 days; clinic-only "care ended" status on the clinician screen stops all outreach | Hugo · Uriel | 1 |
+| S6 | **Body map "Where is your fire today?"** — paint warm / cold on a body silhouette with one finger; replaces the "emotions" step in the weekly check-in; today's map vs her own usual map. Method from Aalto: *Bodily maps of emotions*, Nummenmaa, Glerean, Hari, Hietanen, PNAS 2014, doi 10.1073/pnas.1321664111 (701 participants coloured where they felt activity increase or decrease). Self-report, **never** a diagnosis. Claude can add body maps to the 5 personas | Hugo (UI) · Claude (data) | 2–3 |
+
+| # | Could (only if ahead) | Owner |
+|---|---|---|
+| C1 | **Prism hologram of the fire (W12)** — clear plastic pyramid on a phone/tablet; booth + pitch photo. 1–2 h cap | Meg |
+| C5 | **Ember lamp (W12)** — Arduino + LED glowing with self-care; light or motion sensor = a real sensor in the home (brief's "smart home" direction). Only if someone has the hardware; 1–2 h cap; the demo never depends on it | whoever has the hardware |
+| C2 | Owais's web clinician page (embeddable) | Owais |
+| C3 | Sea sounds as an action (CC0) | Hugo |
+| C4 | **EEG card in the clinician screen ("research layer, not an alarm")**, built on Meg's existing `healthdeeptech-starter/examples/eeg_rest_openneuro.py` (OpenNeuro ds003478 "EEG: Depression rest", Cavanagh, CC0, doi 10.18112/openneuro.ds003478.v1.1.0): band power delta/theta/alpha/beta per channel, eyes closed. Meg exports 2–3 subjects to CSV on her laptop; the screen shows one as "example EEG at discharge — open research recording, not this person". Shown honestly: students aged 18–24, not post-TMS, one visit each, no relapse labels, **no validated EEG biomarker for depression** | Meg (data) · Uriel (card) |
+
+**Not this weekend:** PostgreSQL, FHIR, Path C, live EEG from a headset, LLM chat, real push, camera pulse. (Hologram and ember lamp are **not** dropped: they are C1 and C5.)
+
+**Nothing agreed is dropped — where each idea lives** *(check this list before cutting anything)*
+
+| Idea (agreed) | Section | Lives in |
+|---|---|---|
+| Guiding app, not a clicker | W8.1 | M2 |
+| Reach out on drift | W8.2 | M3 |
+| "What Hiillos has learned" | W8.3 | S2 |
+| Clinician screen | W8.4 | M4 |
+| Time at home, screen-off (bedtime) **and its regularity**, PHQ-9 | W9, W10 | S1 (data ready) |
+| Learning across people (population prior) | W9 | S4 |
+| Value in the aggregate, for the clinic and the lab | W9 | pitch, loop 3, promise to the lab |
+| Clinic tells Hiillos what to watch (early signs) | W10 | S3 |
+| PHQ-2 as the light step, PHQ-9 on a schedule | W10 | M3 |
+| Behavioural activation as the action engine | W10, §8 | action menu (exists) |
+| Season-aware comparison (Finnish November) | W10 | pitch now; code later (compare to own recent weeks — already how the baseline works) |
+| Booster / EEG-check review for the clinic | W10 | M4 |
+| When a person dies / care ends | W11 | S5 + safety slide |
+| Body map "Where is your fire today?" | S6 | S6 |
+| EEG via the clinic loop + open-data card | O25 | pitch + C4 |
+| Prism hologram of the fire | W12 | C1 |
+| Ember lamp (Arduino) | W12 | C5 |
+| Mentor check, three-loop pitch, language switch, submission text, deck, sleep plan | W0 | "Other adjustments" below |
+
+**EEG, our way (decided 10:35):** a phone cannot record EEG, and the judges are the TMS–EEG experts, so we do not fake it. EEG enters **loop 2, the clinic**: the clinic's own EEG / TMS–EEG from treatment is part of her starting point, and when Hiillos sees drift at home the clinician screen can say "consider an EEG check or booster review". In the app, EEG appears only as the C4 research card from open data. Ask the mentors whether the booth's portable EEG could give us one real minute for the demo.
+
+**Other adjustments (not code)**
+1. **Book a mentor check today** (Ilmoniemi/Lioumis group): PHQ-2/PHQ-9 cadence and the safety question, "consider a booster review" wording, the lab ask. It improves the content *and* starts the relationship the "most promising idea" prize depends on.
+2. **Pitch built on the three loops:** name story → Aino live (loop 1 → loop 2) → Elias, the false alarm → Juho, the opposite learning → loop 3 vision → safety and ethics in one slide (not a medical device yet, synthetic data, never infers death, consent) → closing slide with the four criteria and our proofs.
+3. **Demo in English, with a two-second switch to Finnish or Swedish** to show it is built for people here.
+4. **Submission text** rewritten from W0 on Saturday evening (Friday's says "Hiilos", face tracking, bee/cat).
+5. **Deck** outside Lovable to save credits (Claude can build it as Slides).
+6. **Team energy:** Owais slept after the night; Hugo and Uriel need a sleep window tonight; Meg sleeps before the pitch. The pitcher's clarity is worth more than one more feature.
+
+**Timeline to Sun 10:00** *(pitch time and format still to confirm on the Junction schedule)*
+- **10:30–15:00** Must M1–M4 · Meg: mentor booking, PHQ-2/9 wording fi/sv/en, copy for the daily moment.
+- **15:00–19:00** Should S1–S5 · Meg: pitch script + deck draft.
+- **19:00–21:00** Merge to `main`, README, two full demo run-throughs on a phone.
+- **21:00 feature freeze.** After that only bug fixes.
+- **Evening** Meg: submission text; hologram if wanted. Owais (rested): push his code, backup demo recording.
+- **Sun 07:30–09:30** Rehearse with a stopwatch ×3, final recording, **submit by 09:30** (30 min buffer).
 
 ### W1. The situation
 
@@ -39,10 +140,12 @@ What that means for us *(this is our reading, not something we know)*:
 
 | Criterion (25% each) | Judges' question | Our proof — what they **see** on screen | Status |
 |---|---|---|---|
-| **Usefulness** | Could it really help people stay well at home? | Aino's drift is caught **2 weeks before** her PHQ-9 crosses 10 → one small action → the clinic gets her on the "call" list with a one-line reason, early enough for the clinic to consider a booster. Plus Elias: **no** false alert to the clinic. | Clinician view **missing** · PHQ-9 **missing** |
-| **Ease of use** | Would someone recovering from depression actually use it every day? | **One tap, ~3 seconds a day.** Hiillos reaches out first (banner). Bad days are met with kindness: the fire never dies, silence gets a warmer message, not a warning. Say the number out loud: "one tap a day". | Reach-out banner **missing** · silence ladder **missing** · 1-tap exists |
-| **Smart sensing** | Clever use of home measurements, and learns what works for each person? | **Her own baseline, both directions** (too much *and* too little sleep); time at home vs her own average (the strongest early-warning signal in our research). Then a **"What Hiillos has learned about Aino"** card: *walks lift her mood, sea sounds don't* — and for Juho the opposite. That card is the closed loop made visible. | Baseline + bandit **built** · "learned" card **missing** |
-| **Creativity** | How original and delightful? | **The fire is the home screen**: it grows with self-care, never with the risk score, and the embers never go out. Hiillos is **quiet when you're well** (Leena) — an app that doesn't chase engagement. The name story. | Fire exists only as an exercise · rename "Valo" → Hiillos **not done** |
+| **Usefulness** | Could it really help people stay well at home? | Aino's drift is caught **2 weeks before** her PHQ-9 crosses 10 → one small action → the clinic gets her on the "call" list with a one-line reason, early enough for the clinic to consider a booster. Plus Elias: **no** false alert to the clinic. | **Clinician view missing** (`consult.tsx` is the patient asking for a consultation) · PHQ-9 missing in the app (data ready, W9) |
+| **Ease of use** | Would someone recovering from depression actually use it every day? | **A guiding app, not a clicker.** Hiillos speaks first, asks one thing, offers one small step. The full check-in is weekly or when something changes. Bad days are met with kindness: the fire never dies, silence gets a warmer message, not a warning. | **Today the daily check-in is 7 steps** (mood, emotions, energy, sleep, reaction game, safety, note) → redesign W8.1 · silence ladder + simulated reach-out **built 10:01** |
+| **Smart sensing** | Clever use of home measurements, and learns what works for each person? | **Her own baseline, both directions**; time at home and screen-off time vs her own normal; the clinic tells Hiillos *her* early signs. A **"What Hiillos has learned"** card: walks for Aino, sound for Juho. And it learns **across people**: a new person starts from what helped people like them (W9). | App senses only **activity + daylight**; sleep/mood/energy/anxiety are self-reported · reach-out only on **silence, not drift** · "What seems to help you" **exists** on the Progress → Insights screen, not yet on the home screen |
+| **Creativity** | How original and delightful? | **The fire is the home screen**: it grows with self-care, never with the risk score, and the embers never go out. Hiillos is **quiet when you're well** (Leena). The name story. Optional: the fire as a hologram or a real ember lamp (W12). | Renamed to Hiillos + embers on chat home **built 10:01** (not yet seen running) · companion animals still compete with the fire (O14) |
+
+*Status column checked against `hugo/mobile` @ 7796c1e (10:01) at 10:15.*
 
 **The one screen to aim for:** the home screen with the fire in the background, today's one-tap check-in, and a small "learned" line underneath. If a judge remembers one image, it should be that one.
 
@@ -87,6 +190,50 @@ PostgreSQL (in-memory is fine for the demo) · FHIR layer 2 (one line on the roa
 6. **The ask to the lab (for "most promising idea"):** Hiillos can give the lab something it doesn't have today — what happens between discharge and relapse, person by person, and which home actions help which people. *Wording to check with the mentors before the pitch.*
 7. **Closing slide = the four criteria with our four proofs** (W3), so judges can score us straight from the slide.
 
+### W8. The four fixes that move the score (agreed by Meg 10:16)
+
+1. **Guiding daily moment instead of a form** (Ease). Hiillos opens with one line in its own voice ("Morning, Aino. How's the fire today?") and **one tap** of five embers for mood. Then it offers **one** small step from what has helped *her* (the bandit). Done in under 10 seconds. The 7-step check-in becomes the **weekly** check-in, also triggered when the score reaches "medium". The reaction game stays optional.
+   - **Safety question — Meg to decide:** proposal is to ask it whenever the mood tap is 1–2, inside every PHQ-9 (item 9), and in the weekly check-in. Not daily on good days. Trade-off: daily is safest, but daily on good days is what turns a companion into a clicker.
+2. **Reach out on drift, not only on silence** (Smart sensing · Ease). When `priorityScore` reaches **medium**, the simulated notification says "Noticed the week's been heavier. Two quick questions?" → PHQ-2 → PHQ-9 if needed. No clinician alert from this step (guardrail 3). *Hugo or Uriel, ~1 h.*
+3. **"What Hiillos has learned" card** (Smart sensing). *Already built as "What seems to help you" in `features/insights/InsightsView.tsx` (Progress tab).* Remaining work: show its top line on the home screen under the fire, and open Progress in the demo. *~30 min.*
+4. **Clinician screen** (Usefulness). Agreed as a must on Fri. One demo screen listing the 5 personas: level, score, top 2 reasons in plain words, last PHQ-9 + trend, "lost contact" tag, urgent badge. Read-only. *Decided 10:21: **Uriel builds it in the app** (Owais is resting). Owais's web version is an extra only if time allows: a small web page served by the FastAPI backend with the `doctor` demo token, reading the same 5 persona files — a separate, embeddable piece (§13). Expected scores per persona from the app's own code are in `tools/synthetic/ABOUT.md` as test fixtures, so Python and TypeScript must agree. Fallback: an in-app demo screen (Uriel).*
+
+### W9. Smart sensing: one person *and* many people
+
+**What a phone can sense with no wearable** (add now, data ready in `personas_extended/`): time at home (geofence, no coordinates kept), last screen-off of the evening (bedtime proxy) and its **regularity**, activity, daylight. Plus PHQ-9 every 2 weeks and when Hiillos reaches out. Wearables (HRV, sleep) plug in later through Health Connect / HealthKit.
+
+**The value is in the aggregate: per person and across people** (Meg). With the person's consent, and only aggregated scores (never raw data):
+- **Per person:** her own baseline and her own "what helps" ranking (built).
+- **Across people:** a new person does not start from zero. The learning starts from *what helped people like them*, then their own answers take over after a few tries. Small code change: the bandit's `PRIOR_MEAN` becomes a per-action prior from the population. Card text: "Many people find walks help. For you, sound works better."
+- **For the clinic:** the clinician view shows the whole group: who is drifting, how many came back after one small step, which steps work for this clinic's patients.
+- **For the lab and the investment story:** after many people, an anonymised picture of what happens between discharge and relapse, and which home steps help whom. That dataset is the long-term asset. *Pitch it as the vision, not as something built this weekend.*
+
+### W10. Borrow more from the clinic (clinical cleverness)
+
+*These are ideas from known clinical practice; check the exact wording with the mentors before the pitch.*
+- **The clinic tells Hiillos what to watch.** At discharge the clinic enters the person's own 2–3 early warning signs (Aino: sleeps later, stays home, irritable), the way relapse-prevention plans are written. Hiillos watches exactly those, not a generic list.
+- **Measurement-based care:** PHQ-9 on a schedule, plus PHQ-2 as the light two-question step when Hiillos reaches out. Same instruments clinicians already use, so the clinician view speaks their language.
+- **Rhythm, not just amount:** regular bedtime and wake time matter in depression care, not only how long someone sleeps. Screen-off regularity vs her own normal is a cheap, clinically meaningful signal.
+- **Behavioural activation as the action engine:** the small steps are planned, valued activities, which has the best evidence of our action menu (§8).
+- **Season-aware in Finland:** daylight in November is not compared to August. Compare against the person's own recent weeks and, later, against people in the same season.
+- **Booster TMS:** the clinician view can show "consider a review" with the reason. The decision is always the clinic's; nothing about treatment is ever said to the patient (guardrail 2).
+
+### W11. When a person dies (Meg 10:16)
+
+A known failure in health apps: the app keeps sending cheerful nudges after someone has died, and the family sees them. Hiillos must never do that.
+- **Never infer death from silence.** Silence is not relapse and not death. The app never guesses.
+- **The ladder stops.** After "reconnect" (day 7), at most one gentle message a week, then **quiet after 30 days** (account dormant). No endless "we miss you".
+- **Hiillos never messages the trusted person by itself.** It only *suggests* the person contacts them (already so in the app).
+- **The clinic can close the loop:** a clinician-only status "care ended" (moved, transferred, deceased) stops all outreach at once and freezes the data for the clinic's own review and the family's requests. Never self-declared, never inferred.
+- **Discreet notifications:** lock-screen text never mentions depression, mood or crisis ("A message from Hiillos"), because family or others may see the phone.
+- **Data after death:** retention and family access follow the law and the clinic's rules. *Check how GDPR and Finnish law treat a deceased person's data before claiming anything in the pitch; not verified.*
+- Not in the demo. One line on the safety slide, and ready for Q&A.
+
+### W12. Optional "wow" (only after W8 is done; strict 1–2 h timebox)
+
+- **Prism hologram of the fire:** a clear plastic pyramid on a phone or tablet shows the ember fire floating in 3D. Pure delight, no sensing. Cheap, Meg can own it; good for the booth and the pitch photo.
+- **Ember lamp (Arduino + LED, if someone has the hardware):** a small physical ember at home that glows with self-care, so a person sees Hiillos without opening the phone. Can also sense: a light sensor (daylight in the room) or motion (up and about). It answers the brief's "smart home" direction. **The demo must not depend on it.**
+
 ---
 
 ## 0. Where we are now (Sat morning)
@@ -108,7 +255,12 @@ PostgreSQL (in-memory is fine for the demo) · FHIR layer 2 (one line on the roa
 
 **`main` branch:** only the initial commit (13 Nov 14:56). Nothing merged yet — see W6.
 
-**Blocked:** the synthetic data generator needs Hugo to **confirm the `core.json` schema** drafted from the repo in §12.3.
+**Repo check 10:25 (all branches):**
+- `hugo/mobile` @ 7796c1e (10:01): rename to Hiillos complete (`app.json`, locales); embers ("Hearth") on the chat home; silence ladder + simulated reach-out in demo mode; trusted person + silence consent; "Advance 1 day" shifts the app's clock correctly. **Not yet:** persona picker (`PERSONA_FILES` is empty), drift-triggered reach-out, clinician screen, PHQ-9.
+- `owais/backend` @ e136fa6 (**08:40, nothing since**): only `health`, `auth`, `patient` (`/me`, consents) routes. **`POST /checkins`, the self-harm rule and the priority score from the 08:52 status are not on GitHub** — local only, or not done. Also a stray `test.txt`.
+- Root README still says "Team: TBD" / "Setup: TBD". It already lists the four GitHub accounts (Hugo510, muhammad-owais-javed, margita68, urielcont).
+
+**Personas: done (v0.2, 10:20).** 5 × 90 days in Hugo's `core.schema.json` format (`hugo/mobile` @ 33c2dc7), checked with the app's own `priorityScore`, `outreach`, `embers` and `interventionPicker`. Extended files add `homeMinutes`, `screenOffTime` and `phq9` once the schema has those fields. See `tools/synthetic/ABOUT.md`. §12.3 below is superseded by Hugo's schema.
 
 ## 1. What we are building (one line)
 
@@ -128,6 +280,8 @@ Not "an app you have to remember to open". A depressed person may not get out of
 5. **Compute on the phone, send scores.** Raw location / app usage never leaves the device (Owais).
 6. **Silence is not relapse.** Day 7 of the silence rule reads as "lost contact", not crisis. Contacting the care team after silence needs consent given at onboarding.
 7. **All demo data is SYNTHETIC** and labelled so.
+8. **Never infer death; stop outreach when care ends** (W11). The ladder goes quiet after 30 days; only the clinic can set "care ended"; lock-screen text never names mood or depression.
+9. **Cross-person learning only with consent and only on aggregated scores** (W9).
 
 ## 3. The demo story (what judges see, ~2.5 min) — each step tagged with the criterion it proves
 
@@ -222,7 +376,9 @@ Walk outside / short exercise and **behavioural activation** (best evidence) · 
 
 ## 10. Open decisions (full list with owners in `DECISIONS.md`)
 
-- [ ] **Hugo confirms the `core.json` schema** in §12.3 (blocks the persona files)
+- [x] Persona format: Hugo's `core.schema.json` (10:01); personas v0.2 generated
+- [ ] Hugo: add `homeMinutes`, `screenOffTime`, `phq9` to schema + `entities.ts` (W9)
+- [ ] Safety question cadence in the new daily moment (W8.1) → **Meg**
 - [x] 5 personas; the fifth is **False alarm** (Meg, 14 Nov)
 - [ ] **v3 build order and cut list** (W4, W5) — team agrees or changes
 - [ ] **Demo runs from local files; backend live call only as a bonus** (O10)
