@@ -85,7 +85,16 @@
       "title": "Un primer check-in corto",
       "subtitle": "Esto muestra tu punto de partida. No hay respuestas correctas ni incorrectas."
     },
-    "finish": "Empecemos"
+    "finish": "Empecemos",
+    "path": {
+      "title": "¿Dónde estás ahora?",
+      "subtitle": "Hiillos se adapta al momento de tu atención.",
+      "postTreatment": "Acabo de terminar mi tratamiento en la clínica",
+      "inTreatment": "Estoy en tratamiento ahora",
+      "stoppedTreatment": "Me sentí mejor y dejé mi tratamiento",
+      "notInCare": "No estoy en atención por ahora",
+      "comingNext": "Próximamente"
+    }
   },
   "species": {
     "bee": "Abeja",
@@ -363,7 +372,9 @@
       "low": "Ayuda menos por ahora"
     },
     "tried_one": "Valorado {{count}} vez",
-    "tried_other": "Valorado {{count}} veces"
+    "tried_other": "Valorado {{count}} veces",
+    "home": "Tiempo en casa",
+    "avgHoursDay": "Promedio {{value}} h al día"
   },
   "care": {
     "title": "Cuidado",
@@ -427,7 +438,9 @@
       "perceivedUrgency": "Nos dijiste que se siente urgente",
       "belowBaseline": "Tu ánimo ha estado por debajo de lo habitual en ti durante un tiempo",
       "longSleep": "Varias noches muy largas o días en cama (10 horas o más)",
-      "upwardDrift": "Poco sueño con energía o actividad inusualmente altas (indicador de la clínica)"
+      "upwardDrift": "Poco sueño con energía o actividad inusualmente altas (indicador de la clínica)",
+      "homeMore": "Más tiempo en casa de lo habitual en ti",
+      "laterNights": "Las noches terminan más tarde de lo habitual en ti"
     }
   },
   "risk": {
@@ -455,7 +468,10 @@
     "delete": "Borrar todos mis datos",
     "deleteTitle": "¿Borrar todo?",
     "deleteBody": "Esto elimina tus check-ins, ajustes e historial de este teléfono. No se puede deshacer.",
-    "deleteConfirm": "Borrar"
+    "deleteConfirm": "Borrar",
+    "notificationsTitle": "Notificaciones",
+    "discreet": "Notificaciones discretas",
+    "discreetDesc": "La vista previa solo dice \"Un mensaje de Hiillos\". Nunca menciona ánimo ni salud, porque otras personas pueden ver tu teléfono."
   },
   "settings": {
     "title": "Ajustes",
@@ -504,7 +520,9 @@
     "bipolarOn": "Indicador clínico: bipolar → activar",
     "bipolarOff": "Indicador clínico: bipolar → desactivar",
     "personasTitle": "Personas de demostración (sintéticas)",
-    "noPersonas": "Aún no hay archivos de personas. Agrégalos en assets/personas/<id>/core.json."
+    "noPersonas": "Aún no hay archivos de personas. Agrégalos en assets/personas/<id>/core.json.",
+    "careEndedOn": "Estado clínico: atención terminada → activar",
+    "careEndedOff": "Estado clínico: atención terminada → desactivar"
   },
   "menu": {
     "chat": "Chat",
@@ -550,7 +568,8 @@
     "open": {
       "invite": "¿Cómo estás hoy? Con un toque basta.",
       "done": "Ya hiciste tu check-in de hoy. Aquí estoy si quieres hablar.",
-      "careHint": "Tu equipo de salud está a un toque."
+      "careHint": "Tu equipo de salud está a un toque.",
+      "careEnded": "Tu atención con la clínica terminó. Tu diario y el espacio de calma siguen aquí para ti."
     },
     "flow": {
       "askMood": "¿Cómo te sientes ahora mismo?",
@@ -604,7 +623,8 @@
     "outreach": {
       "warm": "Qué bueno saber de ti. Sin ninguna presión.",
       "friend": "Han pasado unos días. A veces una voz conocida ayuda.",
-      "reconnect": "Perdimos el contacto un tiempo, y está bien. Así puedes encontrarnos cuando quieras."
+      "reconnect": "Perdimos el contacto un tiempo, y está bien. Así puedes encontrarnos cuando quieras.",
+      "quiet": "Qué bueno verte. No hace falta explicar nada."
     },
     "phq": {
       "offer": "Noté que la semana ha sido más pesada. ¿Dos preguntas rápidas?",
@@ -675,7 +695,8 @@
     "reconnect": "{{name}}: Hace tiempo que no sabemos de ti. Así puedes encontrarnos.",
     "now": "ahora",
     "openHint": "Abre el chat",
-    "drift": "{{name}}: Noté que la semana ha sido más pesada. ¿Dos preguntas rápidas?"
+    "drift": "{{name}}: Noté que la semana ha sido más pesada. ¿Dos preguntas rápidas?",
+    "discreet": "Un mensaje de Hiillos"
   },
   "embers": {
     "label": "Tus brasas: {{state}}",
@@ -704,6 +725,41 @@
       "7": "Dificultad para concentrarte en cosas como leer el periódico o ver la televisión",
       "8": "Moverte o hablar tan despacio que otras personas lo pudieron notar. O lo contrario: tanta inquietud o agitación que te has movido mucho más de lo habitual",
       "9": "Pensamientos de que sería mejor morir o de hacerte daño de alguna manera"
+    }
+  },
+  "bodyMap": {
+    "title": "¿Dónde está tu fuego hoy?",
+    "hint": "Pinta cálido donde sientas más vida o tensión, y frío donde se sienta pesado o adormecido. No hay respuesta correcta.",
+    "label": "Mapa corporal",
+    "empty": "Aún no has pintado nada. También puedes dejarlo vacío.",
+    "summaryWarm": "Cálido: {{list}}.",
+    "summaryCool": "Frío: {{list}}.",
+    "usual": "Lo habitual en ti",
+    "different": "Hoy es distinto a lo habitual en ti: {{list}}",
+    "selfReport": "Es tu propia imagen de hoy. Nunca se usa como diagnóstico.",
+    "brush": {
+      "warm": "Cálido",
+      "cool": "Frío",
+      "erase": "Borrar"
+    },
+    "state": {
+      "warm": "cálido",
+      "cool": "frío",
+      "neutral": "sin pintar"
+    },
+    "regions": {
+      "head": "Cabeza",
+      "chest": "Pecho",
+      "belly": "Abdomen",
+      "hips": "Cadera",
+      "leftArm": "Brazo izquierdo",
+      "rightArm": "Brazo derecho",
+      "leftHand": "Mano izquierda",
+      "rightHand": "Mano derecha",
+      "leftLeg": "Pierna izquierda",
+      "rightLeg": "Pierna derecha",
+      "leftFoot": "Pie izquierdo",
+      "rightFoot": "Pie derecho"
     }
   }
 }

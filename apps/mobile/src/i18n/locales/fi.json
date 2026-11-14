@@ -85,7 +85,16 @@
       "title": "Ensimmäiset, lyhyet kuulumiset",
       "subtitle": "Tämä näyttää, mistä lähdet liikkeelle. Oikeita tai vääriä vastauksia ei ole."
     },
-    "finish": "Aloitetaan"
+    "finish": "Aloitetaan",
+    "path": {
+      "title": "Missä olet juuri nyt?",
+      "subtitle": "Hiillos mukautuu siihen, missä vaiheessa hoitosi on.",
+      "postTreatment": "Olen juuri saanut hoitoni klinikalla päätökseen",
+      "inTreatment": "Olen parhaillaan hoidossa",
+      "stoppedTreatment": "Voin paremmin ja lopetin hoitoni",
+      "notInCare": "En ole tällä hetkellä hoidossa",
+      "comingNext": "Tulossa"
+    }
   },
   "species": {
     "bee": "Mehiläinen",
@@ -363,7 +372,9 @@
       "low": "Auttanut vähemmän toistaiseksi"
     },
     "tried_one": "Arvioitu {{count}} kerran",
-    "tried_other": "Arvioitu {{count}} kertaa"
+    "tried_other": "Arvioitu {{count}} kertaa",
+    "home": "Aika kotona",
+    "avgHoursDay": "Keskimäärin {{value}} h päivässä"
   },
   "care": {
     "title": "Hoito",
@@ -427,7 +438,9 @@
       "perceivedUrgency": "Kerroit, että asia tuntuu kiireelliseltä",
       "belowBaseline": "Mielialasi on ollut jonkin aikaa tavallista tasoasi matalampi",
       "longSleep": "Useita hyvin pitkiä öitä tai päiviä sängyssä (10 tuntia tai enemmän)",
-      "upwardDrift": "Vähän unta ja poikkeuksellisen paljon energiaa tai liikettä (klinikan merkintä)"
+      "upwardDrift": "Vähän unta ja poikkeuksellisen paljon energiaa tai liikettä (klinikan merkintä)",
+      "homeMore": "Enemmän aikaa kotona kuin sinulle on tavallista",
+      "laterNights": "Illat venyvät myöhempään kuin sinulle on tavallista"
     }
   },
   "risk": {
@@ -455,7 +468,10 @@
     "delete": "Poista kaikki tietoni",
     "deleteTitle": "Poistetaanko kaikki?",
     "deleteBody": "Tämä poistaa kuulumisesi, asetuksesi ja historiasi tästä puhelimesta. Toimintoa ei voi perua.",
-    "deleteConfirm": "Poista"
+    "deleteConfirm": "Poista",
+    "notificationsTitle": "Ilmoitukset",
+    "discreet": "Hienotunteiset ilmoitukset",
+    "discreetDesc": "Esikatselussa lukee vain \"Viesti Hiillokselta\". Siinä ei koskaan mainita mielialaa tai terveyttä, koska muut voivat nähdä puhelimesi."
   },
   "settings": {
     "title": "Asetukset",
@@ -504,7 +520,9 @@
     "bipolarOn": "Klinikan merkintä: kaksisuuntainen → päälle",
     "bipolarOff": "Klinikan merkintä: kaksisuuntainen → pois",
     "personasTitle": "Demohenkilöt (synteettiset)",
-    "noPersonas": "Henkilötiedostoja ei vielä ole. Lisää ne kansioon assets/personas/<id>/core.json."
+    "noPersonas": "Henkilötiedostoja ei vielä ole. Lisää ne kansioon assets/personas/<id>/core.json.",
+    "careEndedOn": "Klinikan tila: hoito päättynyt → päälle",
+    "careEndedOff": "Klinikan tila: hoito päättynyt → pois"
   },
   "menu": {
     "chat": "Keskustelu",
@@ -550,7 +568,8 @@
     "open": {
       "invite": "Mitä sinulle kuuluu tänään? Yksi napautus riittää.",
       "done": "Olet jo kertonut tämän päivän kuulumiset. Olen täällä, jos haluat jutella.",
-      "careHint": "Hoitotiimisi on yhden napautuksen päässä."
+      "careHint": "Hoitotiimisi on yhden napautuksen päässä.",
+      "careEnded": "Hoitosi klinikalla on päättynyt. Päiväkirjasi ja rauhoittumisen tila ovat täällä sinua varten."
     },
     "flow": {
       "askMood": "Miltä sinusta tuntuu juuri nyt?",
@@ -604,7 +623,8 @@
     "outreach": {
       "warm": "Kiva kuulla sinusta. Ei mitään paineita.",
       "friend": "Muutama päivä on kulunut. Joskus tuttu ääni auttaa.",
-      "reconnect": "Yhteys katkesi hetkeksi, ja se on ihan okei. Näin tavoitat meidät milloin tahansa."
+      "reconnect": "Yhteys katkesi hetkeksi, ja se on ihan okei. Näin tavoitat meidät milloin tahansa.",
+      "quiet": "Kiva nähdä sinua. Mitään ei tarvitse selittää."
     },
     "phq": {
       "offer": "Huomasin, että viikko on ollut raskaampi. Kaksi lyhyttä kysymystä?",
@@ -675,7 +695,8 @@
     "reconnect": "{{name}}: Emme ole kuulleet sinusta hetkeen. Näin tavoitat meidät.",
     "now": "nyt",
     "openHint": "Avaa keskustelun",
-    "drift": "{{name}}: Huomasin, että viikko on ollut raskaampi. Kaksi lyhyttä kysymystä?"
+    "drift": "{{name}}: Huomasin, että viikko on ollut raskaampi. Kaksi lyhyttä kysymystä?",
+    "discreet": "Viesti Hiillokselta"
   },
   "embers": {
     "label": "Hiilloksesi: {{state}}",
@@ -704,6 +725,41 @@
       "7": "Vaikeus keskittyä asioihin, kuten sanomalehden lukemiseen tai television katseluun",
       "8": "Liikkuminen tai puhuminen niin hitaasti, että muut ovat voineet huomata sen. Tai päinvastoin: levottomuus tai rauhattomuus niin, että olet liikkunut paljon tavallista enemmän",
       "9": "Ajatukset siitä, että olisi parempi olla kuollut, tai itsesi vahingoittamisesta jollain tavalla"
+    }
+  },
+  "bodyMap": {
+    "title": "Missä tulesi on tänään?",
+    "hint": "Maalaa lämpimäksi kohdat, joissa tunnet enemmän eloa tai jännitystä, ja viileäksi kohdat, jotka tuntuvat raskailta tai turrilta. Oikeaa vastausta ei ole.",
+    "label": "Kehokartta",
+    "empty": "Et ole vielä maalannut mitään. Voit myös jättää tyhjäksi.",
+    "summaryWarm": "Lämmin: {{list}}.",
+    "summaryCool": "Viileä: {{list}}.",
+    "usual": "Sinulle tavallinen",
+    "different": "Tänään eri tavalla kuin yleensä: {{list}}",
+    "selfReport": "Tämä on oma kuvasi tästä päivästä. Sitä ei koskaan käytetä diagnoosina.",
+    "brush": {
+      "warm": "Lämmin",
+      "cool": "Viileä",
+      "erase": "Pyyhi"
+    },
+    "state": {
+      "warm": "lämmin",
+      "cool": "viileä",
+      "neutral": "maalaamatta"
+    },
+    "regions": {
+      "head": "Pää",
+      "chest": "Rinta",
+      "belly": "Vatsa",
+      "hips": "Lantio",
+      "leftArm": "Vasen käsivarsi",
+      "rightArm": "Oikea käsivarsi",
+      "leftHand": "Vasen käsi",
+      "rightHand": "Oikea käsi",
+      "leftLeg": "Vasen jalka",
+      "rightLeg": "Oikea jalka",
+      "leftFoot": "Vasen jalkaterä",
+      "rightFoot": "Oikea jalkaterä"
     }
   }
 }

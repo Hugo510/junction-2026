@@ -85,7 +85,16 @@
       "title": "A first, short check-in",
       "subtitle": "This shows where you're starting from. There are no right or wrong answers."
     },
-    "finish": "Let's begin"
+    "finish": "Let's begin",
+    "path": {
+      "title": "Where are you right now?",
+      "subtitle": "Hiillos adapts to where you are in your care.",
+      "postTreatment": "I've just finished treatment at the clinic",
+      "inTreatment": "I'm in treatment now",
+      "stoppedTreatment": "I felt better and stopped my treatment",
+      "notInCare": "I'm not in care right now",
+      "comingNext": "Coming next"
+    }
   },
   "species": {
     "bee": "Bee",
@@ -363,7 +372,9 @@
       "low": "Less helpful so far"
     },
     "tried_one": "Rated {{count}} time",
-    "tried_other": "Rated {{count}} times"
+    "tried_other": "Rated {{count}} times",
+    "home": "Time at home",
+    "avgHoursDay": "Average {{value}} h a day"
   },
   "care": {
     "title": "Care",
@@ -427,7 +438,9 @@
       "perceivedUrgency": "You told us it feels urgent",
       "belowBaseline": "Your mood has been below your usual level for a while",
       "longSleep": "Several very long nights or days in bed (10 hours or more)",
-      "upwardDrift": "Short sleep with unusually high energy or activity (clinic flag)"
+      "upwardDrift": "Short sleep with unusually high energy or activity (clinic flag)",
+      "homeMore": "More time at home than is usual for you",
+      "laterNights": "Evenings ending later than is usual for you"
     }
   },
   "risk": {
@@ -455,7 +468,10 @@
     "delete": "Delete all my data",
     "deleteTitle": "Delete everything?",
     "deleteBody": "This removes your check-ins, settings and history from this phone. It can't be undone.",
-    "deleteConfirm": "Delete"
+    "deleteConfirm": "Delete",
+    "notificationsTitle": "Notifications",
+    "discreet": "Discreet notifications",
+    "discreetDesc": "Previews only say \"A message from Hiillos\". They never mention mood or health, because others may see your phone."
   },
   "settings": {
     "title": "Settings",
@@ -504,7 +520,9 @@
     "bipolarOn": "Clinic flag: bipolar → turn on",
     "bipolarOff": "Clinic flag: bipolar → turn off",
     "personasTitle": "Demo personas (synthetic)",
-    "noPersonas": "No persona files yet. Add them to assets/personas/<id>/core.json."
+    "noPersonas": "No persona files yet. Add them to assets/personas/<id>/core.json.",
+    "careEndedOn": "Clinic status: care ended → turn on",
+    "careEndedOff": "Clinic status: care ended → turn off"
   },
   "menu": {
     "chat": "Chat",
@@ -550,7 +568,8 @@
     "open": {
       "invite": "How are you today? One tap is enough.",
       "done": "You've already checked in today. I'm here if you want to talk.",
-      "careHint": "Your care team is one tap away."
+      "careHint": "Your care team is one tap away.",
+      "careEnded": "Your care with the clinic has ended. Your journal and the calm space stay here for you."
     },
     "flow": {
       "askMood": "How are you feeling right now?",
@@ -604,7 +623,8 @@
     "outreach": {
       "warm": "It's good to hear from you. No pressure at all.",
       "friend": "It's been a few days. Sometimes a familiar voice helps.",
-      "reconnect": "We lost touch for a while, and that's okay. Here's how to reach us whenever you want."
+      "reconnect": "We lost touch for a while, and that's okay. Here's how to reach us whenever you want.",
+      "quiet": "It's good to see you. No need to explain anything."
     },
     "phq": {
       "offer": "I noticed the week's been heavier. Two quick questions?",
@@ -675,7 +695,8 @@
     "reconnect": "{{name}}: We haven't heard from you in a while. Here's how to reach us.",
     "now": "now",
     "openHint": "Opens the chat",
-    "drift": "{{name}}: I noticed the week's been heavier. Two quick questions?"
+    "drift": "{{name}}: I noticed the week's been heavier. Two quick questions?",
+    "discreet": "A message from Hiillos"
   },
   "embers": {
     "label": "Your embers: {{state}}",
@@ -704,6 +725,41 @@
       "7": "Trouble concentrating on things, such as reading the newspaper or watching television",
       "8": "Moving or speaking so slowly that other people could have noticed. Or the opposite: being so fidgety or restless that you have been moving around a lot more than usual",
       "9": "Thoughts that you would be better off dead, or of hurting yourself in some way"
+    }
+  },
+  "bodyMap": {
+    "title": "Where is your fire today?",
+    "hint": "Paint warm where you feel more alive or tense, cool where it feels heavy or numb. There is no right answer.",
+    "label": "Body map",
+    "empty": "Nothing painted yet. You can also leave it empty.",
+    "summaryWarm": "Warm: {{list}}.",
+    "summaryCool": "Cool: {{list}}.",
+    "usual": "Your usual",
+    "different": "Different from your usual today: {{list}}",
+    "selfReport": "This is your own picture of today. It is never used as a diagnosis.",
+    "brush": {
+      "warm": "Warm",
+      "cool": "Cool",
+      "erase": "Erase"
+    },
+    "state": {
+      "warm": "warm",
+      "cool": "cool",
+      "neutral": "not painted"
+    },
+    "regions": {
+      "head": "Head",
+      "chest": "Chest",
+      "belly": "Belly",
+      "hips": "Hips",
+      "leftArm": "Left arm",
+      "rightArm": "Right arm",
+      "leftHand": "Left hand",
+      "rightHand": "Right hand",
+      "leftLeg": "Left leg",
+      "rightLeg": "Right leg",
+      "leftFoot": "Left foot",
+      "rightFoot": "Right foot"
     }
   }
 }
