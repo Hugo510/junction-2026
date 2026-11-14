@@ -62,7 +62,7 @@ export const MessageItem = memo(
               {t('chat.aiLabel')}
             </AppText>
           ) : null}
-          {canListen ? <ListenButton text={text} /> : null}
+          {canListen ? <ListenButton text={text} companion={species} /> : null}
           {message.card ? <ChatCardView card={message.card} active={cardActive} mood={cardActive ? draftMood : undefined} handlers={handlers} /> : null}
         </View>
       </View>

@@ -33,11 +33,11 @@ export function stopSpeaking(): void {
   done?.();
 }
 
-async function audioUri(text: string, language: SupportedLanguage): Promise<string> {
-  const key = `${language}:${text}`;
+async function audioUri(text: string, language: SupportedLanguage, companion?: string): Promise<string> {
+  const key = `${companion ?? ''}:${language}:${text}`;
   const cached = cache.get(key);
   if (cached) return cached;
-  const base64 = await requestCompanionSpeech(text, language);
+  const base64 = await requestCompanionSpeech(text, language, companion);
   let uri: string;
   if (Platform.OS === 'web') {
     uri = `data:audio/mpeg;base64,${base64}`;
@@ -53,9 +53,9 @@ async function audioUri(text: string, language: SupportedLanguage): Promise<stri
 }
 
 /** Plays the message. `onDone` runs when it finishes or is stopped. Throws if the voice is unavailable. */
-export async function speak(text: string, language: SupportedLanguage, onDone: () => void): Promise<void> {
+export async function speak(text: string, language: SupportedLanguage, onDone: () => void, companion?: string): Promise<void> {
   stopSpeaking();
-  const uri = await audioUri(text.trim().slice(0, 600), language);
+  const uri = await audioUri(text.trim().slice(0, 600), language, companion);
   await setAudioModeAsync({ playsInSilentMode: true }).catch(() => undefined);
   const next = createAudioPlayer({ uri });
   player = next;

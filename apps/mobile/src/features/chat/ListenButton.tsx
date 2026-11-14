@@ -9,7 +9,7 @@ import { AppText, Icon, MIN_TOUCH, radii, spacing, useTheme } from '../../ui';
 type State = 'idle' | 'loading' | 'playing' | 'error';
 
 /** "Listen" under a companion message (only shown when the person turned the voice on). */
-export function ListenButton({ text }: { text: string }) {
+export function ListenButton({ text, companion }: { text: string; companion?: string }) {
   const { t } = useTranslation();
   const { colors } = useTheme();
   const [state, setState] = useState<State>('idle');
@@ -25,7 +25,7 @@ export function ListenButton({ text }: { text: string }) {
     }
     setState('loading');
     try {
-      await speak(text, currentLanguage(), () => setState((s) => (s === 'error' ? s : 'idle')));
+      await speak(text, currentLanguage(), () => setState((s) => (s === 'error' ? s : 'idle')), companion);
       setState('playing');
     } catch {
       setState('error');

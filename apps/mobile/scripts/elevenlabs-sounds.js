@@ -20,8 +20,13 @@ if (!KEY) {
   process.exit(1);
 }
 
+// Only sea.mp3 has a screen today. The other three are ready for the fireplace, the lake
+// (fish) and a future rain scene: generate them, then add a player like app/exercise/sea.tsx.
 const SOUNDS = [
   { file: 'sea.mp3', text: 'Calm sea waves rolling slowly onto a pebble beach, soft and steady, no birds, no voices, no music', seconds: 22 },
+  { file: 'fireplace.mp3', text: 'A small wood fire crackling gently in a quiet room, warm and close, no voices, no music', seconds: 22 },
+  { file: 'lake.mp3', text: 'Still lake at dusk, water lapping softly against a wooden pier, very quiet, no voices, no music', seconds: 22 },
+  { file: 'rain.mp3', text: 'Light steady rain on a cabin roof, soft and even, no thunder, no voices, no music', seconds: 22 },
 ];
 
 (async () => {
