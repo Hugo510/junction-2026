@@ -1,7 +1,7 @@
 import Constants from 'expo-constants';
 import { router } from 'expo-router';
 import { useState } from 'react';
-import { Pressable, StyleSheet, View } from 'react-native';
+import { Pressable, StyleSheet, TextInput, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import type { CompanionSpecies } from '../../src/domain/entities';
@@ -10,7 +10,7 @@ import { applyLanguage, SUPPORTED_LANGUAGES } from '../../src/i18n';
 import { haptics } from '../../src/services/haptics';
 import { useData } from '../../src/store/data';
 import { useSettings, type ThemeMode } from '../../src/store/settings';
-import { AppText, Avatar, Button, Chip, ChipGroup, Icon, ListItem, Screen, Section, ToggleRow, spacing, useTheme } from '../../src/ui';
+import { AppText, Avatar, Button, Chip, ChipGroup, Icon, ListItem, Screen, Section, ToggleRow, radii, spacing, useTheme } from '../../src/ui';
 
 const THEMES: ThemeMode[] = ['system', 'light', 'dark'];
 
@@ -60,6 +60,8 @@ export default function SettingsScreen() {
           </View>
         </Section>
       ) : null}
+
+      <TrustedContactSection />
 
       <Section title={t('settings.appearance')}>
         <View style={styles.pad}>
@@ -117,7 +119,62 @@ export default function SettingsScreen() {
   );
 }
 
+/** Someone the person trusts: stays only on this phone, used by the silence ladder for one-tap contact. */
+function TrustedContactSection() {
+  const { t } = useTranslation();
+  const { colors, textScale } = useTheme();
+  const contact = useSettings((st) => st.trustedContact);
+  const setTrustedContact = useSettings((st) => st.setTrustedContact);
+  const [name, setName] = useState(contact?.name ?? '');
+  const [phone, setPhone] = useState(contact?.phone ?? '');
+  const changed = name.trim() !== (contact?.name ?? '') || phone.trim() !== (contact?.phone ?? '');
+  const valid = name.trim().length > 0 && /[0-9]{5,}/.test(phone.replace(/\D/g, ''));
+  const inputStyle = [styles.input, { color: colors.text, borderColor: colors.border, backgroundColor: colors.background, fontSize: 17 * textScale }];
+
+  return (
+    <Section title={t('settings.trusted.title')} footer={t('settings.trusted.desc')}>
+      <View style={styles.pad}>
+        <TextInput
+          accessibilityLabel={t('settings.trusted.name')}
+          placeholder={t('settings.trusted.name')}
+          placeholderTextColor={colors.textMuted}
+          value={name}
+          onChangeText={setName}
+          maxLength={40}
+          style={inputStyle}
+        />
+        <TextInput
+          accessibilityLabel={t('settings.trusted.phone')}
+          placeholder={t('settings.trusted.phone')}
+          placeholderTextColor={colors.textMuted}
+          value={phone}
+          onChangeText={setPhone}
+          keyboardType="phone-pad"
+          maxLength={20}
+          style={inputStyle}
+        />
+        {changed ? (
+          <Button size="md" title={t('common.save')} disabled={!valid} onPress={() => setTrustedContact({ name: name.trim(), phone: phone.trim() })} />
+        ) : null}
+        {contact && !changed ? (
+          <Button
+            size="md"
+            variant="ghost"
+            title={t('settings.trusted.remove')}
+            onPress={() => {
+              setTrustedContact(null);
+              setName('');
+              setPhone('');
+            }}
+          />
+        ) : null}
+      </View>
+    </Section>
+  );
+}
+
 const styles = StyleSheet.create({
+  input: { minHeight: 52, borderWidth: 1, borderRadius: radii.md, paddingHorizontal: spacing.md },
   pad: { padding: spacing.md, gap: spacing.md },
   padRow: { paddingHorizontal: spacing.md, paddingVertical: spacing.xs },
   about: { flexDirection: 'row', alignItems: 'center' },

@@ -12,7 +12,7 @@ export default function CareScreen() {
   const { t } = useTranslation();
   const doctors = useData((s) => s.doctors);
   const requests = useData((s) => s.requests);
-  const lastAlert = useData((s) => s.alerts[s.alerts.length - 1]);
+  const lastAlert = useData((s) => s.alerts.filter((a) => a.level === 'urgent').pop());
 
   return (
     <Screen footer={<Button title={t('care.requestCta')} onPress={() => router.push('/consult')} />}>

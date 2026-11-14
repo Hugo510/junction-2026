@@ -3,14 +3,15 @@ import { memo, useState } from 'react';
 import { Linking, Pressable, StyleSheet, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
-import { EMERGENCY_NUMBER } from '../../config/crisisResources';
-import type { ChatCard } from '../../domain/chat/types';
+import { CRISIS_RESOURCES, EMERGENCY_NUMBER, displayPhone } from '../../config/crisisResources';
+import type { ChatCard, QuickReplyId } from '../../domain/chat/types';
 import { simulateQueueProgress } from '../../domain/consultQueue';
 import type { EmotionId, InterventionId, PlanItem, Scale5 } from '../../domain/entities';
 import { getIntervention } from '../../domain/interventions';
 import { emotionEmoji } from '../../domain/journal';
 import { now } from '../../store/clock';
 import { useData } from '../../store/data';
+import { useSettings } from '../../store/settings';
 import { AppText, Button, Card, Icon, MIN_TOUCH, MoodFace, Sparkline, spacing, useTheme } from '../../ui';
 import { EmotionPicker } from '../EmotionPicker';
 import { useMoodTrend } from '../insights/useInsightsViewModel';
@@ -22,6 +23,7 @@ export interface ChatCardHandlers {
   onMood: (mood: Scale5) => void;
   onEmotions: (emotions: EmotionId[]) => void;
   onSafety: (answer: boolean) => void;
+  onQuick: (id: QuickReplyId) => void;
 }
 
 /**
@@ -59,6 +61,10 @@ export const ChatCardView = memo(function ChatCardView({
       return <CrisisCard />;
     case 'entry':
       return <EntryCard checkInId={card.checkInId} />;
+    case 'friend':
+      return <FriendCard />;
+    case 'reconnect':
+      return <ReconnectCard onCheckIn={() => handlers.onQuick('checkin')} />;
   }
 });
 
@@ -229,6 +235,49 @@ function EntryCard({ checkInId }: { checkInId: string }) {
       </View>
       <Button size="md" variant="secondary" title={t('chat.card.openJournal')} onPress={() => router.push('/progress')} />
       <Button size="md" variant="ghost" title={t('chat.card.fullCheckin')} onPress={() => router.push('/checkin')} />
+    </Card>
+  );
+}
+
+/** One tap to someone the person trusts (stored only on the phone). */
+function FriendCard() {
+  const { t } = useTranslation();
+  const contact = useSettings((s) => s.trustedContact);
+  if (!contact) {
+    return (
+      <Card tone="sand" flat>
+        <AppText>{t('chat.card.addFriendBody')}</AppText>
+        <Button size="md" variant="secondary" title={t('chat.card.addFriend')} onPress={() => router.push('/settings')} />
+      </Card>
+    );
+  }
+  const phone = contact.phone.replace(/\s+/g, '');
+  return (
+    <Card tone="sand" flat>
+      <Button size="md" title={t('chat.card.callFriend', { name: contact.name })} onPress={() => Linking.openURL(`tel:${phone}`).catch(() => undefined)} />
+      <Button size="md" variant="ghost" title={t('chat.card.messageFriend', { name: contact.name })} onPress={() => Linking.openURL(`sms:${phone}`).catch(() => undefined)} />
+    </Card>
+  );
+}
+
+/** After a long silence: calm ways back in. Not crisis language; 112 is not part of this ladder. */
+function ReconnectCard({ onCheckIn }: { onCheckIn: () => void }) {
+  const { t } = useTranslation();
+  const contact = useSettings((s) => s.trustedContact);
+  const helpline = CRISIS_RESOURCES[0];
+  return (
+    <Card tone="accent" flat>
+      <Button size="md" variant="accent" title={t('chat.card.reconnectCheckin')} onPress={onCheckIn} />
+      <Button size="md" variant="secondary" title={t('chat.card.reconnectCare')} onPress={() => router.push('/consult')} />
+      {contact ? (
+        <Button size="md" variant="ghost" title={t('chat.card.callFriend', { name: contact.name })} onPress={() => Linking.openURL(`tel:${contact.phone.replace(/\s+/g, '')}`).catch(() => undefined)} />
+      ) : null}
+      <Button
+        size="md"
+        variant="ghost"
+        title={t('chat.card.reconnectHelpline', { number: displayPhone(helpline.phone) })}
+        onPress={() => Linking.openURL(`tel:${helpline.phone}`).catch(() => undefined)}
+      />
     </Card>
   );
 }

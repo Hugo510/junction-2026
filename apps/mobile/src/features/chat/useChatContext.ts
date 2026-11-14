@@ -8,8 +8,11 @@ import type { InterventionId } from '../../domain/entities';
 import { checkInsByDate } from '../../domain/history';
 import { getIntervention, INTERVENTION_IDS } from '../../domain/interventions';
 import { rankInterventions } from '../../domain/interventionPicker';
+import { outreachLevel } from '../../domain/outreach';
+import { detectUpwardDrift } from '../../domain/priorityScore';
 import { now, timeOfDay, useToday } from '../../store/clock';
 import { useData } from '../../store/data';
+import { useSettings } from '../../store/settings';
 import { usePriority } from '../usePriority';
 
 /** Snapshot of the patient's situation for the chat engine. */
@@ -19,6 +22,8 @@ export function useChatContext(): ChatContext | null {
   const feedback = useData((s) => s.feedback);
   const plan = useData((s) => s.plan);
   const requests = useData((s) => s.requests);
+  const sensors = useData((s) => s.sensors);
+  const trusted = useSettings((s) => s.trustedContact);
   const priority = usePriority();
   const today = useToday();
 
@@ -46,6 +51,9 @@ export function useChatContext(): ChatContext | null {
       ),
       suggestedIntervention: (pending ?? ranking[0]) as InterventionId,
       calmInterventions: calm,
+      outreach: outreachLevel(checkIns, today),
+      trustedContactName: trusted?.name,
+      upwardDrift: !!patient.bipolarFlag && detectUpwardDrift({ checkIns, sensors, today }),
     };
-  }, [patient, checkIns, feedback, plan, requests, priority.level, today]);
+  }, [patient, checkIns, sensors, feedback, plan, requests, priority.level, today, trusted]);
 }

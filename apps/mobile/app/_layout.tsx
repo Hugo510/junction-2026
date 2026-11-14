@@ -9,6 +9,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useTranslation } from 'react-i18next';
 
+import { ReachOutBanner } from '../src/features/outreach/ReachOutBanner';
 import { applyLanguage, detectDeviceLanguage } from '../src/i18n';
 import { useData } from '../src/store/data';
 import { useSettings } from '../src/store/settings';
@@ -107,6 +108,7 @@ function Bootstrap() {
         <Stack.Screen name="demo" options={{ title: t('demo.title') }} />
         <Stack.Screen name="exercise" options={{ headerShown: false }} />
       </Stack>
+      <ReachOutBanner />
     </ThemeProvider>
   );
 }

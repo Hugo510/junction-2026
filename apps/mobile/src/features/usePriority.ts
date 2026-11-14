@@ -9,6 +9,7 @@ import { useData } from '../store/data';
 export function usePriority(): PriorityResult {
   const checkIns = useData((s) => s.checkIns);
   const sensors = useData((s) => s.sensors);
+  const bipolar = useData((s) => s.patient?.bipolarFlag ?? false);
   const today = useToday();
-  return useMemo(() => priorityScore({ checkIns, sensors, today }), [checkIns, sensors, today]);
+  return useMemo(() => priorityScore({ checkIns, sensors, today, flags: { bipolar } }), [checkIns, sensors, today, bipolar]);
 }

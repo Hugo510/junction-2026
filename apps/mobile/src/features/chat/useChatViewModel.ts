@@ -55,6 +55,7 @@ export function useChatViewModel() {
       onMood: (mood) => dispatch({ type: 'mood', mood }),
       onEmotions: (emotions) => dispatch({ type: 'emotions', emotions }),
       onSafety: (answer) => dispatch({ type: 'safety', answer }),
+      onQuick: (id) => dispatch({ type: 'quick', id }),
     }),
     [dispatch],
   );

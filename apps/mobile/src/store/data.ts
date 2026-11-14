@@ -23,8 +23,10 @@ import { INTERVENTION_IDS } from '../domain/interventions';
 import { pickInterventions } from '../domain/interventionPicker';
 import { priorityScore } from '../domain/priorityScore';
 import { assessCheckInRisk, routeToChannel, type RiskAssessment } from '../domain/riskRules';
+import { outreachLevel, shouldNotifyCareTeam, type OutreachLevel } from '../domain/outreach';
 import { mulberry32 } from '../domain/rng';
 import { now, todayISO, yesterdayISO } from './clock';
+import { useSettings } from './settings';
 
 export type CheckInInput = Omit<CheckIn, 'id' | 'date' | 'createdAt'>;
 
@@ -52,7 +54,11 @@ interface DataState {
   addFeedback: (id: InterventionId, rating: FeedbackRating) => Promise<void>;
   addSensorMinutes: (delta: Partial<Pick<SensorAggregate, 'activityMinutes' | 'daylightMinutes'>>) => Promise<void>;
   requestConsult: (reason: ConsultReason, urgency: PerceivedUrgency) => Promise<ConsultOutcome>;
-  raiseAlert: (source: Alert['source']) => Promise<Alert>;
+  raiseAlert: (source: Alert['source'], level?: Alert['level']) => Promise<Alert>;
+  /** Clinic-only flag (demo: toggled from demo mode). */
+  setBipolarFlag: (on: boolean) => Promise<void>;
+  /** Silence ladder: returns the level and (with consent) gently notifies the care team. */
+  checkSilence: () => Promise<OutreachLevel>;
   seedScenario: (scenario: SeedScenario) => Promise<void>;
   deleteEverything: () => Promise<void>;
 }
@@ -179,7 +185,7 @@ export const useData = create<DataState>()((set, get) => {
       const today = todayISO();
       const latestToday = [...checkIns].reverse().find((c) => c.date === today);
       const risk = assessCheckInRisk({ safetyConcern: latestToday?.safetyConcern ?? false });
-      const priority = priorityScore({ checkIns, sensors, today, perceivedUrgency });
+      const priority = priorityScore({ checkIns, sensors, today, perceivedUrgency, flags: { bipolar: get().patient?.bipolarFlag } });
 
       if (routeToChannel(risk, priority) === 'urgent') {
         const alert = await get().raiseAlert('contactCareTeam');
@@ -206,11 +212,28 @@ export const useData = create<DataState>()((set, get) => {
       return { channel: 'normalQueue', request };
     },
 
-    raiseAlert: async (source) => {
-      const alert: Alert = { id: newId('alert'), createdAt: now().toISOString(), level: 'urgent', source };
+    raiseAlert: async (source, level = 'urgent') => {
+      const alert: Alert = { id: newId('alert'), createdAt: now().toISOString(), level, source };
       await r.care.createAlert(alert);
       set({ alerts: [...get().alerts, alert] });
       return alert;
+    },
+
+    setBipolarFlag: async (on) => {
+      const patient = get().patient;
+      if (!patient) return;
+      const updated = { ...patient, bipolarFlag: on };
+      await r.patient.save(updated);
+      set({ patient: updated });
+    },
+
+    checkSilence: async () => {
+      const { checkIns, alerts } = get();
+      const today = todayISO();
+      const level = outreachLevel(checkIns, today);
+      const consent = useSettings.getState().consents.careTeamAfterSilence;
+      if (shouldNotifyCareTeam(level, consent, alerts, today)) await get().raiseAlert('silence', 'info');
+      return level;
     },
 
     seedScenario: async (scenario) => {

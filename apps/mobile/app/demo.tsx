@@ -2,20 +2,21 @@ import { router } from 'expo-router';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { notificationKey } from '../src/domain/outreach';
 import { usePriority } from '../src/features/usePriority';
 import { formatDate } from '../src/i18n';
 import { haptics } from '../src/services/haptics';
-import { now } from '../src/store/clock';
+import { now, todayISO } from '../src/store/clock';
 import { useChat } from '../src/store/chat';
 import { useData } from '../src/store/data';
+import { useReachOut } from '../src/store/reachOut';
 import { useSettings } from '../src/store/settings';
 import { AppText, Button, Card, Screen } from '../src/ui';
 
 /**
  * Hidden demo mode for the pitch (long-press the logo in Settings for 2 s).
- * Suggested 2-minute script: Seed good week → Today/Insights → Seed declining week →
- * Today shows the companion suggesting a consultation → Request one in Care (high priority, 1st in line)
- * → Trigger urgent check-in to show the crisis path.
+ * Suggested script: Seed good week → Simulate reach-out → Skip 3 silent days (ladder: warm → friend)
+ * → Seed declining week (priority jumps, companion suggests a consultation) → Trigger urgent check-in.
  */
 export default function DemoScreen() {
   const { t } = useTranslation();
@@ -27,6 +28,17 @@ export default function DemoScreen() {
   const dayOffset = useSettings((s) => s.dayOffset);
   const resetSettings = useSettings((s) => s.reset);
   const priority = usePriority();
+  const bipolar = useData((s) => s.patient?.bipolarFlag ?? false);
+  const setBipolarFlag = useData((s) => s.setBipolarFlag);
+  const checkSilence = useData((s) => s.checkSilence);
+
+  /** Show the simulated notification that matches the current silence level. */
+  const reachOut = async () => {
+    const level = await checkSilence();
+    const checkedInToday = useData.getState().checkIns.some((c) => c.date === todayISO());
+    const contact = useSettings.getState().trustedContact;
+    useReachOut.getState().show({ key: notificationKey(level, checkedInToday, !!contact), params: { friend: contact?.name ?? '' } });
+  };
   const [busy, setBusy] = useState<string | null>(null);
   const [done, setDone] = useState<string | null>(null);
 
@@ -52,13 +64,31 @@ export default function DemoScreen() {
         router.push({ pathname: '/crisis', params: { urgent: '1' } });
       },
     },
+    { key: 'reachOut', action: reachOut },
     {
       key: 'advanceDay',
       variant: 'secondary',
       action: async () => {
         advanceDay();
         await ensureTodayPlan();
+        await reachOut();
       },
+    },
+    {
+      key: 'skipDays',
+      variant: 'secondary',
+      action: async () => {
+        advanceDay();
+        advanceDay();
+        advanceDay();
+        await ensureTodayPlan();
+        await reachOut();
+      },
+    },
+    {
+      key: bipolar ? 'bipolarOff' : 'bipolarOn',
+      variant: 'secondary',
+      action: () => setBipolarFlag(!bipolar),
     },
     {
       key: 'reset',

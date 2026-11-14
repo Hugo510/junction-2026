@@ -9,7 +9,7 @@ import { useData } from '../../src/store/data';
 import { useSettings } from '../../src/store/settings';
 import { AppText, Button, ListItem, Screen, Section, spacing } from '../../src/ui';
 
-const ITEMS = ['checkins', 'reaction', 'movement', 'location', 'where', 'sharing'] as const;
+const ITEMS = ['checkins', 'reaction', 'movement', 'location', 'trusted', 'where', 'sharing'] as const;
 
 export default function PrivacyScreen() {
   const { t } = useTranslation();
