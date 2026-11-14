@@ -287,6 +287,15 @@
       "title": "En bra sak",
       "why": "Att lägga märke till små goda stunder stöder återhämtningen.",
       "howTo": "Tänk på en liten sak som gick okej idag. Det är allt."
+    },
+    "seaSounds": {
+      "title": "Havsljud",
+      "why": "Långsamma, jämna vågor ger tankarna något mjukt att vila i."
+    },
+    "windDown": {
+      "title": "Telefonen utanför sovrummet i kväll",
+      "why": "Dina kvällar har blivit senare än du brukar ha dem. En lugnare sista timme skyddar sömnen.",
+      "howTo": "Låt telefonen ladda utanför sovrummet i kväll. Bara om det känns rätt: nej tack går alltid bra."
     }
   },
   "comfort": {
@@ -345,7 +354,13 @@
       "saved": "{{minutes}} minuter dagsljus sparades. Bra gjort.",
       "permissionDenied": "Platsbehörighet gavs inte, så du kan logga tid utomhus själv."
     },
-    "ideas": "Små idéer"
+    "ideas": "Små idéer",
+    "sea": {
+      "hint": "Lyssna så länge du vill. Låt andningen följa vågorna.",
+      "play": "Spela vågorna",
+      "pause": "Pausa",
+      "soundNote": "Ljudet är gjort för Hiillos; inget spelas in eller skickas."
+    }
   },
   "insights": {
     "title": "Översikt",
@@ -471,7 +486,20 @@
     "deleteConfirm": "Radera",
     "notificationsTitle": "Notiser",
     "discreet": "Diskreta notiser",
-    "discreetDesc": "Förhandsvisningen säger bara \"Ett meddelande från Hiillos\". Den nämner aldrig humör eller hälsa, eftersom andra kan se din telefon."
+    "discreetDesc": "Förhandsvisningen säger bara \"Ett meddelande från Hiillos\". Den nämner aldrig humör eller hälsa, eftersom andra kan se din telefon.",
+    "ai": {
+      "title": "AI och röst (valfritt)",
+      "llm": "AI-svar i chatten",
+      "llmDesc": "Avstängt som standard. När det är på skickas meddelandena du skriver i chatten till vår server och till en AI-tjänst som skriver ett svar. Incheckningar, poäng och sensordata skickas aldrig. Krisord hanteras först i din telefon och skickas aldrig till AI:n.",
+      "voice": "Följeslagarens röst",
+      "voiceDesc": "Låter dig lyssna på din följeslagares meddelanden. Bara följeslagarens text skickas till en rösttjänst, aldrig det du skriver.",
+      "unavailable": "Inte tillgängligt just nu: appen är inte ansluten till servern, så den inbyggda följeslagaren svarar."
+    },
+    "shared": {
+      "title": "Lära av andra (valfritt)",
+      "label": "Börja med det som har hjälpt andra",
+      "desc": "Avstängt som standard. När det är på börjar Hiillos med de små steg som har hjälpt andra mest och lär sig sedan dina egna. Bara ett medelvärde per steg används, från flera personer tillsammans. Inget om dig delas."
+    }
   },
   "settings": {
     "title": "Inställningar",
@@ -522,7 +550,19 @@
     "personasTitle": "Demopersoner (syntetiska)",
     "noPersonas": "Inga personfiler än. Lägg dem i assets/personas/<id>/core.json.",
     "careEndedOn": "Klinikens status: vården avslutad → slå på",
-    "careEndedOff": "Klinikens status: vården avslutad → stäng av"
+    "careEndedOff": "Klinikens status: vården avslutad → stäng av",
+    "backend": {
+      "title": "Server",
+      "off": "Inte konfigurerad (appen fungerar helt i telefonen)",
+      "connecting": "Ansluter…",
+      "online": "Ansluten",
+      "offline": "Går inte att nå (appen fungerar fortfarande i telefonen)",
+      "features": "AI-svar: {{llm}} · Röst: {{voice}}",
+      "mirrored": "Senast kopierade incheckning: {{date}}",
+      "yes": "redo",
+      "no": "inte inställd",
+      "retry": "Kontrollera igen"
+    }
   },
   "menu": {
     "chat": "Chatt",
@@ -643,7 +683,12 @@
     },
     "weekly": {
       "invite": "En gång i veckan frågar jag lite mer, som sömn och energi. Det tar två minuter."
-    }
+    },
+    "aiLabel": "AI-svar · inte medicinsk rådgivning",
+    "listen": "Lyssna",
+    "listenLoading": "Förbereder rösten…",
+    "listenStop": "Stoppa",
+    "listenError": "Rösten är inte tillgänglig just nu."
   },
   "journal": {
     "title": "Dagbok",
@@ -711,7 +756,8 @@
       "steady": "jämn",
       "bright": "klar"
     },
-    "helps": "Det som hjälper dig mest just nu: {{action}}"
+    "helps": "Det som hjälper dig mest just nu: {{action}}",
+    "helpsOthers": "En startpunkt från det som har hjälpt andra: {{action}}"
   },
   "phq": {
     "options": {
@@ -774,7 +820,14 @@
       "homeMore": "Mer tid hemma jämfört med den personliga baslinjen",
       "laterNights": "Senare skärmavstängning jämfört med den personliga baslinjen"
     },
-    "quiet": "Långvarig tystnad · kontaktmeddelanden pausade (minst 30 dagar)"
+    "quiet": "Långvarig tystnad · kontaktmeddelanden pausade (minst 30 dagar)",
+    "signs": {
+      "title": "Tidiga tecken att följa (kliniken bestämmer)",
+      "laterNights": "Senare kvällar",
+      "homeMore": "Mer tid hemma",
+      "activityDrop": "Mindre aktivitet",
+      "matched": "tidigt tecken för den här personen"
+    }
   },
   "bodyMap": {
     "title": "Var finns din eld idag?",

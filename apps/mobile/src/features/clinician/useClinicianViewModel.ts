@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { PERSONAS } from '../../data/personas';
 import { addDaysISO } from '../../domain/dates';
+import { useClinic } from '../../store/clinic';
 import { useSettings } from '../../store/settings';
 import { buildClinicianRows } from './clinicianViewModel';
 
@@ -9,6 +10,8 @@ import { buildClinicianRows } from './clinicianViewModel';
 export function useClinicianViewModel() {
   const offset = useSettings((s) => s.dayOffset);
   const date = addDaysISO('2026-11-15', offset);
-  const rows = useMemo(() => buildClinicianRows(PERSONAS, date), [date]);
-  return { rows, date };
+  const earlySigns = useClinic((s) => s.earlySigns);
+  const onToggleSign = useClinic((s) => s.toggleSign);
+  const rows = useMemo(() => buildClinicianRows(PERSONAS, date, earlySigns), [date, earlySigns]);
+  return { rows, date, onToggleSign };
 }

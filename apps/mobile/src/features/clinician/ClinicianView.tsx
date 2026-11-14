@@ -1,9 +1,10 @@
 import { StyleSheet, View, useWindowDimensions } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { AppText, Card, FeatureCard, Screen, radii, spacing, useTheme, type Category } from '../../ui';
+import { EARLY_SIGNS, type EarlySign } from '../../domain/entities';
+import { AppText, Card, Chip, FeatureCard, Screen, radii, spacing, useTheme, type Category } from '../../ui';
 import type { ClinicianRow } from './clinicianViewModel';
 
-export function ClinicianView({ rows, date }: { rows: ClinicianRow[]; date: string }) {
+export function ClinicianView({ rows, date, onToggleSign }: { rows: ClinicianRow[]; date: string; onToggleSign?: (personId: string, sign: EarlySign) => void }) {
   const { t } = useTranslation();
   const { colors } = useTheme();
   const { width } = useWindowDimensions();
@@ -72,10 +73,23 @@ export function ClinicianView({ rows, date }: { rows: ClinicianRow[]; date: stri
                   {row.reasons.length ? row.reasons.map((reason) => (
                     <View key={reason} style={styles.reason}>
                       <View style={[styles.dot, { backgroundColor: color }]} />
-                      <AppText variant="caption" style={styles.reasonText}>{t(`clinician.reasonsText.${reason.replace('priority.reasons.', '')}`)}</AppText>
+                      <AppText variant="caption" style={styles.reasonText}>
+                        {t(`clinician.reasonsText.${reason.replace('priority.reasons.', '')}`)}
+                        {row.priority.clinicSigns?.includes(reason) ? <AppText variant="caption" tone="accent">{`  ·  ${t('clinician.signs.matched')}`}</AppText> : null}
+                      </AppText>
                     </View>
                   )) : <AppText variant="caption" tone="muted">{t('clinician.noReasons')}</AppText>}
                 </View>
+                {onToggleSign ? (
+                  <View style={styles.signs}>
+                    <AppText variant="caption" tone="muted">{t('clinician.signs.title')}</AppText>
+                    <View style={styles.signChips}>
+                      {EARLY_SIGNS.map((sign) => (
+                        <Chip key={sign} role="checkbox" label={t(`clinician.signs.${sign}`)} selected={row.watchedSigns.includes(sign)} onPress={() => onToggleSign(row.id, sign)} />
+                      ))}
+                    </View>
+                  </View>
+                ) : null}
                 <View style={[styles.details, { backgroundColor: colors.surfaceAlt }]}>
                   <AppText variant="label">{row.latestPhq9 ? t('clinician.phq', { total: row.latestPhq9.total, date: row.latestPhq9.date }) : t('clinician.noPhq')}</AppText>
                   {row.lostContact ? (
@@ -118,5 +132,7 @@ const styles = StyleSheet.create({
   reason: { flexDirection: 'row', alignItems: 'flex-start', gap: spacing.sm },
   dot: { width: 8, height: 8, borderRadius: 4, marginTop: 6 },
   reasonText: { flex: 1 },
+  signs: { gap: spacing.xs },
+  signChips: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm },
   details: { borderRadius: radii.md, padding: spacing.sm + spacing.xs, gap: spacing.xs },
 });

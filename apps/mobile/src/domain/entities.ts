@@ -135,7 +135,9 @@ export type InterventionId =
   | 'move'
   | 'daylightWalk'
   | 'reachOut'
-  | 'gratitude';
+  | 'gratitude'
+  | 'seaSounds'
+  | 'windDown';
 
 export type InterventionTag = 'calm' | 'light' | 'movement' | 'social' | 'focus';
 
@@ -184,11 +186,17 @@ export type ConsultReason = 'moodLower' | 'sleep' | 'worried' | 'treatment' | 't
 export type PerceivedUrgency = 'low' | 'medium' | 'high';
 export type PriorityLevel = 'low' | 'medium' | 'high';
 
+/** Early signs a clinician can ask Hiillos to watch for one person (they match priority rules). */
+export type EarlySign = 'laterNights' | 'homeMore' | 'activityDrop';
+export const EARLY_SIGNS: readonly EarlySign[] = ['laterNights', 'homeMore', 'activityDrop'];
+
 export interface PriorityResult {
   score: number;
   level: PriorityLevel;
   /** i18n keys explaining the score. */
   reasons: string[];
+  /** Reasons that match an early sign the clinic set for this person (they are listed first). */
+  clinicSigns?: string[];
 }
 
 export interface ConsultRequest {

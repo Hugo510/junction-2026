@@ -287,6 +287,15 @@
       "title": "Una cosa buena",
       "why": "Notar pequeños momentos buenos apoya la recuperación.",
       "howTo": "Piensa en una cosa pequeña que hoy salió bien. Eso es todo."
+    },
+    "seaSounds": {
+      "title": "Sonidos del mar",
+      "why": "Las olas lentas y constantes le dan a la mente algo suave donde descansar."
+    },
+    "windDown": {
+      "title": "El teléfono fuera del cuarto esta noche",
+      "why": "Tus noches se han alargado más de lo habitual. Una última hora más tranquila protege el sueño.",
+      "howTo": "Esta noche deja el teléfono cargando fuera del cuarto. Solo si te parece bien: decir que no siempre está bien."
     }
   },
   "comfort": {
@@ -345,7 +354,13 @@
       "saved": "Se guardaron {{minutes}} minutos de luz de día. Muy bien.",
       "permissionDenied": "No se dio permiso de ubicación, así que puedes anotar tú el tiempo afuera."
     },
-    "ideas": "Pequeñas ideas"
+    "ideas": "Pequeñas ideas",
+    "sea": {
+      "hint": "Escucha el tiempo que quieras. Deja que tu respiración siga las olas.",
+      "play": "Reproducir las olas",
+      "pause": "Pausar",
+      "soundNote": "El sonido se creó para Hiillos; no se graba ni se envía nada."
+    }
   },
   "insights": {
     "title": "Tendencias",
@@ -471,7 +486,20 @@
     "deleteConfirm": "Borrar",
     "notificationsTitle": "Notificaciones",
     "discreet": "Notificaciones discretas",
-    "discreetDesc": "La vista previa solo dice \"Un mensaje de Hiillos\". Nunca menciona ánimo ni salud, porque otras personas pueden ver tu teléfono."
+    "discreetDesc": "La vista previa solo dice \"Un mensaje de Hiillos\". Nunca menciona ánimo ni salud, porque otras personas pueden ver tu teléfono.",
+    "ai": {
+      "title": "IA y voz (opcional)",
+      "llm": "Respuestas de IA en el chat",
+      "llmDesc": "Apagado por defecto. Si lo activas, los mensajes que escribes en el chat se envían a nuestro servidor y a un servicio de IA para redactar la respuesta. Nunca se envían check-ins, puntajes ni datos de sensores. Las palabras de crisis se atienden primero en tu teléfono y nunca se envían a la IA.",
+      "voice": "Voz del compañero",
+      "voiceDesc": "Te permite escuchar los mensajes de tu compañero. Solo se envía el texto del compañero a un servicio de voz, nunca lo que escribes.",
+      "unavailable": "No disponible por ahora: la app no está conectada al servidor, así que responde el compañero integrado."
+    },
+    "shared": {
+      "title": "Aprender de otras personas (opcional)",
+      "label": "Empezar con lo que ayudó a otras personas",
+      "desc": "Apagado por defecto. Si lo activas, Hiillos empieza con los pasos pequeños que más ayudaron a otras personas y luego aprende los tuyos. Solo se usa un promedio por paso, de varias personas juntas. No se comparte nada sobre ti."
+    }
   },
   "settings": {
     "title": "Ajustes",
@@ -522,7 +550,19 @@
     "personasTitle": "Personas de demostración (sintéticas)",
     "noPersonas": "Aún no hay archivos de personas. Agrégalos en assets/personas/<id>/core.json.",
     "careEndedOn": "Estado clínico: atención terminada → activar",
-    "careEndedOff": "Estado clínico: atención terminada → desactivar"
+    "careEndedOff": "Estado clínico: atención terminada → desactivar",
+    "backend": {
+      "title": "Servidor",
+      "off": "Sin configurar (la app funciona completa en el teléfono)",
+      "connecting": "Conectando…",
+      "online": "Conectado",
+      "offline": "Sin conexión (la app sigue funcionando en el teléfono)",
+      "features": "Respuestas de IA: {{llm}} · Voz: {{voice}}",
+      "mirrored": "Último check-in copiado: {{date}}",
+      "yes": "lista",
+      "no": "sin configurar",
+      "retry": "Revisar de nuevo"
+    }
   },
   "menu": {
     "chat": "Chat",
@@ -643,7 +683,12 @@
     },
     "weekly": {
       "invite": "Una vez por semana pregunto un poco más, como sueño y energía. Toma dos minutos."
-    }
+    },
+    "aiLabel": "Respuesta de IA · no es consejo médico",
+    "listen": "Escuchar",
+    "listenLoading": "Preparando la voz…",
+    "listenStop": "Detener",
+    "listenError": "La voz no está disponible por ahora."
   },
   "journal": {
     "title": "Diario",
@@ -711,7 +756,8 @@
       "steady": "estables",
       "bright": "brillantes"
     },
-    "helps": "Lo que más te ayuda últimamente: {{action}}"
+    "helps": "Lo que más te ayuda últimamente: {{action}}",
+    "helpsOthers": "Un punto de partida con lo que ayudó a otras personas: {{action}}"
   },
   "phq": {
     "options": {
@@ -774,7 +820,14 @@
       "homeMore": "Más tiempo en casa respecto a la referencia personal",
       "laterNights": "Apagado de pantalla más tardío respecto a la referencia personal"
     },
-    "quiet": "Silencio prolongado · avisos detenidos (30 días o más)"
+    "quiet": "Silencio prolongado · avisos detenidos (30 días o más)",
+    "signs": {
+      "title": "Señales tempranas a vigilar (las define la clínica)",
+      "laterNights": "Noches más tardías",
+      "homeMore": "Más tiempo en casa",
+      "activityDrop": "Menos actividad",
+      "matched": "señal temprana de esta persona"
+    }
   },
   "bodyMap": {
     "title": "¿Dónde está tu fuego hoy?",

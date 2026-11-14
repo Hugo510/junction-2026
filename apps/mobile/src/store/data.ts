@@ -2,6 +2,7 @@ import { create } from 'zustand';
 
 import { repositories } from '../data';
 import { rebasePersona, type Persona } from '../data/personas';
+import { demoPopulationPriors } from '../data/personas/population';
 import { generateHistory, type SeedScenario } from '../data/seed';
 import { enqueueNormal, positionInQueue, syntheticWaitingQueue } from '../domain/consultQueue';
 import type {
@@ -21,12 +22,13 @@ import type {
   PlanItemStatus,
   SensorAggregate,
 } from '../domain/entities';
-import { INTERVENTION_IDS } from '../domain/interventions';
+import { availableInterventionIds } from '../domain/interventions';
 import { pickInterventions } from '../domain/interventionPicker';
 import { priorityScore } from '../domain/priorityScore';
 import { assessCheckInRisk, routeToChannel, type RiskAssessment } from '../domain/riskRules';
 import { outreachLevel, shouldNotifyCareTeam, type OutreachLevel } from '../domain/outreach';
 import { mulberry32 } from '../domain/rng';
+import { useBackend } from './backend';
 import { now, todayISO, yesterdayISO } from './clock';
 import { useSettings } from './settings';
 
@@ -151,6 +153,8 @@ export const useData = create<DataState>()((set, get) => {
         await get().raiseAlert('checkIn');
       }
       set({ checkIns: [...get().checkIns, checkIn] });
+      // Optional copy for the backend (numbers only, never the note). Never blocks the app.
+      useBackend.getState().mirrorCheckIn(checkIn);
       return { checkIn, risk };
     },
 
@@ -161,9 +165,11 @@ export const useData = create<DataState>()((set, get) => {
         set({ plan: existing });
         return;
       }
-      const { feedback, checkIns } = get();
+      const { feedback, checkIns, sensors } = get();
       const ids = pickInterventions({
-        ids: INTERVENTION_IDS,
+        ids: availableInterventionIds({ sensors, today: date }),
+        // Only with consent: start from what helped other people (aggregated scores).
+        priors: useSettings.getState().sharedLearning ? demoPopulationPriors() : undefined,
         feedback,
         checkIns,
         rng: mulberry32(hashString(date) + feedback.length),

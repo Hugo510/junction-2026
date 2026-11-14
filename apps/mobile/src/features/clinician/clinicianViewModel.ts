@@ -1,7 +1,7 @@
 import type { Persona } from '../../data/personas';
 import type { ISODate } from '../../domain/dates';
 import { daysBetween } from '../../domain/dates';
-import type { Phq9Entry } from '../../domain/entities';
+import type { EarlySign, Phq9Entry } from '../../domain/entities';
 import { outreachLevel } from '../../domain/outreach';
 import { latestPhq } from '../../domain/phq';
 import { priorityScore } from '../../domain/priorityScore';
@@ -33,19 +33,22 @@ export function callStatus(entries: Phq9Entry[], today: ISODate, baseline?: numb
  * sleep, anxiety, perceived urgency, upward drift), NOT a ranking by weight.
  * No store, repositories, alerts or loadPersona calls belong in this module.
  */
-export function buildClinicianRows(personas: readonly Persona[], today: ISODate) {
+export function buildClinicianRows(personas: readonly Persona[], today: ISODate, earlySigns: Readonly<Record<string, readonly EarlySign[]>> = {}) {
   return personas.map((persona) => {
     const checkIns = persona.checkIns.filter((c) => c.date <= today);
     const sensors = persona.sensors.filter((s) => s.date <= today);
     const phq = (persona.phq9 ?? []).filter((q) => q.date <= today);
     const latest = latestPhq(phq, true);
     const outreach = outreachLevel(checkIns, today);
-    const priority = priorityScore({ checkIns, sensors, today, flags: { bipolar: persona.persona.bipolarFlag } });
+    // Early signs are set by the clinic per person; they only reorder the reasons.
+    const watchedSigns = earlySigns[persona.persona.id] ?? [];
+    const priority = priorityScore({ checkIns, sensors, today, flags: { bipolar: persona.persona.bipolarFlag, earlySigns: watchedSigns } });
     return {
       id: persona.persona.id,
       name: persona.persona.label.split(',')[0].trim(),
       priority,
       reasons: priority.reasons.slice(0, 2),
+      watchedSigns,
       latestPhq9: latest,
       // Quiet stops outreach; it does not mean contact has resumed.
       outreach,

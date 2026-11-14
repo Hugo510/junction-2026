@@ -15,6 +15,14 @@ import type { Rng } from './rng';
 export const PRIOR_MEAN = 0.1;
 export const DEFAULT_EPSILON = 0.2;
 
+/** Starting mean per action, used instead of PRIOR_MEAN when the person agreed to learn from others. */
+export type ArmPriors = Partial<Record<InterventionId, number>>;
+
+/** A prior is only built from at least this many people, each with at least this many ratings. */
+export const MIN_PEOPLE_FOR_PRIOR = 2;
+export const MIN_RATINGS_PER_PERSON = 2;
+const PRIOR_LIMIT = 0.5;
+
 export interface ArmStats {
   id: InterventionId;
   /** Number of real feedback observations. */
@@ -38,12 +46,39 @@ export function computeArmStats(
   ids: readonly InterventionId[],
   feedback: InterventionFeedback[],
   checkIns: CheckIn[],
+  priors: ArmPriors = {},
 ): ArmStats[] {
   return ids.map((id) => {
     const rewards = feedback.filter((f) => f.interventionId === id).map((f) => rewardFor(f, checkIns));
     const sum = rewards.reduce((s, r) => s + r, 0);
-    return { id, n: rewards.length, mean: (PRIOR_MEAN + sum) / (1 + rewards.length) };
+    // The prior counts as ONE virtual observation, so the person's own feedback soon outweighs it.
+    return { id, n: rewards.length, mean: ((priors[id] ?? PRIOR_MEAN) + sum) / (1 + rewards.length) };
   });
+}
+
+/**
+ * Loop 3, "many people": a starting point for a new person from what helped others.
+ * Only one number per action leaves each person (their mean reward), and an action gets a
+ * prior only when at least MIN_PEOPLE_FOR_PRIOR people rated it, so no single person can be
+ * read back from it. Used only with the person's consent.
+ */
+export function populationPriors(
+  ids: readonly InterventionId[],
+  people: readonly { feedback: InterventionFeedback[]; checkIns: CheckIn[] }[],
+): ArmPriors {
+  const priors: ArmPriors = {};
+  for (const id of ids) {
+    const means: number[] = [];
+    for (const person of people) {
+      const rewards = person.feedback.filter((f) => f.interventionId === id).map((f) => rewardFor(f, person.checkIns));
+      if (rewards.length >= MIN_RATINGS_PER_PERSON) means.push(rewards.reduce((s, r) => s + r, 0) / rewards.length);
+    }
+    if (means.length >= MIN_PEOPLE_FOR_PRIOR) {
+      const mean = means.reduce((s, m) => s + m, 0) / means.length;
+      priors[id] = Math.max(-PRIOR_LIMIT, Math.min(PRIOR_LIMIT, mean));
+    }
+  }
+  return priors;
 }
 
 /** Arms sorted from most to least helpful (stable on ties). */
@@ -51,8 +86,9 @@ export function rankInterventions(
   ids: readonly InterventionId[],
   feedback: InterventionFeedback[],
   checkIns: CheckIn[],
+  priors: ArmPriors = {},
 ): ArmStats[] {
-  return computeArmStats(ids, feedback, checkIns)
+  return computeArmStats(ids, feedback, checkIns, priors)
     .map((s, i) => ({ s, i }))
     .sort((a, b) => b.s.mean - a.s.mean || a.i - b.i)
     .map(({ s }) => s);
@@ -65,12 +101,13 @@ export interface PickOptions {
   rng: Rng;
   count?: number;
   epsilon?: number;
+  priors?: ArmPriors;
 }
 
 /** Picks `count` distinct interventions for today's small plan. */
 export function pickInterventions(opts: PickOptions): InterventionId[] {
   const { rng, count = 3, epsilon = DEFAULT_EPSILON } = opts;
-  let remaining = rankInterventions(opts.ids, opts.feedback, opts.checkIns);
+  let remaining = rankInterventions(opts.ids, opts.feedback, opts.checkIns, opts.priors);
   const picked: InterventionId[] = [];
   while (picked.length < count && remaining.length > 0) {
     const index = rng() < epsilon ? Math.floor(rng() * remaining.length) : 0;

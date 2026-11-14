@@ -287,6 +287,15 @@
       "title": "One good thing",
       "why": "Noticing small good moments supports recovery.",
       "howTo": "Think of one small thing that went okay today. That's all."
+    },
+    "seaSounds": {
+      "title": "Sea sounds",
+      "why": "Slow, steady waves give the mind something gentle to rest on."
+    },
+    "windDown": {
+      "title": "Phone out of the bedroom tonight",
+      "why": "Your evenings have been running later than your usual. A calmer last hour protects sleep.",
+      "howTo": "Tonight, leave your phone to charge outside the bedroom. Only if it feels right: no thanks is always fine."
     }
   },
   "comfort": {
@@ -345,7 +354,13 @@
       "saved": "Saved {{minutes}} minutes of daylight. Well done.",
       "permissionDenied": "Location permission wasn't given, so you can log time outside yourself."
     },
-    "ideas": "Small ideas"
+    "ideas": "Small ideas",
+    "sea": {
+      "hint": "Listen for as long as you like. Let your breath follow the waves.",
+      "play": "Play the waves",
+      "pause": "Pause",
+      "soundNote": "The sound was made for Hiillos; nothing is recorded or sent."
+    }
   },
   "insights": {
     "title": "Insights",
@@ -471,7 +486,20 @@
     "deleteConfirm": "Delete",
     "notificationsTitle": "Notifications",
     "discreet": "Discreet notifications",
-    "discreetDesc": "Previews only say \"A message from Hiillos\". They never mention mood or health, because others may see your phone."
+    "discreetDesc": "Previews only say \"A message from Hiillos\". They never mention mood or health, because others may see your phone.",
+    "ai": {
+      "title": "AI and voice (optional)",
+      "llm": "AI replies in the chat",
+      "llmDesc": "Off by default. When on, the messages you type in the chat are sent to our server and to an AI service to write a reply. Check-ins, scores and sensor data are never sent. Crisis words are handled on your phone first and are never sent to the AI.",
+      "voice": "Companion voice",
+      "voiceDesc": "Lets you listen to your companion's messages. Only the companion's text is sent to a voice service, never what you write.",
+      "unavailable": "Not available right now: the app isn't connected to the server, so the built-in companion answers."
+    },
+    "shared": {
+      "title": "Learning from others (optional)",
+      "label": "Start from what helped others",
+      "desc": "Off by default. When on, Hiillos starts with the small steps that helped other people most, then learns your own. Only one average score per step is used, from several people together. Nothing about you is shared."
+    }
   },
   "settings": {
     "title": "Settings",
@@ -522,7 +550,19 @@
     "personasTitle": "Demo personas (synthetic)",
     "noPersonas": "No persona files yet. Add them to assets/personas/<id>/core.json.",
     "careEndedOn": "Clinic status: care ended → turn on",
-    "careEndedOff": "Clinic status: care ended → turn off"
+    "careEndedOff": "Clinic status: care ended → turn off",
+    "backend": {
+      "title": "Server",
+      "off": "Not configured (the app runs fully on the phone)",
+      "connecting": "Connecting…",
+      "online": "Connected",
+      "offline": "Not reachable (the app keeps working on the phone)",
+      "features": "AI replies: {{llm}} · Voice: {{voice}}",
+      "mirrored": "Last check-in copied: {{date}}",
+      "yes": "ready",
+      "no": "not set up",
+      "retry": "Check again"
+    }
   },
   "menu": {
     "chat": "Chat",
@@ -643,7 +683,12 @@
     },
     "weekly": {
       "invite": "Once a week I ask a little more, like sleep and energy. It takes two minutes."
-    }
+    },
+    "aiLabel": "AI reply · not medical advice",
+    "listen": "Listen",
+    "listenLoading": "Preparing the voice…",
+    "listenStop": "Stop",
+    "listenError": "The voice isn't available right now."
   },
   "journal": {
     "title": "Journal",
@@ -711,7 +756,8 @@
       "steady": "steady",
       "bright": "bright"
     },
-    "helps": "What helps you most lately: {{action}}"
+    "helps": "What helps you most lately: {{action}}",
+    "helpsOthers": "A starting point from what helped others: {{action}}"
   },
   "phq": {
     "options": {
@@ -774,7 +820,14 @@
       "homeMore": "More time at home than the personal baseline",
       "laterNights": "Later screen-off time than the personal baseline"
     },
-    "quiet": "Prolonged silence · outreach paused (30 days or more)"
+    "quiet": "Prolonged silence · outreach paused (30 days or more)",
+    "signs": {
+      "title": "Early signs to watch (set by the clinic)",
+      "laterNights": "Later nights",
+      "homeMore": "More time at home",
+      "activityDrop": "Less activity",
+      "matched": "early sign for this person"
+    }
   },
   "bodyMap": {
     "title": "Where is your fire today?",

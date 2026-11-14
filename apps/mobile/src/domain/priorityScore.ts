@@ -1,5 +1,5 @@
 import { addDaysISO, lastNDates, type ISODate } from './dates';
-import type { CheckIn, PerceivedUrgency, PriorityLevel, PriorityResult, SensorAggregate } from './entities';
+import type { CheckIn, EarlySign, PerceivedUrgency, PriorityLevel, PriorityResult, SensorAggregate } from './entities';
 import { average, checkInsByDate, sensorsByDate, twoWeekWindows } from './history';
 
 /**
@@ -46,7 +46,7 @@ export interface PriorityInput {
   today: ISODate;
   perceivedUrgency?: PerceivedUrgency;
   /** Clinic-set flags (never self-declared). */
-  flags?: { bipolar?: boolean };
+  flags?: { bipolar?: boolean; earlySigns?: readonly EarlySign[] };
 }
 
 export const PRIORITY_THRESHOLDS = { high: 60, medium: 30 } as const;
@@ -211,5 +211,12 @@ export function priorityScore(input: PriorityInput): PriorityResult {
   if (input.flags?.bipolar && detectUpwardDrift(input)) add(25, 'upwardDrift');
 
   const clamped = Math.max(0, Math.min(100, score));
-  return { score: clamped, level: levelForScore(clamped), reasons };
+
+  // "The clinic tells Hiillos what to watch": early signs set for this person are named first.
+  // They change the ORDER of the reasons only, never the score, and never raise an alert.
+  const watched = (input.flags?.earlySigns ?? []).map(REASON);
+  const clinicSigns = reasons.filter((r) => watched.includes(r));
+  if (clinicSigns.length === 0) return { score: clamped, level: levelForScore(clamped), reasons };
+  const ordered = [...clinicSigns, ...reasons.filter((r) => !clinicSigns.includes(r))];
+  return { score: clamped, level: levelForScore(clamped), reasons: ordered, clinicSigns };
 }

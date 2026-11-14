@@ -6,7 +6,7 @@ import { daysBetween } from '../../domain/dates';
 import { DEFAULT_LATITUDE, daylightHours } from '../../domain/daylight';
 import type { InterventionId } from '../../domain/entities';
 import { checkInsByDate } from '../../domain/history';
-import { getIntervention, INTERVENTION_IDS } from '../../domain/interventions';
+import { availableInterventionIds, getIntervention } from '../../domain/interventions';
 import { rankInterventions } from '../../domain/interventionPicker';
 import { outreachLevel } from '../../domain/outreach';
 import { hasPhqConcern, isPhqDue } from '../../domain/phq';
@@ -14,6 +14,7 @@ import { detectUpwardDrift } from '../../domain/priorityScore';
 import { now, timeOfDay, useToday } from '../../store/clock';
 import { useData } from '../../store/data';
 import { useSettings } from '../../store/settings';
+import { usePopulationPriors } from '../learning';
 import { usePriority } from '../usePriority';
 
 /** Snapshot of the patient's situation for the chat engine. */
@@ -28,6 +29,7 @@ export function useChatContext(): ChatContext | null {
   const trusted = useSettings((s) => s.trustedContact);
   const priority = usePriority();
   const today = useToday();
+  const priors = usePopulationPriors();
 
   return useMemo(() => {
     if (!patient) return null;
@@ -35,7 +37,7 @@ export function useChatContext(): ChatContext | null {
       .filter((c) => c.date < today)
       .sort((a, b) => a.date.localeCompare(b.date))
       .pop();
-    const ranking = rankInterventions(INTERVENTION_IDS, feedback, checkIns).map((r) => r.id);
+    const ranking = rankInterventions(availableInterventionIds({ sensors, today }), feedback, checkIns, priors).map((r) => r.id);
     const calm = ranking.filter((id) => getIntervention(id).tags.some((tag) => tag === 'calm' || tag === 'focus'));
     const pending = plan?.items.find((i) => i.status === 'pending')?.interventionId;
     const current = now();
@@ -62,5 +64,5 @@ export function useChatContext(): ChatContext | null {
       phqConcern: hasPhqConcern(phq9, today),
       weeklyDue: !checkIns.some((c) => (c.kind ?? 'full') === 'full' && daysBetween(c.date, today) < 7),
     };
-  }, [patient, checkIns, sensors, phq9, feedback, plan, requests, priority.level, today, trusted]);
+  }, [patient, checkIns, sensors, phq9, feedback, plan, requests, priority.level, today, trusted, priors]);
 }

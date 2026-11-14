@@ -287,6 +287,15 @@
       "title": "Yksi hyvä asia",
       "why": "Pienten hyvien hetkien huomaaminen tukee toipumista.",
       "howTo": "Mieti yhtä pientä asiaa, joka meni tänään hyvin. Siinä kaikki."
+    },
+    "seaSounds": {
+      "title": "Meren äänet",
+      "why": "Hitaat, tasaiset aallot antavat mielelle jotain lempeää, johon levätä."
+    },
+    "windDown": {
+      "title": "Puhelin pois makuuhuoneesta tänä iltana",
+      "why": "Iltasi ovat venyneet tavallista myöhempään. Rauhallisempi viimeinen tunti suojaa unta.",
+      "howTo": "Jätä puhelin tänä iltana latautumaan makuuhuoneen ulkopuolelle. Vain jos se tuntuu hyvältä: ei kiitos käy aina."
     }
   },
   "comfort": {
@@ -345,7 +354,13 @@
       "saved": "Tallennettiin {{minutes}} minuuttia päivänvaloa. Hienoa.",
       "permissionDenied": "Sijaintilupaa ei annettu, joten voit kirjata ulkoiluajan itse."
     },
-    "ideas": "Pieniä ideoita"
+    "ideas": "Pieniä ideoita",
+    "sea": {
+      "hint": "Kuuntele niin kauan kuin haluat. Anna hengityksen seurata aaltoja.",
+      "play": "Soita aallot",
+      "pause": "Tauko",
+      "soundNote": "Ääni on tehty Hiillosta varten; mitään ei tallenneta eikä lähetetä."
+    }
   },
   "insights": {
     "title": "Kehitys",
@@ -471,7 +486,20 @@
     "deleteConfirm": "Poista",
     "notificationsTitle": "Ilmoitukset",
     "discreet": "Hienotunteiset ilmoitukset",
-    "discreetDesc": "Esikatselussa lukee vain \"Viesti Hiillokselta\". Siinä ei koskaan mainita mielialaa tai terveyttä, koska muut voivat nähdä puhelimesi."
+    "discreetDesc": "Esikatselussa lukee vain \"Viesti Hiillokselta\". Siinä ei koskaan mainita mielialaa tai terveyttä, koska muut voivat nähdä puhelimesi.",
+    "ai": {
+      "title": "Tekoäly ja ääni (valinnainen)",
+      "llm": "Tekoälyn vastaukset keskustelussa",
+      "llmDesc": "Oletuksena pois päältä. Kun tämä on päällä, keskusteluun kirjoittamasi viestit lähetetään palvelimellemme ja tekoälypalveluun vastauksen kirjoittamista varten. Kirjauksia, pisteitä tai anturitietoja ei koskaan lähetetä. Kriisisanat käsitellään ensin puhelimessasi, eikä niitä koskaan lähetetä tekoälylle.",
+      "voice": "Kumppanin ääni",
+      "voiceDesc": "Voit kuunnella kumppanisi viestit. Äänipalveluun lähetetään vain kumppanin teksti, ei koskaan sitä, mitä itse kirjoitat.",
+      "unavailable": "Ei käytettävissä juuri nyt: sovellus ei ole yhteydessä palvelimeen, joten sisäänrakennettu kumppani vastaa."
+    },
+    "shared": {
+      "title": "Muilta oppiminen (valinnainen)",
+      "label": "Aloita siitä, mikä on auttanut muita",
+      "desc": "Oletuksena pois päältä. Kun tämä on päällä, Hiillos aloittaa pienistä askelista, jotka ovat auttaneet muita eniten, ja oppii sitten sinun omasi. Käytössä on vain yksi keskiarvo askelta kohden, usealta ihmiseltä yhdessä. Sinusta ei jaeta mitään."
+    }
   },
   "settings": {
     "title": "Asetukset",
@@ -522,7 +550,19 @@
     "personasTitle": "Demohenkilöt (synteettiset)",
     "noPersonas": "Henkilötiedostoja ei vielä ole. Lisää ne kansioon assets/personas/<id>/core.json.",
     "careEndedOn": "Klinikan tila: hoito päättynyt → päälle",
-    "careEndedOff": "Klinikan tila: hoito päättynyt → pois"
+    "careEndedOff": "Klinikan tila: hoito päättynyt → pois",
+    "backend": {
+      "title": "Palvelin",
+      "off": "Ei määritetty (sovellus toimii kokonaan puhelimessa)",
+      "connecting": "Yhdistetään…",
+      "online": "Yhdistetty",
+      "offline": "Ei tavoitettavissa (sovellus toimii edelleen puhelimessa)",
+      "features": "Tekoälyvastaukset: {{llm}} · Ääni: {{voice}}",
+      "mirrored": "Viimeisin kopioitu kirjaus: {{date}}",
+      "yes": "valmis",
+      "no": "ei määritetty",
+      "retry": "Tarkista uudelleen"
+    }
   },
   "menu": {
     "chat": "Keskustelu",
@@ -643,7 +683,12 @@
     },
     "weekly": {
       "invite": "Kerran viikossa kysyn vähän enemmän, kuten unesta ja energiasta. Se vie kaksi minuuttia."
-    }
+    },
+    "aiLabel": "Tekoälyn vastaus · ei lääketieteellinen neuvo",
+    "listen": "Kuuntele",
+    "listenLoading": "Ääntä valmistellaan…",
+    "listenStop": "Pysäytä",
+    "listenError": "Ääni ei ole juuri nyt käytettävissä."
   },
   "journal": {
     "title": "Päiväkirja",
@@ -711,7 +756,8 @@
       "steady": "tasainen",
       "bright": "kirkas"
     },
-    "helps": "Mikä auttaa sinua viime aikoina eniten: {{action}}"
+    "helps": "Mikä auttaa sinua viime aikoina eniten: {{action}}",
+    "helpsOthers": "Lähtökohta siitä, mikä on auttanut muita: {{action}}"
   },
   "phq": {
     "options": {
@@ -774,7 +820,14 @@
       "homeMore": "Enemmän aikaa kotona henkilökohtaiseen lähtötasoon verrattuna",
       "laterNights": "Näytön sammutus myöhemmin henkilökohtaiseen lähtötasoon verrattuna"
     },
-    "quiet": "Pitkittynyt hiljaisuus · yhteydenottoviestit keskeytetty (vähintään 30 päivää)"
+    "quiet": "Pitkittynyt hiljaisuus · yhteydenottoviestit keskeytetty (vähintään 30 päivää)",
+    "signs": {
+      "title": "Seurattavat varhaiset merkit (klinikka määrittää)",
+      "laterNights": "Myöhäisemmät illat",
+      "homeMore": "Enemmän aikaa kotona",
+      "activityDrop": "Vähemmän liikettä",
+      "matched": "tämän henkilön varhainen merkki"
+    }
   },
   "bodyMap": {
     "title": "Missä tulesi on tänään?",
