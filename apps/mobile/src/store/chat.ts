@@ -4,6 +4,7 @@ import { repositories } from '../data';
 import { handleEvent } from '../domain/chat/engine';
 import { INITIAL_FLOW, type ChatContext, type ChatEvent, type ChatFlowState, type ChatMessage, type NewChatMessage, type TextPart } from '../domain/chat/types';
 import { toISODate } from '../domain/dates';
+import type { NoticeKind } from '../domain/outreach';
 import { now } from './clock';
 import { useData } from './data';
 
@@ -17,8 +18,18 @@ interface ChatState {
   openSession: (ctx: ChatContext) => Promise<void>;
   /** Sends a user event; returns whether the urgent path was triggered. */
   send: (event: ChatEvent, ctx: ChatContext) => Promise<{ urgent: boolean }>;
+  /** Adds the words behind a tapped notification, when today's conversation already started. */
+  deliver: (kind: NoticeKind) => Promise<void>;
   reset: () => Promise<void>;
 }
+
+/** What the companion says in the chat for each notification (daily / evening need nothing extra). */
+const NOTICE_MESSAGES: Partial<Record<NoticeKind, NewChatMessage>> = {
+  drift: { role: 'companion', parts: [{ key: 'chat.phq.offer' }], quickReplies: ['phq', 'notNow'] },
+  warm: { role: 'companion', parts: [{ key: 'chat.outreach.warm' }] },
+  friend: { role: 'companion', parts: [{ key: 'chat.outreach.friend' }], card: { type: 'friend' } },
+  reconnect: { role: 'companion', parts: [{ key: 'chat.outreach.reconnect' }], card: { type: 'reconnect' } },
+};
 
 const newId = () => `msg-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 7)}`;
 const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
@@ -112,6 +123,19 @@ export const useChat = create<ChatState>()((set, get) => {
       set({ messages: [...get().messages, ...replies.map(stamp)], flow: result.flow, typing: false });
       await persist();
       return { urgent };
+    },
+
+    deliver: async (kind) => {
+      await get().load();
+      const message = NOTICE_MESSAGES[kind];
+      const { messages } = get();
+      const last = messages[messages.length - 1];
+      // On a new day the chat's own opening already carries these words.
+      if (!message || !last || toISODate(new Date(last.createdAt)) !== toISODate(now())) return;
+      const key = message.parts?.[0].key;
+      if (last.parts?.some((p) => p.key === key)) return;
+      set({ messages: [...messages, stamp(message)] });
+      await persist();
     },
 
     reset: async () => {

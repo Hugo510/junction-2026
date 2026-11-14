@@ -8,7 +8,7 @@ import { rankInterventions, type ArmStats } from '../../domain/interventionPicke
 import { useToday } from '../../store/clock';
 import { useData } from '../../store/data';
 
-export type MetricKey = 'mood' | 'sleep' | 'activity' | 'reaction' | 'daylight';
+export type MetricKey = 'mood' | 'sleep' | 'activity' | 'reaction' | 'daylight' | 'home';
 export type RankLabel = 'top' | 'good' | 'mixed' | 'low';
 
 /** 14-day mood series + weekly trend (used by the chat card and the trends tab). */
@@ -58,6 +58,11 @@ export function useInsightsViewModel() {
       activity: days.map((d) => s.get(d)?.activityMinutes ?? null),
       reaction: days.map((d) => c.get(d)?.reaction?.meanMs ?? null),
       daylight: days.map((d) => s.get(d)?.daylightMinutes ?? null),
+      // Hours at home per day (only when the phone provides it)
+      home: days.map((d) => {
+        const minutes = s.get(d)?.homeMinutes;
+        return minutes === undefined ? null : Math.round(minutes / 6) / 10;
+      }),
     };
     const avg = (vals: (number | null)[]) => average(vals.filter((v): v is number => v !== null));
     const averages: Record<MetricKey, number | undefined> = {
@@ -66,6 +71,7 @@ export function useInsightsViewModel() {
       activity: avg(series.activity),
       reaction: avg(series.reaction),
       daylight: avg(series.daylight),
+      home: avg(series.home),
     };
     const ranking = rankInterventions(INTERVENTION_IDS, feedback, checkIns)
       .filter((r) => r.n > 0)

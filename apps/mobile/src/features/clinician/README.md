@@ -22,7 +22,7 @@ BUILD_SPEC (origin/main at 9877db5), W0 and §7, and DECISIONS O6:
 
 The existing persona model does not identify a clinical PHQ baseline. Do not
 infer one from the first/minimum score or use the mood baseline from priorityScore.
-Therefore Aino (latest PHQ-9 12) remains pending in this version, despite priority 70.
+Therefore Aino (latest PHQ-9 12) remains pending in this version, despite priority 90.
 The callStatus helper accepts an explicit baseline for later integration; the UI
 supplies none. Watch status also remains undetermined without that baseline.
 Historical positive safety answers are labeled separately; this screen does not
@@ -40,3 +40,11 @@ From apps/mobile: npm ci; npm run typecheck; npm test -- --runInBand;
 npm run i18n:check. New tests are in src/domain/__tests__/clinicianViewModel.test.ts.
 They check scores, ordering, missing PHQ/baseline, call-rule boundaries, future data,
 input immutability and absence of active-patient store access.
+
+## Hugo integration
+
+Integrated hugo/mobile at 7b0311d. Shared sensing rules now compute Aino at 90.
+Clinical reason translations cover homeMore and laterNights without changing scoring.
+Both reconnect and quiet retain the lost-contact indicator; quiet additionally shows
+that outreach is paused after 30 silent days. Neither creates a clinical alert.
+The active patient careEnded flag is never read or transferred to fixture personas.

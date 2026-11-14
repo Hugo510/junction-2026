@@ -9,7 +9,7 @@ describe('clinician projection', () => {
     const before = JSON.stringify(PERSONAS);
     const rows = buildClinicianRows(PERSONAS, TODAY);
     expect(rows.map((r) => [r.id, r.priority.score, r.priority.level])).toEqual([
-      ['aino', 70, 'high'], ['sara', 25, 'low'], ['elias', 0, 'low'], ['juho', 0, 'low'], ['leena', 0, 'low'],
+      ['aino', 90, 'high'], ['sara', 25, 'low'], ['elias', 0, 'low'], ['juho', 0, 'low'], ['leena', 0, 'low'],
     ]);
     expect(rows.filter((r) => r.lostContact).map((r) => r.id)).toEqual(['sara']);
     expect(rows.map((r) => [r.id, r.latestPhq9?.total, r.latestPhq9?.date])).toEqual([
@@ -21,6 +21,14 @@ describe('clinician projection', () => {
     expect(rows[0].callStatus).toBe('pending');
     expect(JSON.stringify(PERSONAS)).toBe(before);
     expect(rows.every((r) => r.reasons.length <= 2)).toBe(true);
+  });
+  it('keeps contact lost when outreach becomes quiet, without creating clinical alerts', () => {
+    const persona = { ...PERSONAS[0], checkIns: [{ ...PERSONAS[0].checkIns[0], date: '2026-10-16', safetyConcern: false }], sensors: [], phq9: [] };
+    const [row] = buildClinicianRows([persona], TODAY);
+    expect(row.outreach).toBe('quiet');
+    expect(row.lostContact).toBe(true);
+    expect(row.callStatus).toBe('pending');
+    expect(row.safetyRecorded).toBe(false);
   });
   it('does not import or write active patient state', () => {
     const fs = require('fs') as { readFileSync(path: string, encoding: string): string };

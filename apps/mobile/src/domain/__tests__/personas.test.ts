@@ -5,7 +5,8 @@ import { INTERVENTION_IDS } from '../interventions';
 import { rankInterventions } from '../interventionPicker';
 import { outreachLevel } from '../outreach';
 import { hasPhqConcern } from '../phq';
-import { priorityScore } from '../priorityScore';
+import { addDaysISO } from '../dates';
+import { priorityScore, signalDrift } from '../priorityScore';
 
 /** Expected state on the demo day (the day after each file ends), from tools/synthetic/ABOUT.md. */
 describe('the five demo personas on demo day', () => {
@@ -28,8 +29,18 @@ describe('the five demo personas on demo day', () => {
 
   it('Aino: drift caught, high priority, and two PHQ-9 of 10 or more', () => {
     const r = priority('aino');
-    expect(r).toMatchObject({ score: 70, level: 'high' });
-    expect(r.reasons).toEqual(expect.arrayContaining(['priority.reasons.belowBaseline', 'priority.reasons.longSleep']));
+    // 70 from mood, activity and sleep + 20 from the phone-sensed signals (home time, later nights)
+    expect(r).toMatchObject({ score: 90, level: 'high' });
+    expect(r.reasons).toEqual(
+      expect.arrayContaining([
+        'priority.reasons.belowBaseline',
+        'priority.reasons.longSleep',
+        'priority.reasons.homeMore',
+        'priority.reasons.laterNights',
+      ]),
+    );
+    // "home time +36 %, screen off 1 h 34 later than her own normal"
+    expect(signalDrift({ sensors: byId('aino').sensors, today: DEMO_DAY })).toEqual({ homeDeltaPct: 36, screenOffDeltaMin: 94 });
     expect(hasPhqConcern(byId('aino').phq9 ?? [], DEMO_DAY)).toBe(true);
     expect(byId('aino').phq9?.slice(-2).map((q) => q.total)).toEqual([11, 12]);
   });
@@ -63,6 +74,10 @@ describe('the five demo personas on demo day', () => {
     const elias = byId('elias');
     const flu = priorityScore({ checkIns: elias.checkIns, sensors: elias.sensors, today: '2026-11-04' });
     expect(flu.level).toBe('medium');
+    const worst = Math.max(
+      ...Array.from({ length: 70 }, (_, i) => priorityScore({ checkIns: elias.checkIns, sensors: elias.sensors, today: addDaysISO('2026-09-06', i) }).score),
+    );
+    expect(worst).toBeLessThan(60); // never high on any day
     expect(Math.max(...(elias.phq9 ?? []).map((q) => q.total))).toBeLessThan(10);
   });
 });

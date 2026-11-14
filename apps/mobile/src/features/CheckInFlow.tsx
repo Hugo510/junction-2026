@@ -1,21 +1,24 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { StyleSheet, TextInput, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
-import type { CheckIn, EmotionId, ReactionAggregate, Scale5 } from '../domain/entities';
+import { isEmptyBodyMap, usualBodyMap } from '../domain/bodyMap';
+import type { BodyMap, CheckIn, EmotionId, ReactionAggregate, Scale5 } from '../domain/entities';
 import type { RiskAssessment } from '../domain/riskRules';
 import { haptics } from '../services/haptics';
 import { useData } from '../store/data';
 import { useSettings } from '../store/settings';
 import { AppText, Button, Slider, radii, spacing, useTheme } from '../ui';
+import { BodyMapEditor } from './bodymap/BodyMap';
 import { EmotionPicker } from './EmotionPicker';
 import { MoodPicker } from './MoodPicker';
 import { ReactionGame } from './ReactionGame';
 
-type Step = 'mood' | 'emotions' | 'energy' | 'sleep' | 'game' | 'safety' | 'note';
+type Step = 'mood' | 'emotions' | 'body' | 'energy' | 'sleep' | 'game' | 'safety' | 'note';
 
 const STEPS: Record<'full' | 'baseline', Step[]> = {
-  full: ['mood', 'emotions', 'energy', 'sleep', 'game', 'safety', 'note'],
+  // Weekly check-in: the body map ("Where is your fire today?") takes the place of the feelings list.
+  full: ['mood', 'body', 'energy', 'sleep', 'game', 'safety', 'note'],
   baseline: ['mood', 'emotions', 'sleep', 'safety'],
 };
 
@@ -40,6 +43,9 @@ export function CheckInFlow({ variant, onSubmitted }: CheckInFlowProps) {
   const [index, setIndex] = useState(0);
   const [mood, setMood] = useState<Scale5 | null>(null);
   const [emotions, setEmotions] = useState<EmotionId[]>([]);
+  const [bodyMap, setBodyMap] = useState<BodyMap>({});
+  const history = useData((s) => s.checkIns);
+  const usualMap = useMemo(() => usualBodyMap(history), [history]);
   const [energy, setEnergy] = useState<Scale5>(3);
   const [anxiety, setAnxiety] = useState<Scale5>(2);
   const [sleepHours, setSleepHours] = useState(7);
@@ -59,6 +65,7 @@ export function CheckInFlow({ variant, onSubmitted }: CheckInFlowProps) {
         kind: 'full',
         mood,
         emotions,
+        bodyMap: isEmptyBodyMap(bodyMap) ? undefined : bodyMap,
         energy,
         anxiety,
         sleepHours,
@@ -104,6 +111,14 @@ export function CheckInFlow({ variant, onSubmitted }: CheckInFlowProps) {
             selected={emotions}
             onToggle={(id) => setEmotions((cur) => (cur.includes(id) ? cur.filter((e) => e !== id) : [...cur, id]))}
           />
+        </View>
+      )}
+
+      {step === 'body' && (
+        <View style={styles.block}>
+          <AppText variant="title">{t('bodyMap.title')}</AppText>
+          <AppText tone="muted">{t('bodyMap.hint')}</AppText>
+          <BodyMapEditor value={bodyMap} onChange={setBodyMap} usual={usualMap} />
         </View>
       )}
 

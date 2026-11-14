@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import { AppText, Button, Screen, spacing } from '../ui';
 
-export const ONBOARDING_STEPS = 5;
+export const ONBOARDING_STEPS = 6;
 
 export interface OnboardingFrameProps {
   step: number;

@@ -98,6 +98,8 @@ export interface ChatContext {
   phqConcern: boolean;
   /** No full check-in in the last 7 days → invite the longer weekly one. */
   weeklyDue: boolean;
+  /** Clinic-only status: care ended → no outreach, no questions, no suggestions. */
+  careEnded: boolean;
 }
 
 export type ChatEvent =

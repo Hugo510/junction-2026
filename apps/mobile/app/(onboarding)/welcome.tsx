@@ -10,7 +10,7 @@ export default function WelcomeStep() {
   const { t } = useTranslation();
   const { colors } = useTheme();
   return (
-    <OnboardingFrame step={2} title={t('onboarding.welcome.title')} onContinue={() => router.push('/consent')}>
+    <OnboardingFrame step={2} title={t('onboarding.welcome.title')} onContinue={() => router.push('/path')}>
       <View style={{ alignItems: 'center', gap: spacing.sm }}>
         <Avatar species="bird" size={120} animated />
         <AppText variant="heading" align="center">

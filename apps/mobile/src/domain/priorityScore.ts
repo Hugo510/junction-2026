@@ -22,6 +22,12 @@ import { average, checkInsByDate, sensorsByDate, twoWeekWindows } from './histor
  * | perceivedUrgency  | patient-perceived urgency: high +15, medium +5              | +5 / +15            |
  * | upwardDrift       | ONLY with the clinic's bipolar flag: ≥ 3 recent nights < 6 h | +25                 |
  * |                   | AND energy ≥ 1 above usual OR activity ≥ 30 % above previous |                     |
+ * | homeMore          | avg time at home recent ≥ 20 % above the PERSONAL baseline  | +10                 |
+ * | laterNights       | avg last screen-off recent ≥ 60 min later than own baseline | +10                 |
+ *
+ * homeMore and laterNights use what a phone can sense without a wearable (minutes at home, last
+ * screen-off of the evening). They compare the person with THEIR OWN usual (days 15–60), never with
+ * other people, and they need ≥ 4 recent days and ≥ 5 baseline days of data.
  *
  * Personal baseline = avg mood of days 15–60 before today (needs ≥ 5 entries). It keeps the signal
  * alive when someone stays low for weeks (week-over-week drop goes to 0, but they are still unwell).
@@ -55,6 +61,46 @@ export function baselineWindow(today: ISODate): ISODate[] {
 }
 
 const REASON = (key: string) => `priority.reasons.${key}`;
+
+export const HOME_INCREASE_PCT = 20;
+export const LATER_NIGHT_MIN = 60;
+const MIN_RECENT_SIGNAL_DAYS = 4;
+
+/** "23:40" → minutes after noon, so times around midnight compare correctly (00:30 is later than 23:30). */
+export function eveningMinutes(hhmm: string): number {
+  const [h, m] = hhmm.split(':').map(Number);
+  return (h * 60 + m + 720) % 1440;
+}
+
+export interface SignalDrift {
+  /** Time at home, recent 7 days vs own baseline, in percent (+40 = 40 % more). */
+  homeDeltaPct?: number;
+  /** Last screen-off of the evening, recent vs own baseline, in minutes (+100 = 1 h 40 later). */
+  screenOffDeltaMin?: number;
+}
+
+/** How far the phone-sensed signals are from the person's OWN usual. Also used by the clinician view. */
+export function signalDrift(input: Pick<PriorityInput, 'sensors' | 'today'>): SignalDrift {
+  const sensors = sensorsByDate(input.sensors);
+  const { recent } = twoWeekWindows(input.today);
+  const base = baselineWindow(input.today);
+  const compare = (get: (d: ISODate) => number | undefined): [number, number] | undefined => {
+    const recentValues = recent.map(get).filter((v): v is number => v !== undefined);
+    const baseValues = base.map(get).filter((v): v is number => v !== undefined);
+    if (recentValues.length < MIN_RECENT_SIGNAL_DAYS || baseValues.length < MIN_BASELINE_ENTRIES) return undefined;
+    return [average(recentValues) as number, average(baseValues) as number];
+  };
+
+  const drift: SignalDrift = {};
+  const home = compare((d) => sensors.get(d)?.homeMinutes);
+  if (home && home[1] > 0) drift.homeDeltaPct = Math.round(((home[0] - home[1]) / home[1]) * 100);
+  const screenOff = compare((d) => {
+    const t = sensors.get(d)?.screenOffTime;
+    return t ? eveningMinutes(t) : undefined;
+  });
+  if (screenOff) drift.screenOffDeltaMin = Math.round(screenOff[0] - screenOff[1]);
+  return drift;
+}
 
 export const UPWARD_SLEEP_H = 6;
 
@@ -155,6 +201,11 @@ export function priorityScore(input: PriorityInput): PriorityResult {
   // Patient-perceived urgency
   if (input.perceivedUrgency === 'high') add(15, 'perceivedUrgency');
   else if (input.perceivedUrgency === 'medium') add(5, 'perceivedUrgency');
+
+  // Phone-sensed signals vs the person's own usual
+  const drift = signalDrift(input);
+  if ((drift.homeDeltaPct ?? 0) >= HOME_INCREASE_PCT) add(10, 'homeMore');
+  if ((drift.screenOffDeltaMin ?? 0) >= LATER_NIGHT_MIN) add(10, 'laterNights');
 
   // Upward drift (possible hypomania) — only for people the clinic flagged as bipolar.
   if (input.flags?.bipolar && detectUpwardDrift(input)) add(25, 'upwardDrift');

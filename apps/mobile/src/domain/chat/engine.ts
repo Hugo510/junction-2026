@@ -54,7 +54,7 @@ function startCheckIn(flow: ChatFlowState): EngineResult {
 
 /** Questionnaires decide: only a recent PHQ-9 ≥ 10 makes the companion suggest the care team. */
 function suggestConsult(ctx: ChatContext): NewChatMessage[] {
-  if (!ctx.phqConcern || ctx.hasOpenRequest) return [];
+  if (!ctx.phqConcern || ctx.hasOpenRequest || ctx.careEnded) return [];
   return [say('companion.suggestConsult', { name: ctx.companionName }, { card: { type: 'consult' } })];
 }
 
@@ -218,6 +218,10 @@ export function handleEvent(event: ChatEvent, flow: ChatFlowState, ctx: ChatCont
 
   switch (event.type) {
     case 'open': {
+      // Care ended (clinic-only status): nothing is asked or suggested any more.
+      if (ctx.careEnded) {
+        return { messages: [say('chat.open.careEnded', undefined, { quickReplies: ['relax', 'progress'] })], flow: reset(flow), effects: [] };
+      }
       const suggestCare = ctx.phqConcern && !ctx.hasOpenRequest;
       const greeting = greetingParts({
         species: ctx.species,

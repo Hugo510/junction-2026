@@ -53,6 +53,12 @@
               "enum": ["calm", "content", "grateful", "hopeful", "proud", "tired", "sad", "anxious", "irritable", "lonely", "overwhelmed", "numb"]
             }
           },
+          "bodyMap": {
+            "type": "object",
+            "description": "Body map: region -> 1 (warm) or -1 (cool). Neutral regions are left out.",
+            "propertyNames": { "enum": ["head", "chest", "belly", "hips", "leftArm", "rightArm", "leftHand", "rightHand", "leftLeg", "rightLeg", "leftFoot", "rightFoot"] },
+            "additionalProperties": { "enum": [1, -1] }
+          },
           "energy": { "type": "integer", "minimum": 1, "maximum": 5 },
           "anxiety": { "type": "integer", "minimum": 1, "maximum": 5 },
           "sleepHours": { "type": "number", "minimum": 0, "maximum": 24, "description": "Total sleep including naps" },

@@ -1,7 +1,7 @@
 import { generateHistory } from '../../data/seed';
 import { addDaysISO } from '../dates';
 import type { CheckIn } from '../entities';
-import { levelForScore, priorityScore } from '../priorityScore';
+import { eveningMinutes, levelForScore, priorityScore, signalDrift } from '../priorityScore';
 
 const TODAY = '2026-11-14';
 const YESTERDAY = addDaysISO(TODAY, -1);
@@ -91,6 +91,35 @@ describe('priorityScore', () => {
     const r = priorityScore({ checkIns, sensors: [], today: TODAY });
     expect(r.reasons).toEqual(expect.arrayContaining(['priority.reasons.moodDrop', 'priority.reasons.belowBaseline']));
     expect(r.score).toBe(30 + 15); // max(30, 30) + lowMood, not 75
+  });
+
+  describe('phone-sensed signals vs the own baseline', () => {
+    const sensors = (recentHome: number, recentOff: string) =>
+      Array.from({ length: 60 }, (_, i) => ({
+        date: addDaysISO(TODAY, -i),
+        activityMinutes: 40,
+        daylightMinutes: 40,
+        homeMinutes: i < 7 ? recentHome : 900,
+        screenOffTime: i < 7 ? recentOff : '23:00',
+      }));
+
+    it('compares evening times across midnight', () => {
+      expect(eveningMinutes('00:30')).toBeGreaterThan(eveningMinutes('23:30'));
+      expect(eveningMinutes('01:00') - eveningMinutes('23:00')).toBe(120);
+    });
+
+    it('adds points and reasons for more time at home and later nights', () => {
+      const r = priorityScore({ checkIns: [], sensors: sensors(1200, '00:40'), today: TODAY });
+      expect(signalDrift({ sensors: sensors(1200, '00:40'), today: TODAY })).toEqual({ homeDeltaPct: 33, screenOffDeltaMin: 100 });
+      expect(r.reasons).toEqual(['priority.reasons.homeMore', 'priority.reasons.laterNights']);
+      expect(r.score).toBe(20);
+    });
+
+    it('stays quiet inside the own range and without enough data', () => {
+      expect(priorityScore({ checkIns: [], sensors: sensors(950, '23:20'), today: TODAY }).score).toBe(0);
+      const short = sensors(1300, '01:30').slice(0, 10); // no baseline yet
+      expect(priorityScore({ checkIns: [], sensors: short, today: TODAY }).score).toBe(0);
+    });
   });
 
   it('maps scores to levels', () => {

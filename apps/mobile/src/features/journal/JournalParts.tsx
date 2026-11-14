@@ -3,7 +3,9 @@ import { useTranslation } from 'react-i18next';
 
 import { parseISODate, type ISODate } from '../../domain/dates';
 import type { CheckIn, Scale5 } from '../../domain/entities';
+import { isEmptyBodyMap } from '../../domain/bodyMap';
 import { emotionEmoji, monthGrid } from '../../domain/journal';
+import { BodyMapView } from '../bodymap/BodyMap';
 import { capitalizeFirst, formatDate } from '../../i18n';
 import { AppText, Icon, MAX_FONT_SCALE, MIN_TOUCH, MOOD_COLORS, MoodFace, spacing, useTheme } from '../../ui';
 
@@ -119,6 +121,7 @@ export function EntryRow({ entry }: { entry: CheckIn }) {
           </AppText>
         ) : null}
       </View>
+      {entry.bodyMap && !isEmptyBodyMap(entry.bodyMap) ? <BodyMapView value={entry.bodyMap} width={32} /> : null}
     </View>
   );
 }

@@ -39,6 +39,7 @@ export function useChatContext(): ChatContext | null {
     const calm = ranking.filter((id) => getIntervention(id).tags.some((tag) => tag === 'calm' || tag === 'focus'));
     const pending = plan?.items.find((i) => i.status === 'pending')?.interventionId;
     const current = now();
+    const careEnded = !!patient.careEnded;
     return {
       companionName: patient.companion.name,
       species: patient.companion.species,
@@ -53,10 +54,11 @@ export function useChatContext(): ChatContext | null {
       ),
       suggestedIntervention: (pending ?? ranking[0]) as InterventionId,
       calmInterventions: calm,
-      outreach: outreachLevel(checkIns, today),
+      outreach: careEnded ? 'none' : outreachLevel(checkIns, today),
       trustedContactName: trusted?.name,
       upwardDrift: !!patient.bipolarFlag && detectUpwardDrift({ checkIns, sensors, today }),
-      phqDue: isPhqDue(priority.level, phq9, today),
+      phqDue: !careEnded && isPhqDue(priority.level, phq9, today),
+      careEnded,
       phqConcern: hasPhqConcern(phq9, today),
       weeklyDue: !checkIns.some((c) => (c.kind ?? 'full') === 'full' && daysBetween(c.date, today) < 7),
     };

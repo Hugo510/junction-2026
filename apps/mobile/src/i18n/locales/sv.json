@@ -85,7 +85,16 @@
       "title": "En första, kort incheckning",
       "subtitle": "Det här visar var du börjar. Det finns inga rätta eller fel svar."
     },
-    "finish": "Nu börjar vi"
+    "finish": "Nu börjar vi",
+    "path": {
+      "title": "Var befinner du dig just nu?",
+      "subtitle": "Hiillos anpassar sig efter var du är i din vård.",
+      "postTreatment": "Jag har precis avslutat min behandling på kliniken",
+      "inTreatment": "Jag är under behandling nu",
+      "stoppedTreatment": "Jag mådde bättre och avslutade min behandling",
+      "notInCare": "Jag har ingen vårdkontakt just nu",
+      "comingNext": "Kommer snart"
+    }
   },
   "species": {
     "bee": "Bi",
@@ -363,7 +372,9 @@
       "low": "Hjälper mindre hittills"
     },
     "tried_one": "Betygsatt {{count}} gång",
-    "tried_other": "Betygsatt {{count}} gånger"
+    "tried_other": "Betygsatt {{count}} gånger",
+    "home": "Tid hemma",
+    "avgHoursDay": "Genomsnitt {{value}} h per dag"
   },
   "care": {
     "title": "Vård",
@@ -427,7 +438,9 @@
       "perceivedUrgency": "Du berättade att det känns brådskande",
       "belowBaseline": "Ditt humör har en tid legat under din vanliga nivå",
       "longSleep": "Flera mycket långa nätter eller dagar i sängen (10 timmar eller mer)",
-      "upwardDrift": "Lite sömn med ovanligt hög energi eller aktivitet (klinikens markering)"
+      "upwardDrift": "Lite sömn med ovanligt hög energi eller aktivitet (klinikens markering)",
+      "homeMore": "Mer tid hemma än vad som är vanligt för dig",
+      "laterNights": "Kvällarna slutar senare än vad som är vanligt för dig"
     }
   },
   "risk": {
@@ -455,7 +468,10 @@
     "delete": "Radera alla mina data",
     "deleteTitle": "Radera allt?",
     "deleteBody": "Detta tar bort dina incheckningar, inställningar och historik från den här telefonen. Det kan inte ångras.",
-    "deleteConfirm": "Radera"
+    "deleteConfirm": "Radera",
+    "notificationsTitle": "Notiser",
+    "discreet": "Diskreta notiser",
+    "discreetDesc": "Förhandsvisningen säger bara \"Ett meddelande från Hiillos\". Den nämner aldrig humör eller hälsa, eftersom andra kan se din telefon."
   },
   "settings": {
     "title": "Inställningar",
@@ -504,7 +520,9 @@
     "bipolarOn": "Klinikens markering: bipolär → slå på",
     "bipolarOff": "Klinikens markering: bipolär → stäng av",
     "personasTitle": "Demopersoner (syntetiska)",
-    "noPersonas": "Inga personfiler än. Lägg dem i assets/personas/<id>/core.json."
+    "noPersonas": "Inga personfiler än. Lägg dem i assets/personas/<id>/core.json.",
+    "careEndedOn": "Klinikens status: vården avslutad → slå på",
+    "careEndedOff": "Klinikens status: vården avslutad → stäng av"
   },
   "menu": {
     "chat": "Chatt",
@@ -550,7 +568,8 @@
     "open": {
       "invite": "Hur mår du idag? Ett tryck räcker.",
       "done": "Du har redan checkat in idag. Jag finns här om du vill prata.",
-      "careHint": "Ditt vårdteam är ett tryck bort."
+      "careHint": "Ditt vårdteam är ett tryck bort.",
+      "careEnded": "Din vård hos kliniken har avslutats. Din dagbok och det lugna rummet finns kvar här för dig."
     },
     "flow": {
       "askMood": "Hur känner du dig just nu?",
@@ -604,7 +623,8 @@
     "outreach": {
       "warm": "Vad fint att höra från dig. Ingen press alls.",
       "friend": "Det har gått några dagar. Ibland hjälper en bekant röst.",
-      "reconnect": "Vi tappade kontakten ett tag, och det är okej. Så här når du oss när du vill."
+      "reconnect": "Vi tappade kontakten ett tag, och det är okej. Så här når du oss när du vill.",
+      "quiet": "Vad fint att se dig. Du behöver inte förklara något."
     },
     "phq": {
       "offer": "Jag märkte att veckan har varit tyngre. Två snabba frågor?",
@@ -675,7 +695,8 @@
     "reconnect": "{{name}}: Vi har inte hört från dig på ett tag. Så här når du oss.",
     "now": "nu",
     "openHint": "Öppnar chatten",
-    "drift": "{{name}}: Jag märkte att veckan har varit tyngre. Två snabba frågor?"
+    "drift": "{{name}}: Jag märkte att veckan har varit tyngre. Två snabba frågor?",
+    "discreet": "Ett meddelande från Hiillos"
   },
   "embers": {
     "label": "Din glöd: {{state}}",
@@ -744,7 +765,45 @@
       "longSleep": "Minst tre dagar med minst 10 timmars sömn",
       "highAnxiety": "Förhöjd ångest rapporterad av patienten",
       "perceivedUrgency": "Brådska upplevd av patienten",
-      "upwardDrift": "Kort sömn med ökad energi eller aktivitet (klinikmarkering)"
+      "upwardDrift": "Kort sömn med ökad energi eller aktivitet (klinikmarkering)",
+      "homeMore": "Mer tid hemma jämfört med den personliga baslinjen",
+      "laterNights": "Senare skärmavstängning jämfört med den personliga baslinjen"
+    },
+    "quiet": "Långvarig tystnad · kontaktmeddelanden pausade (minst 30 dagar)"
+  },
+  "bodyMap": {
+    "title": "Var finns din eld idag?",
+    "hint": "Måla varmt där du känner mer liv eller spänning, och svalt där det känns tungt eller avdomnat. Det finns inget rätt svar.",
+    "label": "Kroppskarta",
+    "empty": "Inget målat än. Du kan också lämna den tom.",
+    "summaryWarm": "Varmt: {{list}}.",
+    "summaryCool": "Svalt: {{list}}.",
+    "usual": "Ditt vanliga",
+    "different": "Annorlunda än ditt vanliga idag: {{list}}",
+    "selfReport": "Det här är din egen bild av idag. Den används aldrig som diagnos.",
+    "brush": {
+      "warm": "Varmt",
+      "cool": "Svalt",
+      "erase": "Sudda"
+    },
+    "state": {
+      "warm": "varmt",
+      "cool": "svalt",
+      "neutral": "inte målat"
+    },
+    "regions": {
+      "head": "Huvud",
+      "chest": "Bröst",
+      "belly": "Mage",
+      "hips": "Höfter",
+      "leftArm": "Vänster arm",
+      "rightArm": "Höger arm",
+      "leftHand": "Vänster hand",
+      "rightHand": "Höger hand",
+      "leftLeg": "Vänster ben",
+      "rightLeg": "Höger ben",
+      "leftFoot": "Vänster fot",
+      "rightFoot": "Höger fot"
     }
   }
 }

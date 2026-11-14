@@ -66,6 +66,7 @@ export function ClinicianView({ rows, date }: { rows: ClinicianRow[]; date: stri
                       <AppText variant="label" tone="accent">{t('clinician.lostContact')}</AppText>
                     </View>
                   ) : null}
+                  {row.outreach === 'quiet' ? <AppText variant="caption" tone="muted">{t('clinician.quiet')}</AppText> : null}
                   <AppText variant="label" tone={row.callStatus === 'review' ? 'primary' : 'default'}>{t(`clinician.call.${row.callStatus}`)}</AppText>
                   {row.callStatus === 'pending' ? <AppText variant="caption" tone="muted">{t('clinician.pendingReason')}</AppText> : null}
                   {row.safetyRecorded ? <AppText variant="caption" tone="danger">{t('clinician.safetyRecorded')}</AppText> : null}

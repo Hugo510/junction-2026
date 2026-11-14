@@ -39,6 +39,7 @@ export function buildClinicianRows(personas: readonly Persona[], today: ISODate)
     const sensors = persona.sensors.filter((s) => s.date <= today);
     const phq = (persona.phq9 ?? []).filter((q) => q.date <= today);
     const latest = latestPhq(phq, true);
+    const outreach = outreachLevel(checkIns, today);
     const priority = priorityScore({ checkIns, sensors, today, flags: { bipolar: persona.persona.bipolarFlag } });
     return {
       id: persona.persona.id,
@@ -46,7 +47,9 @@ export function buildClinicianRows(personas: readonly Persona[], today: ISODate)
       priority,
       reasons: priority.reasons.slice(0, 2),
       latestPhq9: latest,
-      lostContact: outreachLevel(checkIns, today) === 'reconnect',
+      // Quiet stops outreach; it does not mean contact has resumed.
+      outreach,
+      lostContact: outreach === 'reconnect' || outreach === 'quiet',
       callStatus: callStatus(phq, today),
       // Only explicit safety answers, never a sensor score. This is a historical
       // record indicator, not an assertion that an unresolved emergency exists now.
