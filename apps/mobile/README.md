@@ -104,6 +104,18 @@ Suggested 2-minute script:
 5. Type a crisis phrase in the chat (or *Trigger urgent check-in*) → crisis screen opens immediately
    and an urgent alert is created (never enters the normal queue).
 
+## Sensing and quiet rules
+
+- **Priority score** (`src/domain/priorityScore.ts`): mood, two-sided sleep, activity, reaction time and, when the phone
+  provides them, **time at home** and **last screen-off of the evening**. Every signal is compared with the person's own
+  baseline (days 15–60), never with other people. `signalDrift()` returns the deltas for the clinician view.
+- **Silence ladder** (`src/domain/outreach.ts`): 2 / 4 / 7 days, then one gentle message a week, **quiet after 30 days**.
+  The clinic-only status **care ended** stops all outreach. Silence is never treated as relapse or death.
+- **Discreet notifications** (default on): previews only say "A message from Hiillos".
+- **Body map** in the weekly check-in ("Where is your fire today?"): 12 regions painted warm or cool by tap or drag,
+  compared with the person's own usual map. Self-report only (method: Nummenmaa et al., PNAS 2014).
+- **Onboarding** asks "Where are you right now?": four care paths, only "just finished treatment" is live.
+
 ## Demo personas (synthetic)
 
 One file per persona in `assets/personas/<id>/core.json` (schema: `assets/personas/core.schema.json`,
