@@ -70,3 +70,11 @@ class PatientUpdate(CamelModel):
         ):
             raise ValueError("at least one field must be provided")
         return self
+
+class ConsentsUpdate(CamelModel):
+    """Client sends all four flags. updatedAt is set by the server."""
+
+    motion: bool
+    touch_pattern: bool
+    approximate_location: bool
+    vibration: bool
