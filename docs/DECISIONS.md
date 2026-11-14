@@ -43,7 +43,7 @@
 
 ## Sat 14 Nov 2026
 
-**Decided (21:35, Meg) — Sara stays low: change the data, not the rule**
+**Done (21:35, Claude, pending Meg's OK) — Sara stays low: change the data, not the rule**
 - Hugo (21:28): v0.5 works — Aino's nights after walks +0.76 SD above her previous 14 nights, Juho +0.90 for the fireplace, nobody else; locked in a test. The clinician screen uses the 7-night trend and last night vs her usual (34 vs 38 ms), so day 84 shortens nothing.
 - Hugo also implemented the six points from the research note (anchored baseline, EWMA against personal limits with 3 of 5 days, phases, weekday/weekend apart, two new check-in items, "Your normal" screen). Aino stays 90 high (home time +46 %, screen-off almost 2 h later vs her well weeks). Leena, Juho, Elias 0 on demo day; Elias medium only in his flu week. **Sara rose from 25 low to 35 medium.**
 - **Cause:** a v0.3 data choice. To keep Sara's silence visible after date rebasing, her phone kept logging in the silent week, but with more time at home, later screen-off and less activity than her normal. The new rule correctly read that as drift.
