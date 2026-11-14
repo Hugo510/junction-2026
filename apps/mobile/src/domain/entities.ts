@@ -28,14 +28,38 @@ export interface ReactionAggregate {
   rounds: number;
 }
 
+export type EmotionId =
+  | 'calm'
+  | 'content'
+  | 'grateful'
+  | 'hopeful'
+  | 'proud'
+  | 'tired'
+  | 'sad'
+  | 'anxious'
+  | 'irritable'
+  | 'lonely'
+  | 'overwhelmed'
+  | 'numb';
+
+/** Where an entry came from: full check-in form, chat with the companion, or the journal. */
+export type CheckInKind = 'full' | 'chat' | 'journal';
+
+/**
+ * One entry of the emotional journal. Full check-ins include energy, tension and sleep;
+ * quick entries (chat / journal) may only have mood, feelings and a note.
+ */
 export interface CheckIn {
   id: string;
   date: ISODate;
   createdAt: string;
+  /** Missing on older data = 'full'. */
+  kind?: CheckInKind;
   mood: Scale5;
-  energy: Scale5;
-  anxiety: Scale5;
-  sleepHours: number;
+  emotions?: EmotionId[];
+  energy?: Scale5;
+  anxiety?: Scale5;
+  sleepHours?: number;
   note?: string;
   reaction?: ReactionAggregate;
   /** Answer to the safety question (thoughts of self-harm in recent days). */
@@ -127,5 +151,5 @@ export interface Alert {
   id: string;
   createdAt: string;
   level: 'urgent';
-  source: 'checkIn' | 'contactCareTeam';
+  source: 'checkIn' | 'chat' | 'contactCareTeam';
 }

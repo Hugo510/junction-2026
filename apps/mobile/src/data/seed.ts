@@ -1,6 +1,7 @@
 import { addDaysISO, type ISODate } from '../domain/dates';
 import type {
   CheckIn,
+  EmotionId,
   FeedbackRating,
   InterventionFeedback,
   InterventionId,
@@ -22,6 +23,15 @@ export interface SeedResult {
 }
 
 export const DEFAULT_SEED = 2026;
+
+/** Deterministic feelings for synthetic entries (no randomness, so the RNG sequence is unchanged). */
+const EMOTIONS_BY_MOOD: Record<Scale5, EmotionId[][]> = {
+  5: [['proud', 'content'], ['grateful', 'calm']],
+  4: [['calm', 'content'], ['hopeful'], ['grateful', 'calm']],
+  3: [['tired'], ['calm', 'tired'], ['content']],
+  2: [['sad', 'tired'], ['anxious'], ['lonely', 'tired']],
+  1: [['numb', 'sad'], ['overwhelmed', 'anxious']],
+};
 
 const toScale = (v: number): Scale5 => Math.max(1, Math.min(5, Math.round(v))) as Scale5;
 const round1 = (v: number) => Math.round(v * 10) / 10;
@@ -84,11 +94,14 @@ export function generateHistory(
     const p = profileFor(scenario, i, days, rng);
     sensors.push({ date, activityMinutes: Math.round(p.activity), daylightMinutes: Math.round(p.daylight) });
     if (p.skip) continue;
+    const mood = toScale(p.mood);
     checkIns.push({
       id: `seed-${scenario}-${date}`,
       date,
       createdAt: `${date}T19:30:00.000Z`,
-      mood: toScale(p.mood),
+      kind: 'full',
+      mood,
+      emotions: EMOTIONS_BY_MOOD[mood][i % EMOTIONS_BY_MOOD[mood].length],
       energy: toScale(p.energy),
       anxiety: toScale(p.anxiety),
       sleepHours: round1(p.sleep),
