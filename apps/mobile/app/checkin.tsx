@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import type { InterventionId } from '../src/domain/entities';
-import { INTERVENTION_IDS } from '../src/domain/interventions';
+import { availableInterventionIds } from '../src/domain/interventions';
 import { rankInterventions } from '../src/domain/interventionPicker';
 import { CheckInFlow, type CheckInResult } from '../src/features/CheckInFlow';
 import { interventionRoute } from '../src/features/routes';
@@ -20,6 +20,7 @@ export default function CheckInScreen() {
   const checkIns = useData((s) => s.checkIns);
   const feedback = useData((s) => s.feedback);
   const plan = useData((s) => s.plan);
+  const sensors = useData((s) => s.sensors);
   const [result, setResult] = useState<CheckInResult | null>(null);
   const [again, setAgain] = useState(false);
   const [flowKey, setFlowKey] = useState(0);
@@ -34,8 +35,8 @@ export default function CheckInScreen() {
   const suggestion: InterventionId = useMemo(() => {
     const pending = plan?.items.find((i) => i.status === 'pending');
     if (pending) return pending.interventionId;
-    return rankInterventions(INTERVENTION_IDS, feedback, checkIns)[0].id;
-  }, [plan, feedback, checkIns]);
+    return rankInterventions(availableInterventionIds({ sensors, today }), feedback, checkIns)[0].id;
+  }, [plan, feedback, checkIns, sensors, today]);
 
   const onSubmitted = (r: CheckInResult) => {
     setResult(r);

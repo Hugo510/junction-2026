@@ -10,6 +10,7 @@ export type IllustrationName =
   | 'breath'
   | 'fireplace'
   | 'lake'
+  | 'waves'
   | 'puzzle'
   | 'move'
   | 'walk'
@@ -64,6 +65,15 @@ export function Illustration({ name, category, size = 96 }: { name: Illustration
         <Path d="M4 56c12-9 22-9 34 0s22 9 34 0 16-7 24-3v43H4z" fill={s} opacity={0.8} />
         <Path d="M4 72c12-8 22-8 34 0s22 8 34 0 16-6 24-3v27H4z" fill={a} />
         <Path d="M30 46c7-7 17-7 24 0-7 7-17 7-24 0zm24 0l8-6v12z" fill={a} />
+      </>
+    ),
+    // Three rolling waves under a low moon.
+    waves: (
+      <>
+        <Circle cx={74} cy={24} r={12} fill={s} />
+        <Path d="M0 46c10-10 20-10 30 0s20 10 30 0 20-10 40 2v52H0z" fill={s} opacity={0.6} />
+        <Path d="M0 62c12-10 22-10 34 0s22 10 34 0 18-8 32 0v38H0z" fill={a} opacity={0.7} />
+        <Path d="M0 78c12-9 24-9 36 0s24 9 36 0 16-7 28-2v24H0z" fill={a} />
       </>
     ),
     // Four rounded tiles, one out of place.

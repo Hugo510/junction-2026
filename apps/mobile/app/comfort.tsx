@@ -3,9 +3,11 @@ import { View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import type { InterventionId } from '../src/domain/entities';
-import { INTERVENTIONS } from '../src/domain/interventions';
+import { availableInterventionIds, INTERVENTIONS } from '../src/domain/interventions';
 import { FeedbackBar } from '../src/features/FeedbackBar';
 import { interventionRoute } from '../src/features/routes';
+import { useToday } from '../src/store/clock';
+import { useData } from '../src/store/data';
 import { AppText, Card, FeatureCard, Screen, spacing, type Category, type IllustrationName } from '../src/ui';
 
 /** One colour and one illustration per exercise, so each is recognisable at a glance. */
@@ -15,14 +17,20 @@ const LOOK: Partial<Record<InterventionId, { category: Category; art: Illustrati
   move: { category: 'leaf', art: 'move' },
   fireplace: { category: 'ember', art: 'fireplace' },
   fish: { category: 'sky', art: 'lake' },
+  seaSounds: { category: 'sky', art: 'waves' },
   puzzle: { category: 'rose', art: 'puzzle' },
 };
 
 /** Comfort library: guided exercises as hub cards; simple ideas as small cards with "Did this help?". */
 export default function ComfortScreen() {
   const { t } = useTranslation();
-  const guided = INTERVENTIONS.filter((i) => interventionRoute(i.id));
-  const ideas = INTERVENTIONS.filter((i) => !interventionRoute(i.id));
+  const sensors = useData((s) => s.sensors);
+  const today = useToday();
+  // Some ideas are offered only when they fit the person's own recent days.
+  const available = availableInterventionIds({ sensors, today });
+  const offered = INTERVENTIONS.filter((i) => available.includes(i.id));
+  const guided = offered.filter((i) => interventionRoute(i.id));
+  const ideas = offered.filter((i) => !interventionRoute(i.id));
 
   return (
     <Screen>

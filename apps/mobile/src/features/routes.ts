@@ -17,6 +17,8 @@ export function interventionRoute(id: InterventionId): Href | null {
       return '/exercise/move';
     case 'daylightWalk':
       return '/exercise/walk';
+    case 'seaSounds':
+      return '/exercise/sea';
     default:
       return null;
   }
