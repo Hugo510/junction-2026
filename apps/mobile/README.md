@@ -107,8 +107,9 @@ Suggested 2-minute script:
 ## Demo personas (synthetic)
 
 One file per persona in `assets/personas/<id>/core.json` (schema: `assets/personas/core.schema.json`,
-example: `assets/personas/example/core.json`). Files must contain `"synthetic": true`. Register each file in
-`src/data/personas/index.ts`; it then appears in demo mode. Files keep real calendar dates: on load the app
+example: `assets/personas/example/core.json`). Files must contain `"synthetic": true`. The five team personas (Aino, Leena, Juho, Sara, Elias; 90 days each) are generated in `tools/synthetic/` and copied in with
+`npm run personas:sync` (it stamps `"synthetic": true` and never copies `ground_truth/`). Each file is registered in
+`src/data/personas/index.ts` and appears in demo mode. Files keep real calendar dates: on load the app
 moves every date so the last day becomes "yesterday". The app never reads `ground_truth/`.
 
 ## Languages

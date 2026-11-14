@@ -100,7 +100,11 @@ export function rebasePersona<T extends SeedResult>(data: T, endDate: ISODate): 
 
 /** Registered persona files (static requires so Metro bundles them). */
 const PERSONA_FILES: unknown[] = [
-  // require('../../../assets/personas/aino/core.json'),
+  require('../../../assets/personas/aino/core.json'),
+  require('../../../assets/personas/leena/core.json'),
+  require('../../../assets/personas/juho/core.json'),
+  require('../../../assets/personas/sara/core.json'),
+  require('../../../assets/personas/elias/core.json'),
 ];
 
 export const PERSONAS: Persona[] = PERSONA_FILES.map(parsePersona);

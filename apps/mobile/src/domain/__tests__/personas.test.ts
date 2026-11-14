@@ -1,6 +1,69 @@
 import example from '../../../assets/personas/example/core.json';
-import { parsePersona, rebasePersona } from '../../data/personas';
+import { parsePersona, PERSONAS, rebasePersona } from '../../data/personas';
+import { EMBER_FLOOR, emberLevel, emberState } from '../embers';
+import { INTERVENTION_IDS } from '../interventions';
+import { rankInterventions } from '../interventionPicker';
+import { outreachLevel } from '../outreach';
+import { hasPhqConcern } from '../phq';
 import { priorityScore } from '../priorityScore';
+
+/** Expected state on the demo day (the day after each file ends), from tools/synthetic/ABOUT.md. */
+describe('the five demo personas on demo day', () => {
+  const DEMO_DAY = '2026-11-15';
+  const byId = (id: string) => {
+    const p = PERSONAS.find((x) => x.persona.id === id);
+    if (!p) throw new Error(`persona ${id} is not registered`);
+    return p;
+  };
+  const priority = (id: string) => {
+    const p = byId(id);
+    return priorityScore({ checkIns: p.checkIns, sensors: p.sensors, today: DEMO_DAY });
+  };
+
+  it('all five are registered, synthetic and valid', () => {
+    expect(PERSONAS.map((p) => p.persona.id)).toEqual(['aino', 'leena', 'juho', 'sara', 'elias']);
+    expect(PERSONAS.every((p) => p.synthetic === true)).toBe(true);
+    expect(PERSONAS.every((p) => (p.phq9 ?? []).every((q) => q.items[8] === 0))).toBe(true); // item 9 is 0 in demo data
+  });
+
+  it('Aino: drift caught, high priority, and two PHQ-9 of 10 or more', () => {
+    const r = priority('aino');
+    expect(r).toMatchObject({ score: 70, level: 'high' });
+    expect(r.reasons).toEqual(expect.arrayContaining(['priority.reasons.belowBaseline', 'priority.reasons.longSleep']));
+    expect(hasPhqConcern(byId('aino').phq9 ?? [], DEMO_DAY)).toBe(true);
+    expect(byId('aino').phq9?.slice(-2).map((q) => q.total)).toEqual([11, 12]);
+  });
+
+  it('Leena, Juho and Elias are quiet on demo day (no alerts)', () => {
+    for (const id of ['leena', 'juho', 'elias']) {
+      expect(priority(id)).toMatchObject({ score: 0, level: 'low' });
+      expect(hasPhqConcern(byId(id).phq9 ?? [], DEMO_DAY)).toBe(false);
+      expect(outreachLevel(byId(id).checkIns, DEMO_DAY)).toBe('none');
+    }
+  });
+
+  it('Sara: lost contact (silence ladder), low priority, embers at the floor but not out', () => {
+    const sara = byId('sara');
+    expect(priority('sara')).toMatchObject({ score: 15, level: 'low' });
+    expect(outreachLevel(sara.checkIns, DEMO_DAY)).toBe('reconnect');
+    const level = emberLevel(sara.checkIns, sara.sensors, sara.feedback, DEMO_DAY);
+    expect(level).toBeGreaterThanOrEqual(EMBER_FLOOR);
+    expect(emberState(level)).toBe('low');
+  });
+
+  it('the learning differs per person: walks for Aino, fireplace for Juho', () => {
+    const top = (id: string) => rankInterventions(INTERVENTION_IDS, byId(id).feedback, byId(id).checkIns)[0].id;
+    expect(top('aino')).toBe('daylightWalk');
+    expect(top('juho')).toBe('fireplace');
+  });
+
+  it('Elias: the flu week reached medium (two questions) but never high, and his PHQ-9 stayed under 10', () => {
+    const elias = byId('elias');
+    const flu = priorityScore({ checkIns: elias.checkIns, sensors: elias.sensors, today: '2026-11-04' });
+    expect(flu.level).toBe('medium');
+    expect(Math.max(...(elias.phq9 ?? []).map((q) => q.total))).toBeLessThan(10);
+  });
+});
 
 describe('persona files (core.json)', () => {
   it('the example matches the format the app expects', () => {
