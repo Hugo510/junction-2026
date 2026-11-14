@@ -36,7 +36,12 @@ The home screen is a **conversation with the companion** the patient chose (Chat
 companion messages, soft user bubbles, suggestion chips, a composer with a **+** quick-actions sheet, ☰ side menu).
 Everything else opens *from* the chat as cards or from the menu:
 
-- **Guided check-in in the chat**: mood faces → feelings → optional note → safety question →
+- **Daily moment, not a form**: Hiillos speaks first → one mood tap → one small step. A low day (mood ≤ 2)
+  adds the safety question. The longer check-in (sleep, energy, tap game) is weekly, by invitation.
+- **Reach-out on drift**: when the priority reaches medium, Hiillos asks two quick questions (PHQ-2) and
+  continues to the full PHQ-9 only if PHQ-2 ≥ 3. Sensors only ask, the questionnaire decides: the care team is
+  suggested only after a recent PHQ-9 ≥ 10, and item 9 > 0 always takes the safety path (`src/domain/phq.ts`).
+- **Guided check-in on request** ("Check in with me"): mood faces → feelings → optional note → safety question →
   saved to the journal (same `CheckIn` model the priority score uses).
 - Free text is routed by small, transparent intents (en/fi/es/sv) to calming exercises, today's plan,
   trends, the care team or the journal. It is a **simulated companion**, not an LLM:
