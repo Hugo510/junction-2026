@@ -43,9 +43,21 @@ curl -X POST "$API/api/v1/companion/speech" \
 
 ## Configuration (environment variables)
 
-`GEMINI_API_KEY`, `GEMINI_MODEL` (default `gemini-3.8-flash`), `ELEVENLABS_API_KEY`,
-`ELEVENLABS_VOICE_ID`, `ELEVENLABS_MODEL` (default `eleven_multilingual_v2`),
-`CORS_ORIGINS` (default `*`).
+`GEMINI_API_KEY`, `GEMINI_MODEL` (default `gemini-3.8-flash`), `GEMINI_THINKING_LEVEL`
+(default `low`; empty = do not send it), `ELEVENLABS_API_KEY`, `ELEVENLABS_VOICE_ID`,
+`ELEVENLABS_VOICES` (optional, one voice per companion), `ELEVENLABS_MODEL` (default
+`eleven_multilingual_v2`), `CORS_ORIGINS` (default `*`).
+
+## Complete replies
+
+The model's own "thinking" counts against `maxOutputTokens`
+([Gemini docs, thinking](https://ai.google.dev/gemini-api/docs/thinking)). On the first deploy
+(14 Nov) the limit was 400 and every reply arrived cut in the middle of a sentence. Now:
+
+- the limit is 2048 and the request asks for a low thinking level (asked again without that
+  setting if the model answers 400 to it);
+- a reply that still ends early is trimmed to its last complete sentence, and one with no
+  complete sentence gives `503`, so the app answers by itself.
 
 ## Where the keys go
 

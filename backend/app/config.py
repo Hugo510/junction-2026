@@ -19,6 +19,9 @@ class Settings(BaseSettings):
     # LLM companion (opt-in in the app)
     gemini_api_key: str = ""
     gemini_model: str = "gemini-3.8-flash"
+    # How much the model reasons before it writes ("low", "medium", "high"). Low is enough for
+    # a three-sentence reply. Empty = do not send the setting (for a model that rejects it).
+    gemini_thinking_level: str = "low"
 
     # Voice for the companion's own messages
     elevenlabs_api_key: str = ""
