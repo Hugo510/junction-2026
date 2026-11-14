@@ -59,4 +59,9 @@ export function formatDate(date: Date, pattern: string, lang: SupportedLanguage 
   return formatFns(date, pattern, { locale: dateLocale(lang) });
 }
 
+/** "sábado 14 noviembre" → "Sábado 14 noviembre" (only the first letter, correct for es/fi/sv). */
+export function capitalizeFirst(text: string): string {
+  return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
 export default i18n;
