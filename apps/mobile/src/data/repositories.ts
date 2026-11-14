@@ -1,3 +1,4 @@
+import type { ChatMessage } from '../domain/chat/types';
 import type { ISODate } from '../domain/dates';
 import type {
   Alert,
@@ -46,6 +47,13 @@ export interface CareRepository {
   createAlert(alert: Alert): Promise<void>;
 }
 
+export interface ChatRepository {
+  list(): Promise<ChatMessage[]>;
+  /** Replaces the stored conversation (implementations may cap its length). */
+  save(messages: ChatMessage[]): Promise<void>;
+  clear(): Promise<void>;
+}
+
 export interface DataAdminRepository {
   /** Everything stored about the patient, for "Export my data". */
   exportAll(): Promise<Record<string, unknown>>;
@@ -61,5 +69,6 @@ export interface Repositories {
   sensors: SensorRepository;
   interventions: InterventionRepository;
   care: CareRepository;
+  chat: ChatRepository;
   admin: DataAdminRepository;
 }

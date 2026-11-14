@@ -1,3 +1,4 @@
+import type { ChatMessage } from '../../domain/chat/types';
 import type { ISODate } from '../../domain/dates';
 import type {
   Alert,
@@ -11,6 +12,8 @@ import type {
 import type { Repositories } from '../repositories';
 import { mockDoctors } from './doctors';
 import { KEYS, allOwnKeys, readJSON, removeAllOwnKeys, writeJSON } from './storage';
+
+const MAX_CHAT_MESSAGES = 300;
 
 /** Mock implementation: everything lives on the phone (AsyncStorage), data is synthetic. */
 export function createMockRepositories(): Repositories {
@@ -58,6 +61,11 @@ export function createMockRepositories(): Repositories {
       listAlerts: () => readJSON<Alert[]>(KEYS.alerts, []),
       createAlert: (a) => append(KEYS.alerts, a),
     },
+    chat: {
+      list: () => readJSON<ChatMessage[]>(KEYS.chat, []),
+      save: (messages) => writeJSON(KEYS.chat, messages.slice(-MAX_CHAT_MESSAGES)),
+      clear: () => writeJSON(KEYS.chat, []),
+    },
     admin: {
       exportAll: async () => {
         const out: Record<string, unknown> = {};
@@ -72,6 +80,7 @@ export function createMockRepositories(): Repositories {
         await writeJSON(KEYS.plans, []);
         await writeJSON(KEYS.requests, []);
         await writeJSON(KEYS.alerts, []);
+        await writeJSON(KEYS.chat, []);
       },
     },
   };

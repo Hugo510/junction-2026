@@ -11,6 +11,7 @@ export const KEYS = {
   plans: `${KEY_PREFIX}plans`,
   requests: `${KEY_PREFIX}requests`,
   alerts: `${KEY_PREFIX}alerts`,
+  chat: `${KEY_PREFIX}chat`,
 } as const;
 
 export async function readJSON<T>(key: string, fallback: T): Promise<T> {
