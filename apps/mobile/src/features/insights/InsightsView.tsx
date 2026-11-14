@@ -20,6 +20,7 @@ export function InsightsView() {
     activity: averages.activity !== undefined ? t('insights.avgMinutes', { value: Math.round(averages.activity) }) : null,
     reaction: averages.reaction !== undefined ? t('insights.avgMs', { value: Math.round(averages.reaction) }) : null,
     daylight: averages.daylight !== undefined ? t('insights.avgMinutes', { value: Math.round(averages.daylight) }) : null,
+    home: averages.home !== undefined ? t('insights.avgHoursDay', { value: round1(averages.home) }) : null,
   };
   const metrics: { key: MetricKey; chart: 'line' | 'bar'; color: string; min?: number; max?: number; note?: string }[] = [
     { key: 'mood', chart: 'line', color: colors.chartMood, min: 1, max: 5 },
@@ -27,6 +28,8 @@ export function InsightsView() {
     { key: 'activity', chart: 'bar', color: colors.chartActivity },
     { key: 'reaction', chart: 'line', color: colors.chartReaction, note: t('insights.reactionNote') },
     { key: 'daylight', chart: 'bar', color: colors.chartDaylight },
+    // Shown only when the phone provides time at home
+    ...(averages.home !== undefined ? [{ key: 'home' as const, chart: 'bar' as const, color: colors.accent, max: 24 }] : []),
   ];
 
   return (
