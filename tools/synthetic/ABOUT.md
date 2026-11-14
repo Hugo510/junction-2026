@@ -1,5 +1,7 @@
 # Hiillos demo personas — SYNTHETIC
 
+> **v0.6 (14 Nov, 21:40): Sara's silent week looks like her normal.** In the week she stops checking in, her phone keeps logging (so date rebasing keeps the silence), and now at her own normal levels: time at home, screen-off time, activity and daylight. Under Hugo's anchored-baseline rule (`hugo/mobile` @ 8618a54) she scores **15 low** (missed check-ins only) instead of 35 medium, and still gets **reconnect**. Silence is not relapse. Only Sara's files change; the other four differ only in `generatorVersion`.
+>
 > **v0.5 (14 Nov, 21:20): a step that helps now shows in that night's ring data.** On the night after a step that truly helps the person (walks for Aino, sound/fireplace for Juho), `average_hrv` ×1.15 and `hr_lowest` −1.5 bpm. Steps that don't help get no effect. Aino: nights after walks average 40.3 ms vs 36.8 ± 4.5 baseline (+0.80 SD) and vs 34.0 on her other recent nights (+1.43 SD); Juho: +0.61 / +1.59 SD. Only Aino's and Juho's `ring.json` change; every other value in every file is identical to v0.4 apart from `generatorVersion`. **Illustrative:** it lets the demo show the loop measuring a step's effect, not a claim that one walk raises HRV that night.
 >
 > **v0.4 (14 Nov, evening): new smart-ring layer** → `personas/<id>/ring.json` (one record per night). `core.json` is unchanged except `generatorVersion` (checked byte-for-byte on all other fields), so the app keeps working. See the section *Smart-ring layer (v0.4)* at the end.
@@ -41,7 +43,7 @@ const PERSONA_FILES: unknown[] = [
 | Aino (fi) | **70 high**: mood drop, below her baseline, low mood, activity drop, long sleep | none | PHQ-9 6 → 9 → 7 → **11 → 12**; `hasPhqConcern` = **true** (suggest the care team) | daylightWalk > breathing |
 | Leena (sv) | 0 low | none | 2–4 throughout | daylightWalk > gratitude |
 | Juho (fi) | 0 low (was **medium 30–35** on 18–24 Oct) | none | peaks at 11 once (watch, not call) | **fireplace > breathing** (walks last) |
-| Sara (sv) | 25 low (missed check-ins, activity drop — no mood alarm) | **reconnect** (no check-in for 7 days; phone still logging) | — | breathing > daylightWalk |
+| Sara (sv) | **15 low** (v0.6, Hugo's anchored-baseline rule: missed check-ins only — no mood or phone drift) | **reconnect** (no check-in for 7 days; phone still logging at her normal) | — | breathing > daylightWalk |
 | Elias (en) | 0 low (was **medium 35** on 4 Nov, flu week), never high | none | 7 in the flu week (no call) | daylightWalk > move |
 
 Aino's last week vs her normal: time at home ~1,300 vs ~900 minutes, screen off ~00:40–01:00 vs ~23:00.

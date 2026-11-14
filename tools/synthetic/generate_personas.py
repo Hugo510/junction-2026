@@ -24,7 +24,7 @@ import random
 from datetime import date, datetime, timedelta
 from pathlib import Path
 
-GENERATOR_VERSION = "0.5"
+GENERATOR_VERSION = "0.6"
 SEED = 2026
 DAYS = 90
 
@@ -199,9 +199,10 @@ def sara(i: int) -> Day:
         return Day(mood=3.8, energy=3.3, anxiety=2.3, sleep=7.1, activity=36,
                    daylight=seasonal_daylight(i, 65, 30), checkin_p=0.4, sensor_p=0.5,
                    emotions=["calm", "tired"])
-    # silent from day 84: no check-ins, but the phone keeps logging (so the app's date rebasing keeps the silence)
-    return Day(mood=3.6, activity=22, daylight=seasonal_daylight(i, 65, 30) * 0.6, checkin_p=0.0, sensor_p=1.0,
-               home=1050, screen_off=23.8)
+    # silent from day 84: no check-ins, but the phone keeps logging (so the app's date rebasing keeps the silence).
+    # v0.6: the phone data in the silent week is her own normal -- silence is not relapse, so nothing should drift.
+    return Day(mood=3.8, energy=3.3, anxiety=2.3, sleep=7.1, activity=36, daylight=seasonal_daylight(i, 65, 30),
+               checkin_p=0.0, sensor_p=1.0)
 
 
 def elias(i: int) -> Day:

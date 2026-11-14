@@ -43,6 +43,13 @@
 
 ## Sat 14 Nov 2026
 
+**Decided (21:35, Meg) — Sara stays low: change the data, not the rule**
+- Hugo (21:28): v0.5 works — Aino's nights after walks +0.76 SD above her previous 14 nights, Juho +0.90 for the fireplace, nobody else; locked in a test. The clinician screen uses the 7-night trend and last night vs her usual (34 vs 38 ms), so day 84 shortens nothing.
+- Hugo also implemented the six points from the research note (anchored baseline, EWMA against personal limits with 3 of 5 days, phases, weekday/weekend apart, two new check-in items, "Your normal" screen). Aino stays 90 high (home time +46 %, screen-off almost 2 h later vs her well weeks). Leena, Juho, Elias 0 on demo day; Elias medium only in his flu week. **Sara rose from 25 low to 35 medium.**
+- **Cause:** a v0.3 data choice. To keep Sara's silence visible after date rebasing, her phone kept logging in the silent week, but with more time at home, later screen-off and less activity than her normal. The new rule correctly read that as drift.
+- **Chosen:** keep the rule; **generator v0.6** puts Sara's silent-week phone data at her own normal. Checked with Hugo's rule @ 8618a54: **Sara 15 low (missed check-ins only), outreach "reconnect"**; Aino 90 high; Leena 0; Elias max 45 (flu week, 31 Oct), never high. Only Sara's files change.
+- **FYI for the pitch, not a change:** under the new rule **Juho reaches 75 (high) on 24 Oct** at the bottom of his drift (was medium 30–35 under the old rule). On demo day he is 0. If the demo or pitch ever shows Juho's October, he would have been on the call list then; his PHQ-9 that week was 11 once.
+
 **Decided (21:15, Meg) — demo step 3 keeps the body response (option A)**
 - Hugo (21:01): the ring layer is in the app, but "After your walk, your night-time recovery was higher than your usual" could not appear, because the data had no effect of a step on that night (0.06 SD; the line needs 0.3). Options: (A) add the effect to the generator, or (B) change step 3 to "recovery below your usual".
 - **Chosen: A.** Generator **v0.5**: the night after a step that truly helps (Aino: walks; Juho: sound/fireplace) has `average_hrv` ×1.15 and `hr_lowest` −1.5 bpm. Checked: Aino +0.80 SD vs baseline / +1.43 SD vs her other recent nights; Juho +0.61 / +1.59. `core.json` unchanged apart from `generatorVersion`, so priorities stay; last night stays 34 ms vs usual 37.

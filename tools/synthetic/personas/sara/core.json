@@ -1,6 +1,6 @@
 {
  "synthetic": true,
- "generatorVersion": "0.5",
+ "generatorVersion": "0.6",
  "seed": 2026,
  "persona": {
   "id": "sara",
@@ -1330,45 +1330,45 @@
   },
   {
    "date": "2026-11-09",
-   "activityMinutes": 27,
-   "daylightMinutes": 27,
-   "homeMinutes": 1035,
-   "screenOffTime": "23:28"
+   "activityMinutes": 44,
+   "daylightMinutes": 44,
+   "homeMinutes": 885,
+   "screenOffTime": "22:40"
   },
   {
    "date": "2026-11-10",
-   "activityMinutes": 23,
-   "daylightMinutes": 22,
-   "homeMinutes": 952,
-   "screenOffTime": "23:50"
+   "activityMinutes": 37,
+   "daylightMinutes": 35,
+   "homeMinutes": 802,
+   "screenOffTime": "23:02"
   },
   {
    "date": "2026-11-11",
-   "activityMinutes": 22,
-   "daylightMinutes": 18,
-   "homeMinutes": 1048,
-   "screenOffTime": "23:55"
+   "activityMinutes": 37,
+   "daylightMinutes": 30,
+   "homeMinutes": 898,
+   "screenOffTime": "23:07"
   },
   {
    "date": "2026-11-12",
-   "activityMinutes": 35,
-   "daylightMinutes": 20,
-   "homeMinutes": 1074,
-   "screenOffTime": "23:47"
+   "activityMinutes": 55,
+   "daylightMinutes": 33,
+   "homeMinutes": 924,
+   "screenOffTime": "22:59"
   },
   {
    "date": "2026-11-13",
-   "activityMinutes": 26,
-   "daylightMinutes": 10,
-   "homeMinutes": 981,
-   "screenOffTime": "00:08"
+   "activityMinutes": 42,
+   "daylightMinutes": 19,
+   "homeMinutes": 831,
+   "screenOffTime": "23:20"
   },
   {
    "date": "2026-11-14",
-   "activityMinutes": 25,
-   "daylightMinutes": 18,
-   "homeMinutes": 913,
-   "screenOffTime": "23:51"
+   "activityMinutes": 41,
+   "daylightMinutes": 31,
+   "homeMinutes": 763,
+   "screenOffTime": "23:03"
   }
  ],
  "feedback": [
