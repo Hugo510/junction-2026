@@ -62,4 +62,6 @@ A **single national youth mental-health service**, run in a distributed way and 
 7. **Young people are the scale-up path, not the demo.** The TMS cohort is adult; ask the mentors whether youth fits their work.
 8. **Plug-in partners from the book:** Sekasin-chat (Sekasin Kollektiivi), MIELI, home neurostimulation (Sooma, Flow).
 
+**Sensitivity (Meg):** mental-health data is extremely sensitive — health data is a special category under GDPR Art. 9, and Finland's 2020 Vastaamo breach showed the harm of a leak. Any idea in this note that touches personal data follows spec guardrail 10.
+
 **Don'ts:** don't present the book's numbers as evidence; don't promise to reduce social-media harm; never track what people watch or write.

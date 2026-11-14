@@ -41,6 +41,9 @@
 
 ## Sat 14 Nov 2026
 
+**Decided (11:15, Meg)**
+- **Mental-health data is extremely sensitive** → new guardrail 10 in the spec: data minimisation, on-phone computing, explicit revocable consent per data type, export + delete, never sold, shared or used for ads, no content reading, discreet notifications, care-team-only clinic access, EU hosting, synthetic data in the demo. On the safety slide. Legal wording to be checked with an expert.
+
 **Added (11:15, Meg)**
 - Research note `docs/research/sources_of_ill_being.md`: why people fall ill (digital environment, pressure, family strain, loneliness, inequality, fragmented services; girls inward / boys outward) and the book's one-door "Mieli 360" solution. **Framing source, not evidence.** Spec v4.6 adds it to the pitch (proposals O29–O31). Build plan M1–M4 / S1–S6 unchanged.
 
