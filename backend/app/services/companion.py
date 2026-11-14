@@ -42,6 +42,16 @@ CRISIS_KEYWORDS = [
 
 MAX_REPLY_CHARS = 500
 
+# The model "thinks" before it writes, and those thinking tokens count against this limit.
+# With 400 every reply was cut in the middle of a sentence ("Be gentle"): the thinking used
+# most of the budget. The 3-short-sentences rule of the prompt keeps the visible reply short;
+# this number only has to leave room for the thinking as well.
+MAX_OUTPUT_TOKENS = 2048
+
+# A full stop, question mark, exclamation mark or ellipsis, followed by a space or the end.
+# (… is the ellipsis; » ” ’ are closing quotes.)
+_SENTENCE_END = re.compile(r"[.!?…]+[\"')\]»”’]*(?=\s|$)")
+
 
 class CompanionUnavailable(Exception):
     """No key configured, or the model did not give a usable answer."""
@@ -67,6 +77,14 @@ def has_crisis_language(text: str) -> bool:
     """False positives are acceptable here; false negatives are not."""
     clean = normalize(text)
     return any(p.search(clean) for p in _CRISIS_PATTERNS)
+
+
+def complete_sentences(text: str) -> str:
+    """Drop a trailing fragment: "Rest a little. Be gentle" -> "Rest a little." ("" if none ends)."""
+    end = 0
+    for match in _SENTENCE_END.finditer(text):
+        end = match.end()
+    return text[:end].strip()
 
 
 def system_prompt(companion_name: str, language: str) -> str:
@@ -95,27 +113,40 @@ async def generate_reply(body: CompanionReplyRequest) -> str:
     while contents and contents[0]["role"] != "user":
         contents.pop(0)
 
-    payload = {
-        "system_instruction": {"parts": [{"text": system_prompt(body.companion_name, body.language.value)}]},
-        "contents": contents,
-        "generationConfig": {"temperature": 0.6, "maxOutputTokens": 400},
-    }
+    def payload(with_thinking_level: bool) -> dict:
+        generation: dict = {"temperature": 0.6, "maxOutputTokens": MAX_OUTPUT_TOKENS}
+        if with_thinking_level:
+            # A short, warm reply needs little reasoning: less thinking is faster and cheaper.
+            generation["thinkingConfig"] = {"thinkingLevel": settings.gemini_thinking_level}
+        return {
+            "system_instruction": {"parts": [{"text": system_prompt(body.companion_name, body.language.value)}]},
+            "contents": contents,
+            "generationConfig": generation,
+        }
+
+    url = GEMINI_URL.format(model=settings.gemini_model)
+    headers = {"x-goog-api-key": settings.gemini_api_key, "Content-Type": "application/json"}
+    ask_for_level = bool(settings.gemini_thinking_level)
 
     try:
         async with httpx.AsyncClient(timeout=12.0) as client:
-            res = await client.post(
-                GEMINI_URL.format(model=settings.gemini_model),
-                headers={"x-goog-api-key": settings.gemini_api_key, "Content-Type": "application/json"},
-                json=payload,
-            )
+            res = await client.post(url, headers=headers, json=payload(ask_for_level))
+            if res.status_code == 400 and ask_for_level:
+                # A model that does not know "thinkingLevel" rejects the request: ask again without it.
+                res = await client.post(url, headers=headers, json=payload(False))
         res.raise_for_status()
-        data = res.json()
-        parts = data["candidates"][0]["content"]["parts"]
-        text = " ".join(p.get("text", "") for p in parts).strip()
-    except (httpx.HTTPError, KeyError, IndexError, TypeError, ValueError) as exc:
+        candidate = res.json()["candidates"][0]
+        parts = candidate["content"]["parts"]
+        # Parts marked as "thought" are the model's notes to itself, never shown to the person.
+        text = " ".join(p.get("text", "") for p in parts if not p.get("thought")).strip()
+        cut_short = candidate.get("finishReason") == "MAX_TOKENS"
+    except (httpx.HTTPError, KeyError, IndexError, TypeError, ValueError, AttributeError) as exc:
         # Never leak upstream details (they may contain the request) to the client.
         raise CompanionUnavailable("The companion model did not answer") from exc
 
+    if cut_short or len(text) > MAX_REPLY_CHARS:
+        # Never show half a sentence: keep what is complete, or let the app answer by itself.
+        text = complete_sentences(text[:MAX_REPLY_CHARS])
     if not text:
         raise CompanionUnavailable("The companion model returned an empty answer")
-    return text[:MAX_REPLY_CHARS]
+    return text
