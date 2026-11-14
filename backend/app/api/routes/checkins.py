@@ -60,9 +60,12 @@ def create_checkin(body: CheckInCreate, user: dict = Depends(get_current_user)):
     get_patient_for_user(user)
     entries = CHECKINS.setdefault(user["id"], [])
 
-    same_day = [c for c in entries if c.date == body.date]
-    # A self-harm report is always accepted, even if the day already has entries.
-    if same_day and not body.safety.self_harm_thoughts:
+    # One ORDINARY check-in per day. A self-harm report is always accepted, and it does not
+    # count as the day's check-in (so an ordinary one can still be sent after it).
+    ordinary_same_day = [
+        c for c in entries if c.date == body.date and not c.safety.self_harm_thoughts
+    ]
+    if ordinary_same_day and not body.safety.self_harm_thoughts:
         raise HTTPException(
             status_code=409,
             detail="A check-in already exists for this day. Use PUT /checkins/{date} instead.",
@@ -84,8 +87,17 @@ def replace_checkin(day: CalendarDate, body: CheckInCreate, user: dict = Depends
     if body.date != day:
         raise HTTPException(status_code=422, detail="The date in the body must match the path")
 
-    # Replace the most recent entry for that day, keeping its id and created_at
-    existing = max(same_day, key=lambda c: c.created_at)
+    # A self-harm report is a record for the care team: it is NEVER overwritten.
+    # Only the day's ordinary check-in can be replaced.
+    replaceable = [c for c in same_day if not c.safety.self_harm_thoughts]
+    if not replaceable:
+        raise HTTPException(
+            status_code=409,
+            detail="This day only has safety reports, which cannot be replaced. Use POST /checkins.",
+        )
+
+    # Replace the most recent ordinary entry for that day, keeping its id and created_at
+    existing = max(replaceable, key=lambda c: c.created_at)
     check_in = CheckIn(**body.model_dump(), id=existing.id, created_at=existing.created_at)
     index = next(i for i, c in enumerate(entries) if c.id == existing.id)
     entries[index] = check_in

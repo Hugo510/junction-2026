@@ -149,3 +149,60 @@ List check-ins (should show all entries, including two for 2026-11-13):
 curl -s "http://localhost:8000/api/v1/checkins?from=2026-11-01&to=2026-11-14" \
   -H "Authorization: Bearer $TOKEN"
 ```
+
+
+## Safety reports are never overwritten (added by Hugo, NOT RUN YET)
+
+These checks follow the ones above (2026-11-13 already has one ordinary check-in and one
+self-harm report).
+
+Replace the ordinary check-in of that day (should return 200). The list must still show the
+self-harm report for 2026-11-13 with selfHarmThoughts: true:
+
+```bash
+curl -s -X PUT http://localhost:8000/api/v1/checkins/2026-11-13 \
+  -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -d '{"date": "2026-11-13", "mood": 3, "safety": {"selfHarmThoughts": false}}'
+```
+
+A day that only has a self-harm report: PUT must be refused (409), and an ordinary POST must
+be accepted (201), because the report does not count as the day's check-in:
+
+```bash
+curl -s -X POST http://localhost:8000/api/v1/checkins \
+  -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -d '{"date": "2026-11-10", "mood": 2, "safety": {"selfHarmThoughts": true}}'
+
+curl -i -X PUT http://localhost:8000/api/v1/checkins/2026-11-10 \
+  -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -d '{"date": "2026-11-10", "mood": 4, "safety": {"selfHarmThoughts": false}}'
+
+curl -i -X POST http://localhost:8000/api/v1/checkins \
+  -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -d '{"date": "2026-11-10", "mood": 4, "safety": {"selfHarmThoughts": false}}'
+```
+
+## Alerts for the care team (added by Hugo, NOT RUN YET)
+
+Log in as the doctor and list the urgent alerts (should show one per self-harm report above).
+The patient token must get 403:
+
+```bash
+DOCTOR=$(curl -s -X POST http://localhost:8000/api/v1/auth/demo-login \
+  -H "Content-Type: application/json" -d '{"role": "doctor"}' | python -c "import sys, json; print(json.load(sys.stdin)['token'])")
+
+curl -s http://localhost:8000/api/v1/alerts -H "Authorization: Bearer $DOCTOR"
+curl -i http://localhost:8000/api/v1/alerts -H "Authorization: Bearer $TOKEN"
+```
+
+## Sensor dates need a timezone (added by Hugo, NOT RUN YET)
+
+A period without a timezone should return 422 (it used to be able to return 500 when mixed
+with a value that had one). Turn the motion consent on first:
+
+```bash
+curl -i -X POST http://localhost:8000/api/v1/sensors/aggregates \
+  -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -d '{"items": [{"type": "steps", "periodStart": "2026-11-13T00:00:00Z",
+       "periodEnd": "2026-11-13T23:59:59", "value": 4200, "unit": "steps"}]}'
+```

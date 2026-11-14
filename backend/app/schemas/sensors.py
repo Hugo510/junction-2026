@@ -1,8 +1,7 @@
-from datetime import datetime
 from enum import Enum
 from typing import Literal
 
-from pydantic import ConfigDict, Field, model_validator
+from pydantic import AwareDatetime, ConfigDict, Field, model_validator
 
 from app.schemas.common import CamelModel
 
@@ -19,8 +18,10 @@ class SensorAggregate(CamelModel):
     model_config = ConfigDict(extra="forbid")
 
     type: SensorType
-    period_start: datetime
-    period_end: datetime
+    # Timezone required ("...Z" or "+02:00"). A value without one is rejected with 422;
+    # mixing both kinds used to fail the comparison below and answer 500.
+    period_start: AwareDatetime
+    period_end: AwareDatetime
     value: float
     unit: Literal["minutes", "steps", "index_0_1", "count"]
     source: Literal["phone", "wearable", "manual", "synthetic"] = "phone"
