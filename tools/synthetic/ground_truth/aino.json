@@ -1,6 +1,6 @@
 {
   "synthetic": true,
-  "generatorVersion": "0.3",
+  "generatorVersion": "0.4",
   "seed": 2026,
   "personaId": "aino",
   "firstDay": "2026-08-17",
@@ -33,5 +33,6 @@
       "nextDayMoodLift": 0.1
     }
   },
-  "driftStartDate": "2026-10-16"
+  "driftStartDate": "2026-10-16",
+  "ring": "From day 60: average_hrv about -15 % (about -9 % in the walk-helps days 70-77), hr_lowest +3, later and more irregular bedtimes, efficiency -3 points. No temperature change."
 }

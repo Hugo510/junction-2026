@@ -1,6 +1,6 @@
 {
   "synthetic": true,
-  "generatorVersion": "0.3",
+  "generatorVersion": "0.4",
   "seed": 2026,
   "personaId": "sara",
   "firstDay": "2026-08-17",
@@ -27,5 +27,6 @@
       "nextDayMoodLift": 0.1
     }
   },
-  "lastCheckInDate": "2026-11-08"
+  "lastCheckInDate": "2026-11-08",
+  "ring": "Wear drops (90 % -> 50 % -> 30 % of nights). Missing ring data is not a mood signal."
 }

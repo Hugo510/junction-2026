@@ -1,6 +1,6 @@
 {
   "synthetic": true,
-  "generatorVersion": "0.3",
+  "generatorVersion": "0.4",
   "seed": 2026,
   "personaId": "juho",
   "firstDay": "2026-08-17",
@@ -33,5 +33,6 @@
       "nextDayMoodLift": 0.0
     }
   },
-  "driftStartDate": "2026-10-08"
+  "driftStartDate": "2026-10-08",
+  "ring": "Days 52-69: short, late, broken sleep (latency +25 min, efficiency -6), average_hrv -20 %, hr_lowest +4; partial recovery 70-77."
 }

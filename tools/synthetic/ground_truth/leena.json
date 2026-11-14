@@ -1,6 +1,6 @@
 {
   "synthetic": true,
-  "generatorVersion": "0.3",
+  "generatorVersion": "0.4",
   "seed": 2026,
   "personaId": "leena",
   "firstDay": "2026-08-17",
@@ -31,5 +31,6 @@
       "pThumbsDown": 0.1,
       "nextDayMoodLift": 0.0
     }
-  }
+  },
+  "ring": "Stays inside her normal range; only gaps when the ring charges."
 }

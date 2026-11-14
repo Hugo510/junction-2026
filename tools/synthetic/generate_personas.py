@@ -21,12 +21,95 @@ from __future__ import annotations
 import argparse
 import json
 import random
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta
 from pathlib import Path
 
-GENERATOR_VERSION = "0.3"
+GENERATOR_VERSION = "0.4"
 SEED = 2026
 DAYS = 90
+
+# ---------- v0.4: smart-ring layer (written to <out>/<id>/ring.json; core.json is unchanged) ----------
+# One record per night, field names/units follow the Junction sleep-summary shape (which mirrors Oura):
+# seconds for durations, efficiency 0-1, average_hrv = RMSSD in ms, hr_lowest/hr_average in bpm,
+# temperature_delta in °C from the person's long-term average, respiratory_rate in breaths/min.
+# Calibration (see ABOUT.md):
+#  * within-person night-to-night SD: lowest HR ~2-3 bpm (strongly autocorrelated, lag-1 ~0.8),
+#    sleep efficiency ~2.6 points, asleep time ~1 h in an active cohort  -> PMData-derived stats
+#  * HRV declines with age, RMSSD lower in depression (group effect g ~ -0.46, Koch 2019)
+#  * flu -> skin temperature up, respiratory rate up, lowest HR up, HRV down (lets the app tell flu from mood)
+# HRV night-to-night CV (~15 %) and every drift size below are ILLUSTRATIVE, not calibrated.
+
+RING_BASE = {  # per-person "normal" (illustrative), age in brackets
+    "aino":  {"hrv": 38, "hr_low": 54, "resp": 14.2, "steps_per_active_min": 105, "base_steps": 3200},   # 42
+    "leena": {"hrv": 45, "hr_low": 52, "resp": 13.8, "steps_per_active_min": 100, "base_steps": 3800},   # 30s
+    "juho":  {"hrv": 31, "hr_low": 58, "resp": 15.0, "steps_per_active_min": 100, "base_steps": 2800},   # 50s
+    "sara":  {"hrv": 40, "hr_low": 55, "resp": 14.5, "steps_per_active_min": 100, "base_steps": 3000},
+    "elias": {"hrv": 56, "hr_low": 48, "resp": 13.5, "steps_per_active_min": 110, "base_steps": 4200},   # active
+}
+
+
+def ring_drift(pid: str, i: int) -> dict:
+    """Night-level shifts from the person's normal (illustrative). Keys: hrv (fraction), hr (bpm),
+    temp (°C), resp (breaths/min), timing_sd (h, bedtime irregularity), latency (min), eff (points)."""
+    z = {"hrv": 0.0, "hr": 0.0, "temp": 0.0, "resp": 0.0, "timing_sd": 0.35, "latency": 0.0, "eff": 0.0, "wear": 0.95}
+    if pid == "aino" and i >= 60:          # atypical pattern: sleeps longer, later, more irregular; HRV drifts down
+        sev = 0.6 if 70 <= i < 78 else 1.0  # walks help in days 70-77
+        z.update(hrv=-0.15 * sev, hr=3 * sev, timing_sd=0.35 + 0.6 * sev, latency=10 * sev, eff=-3 * sev)
+    if pid == "juho" and 52 <= i < 78:     # anxious pattern: short, late, broken sleep; HRV lower, HR higher
+        sev = 1.0 if i < 70 else 0.4
+        z.update(hrv=-0.2 * sev, hr=4 * sev, timing_sd=0.35 + 0.7 * sev, latency=25 * sev, eff=-6 * sev)
+    if pid == "sara":                      # ring worn less and less (charging forgotten)
+        z["wear"] = 0.9 if i < 55 else (0.5 if i < 84 else 0.3)
+    if pid == "elias" and 72 <= i < 79:    # flu: fever signature, unlike a mood drift
+        peak = 1.0 - abs(i - 74) / 4
+        z.update(hrv=-0.3 * peak, hr=8 * peak, temp=1.1 * peak, resp=2.5 * peak, eff=-5 * peak, latency=10 * peak)
+    return z
+
+
+def ring_nights(pid: str, start: date, days_fn) -> list[dict]:
+    rng = random.Random(f"{SEED}-{pid}-ring")  # own stream: core.json is identical with or without the ring layer
+    b = RING_BASE[pid]
+    hrv_ar, hr_ar = 0.0, 0.0  # AR(1) noise, lag-1 ~0.8 like resting HR in PMData
+    nights = []
+    for i in range(DAYS):
+        day: Day = days_fn(i)
+        z = ring_drift(pid, i)
+        hrv_ar = 0.8 * hrv_ar + rng.gauss(0, 0.09)
+        hr_ar = 0.8 * hr_ar + rng.gauss(0, 1.4)
+        if rng.random() > z["wear"]:
+            continue  # ring not worn / charging -> no record (real gaps)
+        d = start + timedelta(days=i)
+        bed = clamp(rng.gauss(day.screen_off + 0.3, z["timing_sd"]), 20.5, 28.5)  # hours, 24.5 = 00:30
+        latency_min = clamp(rng.gauss(9 + z["latency"], 5), 1, 90)
+        asleep_h = clamp(rng.gauss(day.sleep, 0.45), 3.0, 13.5)
+        eff = clamp(rng.gauss(0.92 + z["eff"] / 100, 0.026), 0.6, 0.99)
+        in_bed_h = asleep_h / eff + latency_min / 60 * 0.3
+        total = int(asleep_h * 3600)
+        deep = int(total * clamp(rng.gauss(0.18, 0.03), 0.05, 0.3))
+        rem = int(total * clamp(rng.gauss(0.21, 0.035), 0.08, 0.32))
+        light = total - deep - rem
+        duration = int(in_bed_h * 3600)
+        hrv = max(8.0, b["hrv"] * (1 + z["hrv"]) * (1 + hrv_ar))
+        hr_low = b["hr_low"] + z["hr"] + hr_ar
+        bed_dt = datetime(d.year, d.month, d.day) + timedelta(hours=bed)
+        nights.append({
+            "date": iso(d),                      # the evening the night started (local day)
+            "bedtime_start": bed_dt.strftime("%Y-%m-%dT%H:%M:00+02:00"),
+            "bedtime_end": (bed_dt + timedelta(seconds=duration)).strftime("%Y-%m-%dT%H:%M:00+02:00"),
+            "duration": duration, "total": total, "awake": max(0, duration - total),
+            "light": light, "deep": deep, "rem": rem,
+            "latency": int(latency_min * 60),
+            "efficiency": round(eff, 2),
+            "hr_lowest": round(hr_low),
+            "hr_average": round(hr_low + clamp(rng.gauss(6, 1.5), 2, 12)),
+            "average_hrv": round(hrv, 1),
+            "respiratory_rate": round(b["resp"] + z["resp"] + rng.gauss(0, 0.3), 1),
+            "temperature_delta": round(z["temp"] + rng.gauss(0, 0.08), 2),
+            "steps": int(clamp(rng.gauss(b["base_steps"] + day.activity * b["steps_per_active_min"],
+                                         (b["base_steps"] + day.activity * b["steps_per_active_min"]) * 0.25), 0, 40000)),
+            "source": {"provider": "synthetic-ring", "shape": "junction-sleep-summary-like"},
+        })
+    return nights
 
 
 # ---------- helpers ----------------------------------------------------------
@@ -298,7 +381,17 @@ def generate(p: dict, end: date, rng: random.Random, extended: bool = False) -> 
     for key in ("driftStartDay", "driftEndDay", "lastCheckInDay"):
         if truth.get(key) is not None:
             truth[key.replace("Day", "Date")] = iso(start + timedelta(days=truth[key]))
+    truth["ring"] = RING_TRUTH[pid]
     return core, truth
+
+
+RING_TRUTH = {
+    "aino": "From day 60: average_hrv about -15 % (about -9 % in the walk-helps days 70-77), hr_lowest +3, later and more irregular bedtimes, efficiency -3 points. No temperature change.",
+    "leena": "Stays inside her normal range; only gaps when the ring charges.",
+    "juho": "Days 52-69: short, late, broken sleep (latency +25 min, efficiency -6), average_hrv -20 %, hr_lowest +4; partial recovery 70-77.",
+    "sara": "Wear drops (90 % -> 50 % -> 30 % of nights). Missing ring data is not a mood signal.",
+    "elias": "Flu days 72-78, peak day 74: temperature_delta up to +1.1 °C, respiratory_rate +2.5, hr_lowest +8, average_hrv -30 %. Fever signature = illness, not relapse.",
+}
 
 
 def main():
@@ -308,6 +401,7 @@ def main():
     ap.add_argument("--truth", default="out/ground_truth")
     ap.add_argument("--minimal", action="store_true",
                     help="leave out homeMinutes, screenOffTime and phq9 (older app format)")
+    ap.add_argument("--no-ring", action="store_true", help="do not write ring.json (smart-ring layer, v0.4)")
     a = ap.parse_args()
     end = date.fromisoformat(a.end)
     out, truth_dir = Path(a.out), Path(a.truth)
@@ -316,10 +410,23 @@ def main():
     for n, p in enumerate(PERSONAS):
         rng = random.Random(SEED + n)
         core, truth = generate(p, end, rng, not a.minimal)
-        (out / p['meta']['id']).mkdir(parents=True, exist_ok=True)
-        (out / p['meta']['id'] / "core.json").write_text(json.dumps(core, ensure_ascii=False, indent=1) + "\n")
-        (truth_dir / f"{p['meta']['id']}.json").write_text(json.dumps(truth, ensure_ascii=False, indent=2) + "\n")
-        print(f"{p['meta']['id']:6s} check-ins {len(core['checkIns']):3d}  sensors {len(core['sensors']):3d}  feedback {len(core['feedback']):3d}")
+        pid = p['meta']['id']
+        (out / pid).mkdir(parents=True, exist_ok=True)
+        (out / pid / "core.json").write_text(json.dumps(core, ensure_ascii=False, indent=1) + "\n")
+        (truth_dir / f"{pid}.json").write_text(json.dumps(truth, ensure_ascii=False, indent=2) + "\n")
+        msg = f"{pid:6s} check-ins {len(core['checkIns']):3d}  sensors {len(core['sensors']):3d}  feedback {len(core['feedback']):3d}"
+        if not a.no_ring:
+            nights = ring_nights(pid, end - timedelta(days=DAYS - 1), p["fn"])
+            ring = {"synthetic": True, "generatorVersion": GENERATOR_VERSION, "seed": SEED, "personaId": pid,
+                    "device": "smart ring (Oura-like), SYNTHETIC",
+                    "units": {"duration/total/awake/light/deep/rem/latency": "seconds", "efficiency": "0-1",
+                              "average_hrv": "RMSSD ms", "hr_lowest/hr_average": "bpm",
+                              "temperature_delta": "°C vs own long-term average", "respiratory_rate": "breaths/min",
+                              "steps": "per day", "date": "local evening the night started; missing date = ring not worn"},
+                    "nights": nights}
+            (out / pid / "ring.json").write_text(json.dumps(ring, ensure_ascii=False, indent=1) + "\n")
+            msg += f"  ring nights {len(nights):3d}"
+        print(msg)
 
 
 if __name__ == "__main__":

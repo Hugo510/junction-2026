@@ -1,6 +1,6 @@
 {
   "synthetic": true,
-  "generatorVersion": "0.3",
+  "generatorVersion": "0.4",
   "seed": 2026,
   "personaId": "elias",
   "firstDay": "2026-08-17",
@@ -35,5 +35,6 @@
     }
   },
   "driftStartDate": "2026-10-28",
-  "driftEndDate": "2026-11-03"
+  "driftEndDate": "2026-11-03",
+  "ring": "Flu days 72-78, peak day 74: temperature_delta up to +1.1 °C, respiratory_rate +2.5, hr_lowest +8, average_hrv -30 %. Fever signature = illness, not relapse."
 }
