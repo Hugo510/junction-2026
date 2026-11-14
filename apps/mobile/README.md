@@ -99,6 +99,13 @@ Suggested 2-minute script:
 5. Type a crisis phrase in the chat (or *Trigger urgent check-in*) → crisis screen opens immediately
    and an urgent alert is created (never enters the normal queue).
 
+## Demo personas (synthetic)
+
+One file per persona in `assets/personas/<id>/core.json` (schema: `assets/personas/core.schema.json`,
+example: `assets/personas/example/core.json`). Files must contain `"synthetic": true`. Register each file in
+`src/data/personas/index.ts`; it then appears in demo mode. Files keep real calendar dates: on load the app
+moves every date so the last day becomes "yesterday". The app never reads `ground_truth/`.
+
 ## Languages
 
 English (default), Suomi, Español, Svenska. Device language is detected on first launch

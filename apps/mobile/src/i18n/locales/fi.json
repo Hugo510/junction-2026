@@ -502,7 +502,9 @@
     "reachOut": "Simuloi yhteydenottoilmoitus",
     "skipDays": "Ohita 3 päivää ilman kuulumisia",
     "bipolarOn": "Klinikan merkintä: kaksisuuntainen → päälle",
-    "bipolarOff": "Klinikan merkintä: kaksisuuntainen → pois"
+    "bipolarOff": "Klinikan merkintä: kaksisuuntainen → pois",
+    "personasTitle": "Demohenkilöt (synteettiset)",
+    "noPersonas": "Henkilötiedostoja ei vielä ole. Lisää ne kansioon assets/personas/<id>/core.json."
   },
   "menu": {
     "chat": "Keskustelu",

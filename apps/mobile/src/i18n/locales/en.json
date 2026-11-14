@@ -502,7 +502,9 @@
     "reachOut": "Simulate reach-out notification",
     "skipDays": "Skip 3 days without check-ins",
     "bipolarOn": "Clinic flag: bipolar → turn on",
-    "bipolarOff": "Clinic flag: bipolar → turn off"
+    "bipolarOff": "Clinic flag: bipolar → turn off",
+    "personasTitle": "Demo personas (synthetic)",
+    "noPersonas": "No persona files yet. Add them to assets/personas/<id>/core.json."
   },
   "menu": {
     "chat": "Chat",

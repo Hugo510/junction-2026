@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 
 import { repositories } from '../data';
+import { rebasePersona, type Persona } from '../data/personas';
 import { generateHistory, type SeedScenario } from '../data/seed';
 import { enqueueNormal, positionInQueue, syntheticWaitingQueue } from '../domain/consultQueue';
 import type {
@@ -16,6 +17,7 @@ import type {
   InterventionId,
   Patient,
   PerceivedUrgency,
+  Phq9Entry,
   PlanItemStatus,
   SensorAggregate,
 } from '../domain/entities';
@@ -43,6 +45,7 @@ interface DataState {
   plan: DailyPlan | null;
   requests: ConsultRequest[];
   alerts: Alert[];
+  phq9: Phq9Entry[];
   doctors: Doctor[];
 
   load: () => Promise<void>;
@@ -60,6 +63,8 @@ interface DataState {
   /** Silence ladder: returns the level and (with consent) gently notifies the care team. */
   checkSilence: () => Promise<OutreachLevel>;
   seedScenario: (scenario: SeedScenario) => Promise<void>;
+  /** Demo: replace the history with a synthetic persona (dates are moved so it ends yesterday). */
+  loadPersona: (persona: Persona) => Promise<void>;
   deleteEverything: () => Promise<void>;
 }
 
@@ -75,6 +80,7 @@ const empty = {
   plan: null,
   requests: [],
   alerts: [],
+  phq9: [],
   doctors: [],
 };
 
@@ -82,14 +88,15 @@ export const useData = create<DataState>()((set, get) => {
   const r = repositories;
 
   const reloadHistory = async () => {
-    const [checkIns, sensors, feedback, requests, alerts] = await Promise.all([
+    const [checkIns, sensors, feedback, requests, alerts, phq9] = await Promise.all([
       r.checkIns.list(),
       r.sensors.list(),
       r.interventions.listFeedback(),
       r.care.listRequests(),
       r.care.listAlerts(),
+      r.phq9.list(),
     ]);
-    set({ checkIns, sensors, feedback, requests, alerts });
+    set({ checkIns, sensors, feedback, requests, alerts, phq9 });
   };
 
   return {
@@ -236,6 +243,24 @@ export const useData = create<DataState>()((set, get) => {
       return level;
     },
 
+    loadPersona: async (persona) => {
+      await r.admin.replaceHistory(rebasePersona(persona, yesterdayISO()));
+      const current = get().patient;
+      if (current) {
+        const updated: Patient = {
+          ...current,
+          companion: persona.persona.companion ?? current.companion,
+          bipolarFlag: !!persona.persona.bipolarFlag,
+        };
+        await r.patient.save(updated);
+        set({ patient: updated });
+      }
+      if (persona.persona.trustedContact) useSettings.getState().setTrustedContact(persona.persona.trustedContact);
+      set({ plan: null });
+      await reloadHistory();
+      await get().ensureTodayPlan();
+    },
+
     seedScenario: async (scenario) => {
       await r.admin.replaceHistory(generateHistory(scenario, yesterdayISO()));
       set({ plan: null });
@@ -245,7 +270,8 @@ export const useData = create<DataState>()((set, get) => {
 
     deleteEverything: async () => {
       await r.admin.deleteAll();
-      set({ ...empty, status: 'ready' });
+      // Keep the (fictional) care team: it is not patient data and is only loaded at startup.
+      set({ ...empty, doctors: get().doctors, status: 'ready' });
     },
   };
 });

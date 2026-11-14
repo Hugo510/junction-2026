@@ -2,6 +2,7 @@ import { router } from 'expo-router';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { PERSONAS } from '../src/data/personas';
 import { notificationKey } from '../src/domain/outreach';
 import { usePriority } from '../src/features/usePriority';
 import { formatDate } from '../src/i18n';
@@ -11,7 +12,7 @@ import { useChat } from '../src/store/chat';
 import { useData } from '../src/store/data';
 import { useReachOut } from '../src/store/reachOut';
 import { useSettings } from '../src/store/settings';
-import { AppText, Button, Card, Screen } from '../src/ui';
+import { AppText, Button, Card, ListItem, Screen, Section } from '../src/ui';
 
 /**
  * Hidden demo mode for the pitch (long-press the logo in Settings for 2 s).
@@ -31,6 +32,7 @@ export default function DemoScreen() {
   const bipolar = useData((s) => s.patient?.bipolarFlag ?? false);
   const setBipolarFlag = useData((s) => s.setBipolarFlag);
   const checkSilence = useData((s) => s.checkSilence);
+  const loadPersona = useData((s) => s.loadPersona);
 
   /** Show the simulated notification that matches the current silence level. */
   const reachOut = async () => {
@@ -122,6 +124,30 @@ export default function DemoScreen() {
           onPress={run(key, action)}
         />
       ))}
+
+      {PERSONAS.length > 0 ? (
+        <Section title={t('demo.personasTitle')}>
+          {PERSONAS.map((p) => {
+            const key = `persona-${p.persona.id}`;
+            return (
+              <ListItem
+                key={key}
+                title={p.persona.label}
+                subtitle={done === key ? t('demo.doneToast') : p.persona.story}
+                chevron
+                onPress={run(key, async () => {
+                  await loadPersona(p);
+                  await useChat.getState().reset();
+                })}
+              />
+            );
+          })}
+        </Section>
+      ) : (
+        <AppText variant="caption" tone="muted">
+          {t('demo.noPersonas')}
+        </AppText>
+      )}
     </Screen>
   );
 }

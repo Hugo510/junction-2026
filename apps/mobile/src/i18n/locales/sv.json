@@ -502,7 +502,9 @@
     "reachOut": "Simulera kontaktnotis",
     "skipDays": "Hoppa över 3 dagar utan incheckning",
     "bipolarOn": "Klinikens markering: bipolär → slå på",
-    "bipolarOff": "Klinikens markering: bipolär → stäng av"
+    "bipolarOff": "Klinikens markering: bipolär → stäng av",
+    "personasTitle": "Demopersoner (syntetiska)",
+    "noPersonas": "Inga personfiler än. Lägg dem i assets/personas/<id>/core.json."
   },
   "menu": {
     "chat": "Chatt",

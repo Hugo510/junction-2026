@@ -502,7 +502,9 @@
     "reachOut": "Simular notificación de contacto",
     "skipDays": "Saltar 3 días sin check-in",
     "bipolarOn": "Indicador clínico: bipolar → activar",
-    "bipolarOff": "Indicador clínico: bipolar → desactivar"
+    "bipolarOff": "Indicador clínico: bipolar → desactivar",
+    "personasTitle": "Personas de demostración (sintéticas)",
+    "noPersonas": "Aún no hay archivos de personas. Agrégalos en assets/personas/<id>/core.json."
   },
   "menu": {
     "chat": "Chat",
