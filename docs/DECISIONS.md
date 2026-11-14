@@ -26,7 +26,6 @@
 | O17 | **Schema extension:** `homeMinutes`, `screenOffTime` on `SensorAggregate` + `phq9[]`; data ready in `tools/synthetic/personas_extended/`. | Meg (W9) | Hugo |
 | O18 | **Cross-person learning:** bandit starts from a population prior per action, then personal data takes over; consent + aggregated scores only. This weekend: pitch + maybe the prior in code. | Meg (W9) | Uriel |
 | O19 | **When a person dies / care ends (W11):** ladder quiet after 30 days; clinic-only "care ended" status stops all outreach; neutral lock-screen text; legal check before any pitch claim. | Meg | Hugo (texts), Owais (data) |
-| O21 | **Clinician screen → Uriel, in-app demo screen** (Owais resting after working all night, 10:21). Owais's web version only as an extra if time allows. Scores must match the fixtures in `tools/synthetic/ABOUT.md`. | Meg 10:21 | Uriel |
 | O22 | **Owais, when back from rest — in order:** (1) push the check-ins / self-harm / priority-score code (GitHub has only health, auth, `/me`, last push 08:40); (2) merge both branches to `main` + README; (3) backup demo recording. The demo does not depend on the backend (app runs on local data). | Repo check 10:25 · Meg 10:21 | Owais |
 | O23 | **Win strategy v4 (spec W0):** three loops; must M1–M4 by ~15:00, should S1–S5 by ~19:00, **feature freeze 21:00**, submit by **Sun 09:30**. | Claude (spec W0) | Meg + team |
 | O24 | **Mentor check today** (Ilmoniemi/Lioumis group): PHQ-2/9 cadence + safety question, "consider a booster review" wording, the lab ask. | Claude (spec W0) | Meg |
@@ -37,6 +36,9 @@
 ---
 
 ## Sat 14 Nov 2026
+
+**Decided (10:36, Uriel)**
+- **Uriel owns the clinician view** (confirmed 10:36): in-app demo screen with the 5 synthetic patients — priority level and score, top two reasons, latest PHQ-9, lost-contact status. Reuses the existing `priorityScore` logic and the persona data; **no separate implementation**. (Closes O21.)
 
 **Decided (10:16, Meg)**
 - **The four fixes (spec W8) are the priority:** (1) guiding daily moment — Hiillos speaks first, one tap, one small step; the 7-step check-in becomes weekly or on change; (2) reach out on drift when the score hits medium, not only on silence; (3) "What Hiillos has learned" card; (4) clinician screen (agreed already Fri).
