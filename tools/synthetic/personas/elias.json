@@ -1,0 +1,1770 @@
+{
+ "persona": {
+  "id": "elias",
+  "displayName": "Elias (synthetic)",
+  "story": "Flu week: false alarm, no clinic alert",
+  "language": "en",
+  "companion": {
+   "species": "dog",
+   "name": "Otso"
+  },
+  "bipolarFlag": false,
+  "trustedContact": {
+   "name": "Leo (synthetic)",
+   "phone": "+358 40 000 0005"
+  }
+ },
+ "checkIns": [
+  {
+   "id": "elias-2026-08-17",
+   "date": "2026-08-17",
+   "createdAt": "2026-08-17T17:46:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "calm",
+    "content"
+   ],
+   "energy": 4,
+   "anxiety": 3,
+   "sleepHours": 7.3,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-08-19",
+   "date": "2026-08-19",
+   "createdAt": "2026-08-19T18:42:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "content",
+    "calm"
+   ],
+   "energy": 4,
+   "anxiety": 2,
+   "sleepHours": 6.7,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-08-20",
+   "date": "2026-08-20",
+   "createdAt": "2026-08-20T18:34:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "calm"
+   ],
+   "energy": 3,
+   "anxiety": 2,
+   "sleepHours": 7.4,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-08-21",
+   "date": "2026-08-21",
+   "createdAt": "2026-08-21T19:48:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "calm"
+   ],
+   "energy": 4,
+   "anxiety": 3,
+   "sleepHours": 7.1,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-08-22",
+   "date": "2026-08-22",
+   "createdAt": "2026-08-22T17:56:00.000Z",
+   "kind": "full",
+   "mood": 3,
+   "emotions": [
+    "content"
+   ],
+   "energy": 4,
+   "anxiety": 1,
+   "sleepHours": 7.9,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-08-23",
+   "date": "2026-08-23",
+   "createdAt": "2026-08-23T18:22:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "content"
+   ],
+   "energy": 4,
+   "anxiety": 2,
+   "sleepHours": 6.7,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-08-24",
+   "date": "2026-08-24",
+   "createdAt": "2026-08-24T18:44:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "content",
+    "calm"
+   ],
+   "energy": 3,
+   "anxiety": 2,
+   "sleepHours": 7.4,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-08-25",
+   "date": "2026-08-25",
+   "createdAt": "2026-08-25T17:58:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "calm"
+   ],
+   "energy": 3,
+   "anxiety": 2,
+   "sleepHours": 7.8,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-08-26",
+   "date": "2026-08-26",
+   "createdAt": "2026-08-26T17:26:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "content",
+    "calm"
+   ],
+   "energy": 3,
+   "anxiety": 2,
+   "sleepHours": 7.2,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-08-27",
+   "date": "2026-08-27",
+   "createdAt": "2026-08-27T17:25:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "content",
+    "calm"
+   ],
+   "energy": 3,
+   "anxiety": 2,
+   "sleepHours": 6.8,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-08-28",
+   "date": "2026-08-28",
+   "createdAt": "2026-08-28T19:44:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "calm"
+   ],
+   "energy": 4,
+   "anxiety": 2,
+   "sleepHours": 6.6,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-08-29",
+   "date": "2026-08-29",
+   "createdAt": "2026-08-29T19:37:00.000Z",
+   "kind": "full",
+   "mood": 5,
+   "emotions": [
+    "calm"
+   ],
+   "energy": 4,
+   "anxiety": 2,
+   "sleepHours": 7.7,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-08-30",
+   "date": "2026-08-30",
+   "createdAt": "2026-08-30T17:24:00.000Z",
+   "kind": "full",
+   "mood": 5,
+   "emotions": [
+    "calm"
+   ],
+   "energy": 4,
+   "anxiety": 2,
+   "sleepHours": 6.4,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-08-31",
+   "date": "2026-08-31",
+   "createdAt": "2026-08-31T18:15:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "content"
+   ],
+   "energy": 4,
+   "anxiety": 3,
+   "sleepHours": 7.4,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-09-01",
+   "date": "2026-09-01",
+   "createdAt": "2026-09-01T19:51:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "content"
+   ],
+   "energy": 4,
+   "anxiety": 3,
+   "sleepHours": 7.4,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-09-02",
+   "date": "2026-09-02",
+   "createdAt": "2026-09-02T19:18:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "content"
+   ],
+   "energy": 3,
+   "anxiety": 2,
+   "sleepHours": 6.8,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-09-03",
+   "date": "2026-09-03",
+   "createdAt": "2026-09-03T19:41:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "content",
+    "calm"
+   ],
+   "energy": 4,
+   "anxiety": 2,
+   "sleepHours": 7.0,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-09-04",
+   "date": "2026-09-04",
+   "createdAt": "2026-09-04T18:16:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "calm",
+    "content"
+   ],
+   "energy": 5,
+   "anxiety": 2,
+   "sleepHours": 7.2,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-09-05",
+   "date": "2026-09-05",
+   "createdAt": "2026-09-05T19:01:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "calm",
+    "content"
+   ],
+   "energy": 4,
+   "anxiety": 2,
+   "sleepHours": 7.3,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-09-06",
+   "date": "2026-09-06",
+   "createdAt": "2026-09-06T17:53:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "calm"
+   ],
+   "energy": 3,
+   "anxiety": 2,
+   "sleepHours": 7.1,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-09-07",
+   "date": "2026-09-07",
+   "createdAt": "2026-09-07T17:34:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "content"
+   ],
+   "energy": 4,
+   "anxiety": 2,
+   "sleepHours": 7.2,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-09-08",
+   "date": "2026-09-08",
+   "createdAt": "2026-09-08T17:14:00.000Z",
+   "kind": "full",
+   "mood": 3,
+   "emotions": [
+    "calm",
+    "content"
+   ],
+   "energy": 4,
+   "anxiety": 2,
+   "sleepHours": 7.4,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-09-10",
+   "date": "2026-09-10",
+   "createdAt": "2026-09-10T19:40:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "calm"
+   ],
+   "energy": 4,
+   "anxiety": 2,
+   "sleepHours": 7.6,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-09-11",
+   "date": "2026-09-11",
+   "createdAt": "2026-09-11T17:28:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "content"
+   ],
+   "energy": 4,
+   "anxiety": 2,
+   "sleepHours": 7.4,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-09-12",
+   "date": "2026-09-12",
+   "createdAt": "2026-09-12T17:01:00.000Z",
+   "kind": "full",
+   "mood": 3,
+   "emotions": [
+    "content"
+   ],
+   "energy": 3,
+   "anxiety": 2,
+   "sleepHours": 7.5,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-09-13",
+   "date": "2026-09-13",
+   "createdAt": "2026-09-13T18:44:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "calm"
+   ],
+   "energy": 3,
+   "anxiety": 2,
+   "sleepHours": 7.8,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-09-14",
+   "date": "2026-09-14",
+   "createdAt": "2026-09-14T17:26:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "calm",
+    "content"
+   ],
+   "energy": 3,
+   "anxiety": 2,
+   "sleepHours": 7.7,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-09-15",
+   "date": "2026-09-15",
+   "createdAt": "2026-09-15T17:04:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "content"
+   ],
+   "energy": 4,
+   "anxiety": 2,
+   "sleepHours": 7.5,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-09-16",
+   "date": "2026-09-16",
+   "createdAt": "2026-09-16T17:03:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "content",
+    "calm"
+   ],
+   "energy": 5,
+   "anxiety": 2,
+   "sleepHours": 6.9,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-09-17",
+   "date": "2026-09-17",
+   "createdAt": "2026-09-17T19:00:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "calm",
+    "content"
+   ],
+   "energy": 4,
+   "anxiety": 3,
+   "sleepHours": 6.9,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-09-18",
+   "date": "2026-09-18",
+   "createdAt": "2026-09-18T19:14:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "content"
+   ],
+   "energy": 3,
+   "anxiety": 2,
+   "sleepHours": 6.7,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-09-19",
+   "date": "2026-09-19",
+   "createdAt": "2026-09-19T19:30:00.000Z",
+   "kind": "full",
+   "mood": 5,
+   "emotions": [
+    "content"
+   ],
+   "energy": 4,
+   "anxiety": 2,
+   "sleepHours": 7.0,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-09-20",
+   "date": "2026-09-20",
+   "createdAt": "2026-09-20T19:13:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "calm"
+   ],
+   "energy": 3,
+   "anxiety": 1,
+   "sleepHours": 7.0,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-09-21",
+   "date": "2026-09-21",
+   "createdAt": "2026-09-21T17:49:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "content",
+    "calm"
+   ],
+   "energy": 4,
+   "anxiety": 3,
+   "sleepHours": 7.1,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-09-22",
+   "date": "2026-09-22",
+   "createdAt": "2026-09-22T17:17:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "content"
+   ],
+   "energy": 3,
+   "anxiety": 2,
+   "sleepHours": 7.3,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-09-25",
+   "date": "2026-09-25",
+   "createdAt": "2026-09-25T17:58:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "calm",
+    "content"
+   ],
+   "energy": 4,
+   "anxiety": 2,
+   "sleepHours": 7.0,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-09-26",
+   "date": "2026-09-26",
+   "createdAt": "2026-09-26T18:57:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "calm",
+    "content"
+   ],
+   "energy": 4,
+   "anxiety": 2,
+   "sleepHours": 7.1,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-09-27",
+   "date": "2026-09-27",
+   "createdAt": "2026-09-27T19:54:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "calm",
+    "content"
+   ],
+   "energy": 3,
+   "anxiety": 2,
+   "sleepHours": 7.1,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-09-28",
+   "date": "2026-09-28",
+   "createdAt": "2026-09-28T17:02:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "content"
+   ],
+   "energy": 4,
+   "anxiety": 2,
+   "sleepHours": 7.1,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-09-29",
+   "date": "2026-09-29",
+   "createdAt": "2026-09-29T19:51:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "calm",
+    "content"
+   ],
+   "energy": 4,
+   "anxiety": 3,
+   "sleepHours": 6.9,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-09-30",
+   "date": "2026-09-30",
+   "createdAt": "2026-09-30T17:27:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "content"
+   ],
+   "energy": 4,
+   "anxiety": 2,
+   "sleepHours": 7.3,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-10-01",
+   "date": "2026-10-01",
+   "createdAt": "2026-10-01T18:36:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "content"
+   ],
+   "energy": 5,
+   "anxiety": 2,
+   "sleepHours": 7.1,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-10-02",
+   "date": "2026-10-02",
+   "createdAt": "2026-10-02T17:40:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "calm",
+    "content"
+   ],
+   "energy": 4,
+   "anxiety": 2,
+   "sleepHours": 6.7,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-10-03",
+   "date": "2026-10-03",
+   "createdAt": "2026-10-03T18:50:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "calm",
+    "content"
+   ],
+   "energy": 4,
+   "anxiety": 2,
+   "sleepHours": 6.5,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-10-05",
+   "date": "2026-10-05",
+   "createdAt": "2026-10-05T19:59:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "calm",
+    "content"
+   ],
+   "energy": 3,
+   "anxiety": 1,
+   "sleepHours": 7.5,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-10-06",
+   "date": "2026-10-06",
+   "createdAt": "2026-10-06T17:44:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "content",
+    "calm"
+   ],
+   "energy": 3,
+   "anxiety": 2,
+   "sleepHours": 6.5,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-10-07",
+   "date": "2026-10-07",
+   "createdAt": "2026-10-07T19:17:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "calm",
+    "content"
+   ],
+   "energy": 3,
+   "anxiety": 2,
+   "sleepHours": 6.7,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-10-08",
+   "date": "2026-10-08",
+   "createdAt": "2026-10-08T18:41:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "content"
+   ],
+   "energy": 5,
+   "anxiety": 3,
+   "sleepHours": 7.3,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-10-09",
+   "date": "2026-10-09",
+   "createdAt": "2026-10-09T17:23:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "calm",
+    "content"
+   ],
+   "energy": 3,
+   "anxiety": 2,
+   "sleepHours": 7.5,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-10-10",
+   "date": "2026-10-10",
+   "createdAt": "2026-10-10T18:11:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "calm",
+    "content"
+   ],
+   "energy": 3,
+   "anxiety": 2,
+   "sleepHours": 6.6,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-10-11",
+   "date": "2026-10-11",
+   "createdAt": "2026-10-11T19:06:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "calm"
+   ],
+   "energy": 4,
+   "anxiety": 3,
+   "sleepHours": 7.3,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-10-12",
+   "date": "2026-10-12",
+   "createdAt": "2026-10-12T17:16:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "content",
+    "calm"
+   ],
+   "energy": 4,
+   "anxiety": 2,
+   "sleepHours": 7.0,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-10-13",
+   "date": "2026-10-13",
+   "createdAt": "2026-10-13T17:12:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "calm",
+    "content"
+   ],
+   "energy": 5,
+   "anxiety": 2,
+   "sleepHours": 6.8,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-10-14",
+   "date": "2026-10-14",
+   "createdAt": "2026-10-14T19:25:00.000Z",
+   "kind": "full",
+   "mood": 5,
+   "emotions": [
+    "content"
+   ],
+   "energy": 4,
+   "anxiety": 2,
+   "sleepHours": 7.1,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-10-16",
+   "date": "2026-10-16",
+   "createdAt": "2026-10-16T18:44:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "calm"
+   ],
+   "energy": 3,
+   "anxiety": 2,
+   "sleepHours": 7.2,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-10-17",
+   "date": "2026-10-17",
+   "createdAt": "2026-10-17T17:04:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "content"
+   ],
+   "energy": 4,
+   "anxiety": 2,
+   "sleepHours": 7.0,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-10-18",
+   "date": "2026-10-18",
+   "createdAt": "2026-10-18T17:01:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "content",
+    "calm"
+   ],
+   "energy": 4,
+   "anxiety": 2,
+   "sleepHours": 7.3,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-10-19",
+   "date": "2026-10-19",
+   "createdAt": "2026-10-19T18:39:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "content",
+    "calm"
+   ],
+   "energy": 4,
+   "anxiety": 2,
+   "sleepHours": 7.0,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-10-20",
+   "date": "2026-10-20",
+   "createdAt": "2026-10-20T17:41:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "content",
+    "calm"
+   ],
+   "energy": 4,
+   "anxiety": 2,
+   "sleepHours": 6.9,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-10-21",
+   "date": "2026-10-21",
+   "createdAt": "2026-10-21T19:08:00.000Z",
+   "kind": "full",
+   "mood": 5,
+   "emotions": [
+    "calm"
+   ],
+   "energy": 4,
+   "anxiety": 1,
+   "sleepHours": 7.8,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-10-22",
+   "date": "2026-10-22",
+   "createdAt": "2026-10-22T19:06:00.000Z",
+   "kind": "full",
+   "mood": 3,
+   "emotions": [
+    "content",
+    "calm"
+   ],
+   "energy": 3,
+   "anxiety": 1,
+   "sleepHours": 8.1,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-10-24",
+   "date": "2026-10-24",
+   "createdAt": "2026-10-24T17:36:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "calm",
+    "content"
+   ],
+   "energy": 4,
+   "anxiety": 2,
+   "sleepHours": 7.0,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-10-25",
+   "date": "2026-10-25",
+   "createdAt": "2026-10-25T17:33:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "calm",
+    "content"
+   ],
+   "energy": 4,
+   "anxiety": 2,
+   "sleepHours": 7.1,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-10-26",
+   "date": "2026-10-26",
+   "createdAt": "2026-10-26T17:49:00.000Z",
+   "kind": "full",
+   "mood": 3,
+   "emotions": [
+    "content",
+    "calm"
+   ],
+   "energy": 3,
+   "anxiety": 2,
+   "sleepHours": 7.6,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-10-27",
+   "date": "2026-10-27",
+   "createdAt": "2026-10-27T19:42:00.000Z",
+   "kind": "full",
+   "mood": 3,
+   "emotions": [
+    "calm"
+   ],
+   "energy": 3,
+   "anxiety": 1,
+   "sleepHours": 7.7,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-10-29",
+   "date": "2026-10-29",
+   "createdAt": "2026-10-29T18:48:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "tired"
+   ],
+   "energy": 2,
+   "anxiety": 2,
+   "sleepHours": 10.5,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-10-30",
+   "date": "2026-10-30",
+   "createdAt": "2026-10-30T19:29:00.000Z",
+   "kind": "full",
+   "mood": 3,
+   "emotions": [
+    "tired"
+   ],
+   "energy": 2,
+   "anxiety": 2,
+   "sleepHours": 10.6,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-10-31",
+   "date": "2026-10-31",
+   "createdAt": "2026-10-31T17:44:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "tired"
+   ],
+   "energy": 1,
+   "anxiety": 2,
+   "sleepHours": 10.9,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-11-01",
+   "date": "2026-11-01",
+   "createdAt": "2026-11-01T19:53:00.000Z",
+   "kind": "full",
+   "mood": 3,
+   "emotions": [
+    "tired"
+   ],
+   "energy": 1,
+   "anxiety": 3,
+   "sleepHours": 10.0,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-11-02",
+   "date": "2026-11-02",
+   "createdAt": "2026-11-02T19:17:00.000Z",
+   "kind": "full",
+   "mood": 3,
+   "emotions": [
+    "tired"
+   ],
+   "energy": 2,
+   "anxiety": 2,
+   "sleepHours": 10.5,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-11-03",
+   "date": "2026-11-03",
+   "createdAt": "2026-11-03T18:23:00.000Z",
+   "kind": "full",
+   "mood": 3,
+   "emotions": [
+    "tired"
+   ],
+   "energy": 1,
+   "anxiety": 2,
+   "sleepHours": 10.8,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-11-04",
+   "date": "2026-11-04",
+   "createdAt": "2026-11-04T17:11:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "calm"
+   ],
+   "energy": 5,
+   "anxiety": 2,
+   "sleepHours": 7.4,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-11-05",
+   "date": "2026-11-05",
+   "createdAt": "2026-11-05T19:02:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "calm"
+   ],
+   "energy": 4,
+   "anxiety": 2,
+   "sleepHours": 7.1,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-11-06",
+   "date": "2026-11-06",
+   "createdAt": "2026-11-06T17:38:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "calm"
+   ],
+   "energy": 4,
+   "anxiety": 3,
+   "sleepHours": 7.6,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-11-07",
+   "date": "2026-11-07",
+   "createdAt": "2026-11-07T17:53:00.000Z",
+   "kind": "full",
+   "mood": 5,
+   "emotions": [
+    "calm",
+    "content"
+   ],
+   "energy": 4,
+   "anxiety": 1,
+   "sleepHours": 6.8,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-11-08",
+   "date": "2026-11-08",
+   "createdAt": "2026-11-08T18:59:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "calm"
+   ],
+   "energy": 4,
+   "anxiety": 3,
+   "sleepHours": 7.5,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-11-09",
+   "date": "2026-11-09",
+   "createdAt": "2026-11-09T17:03:00.000Z",
+   "kind": "full",
+   "mood": 5,
+   "emotions": [
+    "content"
+   ],
+   "energy": 4,
+   "anxiety": 2,
+   "sleepHours": 7.0,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-11-10",
+   "date": "2026-11-10",
+   "createdAt": "2026-11-10T18:37:00.000Z",
+   "kind": "full",
+   "mood": 5,
+   "emotions": [
+    "calm"
+   ],
+   "energy": 4,
+   "anxiety": 2,
+   "sleepHours": 7.9,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-11-11",
+   "date": "2026-11-11",
+   "createdAt": "2026-11-11T18:47:00.000Z",
+   "kind": "full",
+   "mood": 5,
+   "emotions": [
+    "content",
+    "calm"
+   ],
+   "energy": 3,
+   "anxiety": 2,
+   "sleepHours": 7.1,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-11-12",
+   "date": "2026-11-12",
+   "createdAt": "2026-11-12T19:02:00.000Z",
+   "kind": "full",
+   "mood": 4,
+   "emotions": [
+    "calm"
+   ],
+   "energy": 4,
+   "anxiety": 3,
+   "sleepHours": 7.3,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-11-13",
+   "date": "2026-11-13",
+   "createdAt": "2026-11-13T17:56:00.000Z",
+   "kind": "full",
+   "mood": 3,
+   "emotions": [
+    "calm"
+   ],
+   "energy": 4,
+   "anxiety": 3,
+   "sleepHours": 7.6,
+   "safetyConcern": false
+  },
+  {
+   "id": "elias-2026-11-14",
+   "date": "2026-11-14",
+   "createdAt": "2026-11-14T19:08:00.000Z",
+   "kind": "full",
+   "mood": 3,
+   "emotions": [
+    "calm"
+   ],
+   "energy": 3,
+   "anxiety": 2,
+   "sleepHours": 7.4,
+   "safetyConcern": false
+  }
+ ],
+ "sensors": [
+  {
+   "date": "2026-08-17",
+   "activityMinutes": 41,
+   "daylightMinutes": 84
+  },
+  {
+   "date": "2026-08-18",
+   "activityMinutes": 56,
+   "daylightMinutes": 58
+  },
+  {
+   "date": "2026-08-19",
+   "activityMinutes": 36,
+   "daylightMinutes": 90
+  },
+  {
+   "date": "2026-08-20",
+   "activityMinutes": 40,
+   "daylightMinutes": 69
+  },
+  {
+   "date": "2026-08-21",
+   "activityMinutes": 54,
+   "daylightMinutes": 78
+  },
+  {
+   "date": "2026-08-22",
+   "activityMinutes": 70,
+   "daylightMinutes": 79
+  },
+  {
+   "date": "2026-08-23",
+   "activityMinutes": 69,
+   "daylightMinutes": 29
+  },
+  {
+   "date": "2026-08-24",
+   "activityMinutes": 47,
+   "daylightMinutes": 86
+  },
+  {
+   "date": "2026-08-25",
+   "activityMinutes": 39,
+   "daylightMinutes": 72
+  },
+  {
+   "date": "2026-08-26",
+   "activityMinutes": 60,
+   "daylightMinutes": 57
+  },
+  {
+   "date": "2026-08-27",
+   "activityMinutes": 39,
+   "daylightMinutes": 60
+  },
+  {
+   "date": "2026-08-28",
+   "activityMinutes": 46,
+   "daylightMinutes": 55
+  },
+  {
+   "date": "2026-08-29",
+   "activityMinutes": 57,
+   "daylightMinutes": 87
+  },
+  {
+   "date": "2026-08-30",
+   "activityMinutes": 44,
+   "daylightMinutes": 54
+  },
+  {
+   "date": "2026-08-31",
+   "activityMinutes": 38,
+   "daylightMinutes": 79
+  },
+  {
+   "date": "2026-09-01",
+   "activityMinutes": 51,
+   "daylightMinutes": 76
+  },
+  {
+   "date": "2026-09-02",
+   "activityMinutes": 51,
+   "daylightMinutes": 77
+  },
+  {
+   "date": "2026-09-03",
+   "activityMinutes": 48,
+   "daylightMinutes": 59
+  },
+  {
+   "date": "2026-09-04",
+   "activityMinutes": 58,
+   "daylightMinutes": 62
+  },
+  {
+   "date": "2026-09-05",
+   "activityMinutes": 39,
+   "daylightMinutes": 72
+  },
+  {
+   "date": "2026-09-06",
+   "activityMinutes": 51,
+   "daylightMinutes": 87
+  },
+  {
+   "date": "2026-09-07",
+   "activityMinutes": 41,
+   "daylightMinutes": 64
+  },
+  {
+   "date": "2026-09-08",
+   "activityMinutes": 62,
+   "daylightMinutes": 33
+  },
+  {
+   "date": "2026-09-09",
+   "activityMinutes": 63,
+   "daylightMinutes": 76
+  },
+  {
+   "date": "2026-09-10",
+   "activityMinutes": 57,
+   "daylightMinutes": 54
+  },
+  {
+   "date": "2026-09-11",
+   "activityMinutes": 30,
+   "daylightMinutes": 44
+  },
+  {
+   "date": "2026-09-12",
+   "activityMinutes": 27,
+   "daylightMinutes": 46
+  },
+  {
+   "date": "2026-09-13",
+   "activityMinutes": 49,
+   "daylightMinutes": 64
+  },
+  {
+   "date": "2026-09-14",
+   "activityMinutes": 60,
+   "daylightMinutes": 75
+  },
+  {
+   "date": "2026-09-15",
+   "activityMinutes": 47,
+   "daylightMinutes": 47
+  },
+  {
+   "date": "2026-09-16",
+   "activityMinutes": 41,
+   "daylightMinutes": 55
+  },
+  {
+   "date": "2026-09-17",
+   "activityMinutes": 46,
+   "daylightMinutes": 59
+  },
+  {
+   "date": "2026-09-18",
+   "activityMinutes": 56,
+   "daylightMinutes": 57
+  },
+  {
+   "date": "2026-09-19",
+   "activityMinutes": 30,
+   "daylightMinutes": 56
+  },
+  {
+   "date": "2026-09-20",
+   "activityMinutes": 43,
+   "daylightMinutes": 55
+  },
+  {
+   "date": "2026-09-21",
+   "activityMinutes": 60,
+   "daylightMinutes": 60
+  },
+  {
+   "date": "2026-09-22",
+   "activityMinutes": 35,
+   "daylightMinutes": 44
+  },
+  {
+   "date": "2026-09-23",
+   "activityMinutes": 54,
+   "daylightMinutes": 48
+  },
+  {
+   "date": "2026-09-24",
+   "activityMinutes": 33,
+   "daylightMinutes": 45
+  },
+  {
+   "date": "2026-09-25",
+   "activityMinutes": 41,
+   "daylightMinutes": 54
+  },
+  {
+   "date": "2026-09-26",
+   "activityMinutes": 52,
+   "daylightMinutes": 59
+  },
+  {
+   "date": "2026-09-27",
+   "activityMinutes": 44,
+   "daylightMinutes": 47
+  },
+  {
+   "date": "2026-09-28",
+   "activityMinutes": 49,
+   "daylightMinutes": 62
+  },
+  {
+   "date": "2026-09-29",
+   "activityMinutes": 40,
+   "daylightMinutes": 55
+  },
+  {
+   "date": "2026-09-30",
+   "activityMinutes": 58,
+   "daylightMinutes": 79
+  },
+  {
+   "date": "2026-10-01",
+   "activityMinutes": 59,
+   "daylightMinutes": 65
+  },
+  {
+   "date": "2026-10-02",
+   "activityMinutes": 48,
+   "daylightMinutes": 44
+  },
+  {
+   "date": "2026-10-03",
+   "activityMinutes": 40,
+   "daylightMinutes": 59
+  },
+  {
+   "date": "2026-10-04",
+   "activityMinutes": 48,
+   "daylightMinutes": 17
+  },
+  {
+   "date": "2026-10-05",
+   "activityMinutes": 68,
+   "daylightMinutes": 48
+  },
+  {
+   "date": "2026-10-06",
+   "activityMinutes": 54,
+   "daylightMinutes": 41
+  },
+  {
+   "date": "2026-10-07",
+   "activityMinutes": 59,
+   "daylightMinutes": 54
+  },
+  {
+   "date": "2026-10-08",
+   "activityMinutes": 53,
+   "daylightMinutes": 54
+  },
+  {
+   "date": "2026-10-09",
+   "activityMinutes": 57,
+   "daylightMinutes": 49
+  },
+  {
+   "date": "2026-10-10",
+   "activityMinutes": 65,
+   "daylightMinutes": 40
+  },
+  {
+   "date": "2026-10-11",
+   "activityMinutes": 34,
+   "daylightMinutes": 52
+  },
+  {
+   "date": "2026-10-12",
+   "activityMinutes": 53,
+   "daylightMinutes": 16
+  },
+  {
+   "date": "2026-10-13",
+   "activityMinutes": 60,
+   "daylightMinutes": 47
+  },
+  {
+   "date": "2026-10-14",
+   "activityMinutes": 56,
+   "daylightMinutes": 41
+  },
+  {
+   "date": "2026-10-15",
+   "activityMinutes": 47,
+   "daylightMinutes": 41
+  },
+  {
+   "date": "2026-10-16",
+   "activityMinutes": 50,
+   "daylightMinutes": 46
+  },
+  {
+   "date": "2026-10-17",
+   "activityMinutes": 67,
+   "daylightMinutes": 63
+  },
+  {
+   "date": "2026-10-18",
+   "activityMinutes": 51,
+   "daylightMinutes": 58
+  },
+  {
+   "date": "2026-10-19",
+   "activityMinutes": 45,
+   "daylightMinutes": 57
+  },
+  {
+   "date": "2026-10-20",
+   "activityMinutes": 52,
+   "daylightMinutes": 41
+  },
+  {
+   "date": "2026-10-21",
+   "activityMinutes": 63,
+   "daylightMinutes": 40
+  },
+  {
+   "date": "2026-10-22",
+   "activityMinutes": 48,
+   "daylightMinutes": 42
+  },
+  {
+   "date": "2026-10-23",
+   "activityMinutes": 51,
+   "daylightMinutes": 38
+  },
+  {
+   "date": "2026-10-24",
+   "activityMinutes": 26,
+   "daylightMinutes": 47
+  },
+  {
+   "date": "2026-10-25",
+   "activityMinutes": 62,
+   "daylightMinutes": 37
+  },
+  {
+   "date": "2026-10-26",
+   "activityMinutes": 50,
+   "daylightMinutes": 51
+  },
+  {
+   "date": "2026-10-27",
+   "activityMinutes": 51,
+   "daylightMinutes": 42
+  },
+  {
+   "date": "2026-10-28",
+   "activityMinutes": 8,
+   "daylightMinutes": 0
+  },
+  {
+   "date": "2026-10-29",
+   "activityMinutes": 6,
+   "daylightMinutes": 1
+  },
+  {
+   "date": "2026-10-30",
+   "activityMinutes": 9,
+   "daylightMinutes": 1
+  },
+  {
+   "date": "2026-10-31",
+   "activityMinutes": 10,
+   "daylightMinutes": 0
+  },
+  {
+   "date": "2026-11-01",
+   "activityMinutes": 6,
+   "daylightMinutes": 2
+  },
+  {
+   "date": "2026-11-02",
+   "activityMinutes": 6,
+   "daylightMinutes": 0
+  },
+  {
+   "date": "2026-11-03",
+   "activityMinutes": 7,
+   "daylightMinutes": 1
+  },
+  {
+   "date": "2026-11-04",
+   "activityMinutes": 54,
+   "daylightMinutes": 42
+  },
+  {
+   "date": "2026-11-05",
+   "activityMinutes": 55,
+   "daylightMinutes": 20
+  },
+  {
+   "date": "2026-11-06",
+   "activityMinutes": 53,
+   "daylightMinutes": 38
+  },
+  {
+   "date": "2026-11-07",
+   "activityMinutes": 54,
+   "daylightMinutes": 45
+  },
+  {
+   "date": "2026-11-08",
+   "activityMinutes": 67,
+   "daylightMinutes": 41
+  },
+  {
+   "date": "2026-11-09",
+   "activityMinutes": 37,
+   "daylightMinutes": 38
+  },
+  {
+   "date": "2026-11-10",
+   "activityMinutes": 25,
+   "daylightMinutes": 51
+  },
+  {
+   "date": "2026-11-11",
+   "activityMinutes": 65,
+   "daylightMinutes": 35
+  },
+  {
+   "date": "2026-11-12",
+   "activityMinutes": 43,
+   "daylightMinutes": 24
+  },
+  {
+   "date": "2026-11-13",
+   "activityMinutes": 59,
+   "daylightMinutes": 47
+  },
+  {
+   "date": "2026-11-14",
+   "activityMinutes": 50,
+   "daylightMinutes": 27
+  }
+ ],
+ "feedback": [
+  {
+   "id": "elias-fb-2026-08-25-fireplace",
+   "interventionId": "fireplace",
+   "date": "2026-08-25",
+   "rating": 0
+  },
+  {
+   "id": "elias-fb-2026-08-29-move",
+   "interventionId": "move",
+   "date": "2026-08-29",
+   "rating": 1
+  },
+  {
+   "id": "elias-fb-2026-09-02-daylightWalk",
+   "interventionId": "daylightWalk",
+   "date": "2026-09-02",
+   "rating": 1
+  },
+  {
+   "id": "elias-fb-2026-09-06-fireplace",
+   "interventionId": "fireplace",
+   "date": "2026-09-06",
+   "rating": 0
+  },
+  {
+   "id": "elias-fb-2026-09-10-move",
+   "interventionId": "move",
+   "date": "2026-09-10",
+   "rating": 1
+  },
+  {
+   "id": "elias-fb-2026-09-14-daylightWalk",
+   "interventionId": "daylightWalk",
+   "date": "2026-09-14",
+   "rating": 1
+  },
+  {
+   "id": "elias-fb-2026-09-18-fireplace",
+   "interventionId": "fireplace",
+   "date": "2026-09-18",
+   "rating": 1
+  },
+  {
+   "id": "elias-fb-2026-09-22-move",
+   "interventionId": "move",
+   "date": "2026-09-22",
+   "rating": 0
+  },
+  {
+   "id": "elias-fb-2026-09-26-daylightWalk",
+   "interventionId": "daylightWalk",
+   "date": "2026-09-26",
+   "rating": 1
+  },
+  {
+   "id": "elias-fb-2026-09-30-fireplace",
+   "interventionId": "fireplace",
+   "date": "2026-09-30",
+   "rating": 0
+  },
+  {
+   "id": "elias-fb-2026-10-08-daylightWalk",
+   "interventionId": "daylightWalk",
+   "date": "2026-10-08",
+   "rating": 1
+  },
+  {
+   "id": "elias-fb-2026-10-12-fireplace",
+   "interventionId": "fireplace",
+   "date": "2026-10-12",
+   "rating": 0
+  },
+  {
+   "id": "elias-fb-2026-10-16-move",
+   "interventionId": "move",
+   "date": "2026-10-16",
+   "rating": 1
+  },
+  {
+   "id": "elias-fb-2026-10-20-daylightWalk",
+   "interventionId": "daylightWalk",
+   "date": "2026-10-20",
+   "rating": 1
+  },
+  {
+   "id": "elias-fb-2026-10-24-fireplace",
+   "interventionId": "fireplace",
+   "date": "2026-10-24",
+   "rating": 0
+  },
+  {
+   "id": "elias-fb-2026-11-01-daylightWalk",
+   "interventionId": "daylightWalk",
+   "date": "2026-11-01",
+   "rating": 1
+  },
+  {
+   "id": "elias-fb-2026-11-05-fireplace",
+   "interventionId": "fireplace",
+   "date": "2026-11-05",
+   "rating": 1
+  },
+  {
+   "id": "elias-fb-2026-11-09-move",
+   "interventionId": "move",
+   "date": "2026-11-09",
+   "rating": 1
+  },
+  {
+   "id": "elias-fb-2026-11-13-daylightWalk",
+   "interventionId": "daylightWalk",
+   "date": "2026-11-13",
+   "rating": 1
+  }
+ ]
+}

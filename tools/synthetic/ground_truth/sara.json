@@ -1,0 +1,31 @@
+{
+  "synthetic": true,
+  "generatorVersion": "0.2",
+  "seed": 2026,
+  "personaId": "sara",
+  "firstDay": "2026-08-17",
+  "lastDay": "2026-11-14",
+  "demoDay": "2026-11-15",
+  "dayIndexToDate": "day i = firstDay + i days (0..89)",
+  "driftStartDay": null,
+  "lastCheckInDay": 83,
+  "helps": [
+    "breathing"
+  ],
+  "doesNotHelp": [],
+  "expectedAtDemoDay": "silent >= 7 days -> outreach 'reconnect' (care team only with consent); priority LOW-MEDIUM from missed check-ins only, no mood alarm",
+  "showsInDemo": "Silence is not relapse: warm -> friend -> reconnect",
+  "trueEffects": {
+    "breathing": {
+      "pThumbsUp": 0.5,
+      "pThumbsDown": 0.1,
+      "nextDayMoodLift": 0.1
+    },
+    "daylightWalk": {
+      "pThumbsUp": 0.45,
+      "pThumbsDown": 0.15,
+      "nextDayMoodLift": 0.1
+    }
+  },
+  "lastCheckInDate": "2026-11-08"
+}
