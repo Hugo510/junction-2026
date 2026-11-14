@@ -60,6 +60,8 @@ interface DataState {
   raiseAlert: (source: Alert['source'], level?: Alert['level']) => Promise<Alert>;
   /** Saves a questionnaire: 2 answers = PHQ-2, 9 answers = full PHQ-9. */
   addPhq: (items: number[]) => Promise<Phq9Entry>;
+  /** Clinic-only status: care ended → all outreach stops (demo: toggled from demo mode / clinician screen). */
+  setCareEnded: (on: boolean) => Promise<void>;
   /** Clinic-only flag (demo: toggled from demo mode). */
   setBipolarFlag: (on: boolean) => Promise<void>;
   /** Silence ladder: returns the level and (with consent) gently notifies the care team. */
@@ -119,7 +121,12 @@ export const useData = create<DataState>()((set, get) => {
     },
 
     createPatient: async (companion) => {
-      const patient: Patient = { id: newId('patient'), createdAt: now().toISOString(), companion };
+      const patient: Patient = {
+        id: newId('patient'),
+        createdAt: now().toISOString(),
+        companion,
+        carePath: useSettings.getState().carePath ?? 'postTreatment',
+      };
       await r.patient.save(patient);
       await r.admin.replaceHistory(generateHistory('good', yesterdayISO()));
       set({ patient, plan: null });
@@ -240,6 +247,14 @@ export const useData = create<DataState>()((set, get) => {
       return entry;
     },
 
+    setCareEnded: async (on) => {
+      const patient = get().patient;
+      if (!patient) return;
+      const updated = { ...patient, careEnded: on };
+      await r.patient.save(updated);
+      set({ patient: updated });
+    },
+
     setBipolarFlag: async (on) => {
       const patient = get().patient;
       if (!patient) return;
@@ -249,7 +264,8 @@ export const useData = create<DataState>()((set, get) => {
     },
 
     checkSilence: async () => {
-      const { checkIns, alerts } = get();
+      const { checkIns, alerts, patient } = get();
+      if (patient?.careEnded) return 'none';
       const today = todayISO();
       const level = outreachLevel(checkIns, today);
       const consent = useSettings.getState().consents.careTeamAfterSilence;

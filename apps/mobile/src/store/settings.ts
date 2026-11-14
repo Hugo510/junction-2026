@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
-import type { SupportedLanguage } from '../domain/entities';
+import type { CarePath, SupportedLanguage } from '../domain/entities';
 
 export type ThemeMode = 'system' | 'light' | 'dark';
 
@@ -35,6 +35,9 @@ interface SettingsData {
   /** Demo-only: simulated days added to the real date. */
   dayOffset: number;
   trustedContact: TrustedContact | null;
+  /** Notification previews never mention mood or health (others may see the phone). */
+  discreetNotifications: boolean;
+  carePath: CarePath | null;
 }
 
 interface SettingsState extends SettingsData {
@@ -47,6 +50,8 @@ interface SettingsState extends SettingsData {
   setOnboarded: (on: boolean) => void;
   advanceDay: () => void;
   setTrustedContact: (contact: TrustedContact | null) => void;
+  setDiscreetNotifications: (on: boolean) => void;
+  setCarePath: (path: CarePath) => void;
   reset: () => void;
 }
 
@@ -61,6 +66,8 @@ const defaults: SettingsData = {
   onboarded: false,
   dayOffset: 0,
   trustedContact: null,
+  discreetNotifications: true,
+  carePath: null,
 };
 
 export const SETTINGS_STORAGE_KEY = 'btc:settings';
@@ -78,6 +85,8 @@ export const useSettings = create<SettingsState>()(
       setOnboarded: (onboarded) => set({ onboarded }),
       advanceDay: () => set((s) => ({ dayOffset: s.dayOffset + 1 })),
       setTrustedContact: (trustedContact) => set({ trustedContact }),
+      setDiscreetNotifications: (discreetNotifications) => set({ discreetNotifications }),
+      setCarePath: (carePath) => set({ carePath }),
       reset: () => set({ ...defaults }),
     }),
     {
@@ -93,6 +102,8 @@ export const useSettings = create<SettingsState>()(
           onboarded: rest.onboarded,
           dayOffset: rest.dayOffset,
           trustedContact: rest.trustedContact,
+          discreetNotifications: rest.discreetNotifications,
+          carePath: rest.carePath,
         };
         return data;
       },

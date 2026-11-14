@@ -6,19 +6,26 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTranslation } from 'react-i18next';
 
 import { haptics } from '../../services/haptics';
+import { useChat } from '../../store/chat';
 import { useData } from '../../store/data';
 import { useReachOut } from '../../store/reachOut';
+import { useSettings } from '../../store/settings';
 import { AppText, Avatar, elevation, radii, spacing, useTheme } from '../../ui';
 
 const AUTO_HIDE_MS = 9000;
 
-/** In-app notification banner used to simulate "Hiillos reaches out first" in demo mode. */
+/**
+ * In-app banner that simulates "Hiillos reaches out first" (demo mode).
+ * Discreet by default: the preview never mentions mood, depression or crisis, because family or
+ * others may see the phone. The real words appear in the chat after tapping.
+ */
 export function ReachOutBanner() {
   const { t } = useTranslation();
   const { colors, reduceMotion } = useTheme();
   const insets = useSafeAreaInsets();
   const notice = useReachOut((s) => s.notice);
   const dismiss = useReachOut((s) => s.dismiss);
+  const discreet = useSettings((s) => s.discreetNotifications);
   const patient = useData((s) => s.patient);
 
   useEffect(() => {
@@ -29,7 +36,7 @@ export function ReachOutBanner() {
   }, [notice, dismiss]);
 
   if (!notice || !patient) return null;
-  const text = t(notice.key, { name: patient.companion.name, ...(notice.params ?? {}) });
+  const text = discreet ? t('notify.discreet') : t(notice.textKey, { name: patient.companion.name, ...(notice.params ?? {}) });
 
   return (
     <Animated.View
@@ -44,8 +51,11 @@ export function ReachOutBanner() {
         accessibilityHint={t('notify.openHint')}
         accessibilityLiveRegion="polite"
         onPress={() => {
+          const kind = notice.kind;
           dismiss();
           router.navigate('/chat');
+          // If today's conversation already started, add the companion's words to it.
+          void useChat.getState().deliver(kind);
         }}
         style={[styles.banner, { backgroundColor: colors.surface }, elevation.high]}
       >

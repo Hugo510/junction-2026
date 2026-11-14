@@ -1,7 +1,7 @@
 import { addDaysISO } from '../dates';
 import { EMBER_FLOOR, emberLevel, emberState } from '../embers';
 import type { CheckIn, SensorAggregate } from '../entities';
-import { daysSilent, outreachLevel, shouldNotifyCareTeam } from '../outreach';
+import { daysSilent, noticeFor, noticeTextKey, outreachLevel, shouldNotifyCareTeam } from '../outreach';
 import { priorityScore } from '../priorityScore';
 
 const TODAY = '2026-11-14';
@@ -16,6 +16,30 @@ describe('silence rule (outreach ladder)', () => {
     expect(outreachLevel([entry(2)], TODAY)).toBe('warm');
     expect(outreachLevel([entry(5)], TODAY)).toBe('friend');
     expect(outreachLevel([entry(9)], TODAY)).toBe('reconnect');
+  });
+
+  it('goes quiet after 30 days: the ladder stops', () => {
+    expect(outreachLevel([entry(29)], TODAY)).toBe('reconnect');
+    expect(outreachLevel([entry(30)], TODAY)).toBe('quiet');
+    expect(outreachLevel([entry(200)], TODAY)).toBe('quiet');
+  });
+
+  it('sends at most one "reconnect" message a week, none when quiet or when care ended', () => {
+    const base = { checkedInToday: false, drift: false, careEnded: false };
+    expect(noticeFor({ ...base, level: 'reconnect', daysSilent: 7 })).toBe('reconnect');
+    expect(noticeFor({ ...base, level: 'reconnect', daysSilent: 9 })).toBeNull();
+    expect(noticeFor({ ...base, level: 'reconnect', daysSilent: 14 })).toBe('reconnect');
+    expect(noticeFor({ ...base, level: 'quiet', daysSilent: 45 })).toBeNull();
+    expect(noticeFor({ ...base, level: 'friend', daysSilent: 5, careEnded: true })).toBeNull();
+    expect(noticeFor({ ...base, level: 'none', daysSilent: 0, drift: true, careEnded: true })).toBeNull();
+  });
+
+  it('picks the daily, evening or drift notice on ordinary days', () => {
+    const base = { level: 'none' as const, daysSilent: 1, careEnded: false };
+    expect(noticeFor({ ...base, checkedInToday: false, drift: false })).toBe('daily');
+    expect(noticeFor({ ...base, checkedInToday: true, drift: false })).toBe('evening');
+    expect(noticeFor({ ...base, checkedInToday: false, drift: true })).toBe('drift');
+    expect(noticeTextKey('friend', false)).toBe('notify.friendNoContact');
   });
 
   it('a new user is not "silent"', () => {

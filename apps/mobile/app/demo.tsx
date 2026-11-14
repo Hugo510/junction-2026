@@ -1,10 +1,11 @@
 import { router } from 'expo-router';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { PERSONAS } from '../src/data/personas';
-import { notificationKey } from '../src/domain/outreach';
+import { daysSilent, noticeFor, noticeTextKey } from '../src/domain/outreach';
 import { isPhqDue } from '../src/domain/phq';
+import { priorityScore } from '../src/domain/priorityScore';
 import { usePriority } from '../src/features/usePriority';
 import { formatDate } from '../src/i18n';
 import { haptics } from '../src/services/haptics';
@@ -30,21 +31,31 @@ export default function DemoScreen() {
   const dayOffset = useSettings((s) => s.dayOffset);
   const resetSettings = useSettings((s) => s.reset);
   const priority = usePriority();
-  // Latest value for async handlers (advance day → re-render → reach out).
-  const priorityRef = useRef(priority);
-  priorityRef.current = priority;
   const bipolar = useData((s) => s.patient?.bipolarFlag ?? false);
   const setBipolarFlag = useData((s) => s.setBipolarFlag);
   const checkSilence = useData((s) => s.checkSilence);
   const loadPersona = useData((s) => s.loadPersona);
+  const careEnded = useData((s) => s.patient?.careEnded ?? false);
+  const setCareEnded = useData((s) => s.setCareEnded);
 
   /** Show the simulated notification that matches the current silence level. */
   const reachOut = async () => {
     const level = await checkSilence();
-    const checkedInToday = useData.getState().checkIns.some((c) => c.date === todayISO());
+    const { checkIns, sensors, phq9, patient } = useData.getState();
+    const today = todayISO();
     const contact = useSettings.getState().trustedContact;
-    const drift = isPhqDue(priorityRef.current.level, useData.getState().phq9, todayISO());
-    useReachOut.getState().show({ key: notificationKey(level, checkedInToday, !!contact, drift), params: { friend: contact?.name ?? '' } });
+    // Fresh score for the (possibly just advanced) simulated day.
+    const current = priorityScore({ checkIns, sensors, today, flags: { bipolar: patient?.bipolarFlag } });
+    const kind = noticeFor({
+      level,
+      daysSilent: daysSilent(checkIns, today),
+      checkedInToday: checkIns.some((c) => c.date === today),
+      drift: isPhqDue(current.level, phq9, today),
+      careEnded: !!patient?.careEnded,
+    });
+    // Quiet after 30 days, once a week during "reconnect", and never after care ended.
+    if (!kind) return;
+    useReachOut.getState().show({ kind, textKey: noticeTextKey(kind, !!contact), params: { friend: contact?.name ?? '' } });
   };
   const [busy, setBusy] = useState<string | null>(null);
   const [done, setDone] = useState<string | null>(null);
@@ -96,6 +107,11 @@ export default function DemoScreen() {
       key: bipolar ? 'bipolarOff' : 'bipolarOn',
       variant: 'secondary',
       action: () => setBipolarFlag(!bipolar),
+    },
+    {
+      key: careEnded ? 'careEndedOff' : 'careEndedOn',
+      variant: 'secondary',
+      action: () => setCareEnded(!careEnded),
     },
     {
       key: 'reset',

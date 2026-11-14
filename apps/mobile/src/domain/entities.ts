@@ -19,7 +19,17 @@ export interface Patient {
   companion: Companion;
   /** Set by the clinic ONLY (never self-declared). Enables the upwardDrift rule. */
   bipolarFlag?: boolean;
+  /** Where the person is in their care (chosen at onboarding). */
+  carePath?: CarePath;
+  /**
+   * Clinic-only status (moved, transferred, deceased). Stops all outreach at once.
+   * Never self-declared and never inferred from silence.
+   */
+  careEnded?: boolean;
 }
+
+/** The four starting points. Only postTreatment is live in this version. */
+export type CarePath = 'postTreatment' | 'inTreatment' | 'stoppedTreatment' | 'notInCare';
 
 /** Aggregated result of the "tap when the circle glows" game. Individual taps are never stored. */
 export interface ReactionAggregate {
@@ -44,6 +54,29 @@ export type EmotionId =
   | 'overwhelmed'
   | 'numb';
 
+export type BodyRegion =
+  | 'head'
+  | 'chest'
+  | 'belly'
+  | 'hips'
+  | 'leftArm'
+  | 'rightArm'
+  | 'leftHand'
+  | 'rightHand'
+  | 'leftLeg'
+  | 'rightLeg'
+  | 'leftFoot'
+  | 'rightFoot';
+
+/** 1 = warm (more activity felt there), -1 = cool (less). Neutral regions are simply absent. */
+export type BodyHeat = 1 | -1;
+
+/**
+ * "Where is your fire today?" — self-reported bodily map (method: Nummenmaa, Glerean, Hari &
+ * Hietanen, PNAS 2014, doi 10.1073/pnas.1321664111). Self-report only, never a diagnosis.
+ */
+export type BodyMap = Partial<Record<BodyRegion, BodyHeat>>;
+
 /** Where an entry came from: full check-in form, chat with the companion, or the journal. */
 export type CheckInKind = 'full' | 'chat' | 'journal';
 
@@ -59,6 +92,7 @@ export interface CheckIn {
   kind?: CheckInKind;
   mood: Scale5;
   emotions?: EmotionId[];
+  bodyMap?: BodyMap;
   energy?: Scale5;
   anxiety?: Scale5;
   sleepHours?: number;

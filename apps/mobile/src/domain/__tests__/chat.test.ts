@@ -20,6 +20,7 @@ const ctx: ChatContext = {
   phqDue: false,
   phqConcern: false,
   weeklyDue: false,
+  careEnded: false,
 };
 
 describe('crisis language', () => {
@@ -221,6 +222,23 @@ describe('chat engine', () => {
     expect(lost.messages[0].card).toEqual({ type: 'reconnect' });
     expect(lost.messages.some((m) => m.card?.type === 'crisis')).toBe(false);
     expect(lost.effects).toEqual([]);
+  });
+
+  it('after 30 silent days it is quiet: a gentle welcome, no ladder cards', () => {
+    const r = handleEvent({ type: 'open' }, INITIAL_FLOW, { ...ctx, outreach: 'quiet' });
+    expect(r.messages[0].parts?.map((p) => p.key)).toContain('chat.outreach.quiet');
+    expect(r.messages.some((m) => m.card?.type === 'friend' || m.card?.type === 'reconnect')).toBe(false);
+  });
+
+  it('care ended (clinic status): nothing is asked or suggested', () => {
+    const ended = { ...ctx, careEnded: true, phqDue: true, phqConcern: true, outreach: 'reconnect' as const };
+    const r = handleEvent({ type: 'open' }, INITIAL_FLOW, ended);
+    expect(r.messages).toHaveLength(1);
+    expect(r.messages[0].parts?.[0].key).toBe('chat.open.careEnded');
+    expect(r.messages[0].card).toBeUndefined();
+    expect(r.flow.step).toBe('idle');
+    const low = handleEvent({ type: 'quick', id: 'low' }, INITIAL_FLOW, ended);
+    expect(low.messages.some((m) => m.card?.type === 'consult')).toBe(false);
   });
 
   it('never cheers on upward drift', () => {

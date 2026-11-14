@@ -7,7 +7,7 @@ import { ConsentToggles } from '../../src/features/ConsentToggles';
 import { useChat } from '../../src/store/chat';
 import { useData } from '../../src/store/data';
 import { useSettings } from '../../src/store/settings';
-import { AppText, Button, ListItem, Screen, Section, spacing } from '../../src/ui';
+import { AppText, Button, ListItem, Screen, Section, ToggleRow, spacing } from '../../src/ui';
 
 const ITEMS = ['checkins', 'reaction', 'movement', 'location', 'trusted', 'where', 'sharing'] as const;
 
@@ -15,6 +15,8 @@ export default function PrivacyScreen() {
   const { t } = useTranslation();
   const deleteEverything = useData((s) => s.deleteEverything);
   const resetSettings = useSettings((s) => s.reset);
+  const discreet = useSettings((s) => s.discreetNotifications);
+  const setDiscreet = useSettings((s) => s.setDiscreetNotifications);
 
   const exportData = async () => {
     const data = await repositories.admin.exportAll();
@@ -64,6 +66,12 @@ export default function PrivacyScreen() {
           <ConsentToggles />
         </View>
       </Section>
+      <Section title={t('privacy.notificationsTitle')}>
+        <View style={{ paddingHorizontal: spacing.md, paddingVertical: spacing.sm }}>
+          <ToggleRow label={t('privacy.discreet')} description={t('privacy.discreetDesc')} value={discreet} onChange={setDiscreet} />
+        </View>
+      </Section>
+
       <View style={{ gap: spacing.sm }}>
         <AppText variant="caption" tone="muted">
           {t('privacy.exportBody')}
