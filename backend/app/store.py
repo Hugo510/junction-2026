@@ -4,6 +4,8 @@ from datetime import date as CalendarDate
 from app.schemas.care import Alert
 from app.schemas.checkin import CheckIn
 
+from app.schemas.sensors import SensorAggregate, SensorType
+
 from app.schemas.patient import (
     AppSettings,
     Companion,
@@ -41,3 +43,6 @@ PATIENTS: dict[str, Patient] = {
         created_at=datetime(2026, 11, 1, 9, 0, tzinfo=timezone.utc),
     ),
 }
+
+# user id -> {(sensor type, period start) -> aggregate}. Upserted on that key.
+SENSOR_AGGREGATES: dict[str, dict[tuple[SensorType, datetime], SensorAggregate]] = {}
