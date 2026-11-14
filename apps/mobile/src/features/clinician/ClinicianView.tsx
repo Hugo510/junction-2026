@@ -1,7 +1,7 @@
 import { StyleSheet, View, useWindowDimensions } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { EARLY_SIGNS, type EarlySign } from '../../domain/entities';
-import { AppText, Card, Chip, FeatureCard, Screen, radii, spacing, useTheme, type Category } from '../../ui';
+import { AppText, Card, Chip, FeatureCard, Screen, Sparkline, radii, spacing, useTheme, type Category } from '../../ui';
 import type { ClinicianRow } from './clinicianViewModel';
 
 export function ClinicianView({ rows, date, onToggleSign }: { rows: ClinicianRow[]; date: string; onToggleSign?: (personId: string, sign: EarlySign) => void }) {
@@ -80,6 +80,21 @@ export function ClinicianView({ rows, date, onToggleSign }: { rows: ClinicianRow
                     </View>
                   )) : <AppText variant="caption" tone="muted">{t('clinician.noReasons')}</AppText>}
                 </View>
+                <View style={styles.body}>
+                  <AppText variant="caption" tone="muted">{t('clinician.body.title')}</AppText>
+                  <View style={styles.bodyRow}>
+                    {([['recovery', row.body.recovery, colors.categories.ember.art, (v: number) => t('wearable.recoveryValue', { ms: Math.round(v) })], ['sleep', row.body.sleep, colors.categories.night.art, (v: number) => t('wearable.sleepValue', { hours: v.toFixed(1) })]] as const).map(([key, metric, tint, format]) => (
+                      <View key={key} style={styles.bodyCell}>
+                        <AppText variant="caption">{t(`clinician.body.${key}`)}</AppText>
+                        <Sparkline values={metric.week} color={tint} height={36} accessibilityLabel={t('wearable.weekLabel', { metric: t(`clinician.body.${key}`) })} />
+                        <AppText variant="label">
+                          {metric.latest === undefined ? '–' : format(metric.latest)}
+                          <AppText variant="caption" tone="muted">{metric.usual === undefined ? '' : `  ·  ${t('clinician.body.usual', { value: format(metric.usual) })}`}</AppText>
+                        </AppText>
+                      </View>
+                    ))}
+                  </View>
+                </View>
                 {onToggleSign ? (
                   <View style={styles.signs}>
                     <AppText variant="caption" tone="muted">{t('clinician.signs.title')}</AppText>
@@ -133,6 +148,9 @@ const styles = StyleSheet.create({
   dot: { width: 8, height: 8, borderRadius: 4, marginTop: 6 },
   reasonText: { flex: 1 },
   signs: { gap: spacing.xs },
+  body: { gap: spacing.xs },
+  bodyRow: { flexDirection: 'row', gap: spacing.md },
+  bodyCell: { flex: 1, minWidth: 0, gap: 2 },
   signChips: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm },
   details: { borderRadius: radii.md, padding: spacing.sm + spacing.xs, gap: spacing.xs },
 });

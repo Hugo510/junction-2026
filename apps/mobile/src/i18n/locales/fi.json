@@ -828,6 +828,12 @@
       "homeMore": "Enemmän aikaa kotona",
       "activityDrop": "Vähemmän liikettä",
       "matched": "tämän henkilön varhainen merkki"
+    },
+    "body": {
+      "title": "Kehon signaalit, viimeiset 7 yötä verrattuna henkilön omaan tavalliseen (synteettinen). Vain taustatietoa: ne eivät koskaan yksin aiheuta hälytystä.",
+      "recovery": "Yöaikainen palautuminen",
+      "sleep": "Uni",
+      "usual": "tavallinen {{value}}"
     }
   },
   "bodyMap": {

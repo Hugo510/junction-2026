@@ -828,6 +828,12 @@
       "homeMore": "More time at home",
       "activityDrop": "Less activity",
       "matched": "early sign for this person"
+    },
+    "body": {
+      "title": "Body signals, last 7 nights vs own usual (synthetic). Context only: they never alert on their own.",
+      "recovery": "Night-time recovery",
+      "sleep": "Sleep",
+      "usual": "usual {{value}}"
     }
   },
   "bodyMap": {

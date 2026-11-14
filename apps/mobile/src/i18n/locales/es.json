@@ -828,6 +828,12 @@
       "homeMore": "Más tiempo en casa",
       "activityDrop": "Menos actividad",
       "matched": "señal temprana de esta persona"
+    },
+    "body": {
+      "title": "Señales del cuerpo, últimas 7 noches frente a lo habitual en la persona (sintético). Solo contexto: nunca generan una alerta por sí solas.",
+      "recovery": "Recuperación nocturna",
+      "sleep": "Sueño",
+      "usual": "habitual {{value}}"
     }
   },
   "bodyMap": {

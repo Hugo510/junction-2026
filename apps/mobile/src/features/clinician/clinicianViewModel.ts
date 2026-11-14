@@ -5,6 +5,7 @@ import type { EarlySign, Phq9Entry } from '../../domain/entities';
 import { outreachLevel } from '../../domain/outreach';
 import { latestPhq } from '../../domain/phq';
 import { priorityScore } from '../../domain/priorityScore';
+import { simulateWearable, wearableSummary } from '../../domain/wearable';
 
 export type CallStatus = 'review' | 'pending' | 'notIndicated';
 
@@ -49,6 +50,9 @@ export function buildClinicianRows(personas: readonly Persona[], today: ISODate,
       priority,
       reasons: priority.reasons.slice(0, 2),
       watchedSigns,
+      // B5: night-time recovery and sleep vs the person's own usual. Context only: these never
+      // put anyone on the call list and never raise an alert.
+      body: wearableSummary(simulateWearable({ checkIns, sensors, today }), today),
       latestPhq9: latest,
       // Quiet stops outreach; it does not mean contact has resumed.
       outreach,

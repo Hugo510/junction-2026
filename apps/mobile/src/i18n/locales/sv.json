@@ -828,6 +828,12 @@
       "homeMore": "Mer tid hemma",
       "activityDrop": "Mindre aktivitet",
       "matched": "tidigt tecken för den här personen"
+    },
+    "body": {
+      "title": "Kroppens signaler, senaste 7 nätterna jämfört med personens eget vanliga (syntetiskt). Bara sammanhang: de larmar aldrig på egen hand.",
+      "recovery": "Nattlig återhämtning",
+      "sleep": "Sömn",
+      "usual": "vanligt {{value}}"
     }
   },
   "bodyMap": {
