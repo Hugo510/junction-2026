@@ -4,11 +4,13 @@
 # Local tool configuration (never part of the app)
 .claude/
 
-# Not needed to build the mobile app
-backend/
-docs/
-tools/
-test.txt
+# Not needed to build the mobile app. The leading slash matters: it anchors each pattern to the
+# repository root. Without it, "backend/" also dropped apps/mobile/src/services/backend/ and the
+# build failed with "Unable to resolve ../services/backend/client".
+/backend/
+/docs/
+/tools/
+/test.txt
 
 # Dependencies and build output
 node_modules/
