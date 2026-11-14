@@ -17,7 +17,15 @@ class SpeechUnavailable(Exception):
     """No key configured, or the voice service did not answer."""
 
 
-async def synthesize(text: str) -> str:
+def voice_for(companion: str | None) -> str:
+    """Each companion can have its own voice (ELEVENLABS_VOICES); otherwise the default one."""
+    voices = dict(
+        pair.split("=", 1) for pair in settings.elevenlabs_voices.split(",") if "=" in pair
+    )
+    return voices.get((companion or "").strip().lower(), "").strip() or settings.elevenlabs_voice_id
+
+
+async def synthesize(text: str, companion: str | None = None) -> str:
     """Returns MP3 audio as base64."""
     if not settings.elevenlabs_api_key:
         raise SpeechUnavailable("Voice is not configured")
@@ -25,7 +33,7 @@ async def synthesize(text: str) -> str:
     try:
         async with httpx.AsyncClient(timeout=20.0) as client:
             res = await client.post(
-                TTS_URL.format(voice_id=settings.elevenlabs_voice_id),
+                TTS_URL.format(voice_id=voice_for(companion)),
                 params={"output_format": "mp3_44100_128"},
                 headers={"xi-api-key": settings.elevenlabs_api_key, "Content-Type": "application/json"},
                 json={"text": text, "model_id": settings.elevenlabs_model},

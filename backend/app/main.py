@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api.routes import auth, checkins, companion, crisis, health, patient, sensors
+from app.api.routes import alerts, auth, checkins, companion, crisis, health, patient, sensors
 
 from app.config import settings
 from app.errors import register_error_handlers
@@ -29,5 +29,6 @@ app.include_router(auth.router, prefix=API_PREFIX)
 app.include_router(patient.router, prefix=API_PREFIX)
 app.include_router(checkins.router, prefix=API_PREFIX)
 app.include_router(crisis.router, prefix=API_PREFIX)
+app.include_router(alerts.router, prefix=API_PREFIX)
 app.include_router(sensors.router, prefix=API_PREFIX)
 app.include_router(companion.router, prefix=API_PREFIX)

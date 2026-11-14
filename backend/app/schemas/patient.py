@@ -41,6 +41,8 @@ class Consents(CamelModel):
     approximate_location: bool
     vibration: bool
     care_team_after_silence: bool = False
+    # Daily totals from a connected wearable (sleep, resting heart rate). Off until connected.
+    wearable: bool = False
     updated_at: datetime | None = None
 
 
@@ -80,3 +82,4 @@ class ConsentsUpdate(CamelModel):
     approximate_location: bool
     vibration: bool
     care_team_after_silence: bool = False
+    wearable: bool = False
