@@ -57,6 +57,21 @@ for (const file of inputs) {
   const dir = path.join(target, id);
   fs.mkdirSync(dir, { recursive: true });
   fs.writeFileSync(path.join(dir, 'core.json'), JSON.stringify(data) + '\n', 'utf8');
+
+  // Smart-ring layer (generator v0.4): <id>/ring.json, one record per night. Only the fields the
+  // app reads are kept, so the bundle stays small. A missing date means "ring not worn".
+  const ringFile = path.join(path.dirname(file), 'ring.json');
+  if (fs.existsSync(ringFile)) {
+    const ring = JSON.parse(fs.readFileSync(ringFile, 'utf8').replace(/^\uFEFF/, ''));
+    if (ring.synthetic !== true || ring.personaId !== id) {
+      console.error('x ' + id + ': ring.json must carry "synthetic": true and the same personaId, not copied');
+      failed = true;
+    } else {
+      const nights = (ring.nights ?? []).map((n) => ({ date: n.date, average_hrv: n.average_hrv, hr_lowest: n.hr_lowest, total: n.total, bedtime_end: n.bedtime_end, steps: n.steps }));
+      fs.writeFileSync(path.join(dir, 'ring.json'), JSON.stringify({ synthetic: true, generatorVersion: ring.generatorVersion, personaId: id, nights }) + '\n', 'utf8');
+      console.log('  + ring: ' + nights.length + ' nights');
+    }
+  }
   console.log(`✓ ${id} (v${data.generatorVersion ?? '?'}): ${data.checkIns?.length ?? 0} check-ins, ${data.sensors?.length ?? 0} days, ${data.phq9?.length ?? 0} PHQ-9`);
 }
 

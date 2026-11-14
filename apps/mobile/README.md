@@ -173,6 +173,12 @@ HealthKit, Health Connect or Bluetooth, so the daily totals are simulated and th
 - Field names follow `docs/MEMO_BODY_LOOP.md` (B1): `nightHrvMs`, `restingHr`, `sleepMinutes`, `wakeTime`,
   `wearMinutes`, `wearableSource`, all optional on each day of `sensors`. **Night values sit on the date of
   the evening the night starts**, like `bedtime` and `screenOffTime`.
+- **Smart-ring layer (generator v0.4)**: `npm run personas:sync` also copies each persona's `ring.json`
+  (only the fields the app reads) and `mergeRing` in `src/data/personas/index.ts` puts the nights on the
+  daily rows: `average_hrv` → `nightHrvMs`, `hr_lowest` → `restingHr`, `total` → `sleepMinutes`,
+  `bedtime_end` → `wakeTime`. A missing night means "not worn" and is never read as a signal.
+  `src/domain/__tests__/ringStories.test.ts` checks that the ring does not change anyone's priority level
+  and prints today's body-loop numbers for the demo script.
 - Values in the persona files always win. Where a file has none, `src/domain/wearable.ts` simulates the
   daily totals (sleep, steps, resting heart rate, night-time recovery), deterministically and shaped by the
   person's own data: later evenings give shorter nights, less movement gives fewer steps. Never raw signals

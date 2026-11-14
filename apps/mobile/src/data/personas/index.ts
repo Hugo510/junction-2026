@@ -98,13 +98,66 @@ export function rebasePersona<T extends SeedResult>(data: T, endDate: ISODate): 
   };
 }
 
-/** Registered persona files (static requires so Metro bundles them). */
-const PERSONA_FILES: unknown[] = [
-  require('../../../assets/personas/aino/core.json'),
-  require('../../../assets/personas/leena/core.json'),
-  require('../../../assets/personas/juho/core.json'),
-  require('../../../assets/personas/sara/core.json'),
-  require('../../../assets/personas/elias/core.json'),
+/** One night of the smart-ring layer (tools/synthetic, generator v0.4), as copied by personas:sync. */
+export interface RingNight {
+  /** Local evening the night started. A missing date means the ring was not worn. */
+  date: ISODate;
+  /** Night average heart rate variability, RMSSD in ms. */
+  average_hrv?: number;
+  /** Lowest heart rate of the night, bpm. */
+  hr_lowest?: number;
+  /** Seconds asleep. */
+  total?: number;
+  /** Local wake-up time, ISO with offset, e.g. "2026-08-18T07:33:00+02:00". */
+  bedtime_end?: string;
+  steps?: number;
+}
+
+export interface RingFile {
+  synthetic: true;
+  personaId: string;
+  nights: RingNight[];
+}
+
+/**
+ * Puts the ring's nights on the persona's daily rows, under the app's own field names
+ * (docs/MEMO_BODY_LOOP.md, B1). The ring keys a night by the evening it started, the same
+ * convention as bedtime and screenOffTime. Days without a night stay untouched: not worn is
+ * never read as a signal.
+ */
+export function mergeRing(persona: Persona, raw: unknown): Persona {
+  const ring = raw as Partial<RingFile> | undefined;
+  if (!ring) return persona;
+  const id = persona.persona.id;
+  if (ring.synthetic !== true) throw new Error(`Persona ${id}: ring file needs "synthetic": true`);
+  if (ring.personaId !== id || !Array.isArray(ring.nights)) throw new Error(`Persona ${id}: ring file does not belong to this persona`);
+  const nights = new Map(ring.nights.filter((n) => DATE.test(n.date)).map((n) => [n.date, n]));
+  return {
+    ...persona,
+    sensors: persona.sensors.map((s) => {
+      const n = nights.get(s.date);
+      if (!n) return s;
+      const wake = n.bedtime_end?.slice(11, 16);
+      return {
+        ...s,
+        ...(typeof n.average_hrv === 'number' ? { nightHrvMs: n.average_hrv } : {}),
+        ...(typeof n.hr_lowest === 'number' ? { restingHr: n.hr_lowest } : {}),
+        ...(typeof n.total === 'number' ? { sleepMinutes: Math.round(n.total / 60) } : {}),
+        ...(wake && TIME.test(wake) ? { wakeTime: wake } : {}),
+        ...(s.steps === undefined && typeof n.steps === 'number' ? { steps: n.steps } : {}),
+        wearableSource: 'ring' as const,
+      };
+    }),
+  };
+}
+
+/** Registered persona files (static requires so Metro bundles them): [core, ring layer]. */
+const PERSONA_FILES: [unknown, unknown][] = [
+  [require('../../../assets/personas/aino/core.json'), require('../../../assets/personas/aino/ring.json')],
+  [require('../../../assets/personas/leena/core.json'), require('../../../assets/personas/leena/ring.json')],
+  [require('../../../assets/personas/juho/core.json'), require('../../../assets/personas/juho/ring.json')],
+  [require('../../../assets/personas/sara/core.json'), require('../../../assets/personas/sara/ring.json')],
+  [require('../../../assets/personas/elias/core.json'), require('../../../assets/personas/elias/ring.json')],
 ];
 
-export const PERSONAS: Persona[] = PERSONA_FILES.map(parsePersona);
+export const PERSONAS: Persona[] = PERSONA_FILES.map(([core, ring]) => mergeRing(parsePersona(core), ring));
