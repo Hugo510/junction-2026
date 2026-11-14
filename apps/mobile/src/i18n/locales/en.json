@@ -421,7 +421,9 @@
       "reactionSlower": "Your tap game has been slower than usual",
       "shortSleep": "Several short nights (under 5 hours)",
       "highAnxiety": "You've been feeling quite tense",
-      "perceivedUrgency": "You told us it feels urgent"
+      "perceivedUrgency": "You told us it feels urgent",
+      "belowBaseline": "Your mood has been below your usual level for a while",
+      "longSleep": "Several very long nights or days in bed (10 hours or more)"
     }
   },
   "risk": {

@@ -56,6 +56,43 @@ describe('priorityScore', () => {
     expect(r.score).toBe(15);
   });
 
+  it('counts long sleep too (hypersomnia), not only short nights', () => {
+    const days = [1, 2, 3, 4].map((i) => addDaysISO(TODAY, -i));
+    const checkIns: CheckIn[] = days.map((date, i) => ({
+      id: `s${i}`,
+      date,
+      createdAt: `${date}T20:00:00.000Z`,
+      mood: 3,
+      sleepHours: 11,
+      safetyConcern: false,
+    }));
+    const r = priorityScore({ checkIns, sensors: [], today: TODAY });
+    expect(r.reasons).toContain('priority.reasons.longSleep');
+    expect(r.reasons).not.toContain('priority.reasons.shortSleep');
+  });
+
+  it('keeps the signal when someone stays low for weeks (personal baseline)', () => {
+    // 40 days at mood 4, then 14 days at mood 2: week-over-week drop is 0, but they are still unwell.
+    const checkIns: CheckIn[] = Array.from({ length: 54 }, (_, i) => {
+      const date = addDaysISO(TODAY, -(53 - i));
+      return { id: `b${i}`, date, createdAt: `${date}T20:00:00.000Z`, mood: i < 40 ? 4 : 2, safetyConcern: false };
+    });
+    const r = priorityScore({ checkIns, sensors: [], today: TODAY });
+    expect(r.reasons).not.toContain('priority.reasons.moodDrop');
+    expect(r.reasons).toContain('priority.reasons.belowBaseline');
+    expect(r.score).toBeGreaterThanOrEqual(30 + 15); // baseline drop (max 30) + lowMood
+  });
+
+  it('does not double count week drop and baseline drop', () => {
+    const checkIns: CheckIn[] = Array.from({ length: 40 }, (_, i) => {
+      const date = addDaysISO(TODAY, -(39 - i));
+      return { id: `d${i}`, date, createdAt: `${date}T20:00:00.000Z`, mood: i < 33 ? 4 : 2, safetyConcern: false };
+    });
+    const r = priorityScore({ checkIns, sensors: [], today: TODAY });
+    expect(r.reasons).toEqual(expect.arrayContaining(['priority.reasons.moodDrop', 'priority.reasons.belowBaseline']));
+    expect(r.score).toBe(30 + 15); // max(30, 30) + lowMood, not 75
+  });
+
   it('maps scores to levels', () => {
     expect(levelForScore(0)).toBe('low');
     expect(levelForScore(30)).toBe('medium');

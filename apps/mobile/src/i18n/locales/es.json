@@ -421,7 +421,9 @@
       "reactionSlower": "Tu juego de toques ha ido más lento de lo habitual",
       "shortSleep": "Varias noches cortas (menos de 5 horas)",
       "highAnxiety": "Has sentido bastante tensión",
-      "perceivedUrgency": "Nos dijiste que se siente urgente"
+      "perceivedUrgency": "Nos dijiste que se siente urgente",
+      "belowBaseline": "Tu ánimo ha estado por debajo de lo habitual en ti durante un tiempo",
+      "longSleep": "Varias noches muy largas o días en cama (10 horas o más)"
     }
   },
   "risk": {

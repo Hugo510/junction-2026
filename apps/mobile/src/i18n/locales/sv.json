@@ -421,7 +421,9 @@
       "reactionSlower": "Ditt tryckspel har gått långsammare än vanligt",
       "shortSleep": "Flera korta nätter (under 5 timmar)",
       "highAnxiety": "Du har känt dig ganska spänd",
-      "perceivedUrgency": "Du berättade att det känns brådskande"
+      "perceivedUrgency": "Du berättade att det känns brådskande",
+      "belowBaseline": "Ditt humör har en tid legat under din vanliga nivå",
+      "longSleep": "Flera mycket långa nätter eller dagar i sängen (10 timmar eller mer)"
     }
   },
   "risk": {

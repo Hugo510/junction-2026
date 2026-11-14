@@ -421,7 +421,9 @@
       "reactionSlower": "Napautuspelisi on ollut tavallista hitaampi",
       "shortSleep": "Useita lyhyitä öitä (alle 5 tuntia)",
       "highAnxiety": "Olet tuntenut itsesi melko jännittyneeksi",
-      "perceivedUrgency": "Kerroit, että asia tuntuu kiireelliseltä"
+      "perceivedUrgency": "Kerroit, että asia tuntuu kiireelliseltä",
+      "belowBaseline": "Mielialasi on ollut jonkin aikaa tavallista tasoasi matalampi",
+      "longSleep": "Useita hyvin pitkiä öitä tai päiviä sängyssä (10 tuntia tai enemmän)"
     }
   },
   "risk": {

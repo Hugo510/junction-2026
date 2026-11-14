@@ -1,4 +1,4 @@
-import { type ISODate } from './dates';
+import { addDaysISO, lastNDates, type ISODate } from './dates';
 import type { CheckIn, PerceivedUrgency, PriorityLevel, PriorityResult, SensorAggregate } from './entities';
 import { average, checkInsByDate, sensorsByDate, twoWeekWindows } from './history';
 
@@ -10,14 +10,22 @@ import { average, checkInsByDate, sensorsByDate, twoWeekWindows } from './histor
  *
  * | Rule              | Condition                                                   | Points              |
  * | ----------------- | ----------------------------------------------------------- | ------------------- |
- * | moodDrop          | avg mood recent is ≥ 0.5 lower than previous                | +10 per 0.5, max 30 |
+ * | moodDrop          | avg mood recent is ≥ 0.5 lower than previous week           | +10 per 0.5, max 30 |
+ * | belowBaseline     | avg mood recent is ≥ 0.5 below the PERSONAL baseline        | +10 per 0.5, max 30 |
  * | lowMood           | avg mood recent ≤ 2.5                                       | +15                 |
  * | missedCheckIns    | ≥ 3 days without check-in in the recent window              | +5 per day ≥3, max 15 |
  * | activityDrop      | avg activity minutes recent ≥ 25 % lower than previous      | +10                 |
  * | reactionSlower    | avg reaction time recent ≥ 10 % slower than previous        | +10                 |
  * | shortSleep        | ≥ 3 recent nights with < 5 h of sleep                       | +15                 |
+ * | longSleep         | ≥ 3 recent days with ≥ 10 h of sleep (hypersomnia)          | +15                 |
  * | highAnxiety       | avg anxiety recent ≥ 4                                      | +10                 |
  * | perceivedUrgency  | patient-perceived urgency: high +15, medium +5              | +5 / +15            |
+ *
+ * Personal baseline = avg mood of days 15–60 before today (needs ≥ 5 entries). It keeps the signal
+ * alive when someone stays low for weeks (week-over-week drop goes to 0, but they are still unwell).
+ * moodDrop and belowBaseline describe the same change, so only the larger one adds points
+ * (both reasons are shown when both apply).
+ * Sleep is two-sided: depression can mean much less OR much more sleep.
  *
  * Levels: score ≥ 60 → high, ≥ 30 → medium, otherwise low.
  *
@@ -32,6 +40,15 @@ export interface PriorityInput {
 }
 
 export const PRIORITY_THRESHOLDS = { high: 60, medium: 30 } as const;
+
+export const SLEEP_SHORT_H = 5;
+export const SLEEP_LONG_H = 10;
+export const MIN_BASELINE_ENTRIES = 5;
+
+/** Days 15–60 before today: the person's own "usual" before the two windows we compare. */
+export function baselineWindow(today: ISODate): ISODate[] {
+  return lastNDates(addDaysISO(today, -14), 46);
+}
 
 const REASON = (key: string) => `priority.reasons.${key}`;
 
@@ -57,12 +74,20 @@ export function priorityScore(input: PriorityInput): PriorityResult {
     reasons.push(REASON(key));
   };
 
-  // Mood
+  // Mood: week-over-week change and change vs the person's own baseline (no double counting)
   const moodRecent = average(values(recent, (d) => checks.get(d)?.mood));
   const moodPrev = average(values(previous, (d) => checks.get(d)?.mood));
-  if (moodRecent !== undefined && moodPrev !== undefined) {
-    const drop = moodPrev - moodRecent;
-    if (drop >= 0.5) add(Math.min(30, Math.floor(drop / 0.5) * 10), 'moodDrop');
+  const baselineMoods = values(baselineWindow(input.today), (d) => checks.get(d)?.mood);
+  const baseline = baselineMoods.length >= MIN_BASELINE_ENTRIES ? average(baselineMoods) : undefined;
+  const dropPoints = (drop: number) => (drop >= 0.5 ? Math.min(30, Math.floor(drop / 0.5) * 10) : 0);
+  if (moodRecent !== undefined) {
+    const weekPoints = moodPrev !== undefined ? dropPoints(moodPrev - moodRecent) : 0;
+    const basePoints = baseline !== undefined ? dropPoints(baseline - moodRecent) : 0;
+    if (weekPoints > 0 || basePoints > 0) {
+      score += Math.max(weekPoints, basePoints);
+      if (weekPoints > 0) reasons.push(REASON('moodDrop'));
+      if (basePoints > 0) reasons.push(REASON('belowBaseline'));
+    }
   }
   if (moodRecent !== undefined && moodRecent <= 2.5) add(15, 'lowMood');
 
@@ -86,9 +111,10 @@ export function priorityScore(input: PriorityInput): PriorityResult {
     if ((rtRecent - rtPrev) / rtPrev >= 0.1) add(10, 'reactionSlower');
   }
 
-  // Sleep
-  const shortNights = values(recent, (d) => checks.get(d)?.sleepHours).filter((h) => h < 5).length;
-  if (shortNights >= 3) add(15, 'shortSleep');
+  // Sleep (two-sided)
+  const sleep = values(recent, (d) => checks.get(d)?.sleepHours);
+  if (sleep.filter((h) => h < SLEEP_SHORT_H).length >= 3) add(15, 'shortSleep');
+  if (sleep.filter((h) => h >= SLEEP_LONG_H).length >= 3) add(15, 'longSleep');
 
   // Anxiety
   const anxRecent = average(values(recent, (d) => checks.get(d)?.anxiety));
