@@ -1,0 +1,37 @@
+# What EAS Build uploads. When this file exists it replaces .gitignore for the upload,
+# so the usual ignore rules are repeated here.
+
+# Local tool configuration (never part of the app)
+.claude/
+
+# Not needed to build the mobile app. The leading slash matters: it anchors each pattern to the
+# repository root. Without it, "backend/" also dropped apps/mobile/src/services/backend/ and the
+# build failed with "Unable to resolve ../services/backend/client".
+/backend/
+/docs/
+/tools/
+/test.txt
+
+# Dependencies and build output
+node_modules/
+.expo/
+dist/
+web-build/
+expo-env.d.ts
+.kotlin/
+
+# Secrets and local values: never upload
+.env
+.env.*
+!.env.example
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# Noise
+__pycache__/
+*.log
+.DS_Store
+Thumbs.db

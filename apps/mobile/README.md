@@ -30,6 +30,33 @@ npm run i18n:check      # every locale has exactly the keys of en.json
 npx expo-doctor         # Expo dependency/config health
 ```
 
+## Installable Android build (APK)
+
+Expo Go is for development. To hand someone an app they can install without your computer, build an APK
+in Expo's cloud (EAS Build). It needs a free Expo account; the build itself runs on Expo's servers.
+
+```bash
+cd apps/mobile
+npx eas-cli@latest login
+npx eas-cli@latest init
+npx eas-cli@latest build --platform android --profile preview
+```
+
+- `init` links the folder to an Expo project and writes its id into `app.json` (commit that change).
+- The first build asks to generate an Android keystore: answer yes, Expo keeps it.
+- When it finishes, the command prints a link and a QR code. Open it on an Android phone, download the
+  APK and allow "install from this source".
+- `eas.json` has the profiles: `preview` builds an APK for direct install, `production` builds for the
+  Play Store. `.easignore` (repository root) keeps the backend, the docs and local files out of the upload.
+- The backend address is fixed at build time. Without `EXPO_PUBLIC_API_URL` the APK runs fully on the
+  phone. To build with a backend, add it to the `preview` profile in `eas.json` under `"env"`.
+
+iPhone: a build that installs on a real iPhone needs a paid Apple Developer account (TestFlight or
+registered devices). Without one, iPhone users run the app through Expo Go.
+
+Not done yet: this project has never been built natively, so the first build may surface configuration
+issues that Expo Go hides. iOS builds will also need permission texts for location and motion.
+
 ## Chat-first experience
 
 The home screen is a **conversation with the companion** the patient chose (ChatGPT-like: plain
