@@ -54,7 +54,10 @@ export function parsePersona(raw: unknown): Persona {
   }
   for (const s of p.sensors) {
     if (!DATE.test(s.date)) throw new Error(`Persona ${id}: invalid sensor date ${s.date}`);
-    if (s.bedtime !== undefined && !TIME.test(s.bedtime)) throw new Error(`Persona ${id}: bedtime must be "HH:mm" (${s.date})`);
+    for (const field of ['bedtime', 'screenOffTime'] as const) {
+      const value = s[field];
+      if (value !== undefined && !TIME.test(value)) throw new Error(`Persona ${id}: ${field} must be "HH:mm" (${s.date})`);
+    }
   }
   for (const q of p.phq9 ?? []) {
     const okItems = Array.isArray(q.items) && q.items.length === 9 && q.items.every((v) => Number.isInteger(v) && v >= 0 && v <= 3);

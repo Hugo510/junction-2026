@@ -77,6 +77,8 @@ export interface SensorAggregate {
   homeMinutes?: number;
   /** Local bedtime, "HH:mm". */
   bedtime?: string;
+  /** Local time the phone screen was last turned off at night, "HH:mm". */
+  screenOffTime?: string;
   steps?: number;
   nightPhoneMinutes?: number;
 }
@@ -84,8 +86,11 @@ export interface SensorAggregate {
 /** PHQ-9 questionnaire: 9 items scored 0–3, total 0–27. Sensors only ask; questionnaires decide. */
 export interface Phq9Entry {
   date: ISODate;
+  /** 9 answers for a full PHQ-9, or the first 2 when only the PHQ-2 was asked. */
   items: number[];
   total: number;
+  /** Missing = full PHQ-9. */
+  kind?: 'phq2' | 'phq9';
 }
 
 export type InterventionId =

@@ -83,6 +83,7 @@
           "daylightMinutes": { "type": "number", "minimum": 0 },
           "homeMinutes": { "type": "number", "minimum": 0, "maximum": 1440 },
           "bedtime": { "type": "string", "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$", "description": "Local time, 24 h" },
+          "screenOffTime": { "type": "string", "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$", "description": "Local time the phone screen was last turned off at night, 24 h" },
           "steps": { "type": "integer", "minimum": 0 },
           "nightPhoneMinutes": { "type": "number", "minimum": 0 }
         }

@@ -39,7 +39,7 @@
     }
   ],
   "sensors": [
-    { "date": "2026-11-11", "activityMinutes": 35, "daylightMinutes": 40, "homeMinutes": 820, "bedtime": "23:10", "steps": 6400, "nightPhoneMinutes": 12 },
+    { "date": "2026-11-11", "activityMinutes": 35, "daylightMinutes": 40, "homeMinutes": 820, "bedtime": "23:10", "screenOffTime": "23:25", "steps": 6400, "nightPhoneMinutes": 12 },
     { "date": "2026-11-12", "activityMinutes": 12, "daylightMinutes": 5, "homeMinutes": 1310, "bedtime": "01:40", "steps": 1900, "nightPhoneMinutes": 55 },
     { "date": "2026-11-13", "activityMinutes": 8, "daylightMinutes": 0, "homeMinutes": 1440, "bedtime": "02:15", "steps": 700, "nightPhoneMinutes": 80 }
   ],
