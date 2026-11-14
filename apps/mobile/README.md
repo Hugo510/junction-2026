@@ -54,6 +54,14 @@ Everything else opens *from* the chat as cards or from the menu:
 small milestones (1, 3, 7, 14, 30 days), a monthly mood calendar, most frequent feelings (14 days)
 and every entry (from check-ins, chat or the journal itself).
 
+## Look and feel
+
+Hiillos has its own "embers" identity (`src/ui/tokens.ts`): warm cream surfaces, a glowing ember as the brand
+colour, the rounded Nunito typeface (SIL Open Font License) and one soft colour per area of the app. Places and
+exercises are **hub cards** (`FeatureCard`): text on the left, a simple original illustration on the right
+(`Illustration`, drawn in SVG). The layout idea is inspired by calm wellbeing apps; colours, shapes and drawings are ours.
+Every text/background pair is checked against WCAG AA in light and dark mode (`src/ui/__tests__/contrast.test.ts`).
+
 ## Structure
 
 ```
