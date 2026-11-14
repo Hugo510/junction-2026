@@ -35,11 +35,15 @@
 | O29 | **Pitch frame from *Radikaalit ratkaisut* (Mero & Ojanperä):** W7.1 optional line on why people fall back (feed, pressure, loneliness, fragmented care) and W7.5 "Hiillos is the follow-up loop of a one-door system" (their Mieli 360 idea; their recovery story = our loop). Research: `docs/research/sources_of_ill_being.md`. | Meg 11:10 | Meg (pitch) |
 | O30 | **C6 wind-down small step:** "Phone out of the bedroom tonight" in the action menu, offered only when screen-off drifts later than her own normal; no content tracking; only if trivial (~15 min). | Claude 11:15 (Meg asked for solution additions) | Hugo |
 | O31 | **Check the book's numbers before any slide** (≈€11 bn/yr ≈5% GDP, 1.5 M youth visits 2023, >40% of disability pensions) at THL / OECD / STM. Until then the pitch says "billions a year" without a figure. | Claude 11:15 | Meg |
+| O32 | **Radical frame for the pitch:** open and close with "Treatment doesn't end at discharge — it changes form." Creativity proof names four inversions (comes to you · fire belongs to you, not the risk score · quiet when well · proves its own false alarm). Radical in the idea, conservative in safety. Spec W2, W3, W7.1. | Claude 13:10 (Meg asked: radical or radically creative?) | Meg (pitch) |
 | O20 | **Optional wow (W12) — kept, not dropped (Meg 10:36):** prism hologram of the fire (C1, Meg) and Arduino ember lamp (C5) — after M1–M4, 1–2 h cap each, demo never depends on them. Who has hardware? | Meg | Team |
 
 ---
 
 ## Sat 14 Nov 2026
+
+**Proposed (13:10, Meg asked)**
+- Honest read: Hiillos is **radically creative** in its design inversions but **not yet radical** as a system change; the radical part lives in the pitch frame. Proposal O32 adds the line "Treatment doesn't end at discharge — it changes form." No build change.
 
 **Decided (11:15, Meg)**
 - **Mental-health data is extremely sensitive** → new guardrail 10 in the spec: data minimisation, on-phone computing, explicit revocable consent per data type, export + delete, never sold, shared or used for ads, no content reading, discreet notifications, care-team-only clinic access, EU hosting, synthetic data in the demo. On the safety slide. Legal wording to be checked with an expert.
