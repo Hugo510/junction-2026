@@ -1,0 +1,36 @@
+{
+  "source_commit": "f5d5698a6b55f2fa8212d4e9a42bf6b5a58749dc",
+  "sensor_types": [
+    "activity",
+    "steps",
+    "outdoor_daylight",
+    "screen_engagement",
+    "sleep",
+    "resting_heart_rate"
+  ],
+  "sensor_units": [
+    "minutes",
+    "steps",
+    "index_0_1",
+    "count",
+    "hours",
+    "bpm"
+  ],
+  "sensor_sources": [
+    "phone",
+    "wearable",
+    "manual",
+    "synthetic"
+  ],
+  "check_in_kinds": [
+    "full",
+    "chat",
+    "journal"
+  ],
+  "source_files": [
+    "backend/app/schemas/sensors.py",
+    "backend/app/schemas/checkin.py",
+    "backend/app/schemas/patient.py"
+  ],
+  "purpose": "Metadata-only contract snapshot. No patient or sensor observations."
+}
