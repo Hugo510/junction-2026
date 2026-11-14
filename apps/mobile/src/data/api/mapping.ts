@@ -59,6 +59,15 @@ export function toBackendCheckIn(c: CheckIn, { legacy = false }: { legacy?: bool
   return body;
 }
 
+/**
+ * After a 409 ("this day already has a check-in") the mirror replaces the day's entry with PUT.
+ * It must NOT do that when an earlier entry today was a safety report and this one is not:
+ * on an older server the PUT would overwrite that report. The report stays; this copy is skipped.
+ */
+export function shouldReplaceOnConflict(checkIn: Pick<CheckIn, 'safetyConcern'>, safetyReportedToday: boolean): boolean {
+  return checkIn.safetyConcern || !safetyReportedToday;
+}
+
 export function toBackendConsents(c: { movement: boolean; taps: boolean; location: boolean; vibration: boolean; careTeamAfterSilence?: boolean }): BackendConsents {
   return {
     motion: c.movement,

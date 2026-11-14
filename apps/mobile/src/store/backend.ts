@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-import { toBackendCheckIn, toBackendConsents } from '../data/api/mapping';
+import { shouldReplaceOnConflict, toBackendCheckIn, toBackendConsents } from '../data/api/mapping';
 import type { CheckIn, SupportedLanguage } from '../domain/entities';
 import { api, ApiError, backendConfigured } from '../services/backend/client';
 import type { Consents } from './settings';
@@ -17,7 +17,8 @@ interface BackendStore {
   /** Asks the server what it can do. Safe to call often; never throws. */
   connect: () => Promise<void>;
   /** Fire-and-forget copies. The phone stays the source of truth; failures are silent. */
-  mirrorCheckIn: (checkIn: CheckIn) => void;
+  /** safetyReportedToday: an earlier entry of the same day answered "yes" to the safety question. */
+  mirrorCheckIn: (checkIn: CheckIn, safetyReportedToday?: boolean) => void;
   mirrorConsents: (consents: Consents) => void;
 }
 
@@ -48,7 +49,7 @@ export const useBackend = create<BackendStore>()((set, get) => ({
     }
   },
 
-  mirrorCheckIn: (checkIn) => {
+  mirrorCheckIn: (checkIn, safetyReportedToday = false) => {
     if (!backendConfigured) return;
     void (async () => {
       const send = async (body: ReturnType<typeof toBackendCheckIn>) => {
@@ -58,7 +59,14 @@ export const useBackend = create<BackendStore>()((set, get) => ({
           // A second ordinary check-in on the same day replaces the first (the server accepts a
           // safety report directly; this also covers an older server that answers 409 to it).
           if (!(e instanceof ApiError) || e.status !== 409) throw e;
-          await api(`/checkins/${body.date}`, { method: 'PUT', body });
+          // Never replace the day's entry when it may be a safety report (see mapping.ts).
+          if (!shouldReplaceOnConflict(checkIn, safetyReportedToday)) return;
+          try {
+            await api(`/checkins/${body.date}`, { method: 'PUT', body });
+          } catch (put) {
+            // 409 on PUT = the server refuses to replace a safety report. That is the right outcome.
+            if (!(put instanceof ApiError) || put.status !== 409) throw put;
+          }
         }
       };
       try {

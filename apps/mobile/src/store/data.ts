@@ -154,7 +154,8 @@ export const useData = create<DataState>()((set, get) => {
       }
       set({ checkIns: [...get().checkIns, checkIn] });
       // Optional copy for the backend (numbers only, never the note). Never blocks the app.
-      useBackend.getState().mirrorCheckIn(checkIn);
+      const safetyReportedToday = get().checkIns.some((c) => c.date === checkIn.date && c.id !== checkIn.id && c.safetyConcern);
+      useBackend.getState().mirrorCheckIn(checkIn, safetyReportedToday);
       return { checkIn, risk };
     },
 

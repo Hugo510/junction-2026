@@ -1,4 +1,4 @@
-import { toBackendCheckIn, toBackendConsents } from '../../data/api/mapping';
+import { shouldReplaceOnConflict, toBackendCheckIn, toBackendConsents } from '../../data/api/mapping';
 import { PERSONAS, rebasePersona } from '../../data/personas';
 import { addDaysISO } from '../dates';
 import type { CheckIn, InterventionFeedback, SensorAggregate } from '../entities';
@@ -127,6 +127,13 @@ describe('backend mirror mapping', () => {
   it('fills the midpoint only for an older server that requires both fields', () => {
     expect(toBackendCheckIn(base, { legacy: true })).toMatchObject({ energy: 3, anxiety: 3 });
     expect(toBackendCheckIn({ ...base, energy: 5 }, { legacy: true })).toMatchObject({ energy: 5, anxiety: 3 });
+  });
+
+  it('never replaces the day\u2019s entry when it may be an earlier safety report', () => {
+    expect(shouldReplaceOnConflict({ safetyConcern: false }, true)).toBe(false);
+    expect(shouldReplaceOnConflict({ safetyConcern: false }, false)).toBe(true);
+    expect(shouldReplaceOnConflict({ safetyConcern: true }, true)).toBe(true);
+    expect(shouldReplaceOnConflict({ safetyConcern: true }, false)).toBe(true);
   });
 
   it('maps the sensor consents and the contact-after-silence consent', () => {
