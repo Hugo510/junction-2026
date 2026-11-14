@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-
 from app.api.routes import auth, checkins, companion, crisis, health, patient, sensors
+
 from app.config import settings
 from app.errors import register_error_handlers
 

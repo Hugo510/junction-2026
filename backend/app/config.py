@@ -4,15 +4,15 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     """Values come from environment variables (GEMINI_API_KEY, ELEVENLABS_API_KEY, ...).
 
-    Keys are NEVER committed. Locally they live in backend/.env (ignored by git, read when
-    the server starts from the backend/ folder); on Modal they live in a Secret.
+
+    Keys are NEVER committed: locally they live in an ignored .env, on Modal in a Secret.
     Without a key the matching feature answers 503 and the app falls back to its
     built-in companion, so the demo never depends on these services.
     """
 
+
     # extra="ignore": the shared .env.example lists other keys this service does not use.
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
-
     app_version: str = "0.1.0"
     demo_mode: bool = True
 
