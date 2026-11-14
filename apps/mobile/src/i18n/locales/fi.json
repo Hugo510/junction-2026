@@ -705,5 +705,46 @@
       "8": "Liikkuminen tai puhuminen niin hitaasti, että muut ovat voineet huomata sen. Tai päinvastoin: levottomuus tai rauhattomuus niin, että olet liikkunut paljon tavallista enemmän",
       "9": "Ajatukset siitä, että olisi parempi olla kuollut, tai itsesi vahingoittamisesta jollain tavalla"
     }
+  },
+  "clinician": {
+    "title": "Ammattilaisen yhteenveto",
+    "subtitle": "Synteettiset potilaat · viitepäivä {{date}} · kiireellisyysjärjestys",
+    "legend": "Prioriteetti järjestää listan. PHQ-säännöt määrittävät soittolistan. Nämä eivät ole diagnooseja tai anturien tuottamia hälytyksiä.",
+    "reasons": "Havaitut syyt",
+    "noReasons": "Ei pisteisiin vaikuttavia havaintoja tällä jaksolla.",
+    "phq": "Viimeisin PHQ-9: {{total}}/27 · {{date}}",
+    "noPhq": "PHQ-9: ei tulosta",
+    "lostContact": "Yhteys katkennut · vähintään 7 päivää ilman kirjausta",
+    "contact": "Ei katkenneen yhteyden merkintää",
+    "pendingReason": "PHQ-lähtötaso tai vaadittu vahvistus puuttuu.",
+    "watch": "Seuranta määrittämättä: PHQ-lähtötaso puuttuu.",
+    "safetyRecorded": "Historiassa turvallisuushuoli; nykyistä kiireellisyyttä ei määritetä tässä.",
+    "noSafety": "Ei kirjattua myönteistä turvallisuusvastausta; nykyistä kiireellisyyttä ei arvioida tässä.",
+    "reasonOrder": "Enintään kaksi syytä sääntöjen järjestyksessä, ei painoarvon mukaan. Viitepäivä alkaa 15.11.2026 ja muuttuu demon päiväpainikkeilla.",
+    "call": {
+      "review": "Harkitse arviota",
+      "pending": "Soittolista: määritys kesken",
+      "notIndicated": "Soittolista: viimeisin tulos ei täytä ehtoja"
+    },
+    "summary": {
+      "total": "Potilaat",
+      "high": "Korkea prioriteetti",
+      "lost": "Yhteys katkennut"
+    },
+    "scoreLabel": "Potilaan {{name}} prioriteettipisteet · {{level}}",
+    "dashboardNote": "Prioriteetti järjestää; PHQ määrittää soittolistan. Ne eivät vahvista diagnoosia tai kiireellisyyttä. Turvallisuushistoria merkitään erikseen. Pelkät anturit eivät tuota kliinisiä hälytyksiä.",
+    "reasonsText": {
+      "moodDrop": "Mielialan lasku edelliseen viikkoon verrattuna",
+      "belowBaseline": "Mieliala henkilökohtaisen lähtötason alapuolella",
+      "lowMood": "Matala mieliala viime viikon aikana",
+      "missedCheckIns": "Useita puuttuvia päivittäisiä kirjauksia",
+      "activityDrop": "Aktiivisuuden lasku edelliseen viikkoon verrattuna",
+      "reactionSlower": "Hitaampi reaktioaika edelliseen viikkoon verrattuna",
+      "shortSleep": "Vähintään kolme yötä alle 5 tunnin unella",
+      "longSleep": "Vähintään kolme päivää, joina unta vähintään 10 tuntia",
+      "highAnxiety": "Potilaan ilmoittama kohonnut ahdistuneisuus",
+      "perceivedUrgency": "Potilaan kokema kiireellisyys",
+      "upwardDrift": "Lyhyt uni ja lisääntynyt energia tai aktiivisuus (klinikan merkintä)"
+    }
   }
 }

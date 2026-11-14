@@ -705,5 +705,46 @@
       "8": "Moving or speaking so slowly that other people could have noticed. Or the opposite: being so fidgety or restless that you have been moving around a lot more than usual",
       "9": "Thoughts that you would be better off dead, or of hurting yourself in some way"
     }
+  },
+  "clinician": {
+    "title": "Clinician Overview",
+    "subtitle": "Synthetic patients · reference date {{date}} · sorted by priority",
+    "legend": "Priority orders this list. PHQ rules determine the call list. Neither is a diagnosis or a sensor-generated alert.",
+    "reasons": "Observed reasons",
+    "noReasons": "No scoring signals in this window.",
+    "phq": "Latest PHQ-9: {{total}}/27 · {{date}}",
+    "noPhq": "PHQ-9: no result available",
+    "lostContact": "Lost contact · at least 7 days without a check-in",
+    "contact": "No lost-contact flag",
+    "pendingReason": "PHQ baseline or required confirmation unavailable.",
+    "watch": "Watch: undetermined; PHQ baseline unavailable.",
+    "safetyRecorded": "Safety answer recorded in history; current urgency is not determined here.",
+    "noSafety": "No positive safety answer recorded; current urgency is not assessed here.",
+    "reasonOrder": "Up to two reasons in scoring-rule order, not ranked by contribution. Demo reference starts at 2026-11-15; demo day controls shift it.",
+    "call": {
+      "review": "Consider a review",
+      "pending": "Call list: pending determination",
+      "notIndicated": "Call list: criteria not met on latest result"
+    },
+    "summary": {
+      "total": "Patients",
+      "high": "High priority",
+      "lost": "Lost contact"
+    },
+    "scoreLabel": "Priority score for {{name}} · {{level}}",
+    "dashboardNote": "Priority sorts; PHQ determines the call list. Neither confirms diagnosis or urgency. Safety history is flagged separately. Sensors alone never trigger clinical alerts.",
+    "reasonsText": {
+      "moodDrop": "Mood decline compared with the previous week",
+      "belowBaseline": "Mood below the personal baseline",
+      "lowMood": "Low mood during the recent week",
+      "missedCheckIns": "Several missed check-ins",
+      "activityDrop": "Reduced activity compared with the previous week",
+      "reactionSlower": "Slower reaction times compared with the previous week",
+      "shortSleep": "At least three nights with under 5 hours of sleep",
+      "longSleep": "At least three days with 10 or more hours of sleep",
+      "highAnxiety": "Elevated reported anxiety",
+      "perceivedUrgency": "Patient-reported urgency",
+      "upwardDrift": "Short sleep with increased energy or activity (clinic flag)"
+    }
   }
 }

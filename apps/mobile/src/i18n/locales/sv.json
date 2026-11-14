@@ -705,5 +705,46 @@
       "8": "Rört dig eller talat så långsamt att andra kan ha märkt det. Eller motsatsen: varit så nervös eller rastlös att du rört dig mer än vanligt",
       "9": "Tankar på att det skulle vara bättre om du var död eller att du skulle skada dig på något sätt"
     }
+  },
+  "clinician": {
+    "title": "Klinisk översikt",
+    "subtitle": "Syntetiska patienter · referensdatum {{date}} · sorterade efter prioritet",
+    "legend": "Prioritet ordnar listan. PHQ-regler avgör samtalslistan. Detta är inga diagnoser eller sensorgenererade larm.",
+    "reasons": "Observerade orsaker",
+    "noReasons": "Inga poänggivande signaler under perioden.",
+    "phq": "Senaste PHQ-9: {{total}}/27 · {{date}}",
+    "noPhq": "PHQ-9: inget resultat",
+    "lostContact": "Förlorad kontakt · minst 7 dagar utan registrering",
+    "contact": "Ingen markering för förlorad kontakt",
+    "pendingReason": "PHQ-baslinje eller nödvändig bekräftelse saknas.",
+    "watch": "Uppföljning ej fastställd: PHQ-baslinje saknas.",
+    "safetyRecorded": "Säkerhetssvar finns i historiken; aktuell brådska fastställs inte här.",
+    "noSafety": "Inget positivt säkerhetssvar registrerat; aktuell brådska bedöms inte här.",
+    "reasonOrder": "Högst två orsaker i regelordning, inte rangordnade efter vikt. Referensdatum börjar 2026-11-15 och ändras med demons dagkontroller.",
+    "call": {
+      "review": "Överväg en bedömning",
+      "pending": "Samtalslista: ännu inte fastställd",
+      "notIndicated": "Samtalslista: senaste resultatet uppfyller inte kriterierna"
+    },
+    "summary": {
+      "total": "Patienter",
+      "high": "Hög prioritet",
+      "lost": "Förlorad kontakt"
+    },
+    "scoreLabel": "Prioritetspoäng för {{name}} · {{level}}",
+    "dashboardNote": "Prioritet sorterar; PHQ avgör samtalslistan. De bekräftar inte diagnos eller brådska. Säkerhetshistorik markeras separat. Enbart sensorer utlöser aldrig kliniska larm.",
+    "reasonsText": {
+      "moodDrop": "Sänkt stämningsläge jämfört med föregående vecka",
+      "belowBaseline": "Stämningsläge under den personliga baslinjen",
+      "lowMood": "Lågt stämningsläge under den senaste veckan",
+      "missedCheckIns": "Flera uteblivna dagliga registreringar",
+      "activityDrop": "Minskad aktivitet jämfört med föregående vecka",
+      "reactionSlower": "Långsammare reaktionstid jämfört med föregående vecka",
+      "shortSleep": "Minst tre nätter med mindre än 5 timmars sömn",
+      "longSleep": "Minst tre dagar med minst 10 timmars sömn",
+      "highAnxiety": "Förhöjd ångest rapporterad av patienten",
+      "perceivedUrgency": "Brådska upplevd av patienten",
+      "upwardDrift": "Kort sömn med ökad energi eller aktivitet (klinikmarkering)"
+    }
   }
 }

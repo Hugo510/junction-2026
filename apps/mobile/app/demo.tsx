@@ -114,6 +114,7 @@ export default function DemoScreen() {
   return (
     <Screen>
       <AppText tone="muted">{t('demo.subtitle')}</AppText>
+      <Button title={t('clinician.title')} variant="secondary" onPress={() => router.push('/clinician')} />
       <Card tone="sand">
         <AppText>{t('demo.simulatedDate', { date: formatDate(now(), 'EEEE d MMMM') })}</AppText>
         <AppText variant="label" key={dayOffset}>

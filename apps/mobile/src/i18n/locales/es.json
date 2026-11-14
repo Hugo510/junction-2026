@@ -705,5 +705,46 @@
       "8": "Moverte o hablar tan despacio que otras personas lo pudieron notar. O lo contrario: tanta inquietud o agitación que te has movido mucho más de lo habitual",
       "9": "Pensamientos de que sería mejor morir o de hacerte daño de alguna manera"
     }
+  },
+  "clinician": {
+    "title": "Resumen clínico",
+    "subtitle": "Pacientes sintéticos · fecha de referencia {{date}} · ordenados por prioridad",
+    "legend": "La prioridad ordena esta lista. Las reglas PHQ determinan la lista de llamadas. No son diagnósticos ni alertas generadas por sensores.",
+    "reasons": "Motivos observados",
+    "noReasons": "Sin señales que puntúen en esta ventana.",
+    "phq": "Último PHQ-9: {{total}}/27 · {{date}}",
+    "noPhq": "PHQ-9: sin resultado disponible",
+    "lostContact": "Contacto perdido · al menos 7 días sin registro",
+    "contact": "Sin indicador de contacto perdido",
+    "pendingReason": "Referencia PHQ o confirmación requerida no disponible.",
+    "watch": "Seguimiento no determinado: falta referencia PHQ.",
+    "safetyRecorded": "Respuesta de seguridad registrada en el historial; no determina la urgencia actual.",
+    "noSafety": "Sin respuesta de seguridad positiva registrada; aquí no se evalúa la urgencia actual.",
+    "reasonOrder": "Hasta dos motivos en el orden de las reglas, sin clasificación por contribución. La referencia comienza el 15/11/2026 y cambia con los controles de días de la demo.",
+    "call": {
+      "review": "Considerar una revisión",
+      "pending": "Lista de llamadas: pendiente de determinar",
+      "notIndicated": "Lista de llamadas: el último resultado no cumple los criterios"
+    },
+    "summary": {
+      "total": "Pacientes",
+      "high": "Prioridad alta",
+      "lost": "Contacto perdido"
+    },
+    "scoreLabel": "Puntuación de prioridad de {{name}} · {{level}}",
+    "dashboardNote": "La prioridad ordena; PHQ determina la lista de llamadas. No confirman diagnóstico ni urgencia. Los antecedentes de seguridad se señalan aparte. Los sensores solos nunca generan alertas clínicas.",
+    "reasonsText": {
+      "moodDrop": "Descenso del estado de ánimo respecto a la semana anterior",
+      "belowBaseline": "Estado de ánimo por debajo de la referencia personal",
+      "lowMood": "Estado de ánimo bajo durante la semana reciente",
+      "missedCheckIns": "Varios registros diarios ausentes",
+      "activityDrop": "Descenso de actividad respecto a la semana anterior",
+      "reactionSlower": "Tiempo de reacción más lento respecto a la semana anterior",
+      "shortSleep": "Al menos tres noches con menos de 5 horas de sueño",
+      "longSleep": "Al menos tres días con 10 horas de sueño o más",
+      "highAnxiety": "Ansiedad elevada comunicada por el paciente",
+      "perceivedUrgency": "Urgencia percibida comunicada por el paciente",
+      "upwardDrift": "Sueño corto con aumento de energía o actividad (marca clínica)"
+    }
   }
 }
