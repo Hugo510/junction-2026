@@ -20,6 +20,8 @@ import { average, checkInsByDate, sensorsByDate, twoWeekWindows } from './histor
  * | longSleep         | ≥ 3 recent days with ≥ 10 h of sleep (hypersomnia)          | +15                 |
  * | highAnxiety       | avg anxiety recent ≥ 4                                      | +10                 |
  * | perceivedUrgency  | patient-perceived urgency: high +15, medium +5              | +5 / +15            |
+ * | upwardDrift       | ONLY with the clinic's bipolar flag: ≥ 3 recent nights < 6 h | +25                 |
+ * |                   | AND energy ≥ 1 above usual OR activity ≥ 30 % above previous |                     |
  *
  * Personal baseline = avg mood of days 15–60 before today (needs ≥ 5 entries). It keeps the signal
  * alive when someone stays low for weeks (week-over-week drop goes to 0, but they are still unwell).
@@ -37,6 +39,8 @@ export interface PriorityInput {
   sensors: SensorAggregate[];
   today: ISODate;
   perceivedUrgency?: PerceivedUrgency;
+  /** Clinic-set flags (never self-declared). */
+  flags?: { bipolar?: boolean };
 }
 
 export const PRIORITY_THRESHOLDS = { high: 60, medium: 30 } as const;
@@ -51,6 +55,34 @@ export function baselineWindow(today: ISODate): ISODate[] {
 }
 
 const REASON = (key: string) => `priority.reasons.${key}`;
+
+export const UPWARD_SLEEP_H = 6;
+
+/**
+ * Short sleep together with HIGHER energy or activity than usual. For flagged users this is a
+ * signal for the clinician — the companion must never praise it as "doing great".
+ */
+export function detectUpwardDrift(input: Pick<PriorityInput, 'checkIns' | 'sensors' | 'today'>): boolean {
+  const { previous, recent } = twoWeekWindows(input.today);
+  const checks = checkInsByDate(input.checkIns);
+  const sensors = sensorsByDate(input.sensors);
+  const pick = <T>(dates: ISODate[], get: (d: ISODate) => T | undefined) =>
+    dates.map(get).filter((v): v is T => v !== undefined);
+
+  const shortNights = pick(recent, (d) => checks.get(d)?.sleepHours).filter((h) => h < UPWARD_SLEEP_H).length;
+  if (shortNights < 3) return false;
+
+  const energyRecent = average(pick(recent, (d) => checks.get(d)?.energy));
+  const energyUsual =
+    average(pick(baselineWindow(input.today), (d) => checks.get(d)?.energy)) ?? average(pick(previous, (d) => checks.get(d)?.energy)) ?? 3;
+  const energyUp = energyRecent !== undefined && energyRecent >= energyUsual + 1;
+
+  const actRecent = average(pick(recent, (d) => sensors.get(d)?.activityMinutes));
+  const actPrev = average(pick(previous, (d) => sensors.get(d)?.activityMinutes));
+  const activityUp = actRecent !== undefined && actPrev !== undefined && actPrev > 0 && actRecent >= actPrev * 1.3;
+
+  return energyUp || activityUp;
+}
 
 export function levelForScore(score: number): PriorityLevel {
   if (score >= PRIORITY_THRESHOLDS.high) return 'high';
@@ -123,6 +155,9 @@ export function priorityScore(input: PriorityInput): PriorityResult {
   // Patient-perceived urgency
   if (input.perceivedUrgency === 'high') add(15, 'perceivedUrgency');
   else if (input.perceivedUrgency === 'medium') add(5, 'perceivedUrgency');
+
+  // Upward drift (possible hypomania) — only for people the clinic flagged as bipolar.
+  if (input.flags?.bipolar && detectUpwardDrift(input)) add(25, 'upwardDrift');
 
   const clamped = Math.max(0, Math.min(100, score));
   return { score: clamped, level: levelForScore(clamped), reasons };

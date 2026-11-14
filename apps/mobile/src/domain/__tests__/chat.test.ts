@@ -15,6 +15,8 @@ const ctx: ChatContext = {
   hasOpenRequest: false,
   suggestedIntervention: 'daylightWalk',
   calmInterventions: ['breathing', 'fireplace', 'fish'],
+  outreach: 'none',
+  upwardDrift: false,
 };
 
 describe('crisis language', () => {
@@ -111,6 +113,24 @@ describe('chat engine', () => {
     expect(r.effects).toEqual([]);
     const low = handleEvent({ type: 'quick', id: 'low' }, INITIAL_FLOW, { ...ctx, priorityLevel: 'high' });
     expect(low.messages.some((m) => m.card?.type === 'consult')).toBe(true);
+  });
+
+  it('reaches out warmer along the silence ladder, without crisis language', () => {
+    const friend = handleEvent({ type: 'open' }, INITIAL_FLOW, { ...ctx, outreach: 'friend' });
+    expect(friend.messages[0].parts?.map((p) => p.key)).toContain('chat.outreach.friend');
+    expect(friend.messages[0].card).toEqual({ type: 'friend' });
+    const lost = handleEvent({ type: 'open' }, INITIAL_FLOW, { ...ctx, outreach: 'reconnect' });
+    expect(lost.messages[0].card).toEqual({ type: 'reconnect' });
+    expect(lost.messages.some((m) => m.card?.type === 'crisis')).toBe(false);
+    expect(lost.effects).toEqual([]);
+  });
+
+  it('never cheers on upward drift', () => {
+    const r = handleEvent({ type: 'text', text: 'I feel great!' }, INITIAL_FLOW, { ...ctx, upwardDrift: true });
+    expect(r.messages[0].parts?.[0].key).toBe('chat.reply.steady');
+    const flow = { ...INITIAL_FLOW, step: 'safety' as const, draft: { mood: 5 as const, emotions: [] } };
+    const done = handleEvent({ type: 'safety', answer: false }, flow, { ...ctx, upwardDrift: true });
+    expect(done.messages[0].parts?.[0].key).toBe('companion.checkin.steady');
   });
 
   it('rotates calming options', () => {

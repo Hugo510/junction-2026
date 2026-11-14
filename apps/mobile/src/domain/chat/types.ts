@@ -1,4 +1,5 @@
 import type { CompanionSpecies, EmotionId, InterventionId, PriorityLevel, Scale5 } from '../entities';
+import type { OutreachLevel } from '../outreach';
 
 /**
  * Chat messages store i18n keys (not rendered text), so the whole conversation
@@ -19,7 +20,11 @@ export type ChatCard =
   | { type: 'consult' }
   | { type: 'crisis' }
   /** Saved journal entry; checkInId is filled in by the store after saving. */
-  | { type: 'entry'; checkInId: string };
+  | { type: 'entry'; checkInId: string }
+  /** One-tap call/message to the trusted person (or invite to add one). */
+  | { type: 'friend' }
+  /** After a long silence: calm ways to reconnect (not crisis language). */
+  | { type: 'reconnect' };
 
 export type InteractiveCard = 'mood' | 'emotions' | 'safety';
 
@@ -73,6 +78,12 @@ export interface ChatContext {
   suggestedIntervention: InterventionId;
   /** Calming options ordered by what helped this user most. */
   calmInterventions: InterventionId[];
+  /** Silence ladder level (days without check-in). */
+  outreach: OutreachLevel;
+  /** Name of the trusted person, if the user added one. */
+  trustedContactName?: string;
+  /** Clinic-flagged upward drift: never praise, keep a calm, sleep-protecting tone. */
+  upwardDrift: boolean;
 }
 
 export type ChatEvent =

@@ -17,6 +17,8 @@ export interface Patient {
   id: string;
   createdAt: string;
   companion: Companion;
+  /** Set by the clinic ONLY (never self-declared). Enables the upwardDrift rule. */
+  bipolarFlag?: boolean;
 }
 
 /** Aggregated result of the "tap when the circle glows" game. Individual taps are never stored. */
@@ -150,6 +152,7 @@ export interface ConsultRequest {
 export interface Alert {
   id: string;
   createdAt: string;
-  level: 'urgent';
-  source: 'checkIn' | 'chat' | 'contactCareTeam';
+  /** urgent = safety path; info = gentle note (e.g. lost touch, with consent). */
+  level: 'urgent' | 'info';
+  source: 'checkIn' | 'chat' | 'contactCareTeam' | 'silence';
 }

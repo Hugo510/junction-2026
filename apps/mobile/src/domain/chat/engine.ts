@@ -98,6 +98,8 @@ function handleIntent(intent: Intent, ctx: ChatContext, flow: ChatFlowState): En
         say('chat.reply.tired', undefined, { card: { type: 'intervention', id: nextCalm(ctx, flow) }, quickReplies: ['checkin', 'plan'] }),
       ]);
     case 'positive':
+      // With clinic-flagged upward drift, never cheer it on: calm tone, protect sleep.
+      if (ctx.upwardDrift) return result([say('chat.reply.steady', undefined, { quickReplies: ['checkin', 'relax'] })]);
       return result([say('chat.reply.positive', undefined, { quickReplies: ['checkin', 'plan'] })]);
     case 'thanks':
       return result([say('chat.reply.thanks')]);
@@ -132,7 +134,9 @@ function finishCheckIn(answer: boolean, ctx: ChatContext, flow: ChatFlowState): 
   if (answer) return crisis(flow, effects);
   return {
     messages: [
-      say(checkInResponseKey(mood, false), undefined, { card: { type: 'entry', checkInId: 'pending' } }),
+      say(ctx.upwardDrift && mood >= 4 ? 'companion.checkin.steady' : checkInResponseKey(mood, false), undefined, {
+        card: { type: 'entry', checkInId: 'pending' },
+      }),
       say('chat.flow.suggestion', undefined, { card: { type: 'intervention', id: ctx.suggestedIntervention } }),
       ...suggestConsult(ctx),
     ],
@@ -154,21 +158,23 @@ export function handleEvent(event: ChatEvent, flow: ChatFlowState, ctx: ChatCont
     case 'open': {
       // One calm turn: greeting + invitation. A worrying trend only adds a gentle chip, not a card.
       const suggestCare = ctx.priorityLevel !== 'low' && !ctx.hasOpenRequest;
-      const parts: TextPart[] = [
-        ...greetingParts({
-          species: ctx.species,
-          timeOfDay: ctx.timeOfDay,
-          lastMood: ctx.lastMood,
-          daysSinceLastCheckIn: ctx.daysSinceLastCheckIn,
-          daylightHours: ctx.daylightHours,
-        }),
-        { key: ctx.checkedInToday ? 'chat.open.done' : 'chat.open.invite' },
-      ];
-      if (suggestCare) parts.push({ key: 'chat.open.careHint' });
+      const greeting = greetingParts({
+        species: ctx.species,
+        timeOfDay: ctx.timeOfDay,
+        lastMood: ctx.lastMood,
+        daysSinceLastCheckIn: ctx.daysSinceLastCheckIn,
+        daylightHours: ctx.daylightHours,
+      });
+      // Silence ladder: the context line becomes a warmer outreach message (never crisis language).
+      if (ctx.outreach !== 'none') greeting[greeting.length - 1] = { key: `chat.outreach.${ctx.outreach}` };
+      const parts: TextPart[] = [...greeting, { key: ctx.checkedInToday ? 'chat.open.done' : 'chat.open.invite' }];
+      if (suggestCare && ctx.outreach === 'none') parts.push({ key: 'chat.open.careHint' });
       const base: QuickReplyId[] = ctx.checkedInToday ? ['relax', 'plan', 'progress'] : ['checkin', 'relax', 'low'];
       const quickReplies: QuickReplyId[] = suggestCare ? [base[0], 'care', ...base.slice(1)] : [...base, ctx.checkedInToday ? 'care' : 'progress'];
+      const outreachCard: ChatCard | undefined =
+        ctx.outreach === 'reconnect' ? { type: 'reconnect' } : ctx.outreach === 'friend' ? { type: 'friend' } : undefined;
       return {
-        messages: [{ role: 'companion', parts, quickReplies }],
+        messages: [{ role: 'companion', parts, quickReplies, card: outreachCard }],
         flow: { ...INITIAL_FLOW, relaxCount: flow.relaxCount },
         effects: [],
       };
