@@ -3,7 +3,7 @@ import { Text, type TextProps, type TextStyle } from 'react-native';
 import { useTheme } from './theme';
 import { typeScale, type TextVariant } from './tokens';
 
-type Tone = 'default' | 'muted' | 'primary' | 'accent' | 'danger' | 'onPrimary' | 'onAccent' | 'onDanger';
+type Tone = 'default' | 'muted' | 'primary' | 'accent' | 'danger' | 'onPrimary' | 'onCta' | 'onAccent' | 'onDanger';
 
 export interface AppTextProps extends TextProps {
   variant?: TextVariant;
@@ -11,9 +11,9 @@ export interface AppTextProps extends TextProps {
   align?: TextStyle['textAlign'];
 }
 
-/** All app text goes through here: theme colors, type scale and "Larger text". */
+/** All app text goes through here: theme colors, brand typeface, type scale and "Larger text". */
 export function AppText({ variant = 'body', tone = 'default', align, style, ...rest }: AppTextProps) {
-  const { colors, textScale } = useTheme();
+  const { colors, textScale, font } = useTheme();
   const t = typeScale[variant];
   const color = {
     default: colors.text,
@@ -22,6 +22,7 @@ export function AppText({ variant = 'body', tone = 'default', align, style, ...r
     accent: colors.accent,
     danger: colors.danger,
     onPrimary: colors.onPrimary,
+    onCta: colors.onCta,
     onAccent: colors.onAccent,
     onDanger: colors.onDanger,
   }[tone];
@@ -36,9 +37,9 @@ export function AppText({ variant = 'body', tone = 'default', align, style, ...r
           color,
           fontSize: t.fontSize * textScale,
           lineHeight: t.lineHeight * textScale,
-          fontWeight: t.fontWeight,
           textAlign: align,
         },
+        font(t.fontWeight),
         style,
       ]}
     />

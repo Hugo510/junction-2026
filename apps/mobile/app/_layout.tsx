@@ -32,7 +32,7 @@ export default function RootLayout() {
 }
 
 function Bootstrap() {
-  const { colors, scheme } = useTheme();
+  const { colors, scheme, fontsReady, font } = useTheme();
   const { t } = useTranslation();
   const hydrated = useSettings((s) => s.hydrated);
   const language = useSettings((s) => s.language);
@@ -51,11 +51,11 @@ function Bootstrap() {
     if (hydrated && status === 'idle') void load();
   }, [hydrated, status, load]);
 
-  const ready = hydrated && (status === 'ready' || status === 'error');
+  const ready = hydrated && fontsReady && (status === 'ready' || status === 'error');
   // Hide the native splash as soon as settings are read; the skeleton covers the data load.
   useEffect(() => {
-    if (hydrated) SplashScreen.hideAsync().catch(() => undefined);
-  }, [hydrated]);
+    if (hydrated && fontsReady) SplashScreen.hideAsync().catch(() => undefined);
+  }, [hydrated, fontsReady]);
 
   const navTheme = useMemo(() => {
     const base = scheme === 'dark' ? DarkTheme : DefaultTheme;
@@ -88,7 +88,7 @@ function Bootstrap() {
           headerStyle: { backgroundColor: colors.background },
           headerTintColor: colors.text,
           headerShadowVisible: false,
-          headerTitleStyle: { fontWeight: '600' },
+          headerTitleStyle: { ...font('800'), fontSize: 19 },
           contentStyle: { backgroundColor: colors.background },
           headerRight: () => <HelpButton />,
         }}
