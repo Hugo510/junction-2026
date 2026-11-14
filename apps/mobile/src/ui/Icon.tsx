@@ -1,7 +1,24 @@
 import { View, type ColorValue } from 'react-native';
 import Svg, { Circle, Path } from 'react-native-svg';
 
-export type IconName = 'today' | 'checkin' | 'comfort' | 'insights' | 'care' | 'settings' | 'help' | 'check' | 'close' | 'shield';
+export type IconName =
+  | 'today'
+  | 'checkin'
+  | 'comfort'
+  | 'insights'
+  | 'care'
+  | 'settings'
+  | 'help'
+  | 'check'
+  | 'close'
+  | 'shield'
+  | 'menu'
+  | 'send'
+  | 'journal'
+  | 'plus'
+  | 'chat'
+  | 'chevronLeft'
+  | 'chevronRight';
 
 /** Small original line icons drawn with react-native-svg. Decorative: labels live on the controls. */
 export function Icon({ name, color, size = 24 }: { name: IconName; color: ColorValue; size?: number }) {
@@ -48,6 +65,18 @@ export function Icon({ name, color, size = 24 }: { name: IconName; color: ColorV
       {name === 'check' && <Path d="M5 12.5l4.5 4.5L19 7.5" {...p} />}
       {name === 'close' && <Path d="M6 6l12 12M18 6L6 18" {...p} />}
       {name === 'shield' && <Path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6l7-3z" {...p} />}
+      {name === 'menu' && <Path d="M4 7h16M4 12h10M4 17h16" {...p} />}
+      {name === 'send' && <Path d="M12 19V5M6 11l6-6 6 6" {...p} />}
+      {name === 'journal' && (
+        <>
+          <Path d="M6 3.5h11a1.5 1.5 0 0 1 1.5 1.5v14A1.5 1.5 0 0 1 17 20.5H6z" {...p} />
+          <Path d="M6 3.5v17M10 8h5M10 11.5h5" {...p} />
+        </>
+      )}
+      {name === 'plus' && <Path d="M12 5v14M5 12h14" {...p} />}
+      {name === 'chat' && <Path d="M4.5 5.5h15v10h-8l-4.5 3.5v-3.5h-2.5z" {...p} />}
+      {name === 'chevronLeft' && <Path d="M15 5l-7 7 7 7" {...p} />}
+      {name === 'chevronRight' && <Path d="M9 5l7 7-7 7" {...p} />}
     </Svg>
     </View>
   );

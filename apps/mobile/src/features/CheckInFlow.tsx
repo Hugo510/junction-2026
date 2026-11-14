@@ -1,20 +1,22 @@
 import { useState } from 'react';
-import { Pressable, StyleSheet, TextInput, View } from 'react-native';
+import { StyleSheet, TextInput, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
-import type { CheckIn, ReactionAggregate, Scale5 } from '../domain/entities';
+import type { CheckIn, EmotionId, ReactionAggregate, Scale5 } from '../domain/entities';
 import type { RiskAssessment } from '../domain/riskRules';
 import { haptics } from '../services/haptics';
 import { useData } from '../store/data';
 import { useSettings } from '../store/settings';
-import { AppText, Button, MIN_TOUCH, MoodFace, Slider, radii, spacing, useTheme } from '../ui';
+import { AppText, Button, Slider, radii, spacing, useTheme } from '../ui';
+import { EmotionPicker } from './EmotionPicker';
+import { MoodPicker } from './MoodPicker';
 import { ReactionGame } from './ReactionGame';
 
-type Step = 'mood' | 'energy' | 'sleep' | 'game' | 'safety' | 'note';
+type Step = 'mood' | 'emotions' | 'energy' | 'sleep' | 'game' | 'safety' | 'note';
 
 const STEPS: Record<'full' | 'baseline', Step[]> = {
-  full: ['mood', 'energy', 'sleep', 'game', 'safety', 'note'],
-  baseline: ['mood', 'sleep', 'safety'],
+  full: ['mood', 'emotions', 'energy', 'sleep', 'game', 'safety', 'note'],
+  baseline: ['mood', 'emotions', 'sleep', 'safety'],
 };
 
 export interface CheckInResult {
@@ -37,6 +39,7 @@ export function CheckInFlow({ variant, onSubmitted }: CheckInFlowProps) {
 
   const [index, setIndex] = useState(0);
   const [mood, setMood] = useState<Scale5 | null>(null);
+  const [emotions, setEmotions] = useState<EmotionId[]>([]);
   const [energy, setEnergy] = useState<Scale5>(3);
   const [anxiety, setAnxiety] = useState<Scale5>(2);
   const [sleepHours, setSleepHours] = useState(7);
@@ -53,7 +56,9 @@ export function CheckInFlow({ variant, onSubmitted }: CheckInFlowProps) {
     setSaving(true);
     try {
       const result = await submitCheckIn({
+        kind: 'full',
         mood,
+        emotions,
         energy,
         anxiety,
         sleepHours,
@@ -88,33 +93,17 @@ export function CheckInFlow({ variant, onSubmitted }: CheckInFlowProps) {
       {step === 'mood' && (
         <View style={styles.block}>
           <AppText variant="title">{t('checkin.mood.question')}</AppText>
-          <View style={styles.moods} accessibilityRole="radiogroup">
-            {([1, 2, 3, 4, 5] as Scale5[]).map((level) => {
-              const selected = mood === level;
-              const label = t(`checkin.mood.levels.${level}`);
-              return (
-                <Pressable
-                  key={level}
-                  accessibilityRole="radio"
-                  accessibilityLabel={t('a11y.moodOption', { value: level, label })}
-                  accessibilityState={{ selected, checked: selected }}
-                  onPress={() => {
-                    haptics.tap();
-                    setMood(level);
-                  }}
-                  style={[
-                    styles.moodOption,
-                    { borderColor: selected ? colors.primary : colors.border, backgroundColor: selected ? colors.primarySoft : colors.surface },
-                  ]}
-                >
-                  <MoodFace level={level} size={52 * textScale} />
-                  <AppText variant="caption" align="center">
-                    {label}
-                  </AppText>
-                </Pressable>
-              );
-            })}
-          </View>
+          <MoodPicker value={mood} onChange={setMood} />
+        </View>
+      )}
+
+      {step === 'emotions' && (
+        <View style={styles.block}>
+          <AppText variant="title">{t('journal.emotionsQuestion')}</AppText>
+          <EmotionPicker
+            selected={emotions}
+            onToggle={(id) => setEmotions((cur) => (cur.includes(id) ? cur.filter((e) => e !== id) : [...cur, id]))}
+          />
         </View>
       )}
 
@@ -232,18 +221,6 @@ export function CheckInFlow({ variant, onSubmitted }: CheckInFlowProps) {
 const styles = StyleSheet.create({
   wrap: { gap: spacing.lg },
   block: { gap: spacing.md },
-  moods: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm, justifyContent: 'space-between' },
-  moodOption: {
-    flexGrow: 1,
-    flexBasis: 90,
-    minHeight: MIN_TOUCH * 2,
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: spacing.xs,
-    borderRadius: radii.md,
-    borderWidth: 1.5,
-    padding: spacing.sm,
-  },
   safetyRow: { flexDirection: 'row', gap: spacing.md },
   flex: { flex: 1 },
   input: { minHeight: 120, borderWidth: 1, borderRadius: radii.md, padding: spacing.md, textAlignVertical: 'top' },
