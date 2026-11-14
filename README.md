@@ -17,7 +17,7 @@ hears from Hiillos only when it matters, with a one-line reason, and it makes ev
 | Folder | What it is |
 | --- | --- |
 | [`apps/mobile`](apps/mobile) | The app (Expo, React Native, TypeScript). Patient side and a clinician overview. Runs in Expo Go. |
-| [`backend`](backend) | Optional API (FastAPI). The app works fully without it. |
+| [`backend`](backend) | Optional API (FastAPI), deployed on Modal for the demo. The app works fully without it. Also holds the PostgreSQL schema that the API will use next. |
 | [`tools/synthetic`](tools/synthetic) | Generator for the five synthetic personas (90 days each, plus a smart-ring layer). |
 | [`docs`](docs) | Build spec, decisions log, demo and pitch notes, and the research behind the rules. |
 
@@ -63,6 +63,17 @@ npx expo-doctor
 
 Details, the demo script and what is simulated: [`apps/mobile/README.md`](apps/mobile/README.md).
 
+## Install on Android (no computer needed)
+
+An installable build (APK, version 0.1.0, built on 15 November 2026 with EAS Build):
+
+**[Download the Hiillos APK](https://expo.dev/artifacts/eas/5odKKWn4HNE5fL7V285B1uiB-p5kjwKZyKRmwtW2Cgs.apk)** (99 MB; the link works until 28 November 2026)
+
+Android asks for permission to install an app from outside the Play Store. This build runs on
+its own, without the backend, so the opt-in AI replies and the companion's voice are not
+available in it. How it is built: [`apps/mobile/README.md`](apps/mobile/README.md). There is no iOS build,
+because installing on an iPhone needs a paid Apple developer account; on iOS use Expo Go as above.
+
 ## Run the backend (optional)
 
 ```bash
@@ -77,6 +88,19 @@ app, so it is never a secret. API keys for the AI replies and the voice live onl
 see [`backend/AI.md`](backend/AI.md). Copy `.env.example` to `.env` for local values and never
 commit `.env`.
 
+### Where the data lives
+
+- **Today:** the API keeps its data in memory, which is enough for a demo with synthetic people.
+  Restarting the server clears it.
+- **Ready for the next step:** a PostgreSQL schema with nine tables (patients, care team,
+  consents, sessions, check-ins, alerts, sensor totals), written as SQLAlchemy models with an
+  Alembic migration. It is applied to a managed PostgreSQL database that holds no data yet.
+  Connecting the API to it is the next step, described in
+  [`backend/docs/database/BACKEND_HANDOFF.md`](backend/docs/database/BACKEND_HANDOFF.md).
+
+The app never sends notes, feelings or the body map to the server: they stay on the phone. Schema
+and decisions: [`backend/docs/database`](backend/docs/database); setup: [`backend/README.md`](backend/README.md).
+
 ## Documents
 
 - [`docs/BUILD_SPEC.md`](docs/BUILD_SPEC.md): what we build and why (start with section W).
@@ -85,14 +109,17 @@ commit `.env`.
 - [`docs/DECISIONS.md`](docs/DECISIONS.md): decisions log.
 - [`docs/PERSONAS.md`](docs/PERSONAS.md): the five synthetic personas.
 - [`docs/research`](docs/research): sources for the baseline, the triggers and the small steps.
+- [`backend/AI.md`](backend/AI.md): the AI replies and the voice, and the safety order they follow.
+- [`backend/docs/database/SCHEMA.md`](backend/docs/database/SCHEMA.md): the database schema.
+- [`MEDIA_SOURCES.md`](MEDIA_SOURCES.md): where the sounds and fonts come from, with their licenses.
 
 ## Team: SISU Lab
 
 | Name | Role | GitHub |
 | --- | --- | --- |
 | Meg | Product, spec, research, synthetic data, pitch | [@margita68](https://github.com/margita68) |
-| Owais | Backend | [@muhammad-owais-javed](https://github.com/muhammad-owais-javed) |
-| Uriel | Clinician overview | [@urielcont](https://github.com/urielcont) |
+| Owais | Backend (FastAPI) and its deployment | [@muhammad-owais-javed](https://github.com/muhammad-owais-javed) |
+| Uriel | Clinician overview, database (PostgreSQL) | [@urielcont](https://github.com/urielcont) |
 | Hugo | Mobile app | [@Hugo510](https://github.com/Hugo510) |
 
 ## About this repository
