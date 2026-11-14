@@ -1,0 +1,975 @@
+{
+  "common": {
+    "appName": "Hiillos",
+    "tagline": "Seguir bien después de la TMS, un pequeño paso a la vez",
+    "continue": "Continuar",
+    "back": "Atrás",
+    "skip": "Omitir",
+    "done": "Listo",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "close": "Cerrar",
+    "start": "Empezar",
+    "stop": "Detener",
+    "retry": "Intentar de nuevo",
+    "loading": "Cargando…",
+    "errorTitle": "Algo no se cargó",
+    "errorBody": "No es tu culpa. Inténtalo de nuevo en un momento.",
+    "yes": "Sí",
+    "no": "No",
+    "needHelp": "¿Necesitas ayuda ahora?",
+    "notMedicalDevice": "No es un dispositivo médico. No diagnostica ni trata, y no reemplaza a tu equipo de salud. En una emergencia, llama al 112.",
+    "minutes_one": "{{count}} min",
+    "minutes_other": "{{count}} min",
+    "hours_one": "{{count}} hora",
+    "hours_other": "{{count}} horas",
+    "today": "Hoy",
+    "yesterday": "Ayer"
+  },
+  "languages": {
+    "en": "English",
+    "fi": "Suomi",
+    "es": "Español",
+    "sv": "Svenska"
+  },
+  "a11y": {
+    "increase": "Aumentar",
+    "decrease": "Disminuir",
+    "helpHint": "Abre contactos de emergencia y apoyo",
+    "settings": "Ajustes",
+    "companion": "Compañero {{species}} llamado {{name}}",
+    "moodOption": "Ánimo {{value}} de 5: {{label}}",
+    "chart": "{{label}} en los últimos 14 días",
+    "selected": "seleccionado"
+  },
+  "onboarding": {
+    "step": "Paso {{current}} de {{total}}",
+    "language": {
+      "title": "Elige tu idioma",
+      "subtitle": "Puedes cambiarlo cuando quieras en Ajustes."
+    },
+    "welcome": {
+      "title": "Te damos la bienvenida",
+      "body": "Esta app te ayuda a seguir bien en casa después de tu tratamiento con TMS: check-ins cortos, pequeñas ideas para cada día y una forma sencilla de contactar a tu equipo de salud.",
+      "disclaimerTitle": "Bueno saberlo",
+      "disclaimer": "Esta app no es un dispositivo médico. No diagnostica ni trata, y nunca reemplaza a tu equipo de salud. En una emergencia, llama al 112."
+    },
+    "consent": {
+      "title": "Tú decides, sensor por sensor",
+      "subtitle": "Todo es opcional. La app funciona sin ninguno de estos y puedes cambiarlos después.",
+      "movement": "Movimiento",
+      "movementDesc": "Usa el sensor de movimiento durante los ejercicios para contar minutos activos.",
+      "taps": "Patrón de toques",
+      "tapsDesc": "Un juego corto de toques. Solo se guarda tu velocidad media y precisión.",
+      "location": "Ubicación aproximada",
+      "locationDesc": "Solo para estimar el tiempo al aire libre con luz de día. Se procesa en tu teléfono; nunca se guardan coordenadas.",
+      "vibration": "Vibración",
+      "vibrationDesc": "Vibraciones suaves que guían la respiración y otros ejercicios.",
+      "careTeamAfterSilence": "Que mi equipo de salud me contacte si perdemos el contacto",
+      "careTeamAfterSilenceDesc": "Si pasan 7 días sin check-in, tu equipo recibe un aviso suave (simulado). Desactivado por defecto."
+    },
+    "companion": {
+      "title": "Elige un compañero",
+      "subtitle": "Un pequeño amigo para acompañarte. Solo para dar calma.",
+      "nameLabel": "Ponle un nombre",
+      "namePlaceholder": "Nombre",
+      "defaults": {
+        "bee": "Pörri",
+        "cat": "Kuu",
+        "dog": "Nalle",
+        "bird": "Pipo",
+        "person": "Alex"
+      }
+    },
+    "baseline": {
+      "title": "Un primer check-in corto",
+      "subtitle": "Esto muestra tu punto de partida. No hay respuestas correctas ni incorrectas."
+    },
+    "finish": "Empecemos",
+    "path": {
+      "title": "¿Dónde estás ahora?",
+      "subtitle": "Hiillos se adapta al momento de tu atención.",
+      "postTreatment": "Acabo de terminar mi tratamiento en la clínica",
+      "inTreatment": "Estoy en tratamiento ahora",
+      "stoppedTreatment": "Me sentí mejor y dejé mi tratamiento",
+      "notInCare": "No estoy en atención por ahora",
+      "comingNext": "Próximamente"
+    }
+  },
+  "species": {
+    "bee": "Abeja",
+    "cat": "Gato",
+    "dog": "Perro",
+    "bird": "Pájaro",
+    "person": "Persona"
+  },
+  "checkin": {
+    "title": "¿Cómo estás hoy?",
+    "step": "Paso {{current}} de {{total}}",
+    "mood": {
+      "question": "¿Cómo está tu ánimo hoy?",
+      "levels": {
+        "1": "Muy bajo",
+        "2": "Bajo",
+        "3": "Regular",
+        "4": "Bien",
+        "5": "Muy bien"
+      }
+    },
+    "energy": {
+      "question": "¿Cómo está tu energía?",
+      "low": "Baja",
+      "high": "Alta"
+    },
+    "anxiety": {
+      "question": "¿Cuánta tensión o ansiedad sientes?",
+      "low": "En calma",
+      "high": "Mucha tensión"
+    },
+    "sleep": {
+      "question": "¿Cuántas horas dormiste anoche?",
+      "value": "{{hours}} h"
+    },
+    "scaleValue": "{{value}} de 5",
+    "game": {
+      "title": "Toca cuando el círculo brille",
+      "intro": "Un juego corto de {{rounds}} rondas. Solo se guarda un promedio, nunca cada toque.",
+      "wait": "Espera el brillo…",
+      "tap": "¡Toca ahora!",
+      "tooEarly": "Un poco pronto — no pasa nada.",
+      "nice": "¡Bien!",
+      "round": "Ronda {{current}} de {{total}}",
+      "result": "¡Gracias! Tu promedio fue de {{ms}} ms.",
+      "skip": "Omitir el juego",
+      "off": "El juego de toques está desactivado en tu privacidad, así que lo omitimos.",
+      "circle": "Círculo de reacción. Toca cuando brille."
+    },
+    "safety": {
+      "title": "Una pregunta más",
+      "question": "En los últimos días, ¿has tenido pensamientos de hacerte daño?",
+      "context": "Se lo preguntamos a todas las personas. Tu respuesta ayuda a tu equipo de salud a apoyarte."
+    },
+    "note": {
+      "question": "¿Algo que quieras anotar?",
+      "placeholder": "Unas palabras, si quieres (opcional)"
+    },
+    "save": "Guardar check-in",
+    "doneTitle": "Gracias por tu check-in",
+    "suggestion": "Algo que podría ayudarte ahora",
+    "alreadyDone": "Ya hiciste tu check-in de hoy. Si algo cambió, puedes hacer otro.",
+    "again": "Hacer otro check-in",
+    "backToday": "Volver al chat",
+    "restless": {
+      "question": "¿Qué tanta inquietud o irritabilidad has sentido?",
+      "low": "Nada",
+      "high": "Mucha"
+    },
+    "worry": {
+      "question": "¿Qué tanto te has estado preocupando?",
+      "low": "Casi nada",
+      "high": "Mucho"
+    }
+  },
+  "crisis": {
+    "title": "Hay ayuda para ti",
+    "body": "Si estás en peligro o podrías hacerte daño, pide ayuda ahora mismo. Pedir ayuda es un acto de fuerza.",
+    "call112": "Llamar al 112",
+    "call112Hint": "Número de emergencias en Finlandia",
+    "linesTitle": "Habla con alguien",
+    "call": "Llamar al {{number}}",
+    "contactTeam": "Contactar a mi equipo de salud",
+    "contactTeamSent": "Avisamos a tu equipo de salud (simulado en esta demo). Te contactarán lo antes posible.",
+    "urgentSent": "Por tu respuesta, avisamos a tu equipo de salud (simulado). Si no te sientes a salvo, no esperes.",
+    "breathe": "Respira conmigo un minuto",
+    "resources": {
+      "mieliFi": "Línea de crisis (finés)",
+      "mieliSv": "Línea de crisis (sueco)",
+      "mieliEn": "Línea de crisis (inglés)",
+      "always": "24/7",
+      "check": "Consulta el horario"
+    }
+  },
+  "today": {
+    "title": "Hoy",
+    "howDoing": "Cómo vas",
+    "trend": {
+      "better": "Tu ánimo se ha sentido un poco más ligero esta semana.",
+      "steady": "Tu semana ha sido bastante estable.",
+      "harder": "Esta semana parece más pesada que la anterior. Está bien — vamos con calma.",
+      "notEnough": "Después de algunos check-ins verás tu semana aquí."
+    },
+    "moodLabel": "Ánimo",
+    "plan": {
+      "title": "Tu pequeño plan de hoy",
+      "subtitle": "Solo ideas. Cualquiera de ellas cuenta.",
+      "done": "Hecho",
+      "notToday": "Hoy no",
+      "markedDone": "Hecho — muy bien",
+      "markedNotToday": "Quizás otro día",
+      "allDone": "Qué bien. Es suficiente por hoy.",
+      "open": "Abrir",
+      "undo": "Deshacer"
+    },
+    "checkinCta": "Hacer el check-in de hoy",
+    "checkinDone": "Listo por hoy ✓",
+    "suggestConsult": {
+      "title": "¿Te ayudaría hablar con alguien?",
+      "cta": "Pedir una consulta",
+      "dismiss": "Ahora no"
+    },
+    "urgentNotice": "Hoy se avisó a tu equipo de salud (simulado). Si no te sientes a salvo, llama al 112."
+  },
+  "companion": {
+    "greeting": {
+      "morning": "¡Buenos días!",
+      "afternoon": "¡Buenas tardes!",
+      "evening": "¡Buenas noches!",
+      "night": "Hola, ya es tarde."
+    },
+    "voice": {
+      "bee": "Bzz — los pasos pequeños también cuentan.",
+      "cat": "Hoy vamos despacio.",
+      "dog": "¡Qué alegría verte!",
+      "bird": "Te guardé una pequeña canción.",
+      "person": "Estoy aquí contigo."
+    },
+    "context": {
+      "welcomeBack": "Qué bueno verte de nuevo.",
+      "lowMood": "Ayer fue pesado. Hoy seamos aún más amables contigo.",
+      "midMood": "Una cosa pequeña a la vez es suficiente.",
+      "highMood": "Qué lindo que ayer se sintiera más ligero.",
+      "noMood": "¿Cómo te sientes hoy?",
+      "daylight": "Ahora los días son cortos — incluso 10 minutos de luz natural ayudan.",
+      "night": "Descansar también importa. Mañana es un nuevo día."
+    },
+    "checkin": {
+      "low": "Gracias por contármelo. Los días pesados pasan — hagamos algo pequeño y amable.",
+      "mid": "Gracias por tu check-in. Estable está bien.",
+      "high": "¡Me alegra que hoy te sientas bien! Sigamos con calma.",
+      "urgent": "Gracias por tu honestidad. Mereces apoyo — por favor, busca ayuda ahora.",
+      "steady": "Gracias por tu check-in. Mantengamos el día tranquilo y estable, y cuidemos tu sueño."
+    },
+    "encourage": {
+      "start": "Cuando quieras empezar.",
+      "gentle": "Cualquier movimiento cuenta.",
+      "done": "Lo lograste. Muy bien.",
+      "keepGoing": {
+        "bee": "¡Bzz bzz, sigue así!",
+        "cat": "Suave y tranquilo. Perfecto.",
+        "dog": "¡Sí! ¡Lo estás haciendo genial!",
+        "bird": "¡Pío! ¡Qué buen ritmo!",
+        "person": "Lo estás haciendo muy bien."
+      }
+    },
+    "suggestConsult": "{{name}} notó que los últimos días parecen más difíciles. ¿Te gustaría hablar con tu equipo de salud? Tú decides."
+  },
+  "interventions": {
+    "breathing": {
+      "title": "Respiración guiada",
+      "why": "Respirar despacio calma la respuesta al estrés del cuerpo."
+    },
+    "daylightWalk": {
+      "title": "Paseo con luz de día",
+      "why": "La luz natural apoya tu reloj interno y tu ánimo, sobre todo en los meses oscuros."
+    },
+    "reachOut": {
+      "title": "Escribe a alguien",
+      "why": "Una pequeña conexión puede alegrar el día.",
+      "howTo": "Envía un mensaje corto a alguien que aprecias. \"Pensé en ti\" es suficiente."
+    },
+    "move": {
+      "title": "Muévete conmigo",
+      "why": "El movimiento suave libera tensión y da un poco de energía."
+    },
+    "fireplace": {
+      "title": "Chimenea",
+      "why": "Mirar un fuego lento ayuda a que la mente descanse."
+    },
+    "fish": {
+      "title": "Peces en el lago",
+      "why": "El movimiento lento y tranquilo da un respiro a los pensamientos."
+    },
+    "puzzle": {
+      "title": "Rompecabezas tranquilo",
+      "why": "Una tarea suave puede calmar los pensamientos. Sin tiempo ni errores."
+    },
+    "gratitude": {
+      "title": "Una cosa buena",
+      "why": "Notar pequeños momentos buenos apoya la recuperación.",
+      "howTo": "Piensa en una cosa pequeña que hoy salió bien. Eso es todo."
+    },
+    "seaSounds": {
+      "title": "Sonidos del mar",
+      "why": "Las olas lentas y constantes le dan a la mente algo suave donde descansar."
+    },
+    "windDown": {
+      "title": "El teléfono fuera del cuarto esta noche",
+      "why": "Tus noches se han alargado más de lo habitual. Una última hora más tranquila protege el sueño.",
+      "howTo": "Esta noche deja el teléfono cargando fuera del cuarto. Solo si te parece bien: decir que no siempre está bien."
+    }
+  },
+  "comfort": {
+    "title": "Calma",
+    "subtitle": "Cosas tranquilas para hacer, a tu ritmo.",
+    "open": "Empezar",
+    "feedbackQuestion": "¿Te ayudó?",
+    "helped": "Ayudó",
+    "neutral": "No sé",
+    "notHelped": "No ayudó",
+    "thanks": "Gracias — lo anotamos.",
+    "breathing": {
+      "box": "Caja 4-4-4-4",
+      "calm": "Calma 4-6",
+      "pattern": "Patrón",
+      "duration": "Duración",
+      "inhale": "Inhala",
+      "hold": "Sostén",
+      "exhale": "Exhala",
+      "remaining": "Quedan {{time}}",
+      "finished": "Muy bien. Nota cómo te sientes."
+    },
+    "fireplace": {
+      "hint": "Solo mira las llamas. Quédate el tiempo que quieras."
+    },
+    "fish": {
+      "hint": "Toca el agua con suavidad o inclina tu teléfono.",
+      "tiltOff": "La inclinación está desactivada porque el sensor de movimiento no está activo.",
+      "a11y": "Un lago tranquilo con peces nadando despacio. Toca para hacer ondas."
+    },
+    "puzzle": {
+      "hint": "Desliza las fichas en orden. Sin tiempo, sin errores.",
+      "solved": "¡Resuelto! Respira despacio.",
+      "shuffle": "Nuevo rompecabezas",
+      "tile": "Ficha {{n}}",
+      "tileMovable": "Ficha {{n}}, se puede mover",
+      "moves_one": "{{count}} movimiento",
+      "moves_other": "{{count}} movimientos"
+    },
+    "move": {
+      "hint": "Muévete como te siente bien durante 2 minutos. Balancéate, estírate o baila.",
+      "beat": "Ritmo",
+      "movementOff": "El sensor de movimiento está desactivado — solo sigue el ritmo.",
+      "activity": "Tu movimiento",
+      "finished": "¡Qué bien te moviste! Se sumaron {{minutes}} minutos activos a hoy."
+    },
+    "walk": {
+      "daylightToday": "Hoy hay unas {{hours}} horas de luz de día.",
+      "locationOn": "Usamos la ubicación aproximada para estimar el tiempo afuera. Nunca se guardan coordenadas.",
+      "locationOff": "La ubicación está desactivada. Usamos la luz de día de Helsinki y puedes anotar tú el tiempo afuera.",
+      "start": "Empezar paseo",
+      "finish": "Terminar paseo",
+      "elapsed": "Tiempo: {{time}}",
+      "outside": "Tiempo afuera hasta ahora: unos {{minutes}} min",
+      "manualQuestion": "¿Cuántos minutos estuviste afuera, más o menos?",
+      "saved": "Se guardaron {{minutes}} minutos de luz de día. Muy bien.",
+      "permissionDenied": "No se dio permiso de ubicación, así que puedes anotar tú el tiempo afuera."
+    },
+    "ideas": "Pequeñas ideas",
+    "sea": {
+      "hint": "Escucha el tiempo que quieras. Deja que tu respiración siga las olas.",
+      "play": "Reproducir las olas",
+      "pause": "Pausar",
+      "soundNote": "El sonido se creó para Hiillos; no se graba ni se envía nada."
+    }
+  },
+  "insights": {
+    "title": "Tendencias",
+    "subtitle": "Tus últimos 14 días, en palabras sencillas.",
+    "mood": "Ánimo",
+    "sleep": "Sueño",
+    "activity": "Actividad",
+    "reaction": "Tiempo de reacción",
+    "daylight": "Luz de día",
+    "avgMood": "Promedio {{value}} de 5",
+    "avgHours": "Promedio {{value}} h por noche",
+    "avgMinutes": "Promedio {{value}} min al día",
+    "avgMs": "Promedio {{value}} ms",
+    "reactionNote": "Más bajo es más rápido. Es común ir más lento cuando hay cansancio.",
+    "noData": "Aún sin datos",
+    "empty": "Todavía no hay suficientes datos. Haz algunos check-ins para ver tus tendencias.",
+    "helpsTitle": "Lo que parece ayudarte",
+    "helpsBody": "Según tus valoraciones y cómo te sentiste al día siguiente.",
+    "helpsEmpty": "Valora algunas actividades de calma y te mostraremos lo que más te ayuda.",
+    "rank": {
+      "top": "Lo que más te ayuda",
+      "good": "Parece ayudar",
+      "mixed": "Mixto por ahora",
+      "low": "Ayuda menos por ahora"
+    },
+    "tried_one": "Valorado {{count}} vez",
+    "tried_other": "Valorado {{count}} veces",
+    "home": "Tiempo en casa",
+    "avgHoursDay": "Promedio {{value}} h al día"
+  },
+  "care": {
+    "title": "Cuidado",
+    "subtitle": "Tu equipo de salud (ficticio, para esta demo).",
+    "speaks": "Habla: {{list}}",
+    "nextSlot": "Próximo horario libre: {{time}}",
+    "noSlot": "Sin horarios libres en las próximas 48 h",
+    "roles": {
+      "psychiatrist": "Psiquiatría",
+      "nurse": "Enfermería psiquiátrica",
+      "psychologist": "Psicología"
+    },
+    "requestCta": "Pedir una consulta",
+    "requestsTitle": "Tus solicitudes",
+    "noRequests": "Aún no hay solicitudes. Puedes pedir una charla cuando quieras.",
+    "position": "Posición en la fila: {{position}}",
+    "eta_one": "Respuesta esperada en ~{{count}} hora",
+    "eta_other": "Respuesta esperada en ~{{count}} horas",
+    "replied": "Tu equipo de salud respondió y te contactará (simulado).",
+    "sent": "Enviada {{time}}",
+    "urgentAlert": "Alerta urgente enviada {{time}}. Se avisó a tu equipo de salud (simulado).",
+    "priorityLabel": "Prioridad: {{level}}",
+    "consult": {
+      "title": "Pedir una consulta",
+      "reasonQuestion": "¿De qué te gustaría hablar?",
+      "reasons": {
+        "moodLower": "Mi ánimo está más bajo",
+        "sleep": "Sueño",
+        "worried": "Siento preocupación",
+        "treatment": "Preguntas sobre el tratamiento",
+        "talk": "Solo quiero hablar"
+      },
+      "urgencyQuestion": "¿Qué tan urgente se siente?",
+      "urgency": {
+        "low": "Puede esperar unos días",
+        "medium": "Pronto estaría bien",
+        "high": "Lo antes posible"
+      },
+      "submit": "Enviar solicitud",
+      "resultTitle": "Solicitud enviada",
+      "whyTitle": "Lo que verá tu equipo de salud",
+      "noReasons": "Nada preocupante destacó en tus últimos días.",
+      "unsafe": "Si no te sientes a salvo, no esperes — llama al 112.",
+      "urgentRouted": "Por tu respuesta de seguridad de hoy, esto fue directo a tu equipo de salud como urgente (simulado)."
+    }
+  },
+  "priority": {
+    "level": {
+      "low": "baja",
+      "medium": "media",
+      "high": "alta"
+    },
+    "reasons": {
+      "moodDrop": "Tu ánimo ha estado más bajo que la semana anterior",
+      "lowMood": "Tu ánimo ha estado bajo varios días",
+      "missedCheckIns": "Hubo varios días sin check-in",
+      "activityDrop": "Te has movido menos de lo habitual",
+      "reactionSlower": "Tu juego de toques ha ido más lento de lo habitual",
+      "shortSleep": "Varias noches cortas (menos de 5 horas)",
+      "highAnxiety": "Has sentido bastante tensión",
+      "perceivedUrgency": "Nos dijiste que se siente urgente",
+      "belowBaseline": "Tu ánimo ha estado por debajo de lo habitual en ti durante un tiempo",
+      "longSleep": "Varias noches muy largas o días en cama (10 horas o más)",
+      "upwardDrift": "Poco sueño con energía o actividad inusualmente altas (indicador de la clínica)",
+      "homeMore": "Más tiempo en casa de lo habitual en ti",
+      "laterNights": "Las noches terminan más tarde de lo habitual en ti",
+      "lowSteps": "Menos de 5,000 pasos en la mayoría de los días recientes",
+      "activitySwings": "Tu actividad ha variado más de un día a otro de lo habitual en ti",
+      "irregularNights": "Tus noches han sido más irregulares de lo habitual en ti",
+      "restless": "Has sentido inquietud o irritabilidad"
+    }
+  },
+  "risk": {
+    "reasons": {
+      "safetyAnswer": "Pregunta de seguridad respondida con \"sí\"",
+      "crisisLanguage": "Algunas palabras de un mensaje sugieren que podrías estar en riesgo"
+    }
+  },
+  "privacy": {
+    "title": "Centro de privacidad",
+    "intro": "En esta versión, tus datos se quedan en este teléfono. Tú decides qué se recoge.",
+    "whatTitle": "Qué recogemos y para qué",
+    "items": {
+      "checkins": "Check-ins: ánimo, energía, tensión, sueño y notas opcionales — para mostrar tus tendencias.",
+      "reaction": "Juego de toques: solo tu velocidad media y precisión — el cansancio puede notarse aquí.",
+      "movement": "Movimiento: minutos activos durante los ejercicios — nunca datos crudos del sensor.",
+      "location": "Ubicación: solo si estás afuera durante un paseo. Nunca se guardan coordenadas.",
+      "where": "Dónde: solo en este teléfono. Sin cuenta y sin nube por ahora.",
+      "sharing": "Compartir: tu equipo de salud solo ve un resumen cuando pides una consulta, o si una respuesta de seguridad necesita ayuda urgente.",
+      "trusted": "Persona de confianza: su nombre y número solo se guardan en este teléfono."
+    },
+    "sensorsTitle": "Sensores",
+    "export": "Exportar mis datos",
+    "exportBody": "Crea un archivo con todo lo guardado, que puedes guardar o enviar.",
+    "delete": "Borrar todos mis datos",
+    "deleteTitle": "¿Borrar todo?",
+    "deleteBody": "Esto elimina tus check-ins, ajustes e historial de este teléfono. No se puede deshacer.",
+    "deleteConfirm": "Borrar",
+    "notificationsTitle": "Notificaciones",
+    "discreet": "Notificaciones discretas",
+    "discreetDesc": "La vista previa solo dice \"Un mensaje de Hiillos\". Nunca menciona ánimo ni salud, porque otras personas pueden ver tu teléfono.",
+    "ai": {
+      "title": "IA y voz (opcional)",
+      "llm": "Respuestas de IA en el chat",
+      "llmDesc": "Apagado por defecto. Si lo activas, los mensajes que escribes en el chat se envían a nuestro servidor y a un servicio de IA para redactar la respuesta. Nunca se envían check-ins, puntajes ni datos de sensores. Las palabras de crisis se atienden primero en tu teléfono y nunca se envían a la IA.",
+      "voice": "Voz del compañero",
+      "voiceDesc": "Te permite escuchar los mensajes de tu compañero. Solo se envía el texto del compañero a un servicio de voz, nunca lo que escribes.",
+      "unavailable": "No disponible por ahora: la app no está conectada al servidor, así que responde el compañero integrado."
+    },
+    "shared": {
+      "title": "Aprender de otras personas (opcional)",
+      "label": "Empezar con lo que ayudó a otras personas",
+      "desc": "Apagado por defecto. Si lo activas, Hiillos empieza con los pasos pequeños que más ayudaron a otras personas y luego aprende los tuyos. Solo se usa un promedio por paso, de varias personas juntas. No se comparte nada sobre ti."
+    }
+  },
+  "settings": {
+    "title": "Ajustes",
+    "language": "Idioma",
+    "companion": "Compañero",
+    "companionName": "Nombre",
+    "appearance": "Apariencia",
+    "theme": {
+      "system": "Sistema",
+      "light": "Claro",
+      "dark": "Oscuro"
+    },
+    "accessibility": "Accesibilidad",
+    "largeText": "Texto más grande",
+    "largeTextDesc": "Agranda el texto, además del tamaño de texto de tu teléfono.",
+    "reduceMotion": "Reducir movimiento",
+    "reduceMotionDesc": "Desactiva las animaciones fuertes.",
+    "vibration": "Vibración",
+    "vibrationDesc": "Vibraciones suaves durante los ejercicios guiados.",
+    "privacy": "Centro de privacidad",
+    "about": "Acerca de",
+    "aboutBody": "{{app}} apoya el bienestar después del tratamiento con TMS. No es un dispositivo médico: no diagnostica ni trata, y no reemplaza a tu equipo de salud. En una emergencia, llama al 112.",
+    "version": "Versión {{version}}",
+    "logo": "Logo de {{app}}",
+    "trusted": {
+      "title": "Persona de confianza",
+      "desc": "Solo se guarda en este teléfono. Sirve para llamar o escribir con un toque cuando todo pese.",
+      "name": "Nombre",
+      "phone": "Número de teléfono",
+      "remove": "Quitar"
+    }
+  },
+  "demo": {
+    "title": "Modo demo",
+    "subtitle": "Para presentaciones. Usa solo datos sintéticos.",
+    "seedGood": "Sembrar semana buena",
+    "seedDeclining": "Sembrar semana en declive",
+    "triggerUrgent": "Simular check-in urgente",
+    "advanceDay": "Avanzar 1 día",
+    "reset": "Reiniciar app",
+    "simulatedDate": "Fecha simulada: {{date}}",
+    "priorityNow": "Prioridad actual: {{score}} / 100 ({{level}})",
+    "doneToast": "Listo ✓",
+    "reachOut": "Simular notificación de contacto",
+    "skipDays": "Saltar 3 días sin check-in",
+    "bipolarOn": "Indicador clínico: bipolar → activar",
+    "bipolarOff": "Indicador clínico: bipolar → desactivar",
+    "personasTitle": "Personas de demostración (sintéticas)",
+    "noPersonas": "Aún no hay archivos de personas. Agrégalos en assets/personas/<id>/core.json.",
+    "careEndedOn": "Estado clínico: atención terminada → activar",
+    "careEndedOff": "Estado clínico: atención terminada → desactivar",
+    "backend": {
+      "title": "Servidor",
+      "off": "Sin configurar (la app funciona completa en el teléfono)",
+      "connecting": "Conectando…",
+      "online": "Conectado",
+      "offline": "Sin conexión (la app sigue funcionando en el teléfono)",
+      "features": "Respuestas de IA: {{llm}} · Voz: {{voice}}",
+      "mirrored": "Último check-in copiado: {{date}}",
+      "yes": "lista",
+      "no": "sin configurar",
+      "retry": "Revisar de nuevo"
+    }
+  },
+  "menu": {
+    "chat": "Chat",
+    "comfort": "Calma",
+    "care": "Equipo de salud",
+    "settings": "Ajustes",
+    "close": "Cerrar menú",
+    "progress": "Progreso",
+    "hints": {
+      "progress": "Tu diario y tus tendencias",
+      "comfort": "Pequeñas cosas que calman",
+      "care": "Personas que te apoyan"
+    }
+  },
+  "emotions": {
+    "calm": "En calma",
+    "content": "A gusto",
+    "grateful": "Agradecimiento",
+    "hopeful": "Esperanza",
+    "proud": "Orgullo",
+    "tired": "Cansancio",
+    "sad": "Tristeza",
+    "anxious": "Ansiedad",
+    "irritable": "Irritación",
+    "lonely": "Soledad",
+    "overwhelmed": "Agobio",
+    "numb": "Vacío"
+  },
+  "chat": {
+    "placeholder": "Escríbele a {{name}}…",
+    "send": "Enviar",
+    "disclaimer": "{{name}} es un compañero de apoyo, no un terapeuta. En una emergencia, llama al 112.",
+    "typing": "{{name}} está escribiendo…",
+    "menu": "Abrir menú",
+    "heroSubtitle": "Estoy aquí para escucharte y ayudarte con cosas pequeñas.",
+    "quick": {
+      "checkin": "Hagamos un check-in",
+      "relax": "Ayúdame a relajarme",
+      "low": "Me siento bajo de ánimo",
+      "anxious": "Siento ansiedad",
+      "progress": "¿Cómo voy?",
+      "care": "Hablar con mi equipo",
+      "plan": "Ideas para hoy",
+      "skip": "Omitir",
+      "phq": "Va, pregúntame",
+      "notNow": "Ahora no"
+    },
+    "open": {
+      "invite": "¿Cómo estás hoy? Con un toque basta.",
+      "done": "Ya hiciste tu check-in de hoy. Aquí estoy si quieres hablar.",
+      "careHint": "Tu equipo de salud está a un toque.",
+      "careEnded": "Tu atención con la clínica terminó. Tu diario y el espacio de calma siguen aquí para ti."
+    },
+    "flow": {
+      "askMood": "¿Cómo te sientes ahora mismo?",
+      "askEmotions": "¿Qué palabras encajan mejor? Elige las que quieras.",
+      "askNote": "¿Quieres contarme algo más? Escribe libremente u omítelo.",
+      "askSafety": "Una pregunta que hacemos a todas las personas: en los últimos días, ¿has tenido pensamientos de hacerte daño?",
+      "didntGetMood": "Puedes tocar una carita o escribir un número del 1 al 5.",
+      "suggestion": "Algo pequeño que podría ayudar:"
+    },
+    "reply": {
+      "greeting": "¡Hola! Aquí estoy. ¿Qué te ayudaría ahora?",
+      "low": "Siento que se sienta pesado. Busquemos una cosa pequeña y amable.",
+      "anxious": "Eso suena incómodo. Vamos a bajar el ritmo juntos un momento.",
+      "tired": "El cansancio lo hace todo más difícil. Algo suave podría ayudar.",
+      "positive": "¡Qué bueno escucharlo! ¿Quieres guardar este momento en tu diario?",
+      "thanks": "Cuando quieras. Aquí estoy siempre que lo necesites.",
+      "fallback": "Gracias por contármelo. Puedo ayudarte a anotar cómo te sientes, relajarte, ver cómo vas o contactar a tu equipo.",
+      "relax": "Aquí tienes algo que calma. Pídemelo otra vez para ver otra opción.",
+      "progress": "Así se ven tus últimas dos semanas.",
+      "care": "Tu equipo de salud está para ti. Puedes pedir una charla — tú decides.",
+      "careOpen": "Ya tienes una solicitud en la fila. Así va.",
+      "plan": "Aquí tienes algunas ideas pequeñas para hoy. Cualquiera cuenta.",
+      "crisis": "Me alegra que me lo dijeras. Busca ayuda ahora: llama al 112 o a una línea de crisis. Ya avisé a tu equipo (simulado).",
+      "steady": "Qué bueno que tengas energía. Mantengamos un ritmo tranquilo y cuidemos tu sueño esta noche."
+    },
+    "card": {
+      "start": "Empezar",
+      "openDay": "Abrir tu día",
+      "seeTrends": "Ver todas las tendencias",
+      "openCare": "Abrir equipo de salud",
+      "openHelp": "Más opciones de ayuda",
+      "savedTitle": "Guardado en tu diario",
+      "openJournal": "Abrir diario",
+      "fullCheckin": "Añadir sueño y energía",
+      "addFriend": "Añadir persona de confianza",
+      "addFriendBody": "Alguien de tu familia o una amistad a quien podrías llamar cuando todo pese.",
+      "callFriend": "Llamar a {{name}}",
+      "messageFriend": "Escribir a {{name}}",
+      "reconnectCheckin": "Hacer check-in ahora",
+      "reconnectCare": "Escribir a mi equipo de salud",
+      "reconnectHelpline": "Línea 24/7 {{number}}",
+      "weekly": "Check-in semanal"
+    },
+    "aboutHint": "Muestra lo que este compañero puede y no puede hacer",
+    "actions": {
+      "open": "Acciones rápidas",
+      "title": "¿Qué te gustaría hacer?",
+      "journal": "Escribir en mi diario",
+      "fullCheckin": "Check-in completo"
+    },
+    "outreach": {
+      "warm": "Qué bueno saber de ti. Sin ninguna presión.",
+      "friend": "Han pasado unos días. A veces una voz conocida ayuda.",
+      "reconnect": "Perdimos el contacto un tiempo, y está bien. Así puedes encontrarnos cuando quieras.",
+      "quiet": "Qué bueno verte. No hace falta explicar nada."
+    },
+    "phq": {
+      "offer": "Noté que la semana ha sido más pesada. ¿Dos preguntas rápidas?",
+      "intro": "Gracias. Durante las últimas 2 semanas, ¿con qué frecuencia te ha molestado esto?",
+      "more": "Gracias. Unas pocas más, con las mismas respuestas.",
+      "pick": "Puedes tocar una de las cuatro respuestas.",
+      "later": "Sin problema, otro día.",
+      "doneLow": "Gracias. Suena cercano a lo habitual en ti. Seguiré pendiente con calma.",
+      "doneMid": "Gracias por responder. Mantengamos los días pequeños y amables.",
+      "doneHigh": "Gracias por tu sinceridad. Puede ayudar hablar con tu equipo de salud. Tú decides."
+    },
+    "weekly": {
+      "invite": "Una vez por semana pregunto un poco más, como sueño y energía. Toma dos minutos."
+    },
+    "aiLabel": "Respuesta de IA · no es consejo médico",
+    "listen": "Escuchar",
+    "listenLoading": "Preparando la voz…",
+    "listenStop": "Detener",
+    "listenError": "La voz no está disponible por ahora."
+  },
+  "journal": {
+    "title": "Diario",
+    "subtitle": "Nota cómo te sientes. Cada entrada cuenta — no hay forma incorrecta.",
+    "daysLogged_one": "{{count}} día registrado",
+    "daysLogged_other": "{{count}} días registrados",
+    "daysLoggedHint": "Este número solo crece. Está bien saltarse días.",
+    "milestonesTitle": "Pequeños logros",
+    "milestone": {
+      "1": "Primera entrada",
+      "3": "3 días",
+      "7": "1 semana",
+      "14": "2 semanas",
+      "30": "1 mes"
+    },
+    "unlocked": "logrado",
+    "locked": "todavía no",
+    "prevMonth": "Mes anterior",
+    "nextMonth": "Mes siguiente",
+    "noEntry": "Sin entrada",
+    "topEmotions": "Lo que más has sentido (14 días)",
+    "noEmotions": "Aún no hay sentimientos anotados.",
+    "entries": "Entradas recientes",
+    "empty": "Tu diario está vacío. Anota cómo te sientes hoy o haz un check-in con {{name}} en el chat.",
+    "add": "Añadir entrada",
+    "newTitle": "Nueva entrada",
+    "moodQuestion": "¿Cómo te sientes?",
+    "emotionsQuestion": "¿Qué estás sintiendo?",
+    "pleasant": "Agradables",
+    "difficult": "Difíciles",
+    "noteQuestion": "¿Quieres escribir sobre ello?",
+    "notePlaceholder": "Escribe libremente (opcional)",
+    "save": "Guardar entrada",
+    "dayTitle": "Entradas del {{date}}",
+    "kind": {
+      "full": "Check-in",
+      "chat": "Chat",
+      "journal": "Diario"
+    },
+    "more": "Más…"
+  },
+  "progress": {
+    "tabs": {
+      "journal": "Diario",
+      "trends": "Tendencias"
+    }
+  },
+  "notify": {
+    "daily": "{{name}}: ¿Hacemos un check-in? Toma un minuto.",
+    "evening": "{{name}}: ¿Cómo te fue hoy? Aquí estoy si quieres hablar.",
+    "warm": "{{name}}: Pienso en ti. ¿Cómo estás hoy?",
+    "friend": "{{name}}: Han pasado unos días. ¿Te ayudaría hablar con {{friend}}?",
+    "friendNoContact": "{{name}}: Han pasado unos días. ¿Hay alguien con quien podrías hablar?",
+    "reconnect": "{{name}}: Hace tiempo que no sabemos de ti. Así puedes encontrarnos.",
+    "now": "ahora",
+    "openHint": "Abre el chat",
+    "drift": "{{name}}: Noté que la semana ha sido más pesada. ¿Dos preguntas rápidas?",
+    "discreet": "Un mensaje de Hiillos"
+  },
+  "embers": {
+    "label": "Tus brasas: {{state}}",
+    "hint": "Crecen con pequeños actos de autocuidado y nunca se apagan.",
+    "state": {
+      "low": "brillan bajito",
+      "steady": "estables",
+      "bright": "brillantes"
+    },
+    "helps": "Lo que más te ayuda últimamente: {{action}}",
+    "helpsOthers": "Un punto de partida con lo que ayudó a otras personas: {{action}}",
+    "bodyReason": "En las noches siguientes, tu recuperación nocturna fue más alta de lo habitual en ti."
+  },
+  "phq": {
+    "options": {
+      "0": "Nunca",
+      "1": "Varios días",
+      "2": "Más de la mitad de los días",
+      "3": "Casi todos los días"
+    },
+    "items": {
+      "1": "Poco interés o placer en hacer las cosas",
+      "2": "Sentirte con el ánimo bajo, con depresión o sin esperanza",
+      "3": "Problemas para dormirte o seguir durmiendo, o dormir demasiado",
+      "4": "Sentir cansancio o tener poca energía",
+      "5": "Poco apetito o comer en exceso",
+      "6": "Sentirte mal contigo, o sentir que eres un fracaso o que le has fallado a tu familia o a ti",
+      "7": "Dificultad para concentrarte en cosas como leer el periódico o ver la televisión",
+      "8": "Moverte o hablar tan despacio que otras personas lo pudieron notar. O lo contrario: tanta inquietud o agitación que te has movido mucho más de lo habitual",
+      "9": "Pensamientos de que sería mejor morir o de hacerte daño de alguna manera"
+    }
+  },
+  "clinician": {
+    "title": "Resumen clínico",
+    "subtitle": "Pacientes sintéticos · fecha de referencia {{date}} · ordenados por prioridad",
+    "legend": "La prioridad ordena esta lista. Las reglas PHQ determinan la lista de llamadas. No son diagnósticos ni alertas generadas por sensores.",
+    "reasons": "Motivos observados",
+    "noReasons": "Sin señales que puntúen en esta ventana.",
+    "phq": "Último PHQ-9: {{total}}/27 · {{date}}",
+    "noPhq": "PHQ-9: sin resultado disponible",
+    "lostContact": "Contacto perdido · al menos 7 días sin registro",
+    "contact": "Sin indicador de contacto perdido",
+    "pendingReason": "Referencia PHQ o confirmación requerida no disponible.",
+    "watch": "Seguimiento no determinado: falta referencia PHQ.",
+    "safetyRecorded": "Respuesta de seguridad registrada en el historial; no determina la urgencia actual.",
+    "noSafety": "Sin respuesta de seguridad positiva registrada; aquí no se evalúa la urgencia actual.",
+    "reasonOrder": "Hasta dos motivos en el orden de las reglas, sin clasificación por contribución. La referencia comienza el 15/11/2026 y cambia con los controles de días de la demo.",
+    "call": {
+      "review": "Considerar una revisión",
+      "pending": "Lista de llamadas: pendiente de determinar",
+      "notIndicated": "Lista de llamadas: el último resultado no cumple los criterios"
+    },
+    "summary": {
+      "total": "Pacientes",
+      "high": "Prioridad alta",
+      "lost": "Contacto perdido"
+    },
+    "scoreLabel": "Puntuación de prioridad de {{name}} · {{level}}",
+    "dashboardNote": "La prioridad ordena; PHQ determina la lista de llamadas. No confirman diagnóstico ni urgencia. Los antecedentes de seguridad se señalan aparte. Los sensores solos nunca generan alertas clínicas.",
+    "reasonsText": {
+      "moodDrop": "Descenso del estado de ánimo respecto a la semana anterior",
+      "belowBaseline": "Estado de ánimo por debajo de la referencia personal",
+      "lowMood": "Estado de ánimo bajo durante la semana reciente",
+      "missedCheckIns": "Varios registros diarios ausentes",
+      "activityDrop": "Actividad por debajo del rango personal (tendencia suavizada, 3 de los últimos 5 días)",
+      "reactionSlower": "Tiempo de reacción más lento respecto a la semana anterior",
+      "shortSleep": "Al menos tres noches con menos de 5 horas de sueño",
+      "longSleep": "Al menos tres días con 10 horas de sueño o más",
+      "highAnxiety": "Ansiedad elevada comunicada por el paciente",
+      "perceivedUrgency": "Urgencia percibida comunicada por el paciente",
+      "upwardDrift": "Sueño corto con aumento de energía o actividad (marca clínica)",
+      "homeMore": "Tiempo en casa por encima del rango personal (tendencia suavizada, 3 de los últimos 5 días)",
+      "laterNights": "Apagado de pantalla más tardío que el rango personal (tendencia suavizada, 3 de los últimos 5 días)",
+      "lowSteps": "Menos de 5,000 pasos al día en al menos 5 de los últimos 7 días (comprobación poblacional)",
+      "activitySwings": "Variabilidad diaria de la actividad de al menos 1.5 veces la habitual de la persona",
+      "irregularNights": "Variabilidad entre noches del apagado de pantalla de al menos 1.5 veces la habitual de la persona",
+      "restless": "Inquietud o irritabilidad reportada"
+    },
+    "quiet": "Silencio prolongado · avisos detenidos (30 días o más)",
+    "signs": {
+      "title": "Señales tempranas a vigilar (las define la clínica)",
+      "laterNights": "Noches más tardías",
+      "homeMore": "Más tiempo en casa",
+      "activityDrop": "Menos actividad",
+      "matched": "señal temprana de esta persona"
+    },
+    "body": {
+      "title": "Señales del cuerpo, últimas 7 noches frente a lo habitual en la persona (sintético). Solo contexto: nunca generan una alerta por sí solas.",
+      "recovery": "Recuperación nocturna",
+      "sleep": "Sueño",
+      "usual": "habitual {{value}}"
+    }
+  },
+  "bodyMap": {
+    "title": "¿Dónde está tu fuego hoy?",
+    "hint": "Pinta cálido donde sientas más vida o tensión, y frío donde se sienta pesado o adormecido. No hay respuesta correcta.",
+    "label": "Mapa corporal",
+    "empty": "Aún no has pintado nada. También puedes dejarlo vacío.",
+    "summaryWarm": "Cálido: {{list}}.",
+    "summaryCool": "Frío: {{list}}.",
+    "usual": "Lo habitual en ti",
+    "different": "Hoy es distinto a lo habitual en ti: {{list}}",
+    "selfReport": "Es tu propia imagen de hoy. Nunca se usa como diagnóstico.",
+    "brush": {
+      "warm": "Cálido",
+      "cool": "Frío",
+      "erase": "Borrar"
+    },
+    "state": {
+      "warm": "cálido",
+      "cool": "frío",
+      "neutral": "sin pintar"
+    },
+    "regions": {
+      "head": "Cabeza",
+      "chest": "Pecho",
+      "belly": "Abdomen",
+      "hips": "Cadera",
+      "leftArm": "Brazo izquierdo",
+      "rightArm": "Brazo derecho",
+      "leftHand": "Mano izquierda",
+      "rightHand": "Mano derecha",
+      "leftLeg": "Pierna izquierda",
+      "rightLeg": "Pierna derecha",
+      "leftFoot": "Pie izquierdo",
+      "rightFoot": "Pie derecho"
+    }
+  },
+  "wearable": {
+    "title": "Dispositivo",
+    "menu": "Conectar un dispositivo",
+    "menuDesc": "Sueño, pasos, pulso y recuperación nocturna, medidos por ti",
+    "intro": "Un reloj, anillo o pulsera puede medir tu sueño y tus pasos, para que tengas menos que registrar.",
+    "simulated": "Simulado para esta demo: no se conecta ningún dispositivo real y todos los valores son sintéticos.",
+    "choose": "¿Cuál usas?",
+    "devices": {
+      "watch": "Reloj",
+      "ring": "Anillo",
+      "band": "Pulsera"
+    },
+    "connect": "Conectar",
+    "searching": "Buscando tu {{device}}…",
+    "found": "Encontrado. Conectando…",
+    "connected": "Conectado · datos simulados",
+    "disconnect": "Desconectar",
+    "reads": "Hiillos lee solo totales diarios: sueño, pasos, pulso en reposo y recuperación nocturna. Nunca señales en bruto ni ubicación. Conectar es tu consentimiento; puedes desconectar cuando quieras.",
+    "sleep": "Sueño de anoche",
+    "sleepValue": "{{hours}} h",
+    "steps": "Pasos de ayer",
+    "heart": "Pulso en reposo",
+    "heartValue": "{{bpm}} lpm",
+    "usual": "Lo habitual en ti: {{value}}",
+    "noUsual": "Aún aprendiendo lo habitual en ti",
+    "weekLabel": "{{metric}}, últimos 7 días",
+    "use": "Cómo lo usa Hiillos: el sueño medido completa las noches que no registraste. Las reglas no cambian, y los sensores solo hacen que Hiillos pregunte.",
+    "recovery": "Recuperación nocturna",
+    "recoveryValue": "{{ms}} ms",
+    "recoveryHint": "Qué tan estable fue tu ritmo cardiaco mientras dormías. Solo se compara con lo habitual en ti."
+  },
+  "baseline": {
+    "screenTitle": "Lo habitual en ti",
+    "title": "Cómo aprende Hiillos lo habitual en ti",
+    "linkHint": "Las fases y cómo va cada señal hoy",
+    "intro": "Hiillos solo te compara contigo. Tarda unas semanas en aprender qué es lo habitual en ti.",
+    "simulated": "Los datos de esta demo son simulados.",
+    "phasesTitle_one": "Día {{count}} con Hiillos",
+    "phasesTitle_other": "Día {{count}} con Hiillos",
+    "now": "ahora",
+    "phases": {
+      "0": {
+        "title": "Durante el tratamiento",
+        "body": "Con tu clínica. No cuenta como lo habitual en ti, porque las visitas diarias cambian tu rutina. Aún no está en esta app."
+      },
+      "1": {
+        "title": "Promedios",
+        "body": "Días 1 a 14. Hiillos aprende tus pasos, sueño y tiempo en casa habituales, separando entre semana y fin de semana."
+      },
+      "2": {
+        "title": "Deriva temprana",
+        "body": "Semanas 3 a 8. Una tendencia suavizada se compara con tu propio rango. La regularidad aún se está aprendiendo."
+      },
+      "3": {
+        "title": "Imagen personal completa",
+        "body": "Desde la semana 8, aproximadamente. La regularidad (cuánto cambian tus días) también es confiable."
+      },
+      "4": {
+        "title": "Continuo",
+        "body": "Lo habitual en ti solo se actualiza con periodos que un cuestionario confirmó como buenos."
+      }
+    },
+    "shareTitle": "Punto de partida",
+    "share": "El {{percent}} % son tus propios datos. El resto es un punto de partida general.",
+    "referenceTitle": "Lo habitual en ti",
+    "reference": "Del {{start}} al {{end}} ({{count}} días).",
+    "referenceRule": "Nunca sigue solo tus últimas semanas, así una mala racha no se vuelve tu nueva normalidad.",
+    "learning": "Aún aprendiendo. Hiillos necesita unas tres semanas antes de compararte contigo.",
+    "trendsTitle": "Cómo va cada señal",
+    "trendsHint": "La línea es una tendencia suavizada de las últimas cuatro semanas. El centro es lo habitual en ti.",
+    "signals": {
+      "mood": "Ánimo",
+      "activity": "Actividad",
+      "home": "Tiempo en casa",
+      "screenOff": "Apagado de pantalla por la noche"
+    },
+    "inside": "Dentro de tu rango habitual",
+    "outside_one": "Fuera de tu rango habitual en {{count}} de los últimos 5 días",
+    "outside_other": "Fuera de tu rango habitual en {{count}} de los últimos 5 días",
+    "variabilityOn": "La regularidad ya se usa: tu referencia es lo bastante larga.",
+    "variabilityLearning": "La regularidad necesita unas ocho semanas de tus propios datos. Aún aprendiendo.",
+    "note": "Los sensores solo hacen que Hiillos pregunte. Un cuestionario decide y una persona confirma."
+  }
+}

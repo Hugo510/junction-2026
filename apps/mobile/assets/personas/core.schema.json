@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Hugo510/junction-2026/apps/mobile/assets/personas/core.schema.json",
+  "title": "Hiillos synthetic persona: core.json",
+  "description": "SYNTHETIC data only. One file per persona at apps/mobile/assets/personas/<id>/core.json. Dates are real local calendar days (YYYY-MM-DD, Europe/Helsinki); when a persona is loaded the app moves all dates so the last day of the file becomes 'yesterday'. Unknown fields are ignored by the app.",
+  "type": "object",
+  "required": ["synthetic", "persona", "checkIns", "sensors", "feedback"],
+  "properties": {
+    "synthetic": { "const": true, "description": "Required. The app refuses files without it." },
+    "generatorVersion": { "type": "string" },
+    "seed": { "type": "integer" },
+    "persona": {
+      "type": "object",
+      "required": ["id", "label"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+        "label": { "type": "string", "description": "Shown in the demo picker, e.g. \"Aino, 42, post-TMS\"" },
+        "path": { "type": "string", "description": "Scenario path from the spec (demo script only)" },
+        "state": { "type": "string", "description": "Scenario state from the spec (demo script only)" },
+        "story": { "type": "string", "description": "Optional one-liner for the picker, e.g. \"Drift, walks help\"" },
+        "language": { "enum": ["en", "fi", "es", "sv"] },
+        "companion": {
+          "type": "object",
+          "required": ["species", "name"],
+          "properties": {
+            "species": { "enum": ["bee", "cat", "dog", "bird", "person"] },
+            "name": { "type": "string", "maxLength": 24 }
+          }
+        },
+        "bipolarFlag": { "type": "boolean", "description": "Set by the clinic only. Enables the upwardDrift rule." },
+        "trustedContact": {
+          "type": "object",
+          "required": ["name", "phone"],
+          "properties": { "name": { "type": "string" }, "phone": { "type": "string", "description": "FICTIONAL number" } }
+        }
+      }
+    },
+    "checkIns": {
+      "type": "array",
+      "description": "Zero or more entries per day. A day without entries = silence.",
+      "items": {
+        "type": "object",
+        "required": ["id", "date", "createdAt", "mood", "safetyConcern"],
+        "properties": {
+          "id": { "type": "string", "description": "Unique, e.g. \"aino-2026-11-01\"" },
+          "date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+          "createdAt": { "type": "string", "format": "date-time" },
+          "kind": { "enum": ["full", "chat", "journal"], "default": "full" },
+          "mood": { "type": "integer", "minimum": 1, "maximum": 5 },
+          "emotions": {
+            "type": "array",
+            "items": {
+              "enum": ["calm", "content", "grateful", "hopeful", "proud", "tired", "sad", "anxious", "irritable", "lonely", "overwhelmed", "numb"]
+            }
+          },
+          "bodyMap": {
+            "type": "object",
+            "description": "Body map: region -> 1 (warm) or -1 (cool). Neutral regions are left out.",
+            "propertyNames": { "enum": ["head", "chest", "belly", "hips", "leftArm", "rightArm", "leftHand", "rightHand", "leftLeg", "rightLeg", "leftFoot", "rightFoot"] },
+            "additionalProperties": { "enum": [1, -1] }
+          },
+          "energy": { "type": "integer", "minimum": 1, "maximum": 5 },
+          "anxiety": { "type": "integer", "minimum": 1, "maximum": 5 },
+          "sleepHours": { "type": "number", "minimum": 0, "maximum": 24, "description": "Total sleep including naps" },
+          "note": { "type": "string", "maxLength": 500 },
+          "reaction": {
+            "type": "object",
+            "required": ["meanMs", "sdMs", "accuracy", "rounds"],
+            "properties": {
+              "meanMs": { "type": "number", "minimum": 0 },
+              "sdMs": { "type": "number", "minimum": 0 },
+              "accuracy": { "type": "number", "minimum": 0, "maximum": 1 },
+              "rounds": { "type": "integer", "minimum": 1 }
+            }
+          },
+          "safetyConcern": { "type": "boolean", "description": "Keep false unless the demo script needs the crisis path." }
+        }
+      }
+    },
+    "sensors": {
+      "type": "array",
+      "description": "One aggregate per day. No raw samples, no coordinates.",
+      "items": {
+        "type": "object",
+        "required": ["date", "activityMinutes", "daylightMinutes"],
+        "properties": {
+          "date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+          "activityMinutes": { "type": "number", "minimum": 0 },
+          "daylightMinutes": { "type": "number", "minimum": 0 },
+          "homeMinutes": { "type": "number", "minimum": 0, "maximum": 1440 },
+          "bedtime": { "type": "string", "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$", "description": "Local time, 24 h" },
+          "screenOffTime": { "type": "string", "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$", "description": "Local time the phone screen was last turned off at night, 24 h" },
+          "steps": { "type": "integer", "minimum": 0 },
+          "nightPhoneMinutes": { "type": "number", "minimum": 0 },
+          "nightHrvMs": { "type": "number", "minimum": 0, "maximum": 300, "description": "Wearable: night heart rate variability (RMSSD), ms. Night values sit on the date of the evening the night starts" },
+          "restingHr": { "type": "number", "minimum": 25, "maximum": 200, "description": "Wearable: resting heart rate, bpm" },
+          "sleepMinutes": { "type": "number", "minimum": 0, "maximum": 1440 },
+          "wakeTime": { "type": "string", "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$", "description": "Local wake-up time of the next morning, 24 h" },
+          "wearMinutes": { "type": "number", "minimum": 0, "maximum": 1440 },
+          "wearableSource": { "enum": ["watch", "ring"] }
+        }
+      }
+    },
+    "feedback": {
+      "type": "array",
+      "description": "\"Did this help?\" ratings that train the intervention picker.",
+      "items": {
+        "type": "object",
+        "required": ["id", "interventionId", "date", "rating"],
+        "properties": {
+          "id": { "type": "string" },
+          "interventionId": { "enum": ["breathing", "fireplace", "fish", "puzzle", "move", "daylightWalk", "reachOut", "gratitude", "seaSounds", "windDown"] },
+          "date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+          "rating": { "enum": [1, 0, -1] }
+        }
+      }
+    },
+    "phq9": {
+      "type": "array",
+      "description": "PHQ-9 answers. 9 items scored 0-3; total must equal the sum.",
+      "items": {
+        "type": "object",
+        "required": ["date", "items", "total"],
+        "properties": {
+          "date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+          "items": { "type": "array", "minItems": 9, "maxItems": 9, "items": { "type": "integer", "minimum": 0, "maximum": 3 } },
+          "total": { "type": "integer", "minimum": 0, "maximum": 27 }
+        }
+      }
+    }
+  }
+}
