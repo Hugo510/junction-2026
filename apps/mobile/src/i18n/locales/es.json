@@ -332,7 +332,8 @@
       "manualQuestion": "¿Cuántos minutos estuviste afuera, más o menos?",
       "saved": "Se guardaron {{minutes}} minutos de luz de día. Muy bien.",
       "permissionDenied": "No se dio permiso de ubicación, así que puedes anotar tú el tiempo afuera."
-    }
+    },
+    "ideas": "Pequeñas ideas"
   },
   "insights": {
     "title": "Tendencias",
@@ -487,13 +488,11 @@
   },
   "menu": {
     "chat": "Chat",
-    "today": "Tu día",
-    "journal": "Diario",
     "comfort": "Calma",
-    "insights": "Tendencias",
     "care": "Equipo de salud",
     "settings": "Ajustes",
-    "close": "Cerrar menú"
+    "close": "Cerrar menú",
+    "progress": "Progreso"
   },
   "emotions": {
     "calm": "En calma",
@@ -515,7 +514,7 @@
     "disclaimer": "{{name}} es un compañero de apoyo, no un terapeuta. En una emergencia, llama al 112.",
     "typing": "{{name}} está escribiendo…",
     "menu": "Abrir menú",
-    "heroSubtitle": "Aquí para escucharte, acompañar tus check-ins y ayudarte a encontrar pequeñas cosas que ayudan.",
+    "heroSubtitle": "Estoy aquí para escucharte y ayudarte con cosas pequeñas.",
     "quick": {
       "checkin": "Hagamos un check-in",
       "relax": "Ayúdame a relajarme",
@@ -528,7 +527,8 @@
     },
     "open": {
       "invite": "¿Hacemos un check-in? Solo toma un minuto.",
-      "done": "Ya hiciste tu check-in de hoy. Aquí estoy si quieres hablar."
+      "done": "Ya hiciste tu check-in de hoy. Aquí estoy si quieres hablar.",
+      "careHint": "Tu equipo de salud está a un toque."
     },
     "flow": {
       "askMood": "¿Cómo te sientes ahora mismo?",
@@ -540,18 +540,18 @@
     },
     "reply": {
       "greeting": "¡Hola! Aquí estoy. ¿Qué te ayudaría ahora?",
-      "low": "Siento que se sienta pesado. No tienes que resolverlo todo hoy — busquemos una cosa pequeña y amable.",
+      "low": "Siento que se sienta pesado. Busquemos una cosa pequeña y amable.",
       "anxious": "Eso suena incómodo. Vamos a bajar el ritmo juntos un momento.",
       "tired": "El cansancio lo hace todo más difícil. Algo suave podría ayudar.",
       "positive": "¡Qué bueno escucharlo! ¿Quieres guardar este momento en tu diario?",
       "thanks": "Cuando quieras. Aquí estoy siempre que lo necesites.",
-      "fallback": "Gracias por contármelo. Soy un compañero sencillo y no lo entiendo todo, pero puedo ayudarte a anotar cómo te sientes, encontrar algo que te calme, mostrar cómo vas o contactar a tu equipo de salud.",
+      "fallback": "Gracias por contármelo. Puedo ayudarte a anotar cómo te sientes, relajarte, ver cómo vas o contactar a tu equipo.",
       "relax": "Aquí tienes algo que calma. Pídemelo otra vez para ver otra opción.",
       "progress": "Así se ven tus últimas dos semanas.",
       "care": "Tu equipo de salud está para ti. Puedes pedir una charla — tú decides.",
       "careOpen": "Ya tienes una solicitud en la fila. Así va.",
       "plan": "Aquí tienes algunas ideas pequeñas para hoy. Cualquiera cuenta.",
-      "crisis": "Me alegra mucho que me lo dijeras. Mereces ayuda ahora mismo. Llama al 112 o a una línea de crisis. Ya avisé a tu equipo de salud (simulado)."
+      "crisis": "Me alegra que me lo dijeras. Busca ayuda ahora: llama al 112 o a una línea de crisis. Ya avisé a tu equipo (simulado)."
     },
     "card": {
       "start": "Empezar",
@@ -562,6 +562,13 @@
       "savedTitle": "Guardado en tu diario",
       "openJournal": "Abrir diario",
       "fullCheckin": "Añadir sueño y energía"
+    },
+    "aboutHint": "Muestra lo que este compañero puede y no puede hacer",
+    "actions": {
+      "open": "Acciones rápidas",
+      "title": "¿Qué te gustaría hacer?",
+      "journal": "Escribir en mi diario",
+      "fullCheckin": "Check-in completo"
     }
   },
   "journal": {
@@ -601,6 +608,13 @@
       "full": "Check-in",
       "chat": "Chat",
       "journal": "Diario"
+    },
+    "more": "Más…"
+  },
+  "progress": {
+    "tabs": {
+      "journal": "Diario",
+      "trends": "Tendencias"
     }
   }
 }

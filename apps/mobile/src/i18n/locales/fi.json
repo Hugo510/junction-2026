@@ -332,7 +332,8 @@
       "manualQuestion": "Noin montako minuuttia olit ulkona?",
       "saved": "Tallennettiin {{minutes}} minuuttia päivänvaloa. Hienoa.",
       "permissionDenied": "Sijaintilupaa ei annettu, joten voit kirjata ulkoiluajan itse."
-    }
+    },
+    "ideas": "Pieniä ideoita"
   },
   "insights": {
     "title": "Kehitys",
@@ -487,13 +488,11 @@
   },
   "menu": {
     "chat": "Keskustelu",
-    "today": "Päiväsi",
-    "journal": "Päiväkirja",
     "comfort": "Rauhoitu",
-    "insights": "Kehitys",
     "care": "Hoitotiimi",
     "settings": "Asetukset",
-    "close": "Sulje valikko"
+    "close": "Sulje valikko",
+    "progress": "Edistyminen"
   },
   "emotions": {
     "calm": "Rauhallinen",
@@ -515,7 +514,7 @@
     "disclaimer": "{{name}} on tukeva kumppani, ei terapeutti. Hätätilanteessa soita 112.",
     "typing": "{{name}} kirjoittaa…",
     "menu": "Avaa valikko",
-    "heroSubtitle": "Täällä kuuntelemassa, kysymässä kuulumisia ja auttamassa löytämään pieniä asioita, jotka auttavat.",
+    "heroSubtitle": "Olen täällä kuuntelemassa ja auttamassa pienissä asioissa.",
     "quick": {
       "checkin": "Kerrotaan kuulumiset",
       "relax": "Auta minua rentoutumaan",
@@ -528,7 +527,8 @@
     },
     "open": {
       "invite": "Kerrotaanko kuulumiset? Se vie vain minuutin.",
-      "done": "Olet jo kertonut tämän päivän kuulumiset. Olen täällä, jos haluat jutella."
+      "done": "Olet jo kertonut tämän päivän kuulumiset. Olen täällä, jos haluat jutella.",
+      "careHint": "Hoitotiimisi on yhden napautuksen päässä."
     },
     "flow": {
       "askMood": "Miltä sinusta tuntuu juuri nyt?",
@@ -540,18 +540,18 @@
     },
     "reply": {
       "greeting": "Hei! Olen tässä. Mikä auttaisi juuri nyt?",
-      "low": "Ikävää, että olo on raskas. Kaikkea ei tarvitse ratkaista tänään — etsitään yksi pieni, lempeä asia.",
+      "low": "Ikävää, että olo on raskas. Etsitään yksi pieni, lempeä asia.",
       "anxious": "Se kuulostaa epämukavalta. Hidastetaan hetkeksi yhdessä.",
       "tired": "Väsymys tekee kaikesta raskaampaa. Jokin lempeä voisi auttaa.",
       "positive": "Ihana kuulla! Haluatko tallentaa tämän hetken päiväkirjaasi?",
       "thanks": "Milloin vain. Olen täällä aina kun tarvitset.",
-      "fallback": "Kiitos, että kerroit. Olen yksinkertainen kumppani enkä ymmärrä kaikkea, mutta voin auttaa kirjaamaan tunteesi, löytämään jotain rauhoittavaa, näyttämään kehityksesi tai ottamaan yhteyttä hoitotiimiisi.",
-      "relax": "Tässä jotain rauhoittavaa. Pyydä uudelleen, niin näytän toisen vaihtoehdon.",
+      "fallback": "Kiitos, että kerroit. Voin auttaa kirjaamaan tunteita, rentoutumaan, näyttämään kehityksesi tai ottamaan yhteyttä hoitotiimiisi.",
+      "relax": "Tässä jotain rauhoittavaa. Pyydä uudelleen, niin näytän toisen.",
       "progress": "Tältä kaksi viime viikkoasi näyttävät.",
       "care": "Hoitotiimisi on tukenasi. Voit pyytää keskustelua — valinta on sinun.",
       "careOpen": "Sinulla on jo pyyntö jonossa. Tässä sen tilanne.",
       "plan": "Tässä muutama pieni idea tälle päivälle. Mikä tahansa niistä riittää.",
-      "crisis": "Olen todella iloinen, että kerroit. Ansaitset apua heti. Soita 112 tai kriisipuhelimeen. Ilmoitin hoitotiimillesi (simuloitu)."
+      "crisis": "Hyvä, että kerroit. Hae apua nyt: soita 112 tai kriisipuhelimeen. Ilmoitin hoitotiimillesi (simuloitu)."
     },
     "card": {
       "start": "Aloita",
@@ -562,6 +562,13 @@
       "savedTitle": "Tallennettu päiväkirjaan",
       "openJournal": "Avaa päiväkirja",
       "fullCheckin": "Lisää uni ja energia"
+    },
+    "aboutHint": "Näyttää, mitä tämä kumppani voi ja ei voi tehdä",
+    "actions": {
+      "open": "Pikatoiminnot",
+      "title": "Mitä haluaisit tehdä?",
+      "journal": "Kirjoita päiväkirjaan",
+      "fullCheckin": "Kattavat kuulumiset"
     }
   },
   "journal": {
@@ -601,6 +608,13 @@
       "full": "Kuulumiset",
       "chat": "Keskustelu",
       "journal": "Päiväkirja"
+    },
+    "more": "Lisää…"
+  },
+  "progress": {
+    "tabs": {
+      "journal": "Päiväkirja",
+      "trends": "Kehitys"
     }
   }
 }

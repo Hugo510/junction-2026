@@ -332,7 +332,8 @@
       "manualQuestion": "About how many minutes were you outside?",
       "saved": "Saved {{minutes}} minutes of daylight. Well done.",
       "permissionDenied": "Location permission wasn't given, so you can log time outside yourself."
-    }
+    },
+    "ideas": "Small ideas"
   },
   "insights": {
     "title": "Insights",
@@ -487,13 +488,11 @@
   },
   "menu": {
     "chat": "Chat",
-    "today": "Your day",
-    "journal": "Journal",
     "comfort": "Comfort",
-    "insights": "Insights",
     "care": "Care team",
     "settings": "Settings",
-    "close": "Close menu"
+    "close": "Close menu",
+    "progress": "Progress"
   },
   "emotions": {
     "calm": "Calm",
@@ -515,7 +514,7 @@
     "disclaimer": "{{name}} is a supportive companion, not a therapist. In an emergency, call 112.",
     "typing": "{{name}} is writing…",
     "menu": "Open menu",
-    "heroSubtitle": "Here to listen, check in with you and help you find small things that help.",
+    "heroSubtitle": "I'm here to listen and help with small things.",
     "quick": {
       "checkin": "Check in with me",
       "relax": "Help me relax",
@@ -528,7 +527,8 @@
     },
     "open": {
       "invite": "Shall we check in? It only takes a minute.",
-      "done": "You've already checked in today. I'm here if you want to talk."
+      "done": "You've already checked in today. I'm here if you want to talk.",
+      "careHint": "Your care team is one tap away."
     },
     "flow": {
       "askMood": "How are you feeling right now?",
@@ -540,18 +540,18 @@
     },
     "reply": {
       "greeting": "Hi! I'm here. What would help right now?",
-      "low": "I'm sorry it feels heavy. You don't have to fix everything today — let's find one small, kind thing.",
+      "low": "I'm sorry it feels heavy. Let's find one small, kind thing.",
       "anxious": "That sounds uncomfortable. Let's slow down together for a moment.",
       "tired": "Being tired makes everything harder. Something gentle might help.",
       "positive": "That's lovely to hear! Would you like to save this moment in your journal?",
       "thanks": "Anytime. I'm here whenever you need me.",
-      "fallback": "Thank you for telling me. I'm a simple companion, so I can't fully understand everything — but I can help you note how you feel, find something calming, show your progress or reach your care team.",
-      "relax": "Here's something calming. Ask again for another option.",
+      "fallback": "Thanks for telling me. I can help you log feelings, relax, see your progress or reach your care team.",
+      "relax": "Here's something calming. Ask again for another.",
       "progress": "Here's how your last two weeks look.",
       "care": "Your care team is there for you. You can ask for a chat — it's your choice.",
       "careOpen": "You already have a request in line. Here's where it stands.",
       "plan": "Here are a few small ideas for today. Any one of them counts.",
-      "crisis": "I'm really glad you told me. You deserve help right now. Please call 112 or a crisis line. I've let your care team know (simulated)."
+      "crisis": "I'm glad you told me. Please get help now: call 112 or a crisis line. I've alerted your care team (simulated)."
     },
     "card": {
       "start": "Start",
@@ -562,6 +562,13 @@
       "savedTitle": "Saved to your journal",
       "openJournal": "Open journal",
       "fullCheckin": "Add sleep & energy"
+    },
+    "aboutHint": "Shows what this companion can and cannot do",
+    "actions": {
+      "open": "Quick actions",
+      "title": "What would you like to do?",
+      "journal": "Write in my journal",
+      "fullCheckin": "Full check-in"
     }
   },
   "journal": {
@@ -601,6 +608,13 @@
       "full": "Check-in",
       "chat": "Chat",
       "journal": "Journal"
+    },
+    "more": "More…"
+  },
+  "progress": {
+    "tabs": {
+      "journal": "Journal",
+      "trends": "Trends"
     }
   }
 }
