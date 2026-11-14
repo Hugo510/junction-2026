@@ -226,3 +226,13 @@ curl -s -X POST http://localhost:8000/api/v1/companion/reply \
 curl -s -X POST http://localhost:8000/api/v1/companion/reply \
   -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
   -d '{"message": "Quiero morir", "language": "es"}'
+
+
+# ELEVEN LAB Test
+
+curl -s -X POST http://localhost:8000/api/v1/companion/speech \
+  -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -d '{"text": "Take a slow breath with me.", "language": "en"}' > speech.json
+
+
+python3 -c "import json, base64; open('test.mp3','wb').write(base64.b64decode(json.load(open('speech.json'))['audioBase64']))"
