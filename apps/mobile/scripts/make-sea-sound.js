@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 /**
- * Generates assets/sounds/sea.wav: slow waves made from filtered noise.
+ * FALLBACK, not bundled: the app plays a CC0 recording (assets/sounds/sea.mp3, see MEDIA_SOURCES.md).
+ * This generates assets/sounds/sea.wav: slow waves made from filtered noise, for a build that must
+ * carry no third-party file at all. To use it, point SEA_SOUND in src/services/sounds.ts at the .wav.
  *
  * Why generate it: the sound is original (written during the event), needs no licence,
  * no download and no API key, and the result is reproducible (fixed random seed).

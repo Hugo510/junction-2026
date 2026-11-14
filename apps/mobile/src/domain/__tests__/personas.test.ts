@@ -54,19 +54,21 @@ describe('the five demo personas on demo day', () => {
     }
   });
 
-  it('Sara: lost contact (silence ladder), a question from her phone signals, embers at the floor but not out', () => {
+  it('Sara: lost contact (silence ladder), low priority, embers never out', () => {
     const sara = byId('sara');
     // v0.3: her phone keeps logging while she is silent → missed check-ins + activity drop, no mood alarm
-    // With the smoothed trend against her own well weeks, her phone shows more time at home (+10 %)
-    // and later evenings (+56 min) on 3 of the last 5 days. That makes it "medium": Hiillos would ask
-    // two questions. It is never a clinic alert, and her silence alone still reads as lost contact.
-    expect(priority('sara')).toMatchObject({ score: 35, level: 'medium' });
-    expect(priority('sara').reasons).toEqual(['priority.reasons.missedCheckIns', 'priority.reasons.homeMore', 'priority.reasons.laterNights']);
+    // Generator v0.6: while she is silent her phone keeps logging at her own normal, so the trend
+    // rules stay quiet. Only the missed check-ins count: silence reads as lost contact, never as drift.
+    // (With v0.5 data the anchored baseline put her at 35, medium; the data was changed, not the rule.)
+    expect(priority('sara')).toMatchObject({ score: 15, level: 'low' });
+    expect(priority('sara').reasons).toEqual(['priority.reasons.missedCheckIns']);
     expect(hasPhqConcern(sara.phq9 ?? [], DEMO_DAY)).toBe(false);
     expect(outreachLevel(sara.checkIns, DEMO_DAY)).toBe('reconnect');
     const level = emberLevel(sara.checkIns, sara.sensors, sara.feedback, DEMO_DAY);
     expect(level).toBeGreaterThanOrEqual(EMBER_FLOOR);
-    expect(emberState(level)).toBe('low');
+    // v0.6 side effect: her phone logs normal movement while she is silent, so her embers read
+    // "steady" instead of "low" (with v0.5 they sat at the floor). The embers rule did not change.
+    expect(emberState(level)).toBe('steady');
   });
 
   it('the learning differs per person: walks for Aino, fireplace for Juho', () => {
