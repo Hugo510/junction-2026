@@ -37,7 +37,7 @@ export function useChatContext(): ChatContext | null {
       .filter((c) => c.date < today)
       .sort((a, b) => a.date.localeCompare(b.date))
       .pop();
-    const ranking = rankInterventions(availableInterventionIds({ sensors, today }), feedback, checkIns, priors).map((r) => r.id);
+    const ranking = rankInterventions(availableInterventionIds({ sensors, today }), feedback, checkIns, priors, sensors).map((r) => r.id);
     const calm = ranking.filter((id) => getIntervention(id).tags.some((tag) => tag === 'calm' || tag === 'focus'));
     const pending = plan?.items.find((i) => i.status === 'pending')?.interventionId;
     const current = now();

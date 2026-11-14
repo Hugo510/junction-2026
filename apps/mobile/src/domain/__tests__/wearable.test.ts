@@ -2,6 +2,8 @@ import { PERSONAS, rebasePersona } from '../../data/personas';
 import { bodyResponse, respondsWell } from '../bodyResponse';
 import { addDaysISO } from '../dates';
 import type { CheckIn, InterventionFeedback, SensorAggregate } from '../entities';
+import { INTERVENTION_IDS } from '../interventions';
+import { BODY_WEIGHT, rankInterventions, rewardFor } from '../interventionPicker';
 import { priorityScore } from '../priorityScore';
 import { mergeWearable, simulateWearable, simulateWearableDay, wearableSummary } from '../wearable';
 
@@ -98,6 +100,42 @@ describe('wearable sleep in the priority score', () => {
       const sensors = mergeWearable(data.sensors, simulateWearable({ checkIns: data.checkIns, sensors: data.sensors, today: TODAY }));
       const connected = priorityScore({ checkIns: data.checkIns, sensors, today: TODAY, flags });
       expect({ id: persona.persona.id, level: connected.level }).toEqual({ id: persona.persona.id, level: plain.level });
+    }
+  });
+});
+
+describe('the body’s answer in the learning score (B3)', () => {
+  const walk = (date: string, rating: 1 | 0 | -1 = 0): InterventionFeedback => ({ id: `w-${date}`, interventionId: 'daylightWalk', date, rating });
+  const calm = (date: string, rating: 1 | 0 | -1 = 0): InterventionFeedback => ({ id: `b-${date}`, interventionId: 'breathing', date, rating });
+  const D2 = addDaysISO(TODAY, -2);
+  const D6 = addDaysISO(TODAY, -6);
+  /** 30 nights at 39–41 ms, with the nights after the walks clearly better. */
+  const rows = Array.from({ length: 30 }, (_, i) => sensor(addDaysISO(TODAY, -i), { nightHrvMs: i === 2 || i === 6 ? 48 : 40 + (i % 3) - 1 }));
+
+  it('adds up to ±0.5 for a night clearly better or worse than the person’s own usual', () => {
+    expect(rewardFor(walk(D2, 1), [], rows)).toBeCloseTo(1 + BODY_WEIGHT * 2, 5);
+    const worse = rows.map((r) => (r.date === D2 ? { ...r, nightHrvMs: 30 } : r));
+    expect(rewardFor(walk(D2, 1), [], worse)).toBeCloseTo(1 - BODY_WEIGHT * 2, 5);
+  });
+
+  it('changes nothing without wearable nights or without a baseline', () => {
+    expect(rewardFor(walk(D2, 1), [])).toBe(1);
+    expect(rewardFor(walk(D2, 1), [], [sensor(D2)])).toBe(1);
+    expect(rewardFor(walk(D2, 1), [], [sensor(D2, { nightHrvMs: 60 })])).toBe(1);
+  });
+
+  it('lets the body break a tie: same thumbs, but nights were better after the walks', () => {
+    const feedback = [walk(D2), walk(D6), calm(addDaysISO(TODAY, -3)), calm(addDaysISO(TODAY, -8))];
+    const ids = ['breathing', 'daylightWalk'] as const;
+    expect(rankInterventions(ids, feedback, [])[0].id).toBe('breathing');
+    expect(rankInterventions(ids, feedback, [], {}, rows)[0].id).toBe('daylightWalk');
+  });
+
+  it('with today’s persona files (no watch data yet) every persona keeps the same ranking', () => {
+    for (const persona of PERSONAS) {
+      const data = rebasePersona(persona, LAST_NIGHT);
+      const order = (s?: SensorAggregate[]) => rankInterventions(INTERVENTION_IDS, data.feedback, data.checkIns, {}, s).map((r) => r.id);
+      if (data.sensors.every((s) => s.nightHrvMs === undefined)) expect(order(data.sensors)).toEqual(order());
     }
   });
 });

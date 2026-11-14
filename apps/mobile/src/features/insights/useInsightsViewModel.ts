@@ -28,10 +28,11 @@ export function useMoodTrend() {
 export function useTopHelp(): InterventionId | null {
   const checkIns = useData((s) => s.checkIns);
   const feedback = useData((s) => s.feedback);
+  const sensors = useData((s) => s.sensors);
   return useMemo(() => {
-    const top = rankInterventions(INTERVENTION_IDS, feedback, checkIns).find((r) => r.n > 0);
+    const top = rankInterventions(INTERVENTION_IDS, feedback, checkIns, {}, sensors).find((r) => r.n > 0);
     return top && top.mean > 0.3 ? top.id : null;
-  }, [checkIns, feedback]);
+  }, [checkIns, feedback, sensors]);
 }
 
 function rankLabel(s: ArmStats, index: number): RankLabel {
@@ -73,7 +74,7 @@ export function useInsightsViewModel() {
       daylight: avg(series.daylight),
       home: avg(series.home),
     };
-    const ranking = rankInterventions(INTERVENTION_IDS, feedback, checkIns)
+    const ranking = rankInterventions(INTERVENTION_IDS, feedback, checkIns, {}, sensors)
       .filter((r) => r.n > 0)
       .map((r, i) => ({ ...r, label: rankLabel(r, i) }));
     return { series, averages, ranking, empty: averages.mood === undefined && averages.activity === undefined };

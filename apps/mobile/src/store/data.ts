@@ -171,6 +171,7 @@ export const useData = create<DataState>()((set, get) => {
         ids: availableInterventionIds({ sensors, today: date }),
         // Only with consent: start from what helped other people (aggregated scores).
         priors: useSettings.getState().sharedLearning ? demoPopulationPriors() : undefined,
+        sensors,
         feedback,
         checkIns,
         rng: mulberry32(hashString(date) + feedback.length),

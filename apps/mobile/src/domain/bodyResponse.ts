@@ -1,4 +1,4 @@
-import { addDaysISO } from './dates';
+import { addDaysISO, type ISODate } from './dates';
 import type { InterventionFeedback, InterventionId, SensorAggregate } from './entities';
 import { average, sensorsByDate } from './history';
 
@@ -23,24 +23,29 @@ export interface BodyResponse {
   nights: number;
 }
 
+/**
+ * One night: recovery on the night after `day`, in the person's own standard deviations from
+ * their previous 14 nights, capped at ±2. undefined when the night or the baseline is missing.
+ */
+export function nightResponse(day: ISODate, byDate: Map<ISODate, SensorAggregate>): number | undefined {
+  // Night values sit on the date of the evening the night starts: the night after the step.
+  const night = byDate.get(day)?.nightHrvMs;
+  if (night === undefined) return undefined;
+  const baseline: number[] = [];
+  for (let i = 1; i <= BODY_BASELINE_NIGHTS; i++) {
+    const v = byDate.get(addDaysISO(day, -i))?.nightHrvMs;
+    if (v !== undefined) baseline.push(v);
+  }
+  if (baseline.length < MIN_BASELINE_NIGHTS) return undefined;
+  const mean = average(baseline) as number;
+  const sd = Math.max(1, Math.sqrt((average(baseline.map((v) => (v - mean) ** 2)) as number) || 0));
+  return Math.max(-2, Math.min(2, (night - mean) / sd));
+}
+
 export function bodyResponse(id: InterventionId, feedback: InterventionFeedback[], sensors: SensorAggregate[]): BodyResponse | null {
   const byDate = sensorsByDate(sensors);
-  const scores: number[] = [];
   const days = new Set(feedback.filter((f) => f.interventionId === id).map((f) => f.date));
-  for (const day of days) {
-    // Night values sit on the date of the evening the night starts: the night after the step.
-    const night = byDate.get(day)?.nightHrvMs;
-    if (night === undefined) continue;
-    const baseline: number[] = [];
-    for (let i = 1; i <= BODY_BASELINE_NIGHTS; i++) {
-      const v = byDate.get(addDaysISO(day, -i))?.nightHrvMs;
-      if (v !== undefined) baseline.push(v);
-    }
-    if (baseline.length < MIN_BASELINE_NIGHTS) continue;
-    const mean = average(baseline) as number;
-    const sd = Math.max(1, Math.sqrt((average(baseline.map((v) => (v - mean) ** 2)) as number) || 0));
-    scores.push(Math.max(-2, Math.min(2, (night - mean) / sd)));
-  }
+  const scores = [...days].map((day) => nightResponse(day, byDate)).filter((z): z is number => z !== undefined);
   if (scores.length < MIN_RESPONSE_NIGHTS) return null;
   return { z: average(scores) as number, nights: scores.length };
 }

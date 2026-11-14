@@ -35,7 +35,7 @@ export default function CheckInScreen() {
   const suggestion: InterventionId = useMemo(() => {
     const pending = plan?.items.find((i) => i.status === 'pending');
     if (pending) return pending.interventionId;
-    return rankInterventions(availableInterventionIds({ sensors, today }), feedback, checkIns)[0].id;
+    return rankInterventions(availableInterventionIds({ sensors, today }), feedback, checkIns, {}, sensors)[0].id;
   }, [plan, feedback, checkIns, sensors, today]);
 
   const onSubmitted = (r: CheckInResult) => {
