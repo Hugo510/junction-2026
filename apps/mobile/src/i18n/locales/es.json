@@ -543,10 +543,12 @@
       "progress": "¿Cómo voy?",
       "care": "Hablar con mi equipo",
       "plan": "Ideas para hoy",
-      "skip": "Omitir"
+      "skip": "Omitir",
+      "phq": "Va, pregúntame",
+      "notNow": "Ahora no"
     },
     "open": {
-      "invite": "¿Hacemos un check-in? Solo toma un minuto.",
+      "invite": "¿Cómo estás hoy? Con un toque basta.",
       "done": "Ya hiciste tu check-in de hoy. Aquí estoy si quieres hablar.",
       "careHint": "Tu equipo de salud está a un toque."
     },
@@ -589,7 +591,8 @@
       "messageFriend": "Escribir a {{name}}",
       "reconnectCheckin": "Hacer check-in ahora",
       "reconnectCare": "Escribir a mi equipo de salud",
-      "reconnectHelpline": "Línea 24/7 {{number}}"
+      "reconnectHelpline": "Línea 24/7 {{number}}",
+      "weekly": "Check-in semanal"
     },
     "aboutHint": "Muestra lo que este compañero puede y no puede hacer",
     "actions": {
@@ -602,6 +605,19 @@
       "warm": "Qué bueno saber de ti. Sin ninguna presión.",
       "friend": "Han pasado unos días. A veces una voz conocida ayuda.",
       "reconnect": "Perdimos el contacto un tiempo, y está bien. Así puedes encontrarnos cuando quieras."
+    },
+    "phq": {
+      "offer": "Noté que la semana ha sido más pesada. ¿Dos preguntas rápidas?",
+      "intro": "Gracias. Durante las últimas 2 semanas, ¿con qué frecuencia te ha molestado esto?",
+      "more": "Gracias. Unas pocas más, con las mismas respuestas.",
+      "pick": "Puedes tocar una de las cuatro respuestas.",
+      "later": "Sin problema, otro día.",
+      "doneLow": "Gracias. Suena cercano a lo habitual en ti. Seguiré pendiente con calma.",
+      "doneMid": "Gracias por responder. Mantengamos los días pequeños y amables.",
+      "doneHigh": "Gracias por tu sinceridad. Puede ayudar hablar con tu equipo de salud. Tú decides."
+    },
+    "weekly": {
+      "invite": "Una vez por semana pregunto un poco más, como sueño y energía. Toma dos minutos."
     }
   },
   "journal": {
@@ -658,7 +674,8 @@
     "friendNoContact": "{{name}}: Han pasado unos días. ¿Hay alguien con quien podrías hablar?",
     "reconnect": "{{name}}: Hace tiempo que no sabemos de ti. Así puedes encontrarnos.",
     "now": "ahora",
-    "openHint": "Abre el chat"
+    "openHint": "Abre el chat",
+    "drift": "{{name}}: Noté que la semana ha sido más pesada. ¿Dos preguntas rápidas?"
   },
   "embers": {
     "label": "Tus brasas: {{state}}",
@@ -667,6 +684,25 @@
       "low": "brillan bajito",
       "steady": "estables",
       "bright": "brillantes"
+    }
+  },
+  "phq": {
+    "options": {
+      "0": "Nunca",
+      "1": "Varios días",
+      "2": "Más de la mitad de los días",
+      "3": "Casi todos los días"
+    },
+    "items": {
+      "1": "Poco interés o placer en hacer las cosas",
+      "2": "Sentirte con el ánimo bajo, con depresión o sin esperanza",
+      "3": "Problemas para dormirte o seguir durmiendo, o dormir demasiado",
+      "4": "Sentir cansancio o tener poca energía",
+      "5": "Poco apetito o comer en exceso",
+      "6": "Sentirte mal contigo, o sentir que eres un fracaso o que le has fallado a tu familia o a ti",
+      "7": "Dificultad para concentrarte en cosas como leer el periódico o ver la televisión",
+      "8": "Moverte o hablar tan despacio que otras personas lo pudieron notar. O lo contrario: tanta inquietud o agitación que te has movido mucho más de lo habitual",
+      "9": "Pensamientos de que sería mejor morir o de hacerte daño de alguna manera"
     }
   }
 }

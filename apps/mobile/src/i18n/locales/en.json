@@ -543,10 +543,12 @@
       "progress": "How am I doing?",
       "care": "Talk to my care team",
       "plan": "Ideas for today",
-      "skip": "Skip"
+      "skip": "Skip",
+      "phq": "Okay, ask me",
+      "notNow": "Not now"
     },
     "open": {
-      "invite": "Shall we check in? It only takes a minute.",
+      "invite": "How are you today? One tap is enough.",
       "done": "You've already checked in today. I'm here if you want to talk.",
       "careHint": "Your care team is one tap away."
     },
@@ -589,7 +591,8 @@
       "messageFriend": "Message {{name}}",
       "reconnectCheckin": "Check in now",
       "reconnectCare": "Message my care team",
-      "reconnectHelpline": "24/7 helpline {{number}}"
+      "reconnectHelpline": "24/7 helpline {{number}}",
+      "weekly": "Weekly check-in"
     },
     "aboutHint": "Shows what this companion can and cannot do",
     "actions": {
@@ -602,6 +605,19 @@
       "warm": "It's good to hear from you. No pressure at all.",
       "friend": "It's been a few days. Sometimes a familiar voice helps.",
       "reconnect": "We lost touch for a while, and that's okay. Here's how to reach us whenever you want."
+    },
+    "phq": {
+      "offer": "I noticed the week's been heavier. Two quick questions?",
+      "intro": "Thank you. Over the last 2 weeks, how often have you been bothered by this?",
+      "more": "Thanks. A few more, same answers.",
+      "pick": "You can tap one of the four answers.",
+      "later": "No problem, another day.",
+      "doneLow": "Thank you. That sounds close to your usual. I'll keep checking in gently.",
+      "doneMid": "Thank you for answering. Let's keep the days small and kind.",
+      "doneHigh": "Thank you for being open. It may help to talk with your care team. It's your choice."
+    },
+    "weekly": {
+      "invite": "Once a week I ask a little more, like sleep and energy. It takes two minutes."
     }
   },
   "journal": {
@@ -658,7 +674,8 @@
     "friendNoContact": "{{name}}: It's been a few days. Is there someone you could talk to?",
     "reconnect": "{{name}}: We haven't heard from you in a while. Here's how to reach us.",
     "now": "now",
-    "openHint": "Opens the chat"
+    "openHint": "Opens the chat",
+    "drift": "{{name}}: I noticed the week's been heavier. Two quick questions?"
   },
   "embers": {
     "label": "Your embers: {{state}}",
@@ -667,6 +684,25 @@
       "low": "glowing low",
       "steady": "steady",
       "bright": "bright"
+    }
+  },
+  "phq": {
+    "options": {
+      "0": "Not at all",
+      "1": "Several days",
+      "2": "More than half the days",
+      "3": "Nearly every day"
+    },
+    "items": {
+      "1": "Little interest or pleasure in doing things",
+      "2": "Feeling down, depressed, or hopeless",
+      "3": "Trouble falling or staying asleep, or sleeping too much",
+      "4": "Feeling tired or having little energy",
+      "5": "Poor appetite or overeating",
+      "6": "Feeling bad about yourself, or that you are a failure or have let yourself or your family down",
+      "7": "Trouble concentrating on things, such as reading the newspaper or watching television",
+      "8": "Moving or speaking so slowly that other people could have noticed. Or the opposite: being so fidgety or restless that you have been moving around a lot more than usual",
+      "9": "Thoughts that you would be better off dead, or of hurting yourself in some way"
     }
   }
 }

@@ -543,10 +543,12 @@
       "progress": "Miten minulla menee?",
       "care": "Puhu hoitotiimini kanssa",
       "plan": "Ideoita tälle päivälle",
-      "skip": "Ohita"
+      "skip": "Ohita",
+      "phq": "Selvä, kysy",
+      "notNow": "Ei nyt"
     },
     "open": {
-      "invite": "Kerrotaanko kuulumiset? Se vie vain minuutin.",
+      "invite": "Mitä sinulle kuuluu tänään? Yksi napautus riittää.",
       "done": "Olet jo kertonut tämän päivän kuulumiset. Olen täällä, jos haluat jutella.",
       "careHint": "Hoitotiimisi on yhden napautuksen päässä."
     },
@@ -589,7 +591,8 @@
       "messageFriend": "Viesti: {{name}}",
       "reconnectCheckin": "Kerro kuulumiset nyt",
       "reconnectCare": "Viesti hoitotiimilleni",
-      "reconnectHelpline": "Auttava puhelin 24/7 {{number}}"
+      "reconnectHelpline": "Auttava puhelin 24/7 {{number}}",
+      "weekly": "Viikoittaiset kuulumiset"
     },
     "aboutHint": "Näyttää, mitä tämä kumppani voi ja ei voi tehdä",
     "actions": {
@@ -602,6 +605,19 @@
       "warm": "Kiva kuulla sinusta. Ei mitään paineita.",
       "friend": "Muutama päivä on kulunut. Joskus tuttu ääni auttaa.",
       "reconnect": "Yhteys katkesi hetkeksi, ja se on ihan okei. Näin tavoitat meidät milloin tahansa."
+    },
+    "phq": {
+      "offer": "Huomasin, että viikko on ollut raskaampi. Kaksi lyhyttä kysymystä?",
+      "intro": "Kiitos. Kuinka usein tämä on vaivannut sinua viimeisen 2 viikon aikana?",
+      "more": "Kiitos. Vielä muutama, samat vastaukset.",
+      "pick": "Voit napauttaa yhtä neljästä vastauksesta.",
+      "later": "Ei haittaa, toisena päivänä.",
+      "doneLow": "Kiitos. Kuulostaa olevan lähellä tavallista oloasi. Kyselen jatkossakin lempeästi.",
+      "doneMid": "Kiitos vastauksista. Pidetään päivät pieninä ja lempeinä.",
+      "doneHigh": "Kiitos avoimuudestasi. Hoitotiimin kanssa juttelu voisi auttaa. Valinta on sinun."
+    },
+    "weekly": {
+      "invite": "Kerran viikossa kysyn vähän enemmän, kuten unesta ja energiasta. Se vie kaksi minuuttia."
     }
   },
   "journal": {
@@ -658,7 +674,8 @@
     "friendNoContact": "{{name}}: Muutama päivä on kulunut. Onko joku, jolle voisit puhua?",
     "reconnect": "{{name}}: Emme ole kuulleet sinusta hetkeen. Näin tavoitat meidät.",
     "now": "nyt",
-    "openHint": "Avaa keskustelun"
+    "openHint": "Avaa keskustelun",
+    "drift": "{{name}}: Huomasin, että viikko on ollut raskaampi. Kaksi lyhyttä kysymystä?"
   },
   "embers": {
     "label": "Hiilloksesi: {{state}}",
@@ -667,6 +684,25 @@
       "low": "hehkuu hiljaa",
       "steady": "tasainen",
       "bright": "kirkas"
+    }
+  },
+  "phq": {
+    "options": {
+      "0": "Ei lainkaan",
+      "1": "Useana päivänä",
+      "2": "Yli puolet päivistä",
+      "3": "Lähes joka päivä"
+    },
+    "items": {
+      "1": "Vähäinen mielenkiinto tai mielihyvä asioiden tekemiseen",
+      "2": "Alakuloisuus, masentuneisuus tai toivottomuus",
+      "3": "Vaikeus nukahtaa tai pysyä unessa, tai liiallinen nukkuminen",
+      "4": "Väsymys tai energian puute",
+      "5": "Huono ruokahalu tai ylensyöminen",
+      "6": "Tyytymättömyys itseesi, tai tunne, että olet epäonnistunut tai tuottanut pettymyksen itsellesi tai perheellesi",
+      "7": "Vaikeus keskittyä asioihin, kuten sanomalehden lukemiseen tai television katseluun",
+      "8": "Liikkuminen tai puhuminen niin hitaasti, että muut ovat voineet huomata sen. Tai päinvastoin: levottomuus tai rauhattomuus niin, että olet liikkunut paljon tavallista enemmän",
+      "9": "Ajatukset siitä, että olisi parempi olla kuollut, tai itsesi vahingoittamisesta jollain tavalla"
     }
   }
 }

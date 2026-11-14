@@ -543,10 +543,12 @@
       "progress": "Hur går det för mig?",
       "care": "Prata med mitt vårdteam",
       "plan": "Idéer för idag",
-      "skip": "Hoppa över"
+      "skip": "Hoppa över",
+      "phq": "Okej, fråga mig",
+      "notNow": "Inte nu"
     },
     "open": {
-      "invite": "Ska vi checka in? Det tar bara en minut.",
+      "invite": "Hur mår du idag? Ett tryck räcker.",
       "done": "Du har redan checkat in idag. Jag finns här om du vill prata.",
       "careHint": "Ditt vårdteam är ett tryck bort."
     },
@@ -589,7 +591,8 @@
       "messageFriend": "Skriv till {{name}}",
       "reconnectCheckin": "Checka in nu",
       "reconnectCare": "Skriv till mitt vårdteam",
-      "reconnectHelpline": "Stödlinje dygnet runt {{number}}"
+      "reconnectHelpline": "Stödlinje dygnet runt {{number}}",
+      "weekly": "Veckans incheckning"
     },
     "aboutHint": "Visar vad den här följeslagaren kan och inte kan göra",
     "actions": {
@@ -602,6 +605,19 @@
       "warm": "Vad fint att höra från dig. Ingen press alls.",
       "friend": "Det har gått några dagar. Ibland hjälper en bekant röst.",
       "reconnect": "Vi tappade kontakten ett tag, och det är okej. Så här når du oss när du vill."
+    },
+    "phq": {
+      "offer": "Jag märkte att veckan har varit tyngre. Två snabba frågor?",
+      "intro": "Tack. Hur ofta har du besvärats av detta under de senaste 2 veckorna?",
+      "more": "Tack. Några till, samma svar.",
+      "pick": "Du kan trycka på ett av de fyra svaren.",
+      "later": "Inga problem, en annan dag.",
+      "doneLow": "Tack. Det låter nära hur du brukar ha det. Jag fortsätter höra av mig varsamt.",
+      "doneMid": "Tack för att du svarade. Vi håller dagarna små och snälla.",
+      "doneHigh": "Tack för att du är öppen. Det kan hjälpa att prata med ditt vårdteam. Det är ditt val."
+    },
+    "weekly": {
+      "invite": "En gång i veckan frågar jag lite mer, som sömn och energi. Det tar två minuter."
     }
   },
   "journal": {
@@ -658,7 +674,8 @@
     "friendNoContact": "{{name}}: Det har gått några dagar. Finns det någon du kan prata med?",
     "reconnect": "{{name}}: Vi har inte hört från dig på ett tag. Så här når du oss.",
     "now": "nu",
-    "openHint": "Öppnar chatten"
+    "openHint": "Öppnar chatten",
+    "drift": "{{name}}: Jag märkte att veckan har varit tyngre. Två snabba frågor?"
   },
   "embers": {
     "label": "Din glöd: {{state}}",
@@ -667,6 +684,25 @@
       "low": "glöder svagt",
       "steady": "jämn",
       "bright": "klar"
+    }
+  },
+  "phq": {
+    "options": {
+      "0": "Inte alls",
+      "1": "Flera dagar",
+      "2": "Mer än hälften av dagarna",
+      "3": "Nästan varje dag"
+    },
+    "items": {
+      "1": "Lite intresse eller glädje i att göra saker",
+      "2": "Känt dig nedstämd, deprimerad eller upplevt att framtiden ser hopplös ut",
+      "3": "Svårt att somna eller att sova utan avbrott, eller sovit för mycket",
+      "4": "Känt dig trött eller energilös",
+      "5": "Dålig aptit eller ätit för mycket",
+      "6": "Dålig självkänsla, eller känt dig misslyckad eller att du har svikit dig själv eller din familj",
+      "7": "Svårt att koncentrera dig, till exempel när du läst tidningen eller sett på tv",
+      "8": "Rört dig eller talat så långsamt att andra kan ha märkt det. Eller motsatsen: varit så nervös eller rastlös att du rört dig mer än vanligt",
+      "9": "Tankar på att det skulle vara bättre om du var död eller att du skulle skada dig på något sätt"
     }
   }
 }
