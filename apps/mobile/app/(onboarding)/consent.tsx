@@ -10,7 +10,7 @@ export default function ConsentStep() {
   const { t } = useTranslation();
   return (
     <OnboardingFrame
-      step={3}
+      step={4}
       title={t('onboarding.consent.title')}
       subtitle={t('onboarding.consent.subtitle')}
       onContinue={() => router.push('/companion')}

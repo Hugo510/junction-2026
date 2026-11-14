@@ -17,7 +17,7 @@ export default function BaselineStep() {
   };
 
   return (
-    <OnboardingFrame step={5} title={t('onboarding.baseline.title')} subtitle={t('onboarding.baseline.subtitle')}>
+    <OnboardingFrame step={6} title={t('onboarding.baseline.title')} subtitle={t('onboarding.baseline.subtitle')}>
       <CheckInFlow variant="baseline" onSubmitted={onSubmitted} />
     </OnboardingFrame>
   );

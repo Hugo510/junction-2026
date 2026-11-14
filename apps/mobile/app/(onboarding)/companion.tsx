@@ -40,7 +40,7 @@ export default function CompanionStep() {
 
   return (
     <OnboardingFrame
-      step={4}
+      step={5}
       title={t('onboarding.companion.title')}
       subtitle={t('onboarding.companion.subtitle')}
       onContinue={onContinue}
