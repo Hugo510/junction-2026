@@ -1,8 +1,10 @@
-# Valo — patient app (Beyond the Clinic, Junction 2026)
+# Hiillos — patient app (Beyond the Clinic, Junction 2026)
 
 Mobile app for people who **successfully finished TMS treatment for depression**, to help them
 stay well at home and prevent relapse. Built with Expo (SDK 58) + Expo Router, TypeScript strict.
 
+> *Hiillos* = embers in Finnish: the inner fire we help people keep glowing.
+>
 > **Not a medical device.** The app does not diagnose or treat and always refers to professionals.
 > All data is **synthetic**. In an emergency: 112.
 

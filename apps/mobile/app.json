@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "Valo",
-    "slug": "valo-beyond-the-clinic",
+    "name": "Hiillos",
+    "slug": "hiillos",
     "version": "0.1.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "valo",
+    "scheme": "hiillos",
     "userInterfaceStyle": "automatic",
     "ios": {
       "supportsTablet": true
