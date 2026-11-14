@@ -1,6 +1,6 @@
 {
   "synthetic": true,
-  "generatorVersion": "0.4",
+  "generatorVersion": "0.5",
   "seed": 2026,
   "personaId": "juho",
   "firstDay": "2026-08-17",
@@ -34,5 +34,5 @@
     }
   },
   "driftStartDate": "2026-10-08",
-  "ring": "Days 52-69: short, late, broken sleep (latency +25 min, efficiency -6), average_hrv -20 %, hr_lowest +4; partial recovery 70-77."
+  "ring": "Days 52-69: short, late, broken sleep (latency +25 min, efficiency -6), average_hrv -20 %, hr_lowest +4; partial recovery 70-77. v0.5: nights after fireplace/sound (days 54, 60, 66, 72, 78, 84) average_hrv x1.15, hr_lowest -1.5 (illustrative); walks: no effect."
 }

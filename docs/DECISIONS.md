@@ -43,6 +43,13 @@
 
 ## Sat 14 Nov 2026
 
+**Decided (21:15, Meg) — demo step 3 keeps the body response (option A)**
+- Hugo (21:01): the ring layer is in the app, but "After your walk, your night-time recovery was higher than your usual" could not appear, because the data had no effect of a step on that night (0.06 SD; the line needs 0.3). Options: (A) add the effect to the generator, or (B) change step 3 to "recovery below your usual".
+- **Chosen: A.** Generator **v0.5**: the night after a step that truly helps (Aino: walks; Juho: sound/fireplace) has `average_hrv` ×1.15 and `hr_lowest` −1.5 bpm. Checked: Aino +0.80 SD vs baseline / +1.43 SD vs her other recent nights; Juho +0.61 / +1.59. `core.json` unchanged apart from `generatorVersion`, so priorities stay; last night stays 34 ms vs usual 37.
+- **Why:** step 3 is the "sense, respond, measure her body's answer" moment that step 4 (learned card with the body reason) and step 5 (Juho, opposite answer) build on. B would turn it into another drift warning.
+- **Honesty:** the effect is illustrative, labelled as such in `ABOUT.md` and the generator; we never present it as a finding.
+- **Hugo to check after `npm run personas:sync`:** Aino's walk night on day 84 rises to ~39 ms; if the clinician reason counts consecutive nights below her normal, that count may shorten.
+
 **Decided (19:50, Meg, after talking to the challenge team)**
 - The challengers were not convinced by the closed *care* loop; their brief means a closed loop on the body/brain response to interventions, and names smart rings. **Hiillos now leads with the body loop** (sense → small step → measure the body's response that night → learn); the clinic loop stays as the safety net. **Watch added** (Hugo and Uriel ready). Ring proposed (O33). Memo in English and Spanish: `docs/MEMO_BODY_LOOP.md`, `docs/MEMO_BODY_LOOP_ES.md`.
 

@@ -1,5 +1,7 @@
 # Hiillos demo personas — SYNTHETIC
 
+> **v0.5 (14 Nov, 21:20): a step that helps now shows in that night's ring data.** On the night after a step that truly helps the person (walks for Aino, sound/fireplace for Juho), `average_hrv` ×1.15 and `hr_lowest` −1.5 bpm. Steps that don't help get no effect. Aino: nights after walks average 40.3 ms vs 36.8 ± 4.5 baseline (+0.80 SD) and vs 34.0 on her other recent nights (+1.43 SD); Juho: +0.61 / +1.59 SD. Only Aino's and Juho's `ring.json` change; every other value in every file is identical to v0.4 apart from `generatorVersion`. **Illustrative:** it lets the demo show the loop measuring a step's effect, not a claim that one walk raises HRV that night.
+>
 > **v0.4 (14 Nov, evening): new smart-ring layer** → `personas/<id>/ring.json` (one record per night). `core.json` is unchanged except `generatorVersion` (checked byte-for-byte on all other fields), so the app keeps working. See the section *Smart-ring layer (v0.4)* at the end.
 
 All five people and all of their data are invented. Effect sizes are illustrative, not calibrated to real patients.

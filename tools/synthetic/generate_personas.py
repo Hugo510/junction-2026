@@ -24,7 +24,7 @@ import random
 from datetime import date, datetime, timedelta
 from pathlib import Path
 
-GENERATOR_VERSION = "0.4"
+GENERATOR_VERSION = "0.5"
 SEED = 2026
 DAYS = 90
 
@@ -66,7 +66,14 @@ def ring_drift(pid: str, i: int) -> dict:
     return z
 
 
-def ring_nights(pid: str, start: date, days_fn) -> list[dict]:
+# v0.5: the night after a step that truly helps this person (walks for Aino, sound/fireplace for Juho) has
+# higher recovery: average_hrv x1.15 and hr_lowest -1.5 bpm. ILLUSTRATIVE, not calibrated: it exists so the demo can
+# show the loop measuring a step's effect on the body. Not a claim that one walk raises HRV that night.
+STEP_BOOST = 0.15
+
+
+def ring_nights(pid: str, start: date, days_fn, step_nights: dict | None = None) -> list[dict]:
+    step_nights = step_nights or {}
     rng = random.Random(f"{SEED}-{pid}-ring")  # own stream: core.json is identical with or without the ring layer
     b = RING_BASE[pid]
     hrv_ar, hr_ar = 0.0, 0.0  # AR(1) noise, lag-1 ~0.8 like resting HR in PMData
@@ -89,8 +96,9 @@ def ring_nights(pid: str, start: date, days_fn) -> list[dict]:
         rem = int(total * clamp(rng.gauss(0.21, 0.035), 0.08, 0.32))
         light = total - deep - rem
         duration = int(in_bed_h * 3600)
-        hrv = max(8.0, b["hrv"] * (1 + z["hrv"]) * (1 + hrv_ar))
-        hr_low = b["hr_low"] + z["hr"] + hr_ar
+        boost = step_nights.get(i, 0.0)  # v0.5: night after a step that helps this person
+        hrv = max(8.0, b["hrv"] * (1 + z["hrv"]) * (1 + hrv_ar) * (1 + boost))
+        hr_low = b["hr_low"] + z["hr"] + hr_ar - 10 * boost
         bed_dt = datetime(d.year, d.month, d.day) + timedelta(hours=bed)
         nights.append({
             "date": iso(d),                      # the evening the night started (local day)
@@ -386,9 +394,9 @@ def generate(p: dict, end: date, rng: random.Random, extended: bool = False) -> 
 
 
 RING_TRUTH = {
-    "aino": "From day 60: average_hrv about -15 % (about -9 % in the walk-helps days 70-77), hr_lowest +3, later and more irregular bedtimes, efficiency -3 points. No temperature change.",
+    "aino": "From day 60: average_hrv about -15 % (about -9 % in the walk-helps days 70-77), hr_lowest +3, later and more irregular bedtimes, efficiency -3 points. No temperature change. v0.5: nights after her walks (days 60, 66, 72, 78, 84) average_hrv x1.15, hr_lowest -1.5 (illustrative).",
     "leena": "Stays inside her normal range; only gaps when the ring charges.",
-    "juho": "Days 52-69: short, late, broken sleep (latency +25 min, efficiency -6), average_hrv -20 %, hr_lowest +4; partial recovery 70-77.",
+    "juho": "Days 52-69: short, late, broken sleep (latency +25 min, efficiency -6), average_hrv -20 %, hr_lowest +4; partial recovery 70-77. v0.5: nights after fireplace/sound (days 54, 60, 66, 72, 78, 84) average_hrv x1.15, hr_lowest -1.5 (illustrative); walks: no effect.",
     "sara": "Wear drops (90 % -> 50 % -> 30 % of nights). Missing ring data is not a mood signal.",
     "elias": "Flu days 72-78, peak day 74: temperature_delta up to +1.1 °C, respiratory_rate +2.5, hr_lowest +8, average_hrv -30 %. Fever signature = illness, not relapse.",
 }
@@ -416,7 +424,11 @@ def main():
         (truth_dir / f"{pid}.json").write_text(json.dumps(truth, ensure_ascii=False, indent=2) + "\n")
         msg = f"{pid:6s} check-ins {len(core['checkIns']):3d}  sensors {len(core['sensors']):3d}  feedback {len(core['feedback']):3d}"
         if not a.no_ring:
-            nights = ring_nights(pid, end - timedelta(days=DAYS - 1), p["fn"])
+            start = end - timedelta(days=DAYS - 1)
+            helps = {k for k, v in RESPONSES[pid].items() if v[2] >= 0.5}  # steps with a real next-day mood lift
+            step_nights = {(date.fromisoformat(f["date"]) - start).days: STEP_BOOST
+                           for f in core["feedback"] if f["interventionId"] in helps}
+            nights = ring_nights(pid, start, p["fn"], step_nights)
             ring = {"synthetic": True, "generatorVersion": GENERATOR_VERSION, "seed": SEED, "personaId": pid,
                     "device": "smart ring (Oura-like), SYNTHETIC",
                     "units": {"duration/total/awake/light/deep/rem/latency": "seconds", "efficiency": "0-1",
