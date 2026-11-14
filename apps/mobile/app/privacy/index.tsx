@@ -7,7 +7,7 @@ import { ConsentToggles } from '../../src/features/ConsentToggles';
 import { useChat } from '../../src/store/chat';
 import { useData } from '../../src/store/data';
 import { useSettings } from '../../src/store/settings';
-import { AppText, Button, Card, Screen, spacing } from '../../src/ui';
+import { AppText, Button, ListItem, Screen, Section, spacing } from '../../src/ui';
 
 const ITEMS = ['checkins', 'reaction', 'movement', 'location', 'where', 'sharing'] as const;
 
@@ -54,16 +54,16 @@ export default function PrivacyScreen() {
   return (
     <Screen>
       <AppText>{t('privacy.intro')}</AppText>
-      <Card>
-        <AppText variant="heading">{t('privacy.whatTitle')}</AppText>
+      <Section title={t('privacy.whatTitle')}>
         {ITEMS.map((k) => (
-          <AppText key={k}>• {t(`privacy.items.${k}`)}</AppText>
+          <ListItem key={k} title={t(`privacy.items.${k}`)} />
         ))}
-      </Card>
-      <Card>
-        <AppText variant="heading">{t('privacy.sensorsTitle')}</AppText>
-        <ConsentToggles />
-      </Card>
+      </Section>
+      <Section title={t('privacy.sensorsTitle')}>
+        <View style={{ paddingHorizontal: spacing.md, paddingVertical: spacing.sm }}>
+          <ConsentToggles />
+        </View>
+      </Section>
       <View style={{ gap: spacing.sm }}>
         <AppText variant="caption" tone="muted">
           {t('privacy.exportBody')}

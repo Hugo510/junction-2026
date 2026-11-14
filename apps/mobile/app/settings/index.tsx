@@ -1,7 +1,7 @@
 import Constants from 'expo-constants';
 import { router } from 'expo-router';
 import { useState } from 'react';
-import { Pressable, View } from 'react-native';
+import { Pressable, StyleSheet, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import type { CompanionSpecies } from '../../src/domain/entities';
@@ -10,12 +10,14 @@ import { applyLanguage, SUPPORTED_LANGUAGES } from '../../src/i18n';
 import { haptics } from '../../src/services/haptics';
 import { useData } from '../../src/store/data';
 import { useSettings, type ThemeMode } from '../../src/store/settings';
-import { AppText, Avatar, Button, Card, Chip, ChipGroup, Screen, ToggleRow, spacing } from '../../src/ui';
+import { AppText, Avatar, Button, Chip, ChipGroup, Icon, ListItem, Screen, Section, ToggleRow, spacing, useTheme } from '../../src/ui';
 
 const THEMES: ThemeMode[] = ['system', 'light', 'dark'];
 
+/** Settings as grouped lists (no nested cards). */
 export default function SettingsScreen() {
   const { t } = useTranslation();
+  const { colors } = useTheme();
   const s = useSettings();
   const patient = useData((st) => st.patient);
   const updateCompanion = useData((st) => st.updateCompanion);
@@ -26,61 +28,71 @@ export default function SettingsScreen() {
 
   return (
     <Screen>
-      <Card>
-        <AppText variant="heading">{t('settings.language')}</AppText>
-        <ChipGroup>
-          {SUPPORTED_LANGUAGES.map((lang) => (
-            <Chip
-              key={lang}
-              label={t(`languages.${lang}`)}
-              selected={s.language === lang}
-              onPress={() => {
-                s.setLanguage(lang);
-                applyLanguage(lang);
-              }}
-            />
-          ))}
-        </ChipGroup>
-      </Card>
+      <Section title={t('settings.language')}>
+        <View style={styles.pad}>
+          <ChipGroup>
+            {SUPPORTED_LANGUAGES.map((lang) => (
+              <Chip
+                key={lang}
+                label={t(`languages.${lang}`)}
+                selected={s.language === lang}
+                onPress={() => {
+                  s.setLanguage(lang);
+                  applyLanguage(lang);
+                }}
+              />
+            ))}
+          </ChipGroup>
+        </View>
+      </Section>
 
       {patient ? (
-        <Card>
-          <AppText variant="heading">{t('settings.companion')}</AppText>
-          <CompanionPicker species={species} name={name} onSpecies={setSpecies} onName={setName} />
-          {companionChanged ? (
-            <Button
-              title={t('common.save')}
-              size="md"
-              onPress={() => updateCompanion({ species, name: name.trim() || t(`onboarding.companion.defaults.${species}`) })}
-            />
-          ) : null}
-        </Card>
+        <Section title={t('settings.companion')}>
+          <View style={styles.pad}>
+            <CompanionPicker species={species} name={name} onSpecies={setSpecies} onName={setName} />
+            {companionChanged ? (
+              <Button
+                title={t('common.save')}
+                size="md"
+                onPress={() => updateCompanion({ species, name: name.trim() || t(`onboarding.companion.defaults.${species}`) })}
+              />
+            ) : null}
+          </View>
+        </Section>
       ) : null}
 
-      <Card>
-        <AppText variant="heading">{t('settings.appearance')}</AppText>
-        <ChipGroup>
-          {THEMES.map((mode) => (
-            <Chip key={mode} label={t(`settings.theme.${mode}`)} selected={s.themeMode === mode} onPress={() => s.setThemeMode(mode)} />
-          ))}
-        </ChipGroup>
-      </Card>
+      <Section title={t('settings.appearance')}>
+        <View style={styles.pad}>
+          <ChipGroup>
+            {THEMES.map((mode) => (
+              <Chip key={mode} label={t(`settings.theme.${mode}`)} selected={s.themeMode === mode} onPress={() => s.setThemeMode(mode)} />
+            ))}
+          </ChipGroup>
+        </View>
+      </Section>
 
-      <Card>
-        <AppText variant="heading">{t('settings.accessibility')}</AppText>
-        <ToggleRow label={t('settings.largeText')} description={t('settings.largeTextDesc')} value={s.largeText} onChange={s.setLargeText} />
-        <ToggleRow label={t('settings.reduceMotion')} description={t('settings.reduceMotionDesc')} value={s.reduceMotion} onChange={s.setReduceMotion} />
-        <ToggleRow
-          label={t('settings.vibration')}
-          description={t('settings.vibrationDesc')}
-          value={s.consents.vibration}
-          onChange={(v) => s.setConsent('vibration', v)}
+      <Section title={t('settings.accessibility')}>
+        <View style={styles.padRow}>
+          <ToggleRow label={t('settings.largeText')} description={t('settings.largeTextDesc')} value={s.largeText} onChange={s.setLargeText} />
+        </View>
+        <View style={styles.padRow}>
+          <ToggleRow label={t('settings.reduceMotion')} description={t('settings.reduceMotionDesc')} value={s.reduceMotion} onChange={s.setReduceMotion} />
+        </View>
+        <View style={styles.padRow}>
+          <ToggleRow label={t('settings.vibration')} description={t('settings.vibrationDesc')} value={s.consents.vibration} onChange={(v) => s.setConsent('vibration', v)} />
+        </View>
+      </Section>
+
+      <Section>
+        <ListItem
+          title={t('settings.privacy')}
+          leading={<Icon name="shield" color={colors.primary} />}
+          chevron
+          onPress={() => router.push('/privacy')}
         />
-      </Card>
+      </Section>
 
-      <Button title={t('settings.privacy')} variant="secondary" onPress={() => router.push('/privacy')} />
-
-      <Card tone="sand">
+      <Section title={t('settings.about')} footer={t('settings.aboutBody', { app: appName })}>
         {/* Hidden demo mode: long-press the logo for 2 seconds. */}
         <Pressable
           accessibilityRole="image"
@@ -90,9 +102,9 @@ export default function SettingsScreen() {
             haptics.confirm();
             router.push('/demo');
           }}
-          style={{ flexDirection: 'row', alignItems: 'center', gap: spacing.md }}
+          style={[styles.pad, styles.about]}
         >
-          <Avatar species="bird" size={56} />
+          <Avatar species="bird" size={48} />
           <View style={{ flex: 1 }}>
             <AppText variant="heading">{appName}</AppText>
             <AppText variant="caption" tone="muted">
@@ -100,9 +112,13 @@ export default function SettingsScreen() {
             </AppText>
           </View>
         </Pressable>
-        <AppText variant="label">{t('settings.about')}</AppText>
-        <AppText>{t('settings.aboutBody', { app: appName })}</AppText>
-      </Card>
+      </Section>
     </Screen>
   );
 }
+
+const styles = StyleSheet.create({
+  pad: { padding: spacing.md, gap: spacing.md },
+  padRow: { paddingHorizontal: spacing.md, paddingVertical: spacing.xs },
+  about: { flexDirection: 'row', alignItems: 'center' },
+});

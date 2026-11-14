@@ -5,39 +5,44 @@ import { useTranslation } from 'react-i18next';
 import { INTERVENTIONS } from '../src/domain/interventions';
 import { FeedbackBar } from '../src/features/FeedbackBar';
 import { interventionRoute } from '../src/features/routes';
-import { AppText, Button, Card, Screen, spacing } from '../src/ui';
+import { AppText, Card, ListItem, Screen, Section, spacing } from '../src/ui';
 
-/** Library of calming interventions. Each one: duration, why it helps, start, "Did this help?". */
+/** Comfort library: guided exercises as a list; simple ideas as small cards with "Did this help?". */
 export default function ComfortScreen() {
   const { t } = useTranslation();
+  const guided = INTERVENTIONS.filter((i) => interventionRoute(i.id));
+  const ideas = INTERVENTIONS.filter((i) => !interventionRoute(i.id));
+
   return (
     <Screen>
       <AppText tone="muted">{t('comfort.subtitle')}</AppText>
-      {INTERVENTIONS.map((item) => {
-        const route = interventionRoute(item.id);
-        const title = t(`interventions.${item.id}.title`);
-        return (
+      <Section>
+        {guided.map((item) => {
+          const route = interventionRoute(item.id);
+          return (
+            <ListItem
+              key={item.id}
+              title={t(`interventions.${item.id}.title`)}
+              subtitle={`${t('common.minutes', { count: item.minutes })} · ${t(`interventions.${item.id}.why`)}`}
+              chevron
+              onPress={() => route && router.push(route)}
+            />
+          );
+        })}
+      </Section>
+
+      <View style={{ gap: spacing.md }}>
+        <AppText variant="label" tone="muted">
+          {t('comfort.ideas')}
+        </AppText>
+        {ideas.map((item) => (
           <Card key={item.id}>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', gap: spacing.sm }}>
-              <AppText variant="heading" style={{ flex: 1 }}>
-                {title}
-              </AppText>
-              <AppText variant="caption" tone="muted">
-                {t('common.minutes', { count: item.minutes })}
-              </AppText>
-            </View>
-            <AppText tone="muted">{t(`interventions.${item.id}.why`)}</AppText>
-            {route ? (
-              <Button title={t('comfort.open')} variant="accent" size="md" onPress={() => router.push(route)} accessibilityLabel={`${t('comfort.open')}: ${title}`} />
-            ) : (
-              <>
-                <AppText>{t(`interventions.${item.id}.howTo`)}</AppText>
-                <FeedbackBar id={item.id} />
-              </>
-            )}
+            <AppText variant="heading">{t(`interventions.${item.id}.title`)}</AppText>
+            <AppText>{t(`interventions.${item.id}.howTo`)}</AppText>
+            <FeedbackBar id={item.id} />
           </Card>
-        );
-      })}
+        ))}
+      </View>
     </Screen>
   );
 }
