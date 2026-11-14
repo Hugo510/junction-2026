@@ -118,7 +118,8 @@ Buttons: *Seed good week*, *Seed declining week*, *Trigger urgent check-in*, *Ad
 Suggested 2-minute script:
 
 1. *Seed good week* → back to the chat: a calm greeting; tap *Check in with me* and answer in the chat.
-2. *Seed declining week* → mood, sleep, activity and reaction time get worse; priority jumps (≈ 85/100).
+2. *Seed declining week* → mood, sleep, activity and reaction time get worse; priority jumps (75/100). With only 14 days of history there is no personal reference yet, so the activity
+   trend is not judged; the score comes from mood, sleep, missed check-ins, reaction time and anxiety.
    The chat now opens with the companion **suggesting** a consultation.
 3. Tap *Request a consultation* in the chat card → high priority, readable reasons, 1st in line.
 4. Open ☰ → Progress → Journal: calendar of moods, feelings and the entry just saved from the chat.

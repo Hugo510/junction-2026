@@ -35,8 +35,8 @@ import { average, checkInsByDate, sensorsByDate, twoWeekWindows } from './histor
  * |                   | AND energy ≥ 1 above usual OR activity ≥ 30 % above previous    |                       |
  *
  * Staging (docs/research/baseline_design.md): trend rules need a reference (from week 3);
- * variability rules need phase 3 and at least 42 reference days. Before a reference exists,
- * activity falls back to the only comparison available: this week against last week (−25 %).
+ * variability rules need phase 3 and at least 42 reference days. Before a reference exists
+ * Hiillos is learning the person's averages and no trend rule fires.
  * moodDrop and belowBaseline describe the same change, so only the larger one adds points
  * (both reasons are shown when both apply). Sleep is two-sided: depression can mean much less
  * OR much more sleep.
@@ -232,16 +232,10 @@ export function priorityScore(input: PriorityInput): PriorityResult {
     if (missed >= 3) add(Math.min(15, (missed - 2) * 5), 'missedCheckIns');
   }
 
-  // Activity: the smoothed trend against the person's own limit. Before a reference exists,
-  // the only comparison available is this week against last week.
-  const activity = personal.trends.activity;
-  if (activity) {
-    if (activity.triggered) add(10, 'activityDrop');
-  } else {
-    const actRecent = average(values(recent, (d) => sensors.get(d)?.activityMinutes));
-    const actPrev = average(values(previous, (d) => sensors.get(d)?.activityMinutes));
-    if (actRecent !== undefined && actPrev !== undefined && actPrev > 0 && (actPrev - actRecent) / actPrev >= 0.25) add(10, 'activityDrop');
-  }
+  // Activity: the smoothed trend against the person's own limit. There is no fixed "down X %"
+  // cut-off: until a reference exists (the first three weeks) Hiillos is still learning the
+  // person's averages and does not judge activity at all.
+  if (personal.trends.activity?.triggered) add(10, 'activityDrop');
   // Backup population check, independent of the personal baseline.
   const stepDays = values(recent, (d) => sensors.get(d)?.steps);
   if (stepDays.length >= LOW_STEPS_DAYS && stepDays.filter((s) => s < LOW_STEPS).length >= LOW_STEPS_DAYS) add(5, 'lowSteps');
