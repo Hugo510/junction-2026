@@ -45,7 +45,7 @@ export function FeatureCard({ title, description, eyebrow, category, art, onPres
           {title}
         </AppText>
         {description ? (
-          <AppText variant="caption" tone="muted" numberOfLines={size === 'lg' ? 5 : 3}>
+          <AppText variant="caption" tone="muted" numberOfLines={size === 'lg' || !onPress ? 5 : 3}>
             {description}
           </AppText>
         ) : null}

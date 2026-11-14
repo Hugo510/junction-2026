@@ -2,8 +2,9 @@ import { create } from 'zustand';
 
 import { shouldReplaceOnConflict, toBackendCheckIn, toBackendConsents } from '../data/api/mapping';
 import type { CheckIn, SupportedLanguage } from '../domain/entities';
+import type { WearableDay } from '../domain/wearable';
 import { api, ApiError, backendConfigured } from '../services/backend/client';
-import type { Consents } from './settings';
+import { useSettings, type Consents } from './settings';
 
 export type BackendState = 'off' | 'connecting' | 'online' | 'offline';
 
@@ -20,6 +21,8 @@ interface BackendStore {
   /** safetyReportedToday: an earlier entry of the same day answered "yes" to the safety question. */
   mirrorCheckIn: (checkIn: CheckIn, safetyReportedToday?: boolean) => void;
   mirrorConsents: (consents: Consents) => void;
+  /** Copies the wearable's daily totals (and its consent). "synthetic" is sent as the source: the data is simulated. */
+  mirrorWearable: (days: WearableDay[], connected: boolean) => void;
 }
 
 export interface CompanionTurn {
@@ -84,6 +87,30 @@ export const useBackend = create<BackendStore>()((set, get) => ({
     })();
   },
 
+  mirrorWearable: (days, connected) => {
+    if (!backendConfigured || get().state === 'off') return;
+    void (async () => {
+      try {
+        const consents = { ...useSettings.getState().consents };
+        await api('/me/consents', { method: 'PUT', body: { ...toBackendConsents(consents), wearable: connected } });
+        if (connected && days.length > 0) {
+          const items = days.flatMap((d) => {
+            const period = { periodStart: `${d.date}T00:00:00Z`, periodEnd: `${d.date}T23:59:59Z`, source: 'synthetic' };
+            return [
+              // Steps are left out: on the server they belong to the movement consent.
+              { type: 'sleep', value: d.sleepHours, unit: 'hours', ...period },
+              { type: 'resting_heart_rate', value: d.restingHr, unit: 'bpm', ...period },
+            ];
+          });
+          await api('/sensors/aggregates', { method: 'POST', body: { items } });
+        }
+        set({ state: 'online' });
+      } catch {
+        // An older server does not know these types yet: the app keeps working on its own.
+      }
+    })();
+  },
+
   mirrorConsents: (consents) => {
     if (!backendConfigured || get().state === 'off') return;
     void api('/me/consents', { method: 'PUT', body: toBackendConsents(consents) })
@@ -98,7 +125,7 @@ export function requestCompanionReply(input: { message: string; language: Suppor
 }
 
 /** MP3 (base64) of a message the companion wrote. */
-export async function requestCompanionSpeech(text: string, language: SupportedLanguage): Promise<string> {
-  const res = await api<{ audioBase64: string }>('/companion/speech', { method: 'POST', body: { text, language }, timeoutMs: 25000 });
+export async function requestCompanionSpeech(text: string, language: SupportedLanguage, companion?: string): Promise<string> {
+  const res = await api<{ audioBase64: string }>('/companion/speech', { method: 'POST', body: { text, language, companion }, timeoutMs: 25000 });
   return res.audioBase64;
 }

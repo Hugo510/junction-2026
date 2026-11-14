@@ -863,5 +863,33 @@
       "leftFoot": "Pie izquierdo",
       "rightFoot": "Pie derecho"
     }
+  },
+  "wearable": {
+    "title": "Dispositivo",
+    "menu": "Conectar un dispositivo",
+    "menuDesc": "Sueño, pasos y pulso en reposo, medidos por ti",
+    "intro": "Un reloj, anillo o pulsera puede medir tu sueño y tus pasos, para que tengas menos que registrar.",
+    "simulated": "Simulado para esta demo: no se conecta ningún dispositivo real y todos los valores son sintéticos.",
+    "choose": "¿Cuál usas?",
+    "devices": {
+      "watch": "Reloj",
+      "ring": "Anillo",
+      "band": "Pulsera"
+    },
+    "connect": "Conectar",
+    "searching": "Buscando tu {{device}}…",
+    "found": "Encontrado. Conectando…",
+    "connected": "Conectado · datos simulados",
+    "disconnect": "Desconectar",
+    "reads": "Hiillos lee solo totales diarios: horas de sueño, pasos y pulso en reposo. Nunca señales en bruto ni ubicación. Conectar es tu consentimiento; puedes desconectar cuando quieras.",
+    "sleep": "Sueño de anoche",
+    "sleepValue": "{{hours}} h",
+    "steps": "Pasos de ayer",
+    "heart": "Pulso en reposo",
+    "heartValue": "{{bpm}} lpm",
+    "usual": "Lo habitual en ti: {{value}}",
+    "noUsual": "Aún aprendiendo lo habitual en ti",
+    "weekLabel": "{{metric}}, últimos 7 días",
+    "use": "Cómo lo usa Hiillos: el sueño medido completa las noches que no registraste. Las reglas no cambian, y los sensores solo hacen que Hiillos pregunte."
   }
 }

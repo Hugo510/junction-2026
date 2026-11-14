@@ -863,5 +863,33 @@
       "leftFoot": "Left foot",
       "rightFoot": "Right foot"
     }
+  },
+  "wearable": {
+    "title": "Wearable",
+    "menu": "Connect a wearable",
+    "menuDesc": "Sleep, steps and resting heart rate, measured for you",
+    "intro": "A watch, ring or band can measure sleep and steps for you, so you have less to log.",
+    "simulated": "Simulated for this demo: no real device is paired and all values are synthetic.",
+    "choose": "Which one do you wear?",
+    "devices": {
+      "watch": "Watch",
+      "ring": "Ring",
+      "band": "Band"
+    },
+    "connect": "Connect",
+    "searching": "Looking for your {{device}}…",
+    "found": "Found it. Connecting…",
+    "connected": "Connected · simulated data",
+    "disconnect": "Disconnect",
+    "reads": "Hiillos reads daily totals only: hours of sleep, steps and resting heart rate. Never raw signals and never location. Connecting is your consent; you can disconnect at any time.",
+    "sleep": "Sleep last night",
+    "sleepValue": "{{hours}} h",
+    "steps": "Steps yesterday",
+    "heart": "Resting heart rate",
+    "heartValue": "{{bpm}} bpm",
+    "usual": "Your usual: {{value}}",
+    "noUsual": "Still learning your usual",
+    "weekLabel": "{{metric}}, last 7 days",
+    "use": "How Hiillos uses it: measured sleep fills in the nights you did not log. The rules stay the same, and sensors only make Hiillos ask a question."
   }
 }

@@ -92,6 +92,7 @@ export default function SettingsScreen() {
           chevron
           onPress={() => router.push('/privacy')}
         />
+        <ListItem title={t('wearable.menu')} subtitle={t('wearable.menuDesc')} leading={<Icon name="today" color={colors.primary} />} chevron onPress={() => router.push('/wearable')} />
       </Section>
 
       <Section title={t('settings.about')} footer={t('settings.aboutBody', { app: appName })}>

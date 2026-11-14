@@ -863,5 +863,33 @@
       "leftFoot": "Vänster fot",
       "rightFoot": "Höger fot"
     }
+  },
+  "wearable": {
+    "title": "Bärbar enhet",
+    "menu": "Anslut en bärbar enhet",
+    "menuDesc": "Sömn, steg och vilopuls, mätt åt dig",
+    "intro": "En klocka, ring eller ett armband kan mäta din sömn och dina steg, så att du behöver logga mindre.",
+    "simulated": "Simulerat för den här demon: ingen riktig enhet ansluts och alla värden är syntetiska.",
+    "choose": "Vilken använder du?",
+    "devices": {
+      "watch": "Klocka",
+      "ring": "Ring",
+      "band": "Armband"
+    },
+    "connect": "Anslut",
+    "searching": "Söker efter enheten: {{device}}…",
+    "found": "Hittad. Ansluter…",
+    "connected": "Ansluten · simulerad data",
+    "disconnect": "Koppla från",
+    "reads": "Hiillos läser bara dagliga summor: sömntimmar, steg och vilopuls. Aldrig råsignaler och aldrig plats. Att ansluta är ditt samtycke; du kan koppla från när som helst.",
+    "sleep": "Sömn i natt",
+    "sleepValue": "{{hours}} h",
+    "steps": "Steg i går",
+    "heart": "Vilopuls",
+    "heartValue": "{{bpm}} slag/min",
+    "usual": "Ditt vanliga: {{value}}",
+    "noUsual": "Lär sig fortfarande ditt vanliga",
+    "weekLabel": "{{metric}}, senaste 7 dagarna",
+    "use": "Så använder Hiillos det: uppmätt sömn fyller i de nätter du inte loggade. Reglerna är desamma, och sensorer får bara Hiillos att ställa en fråga."
   }
 }

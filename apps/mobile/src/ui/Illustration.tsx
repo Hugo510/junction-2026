@@ -11,6 +11,7 @@ export type IllustrationName =
   | 'fireplace'
   | 'lake'
   | 'waves'
+  | 'watch'
   | 'puzzle'
   | 'move'
   | 'walk'
@@ -65,6 +66,16 @@ export function Illustration({ name, category, size = 96 }: { name: Illustration
         <Path d="M4 56c12-9 22-9 34 0s22 9 34 0 16-7 24-3v43H4z" fill={s} opacity={0.8} />
         <Path d="M4 72c12-8 22-8 34 0s22 8 34 0 16-6 24-3v27H4z" fill={a} />
         <Path d="M30 46c7-7 17-7 24 0-7 7-17 7-24 0zm24 0l8-6v12z" fill={a} />
+      </>
+    ),
+    // A round watch with a soft pulse line.
+    watch: (
+      <>
+        <Rect x={36} y={4} width={28} height={26} rx={8} fill={s} />
+        <Rect x={36} y={70} width={28} height={26} rx={8} fill={s} />
+        <Circle cx={50} cy={50} r={30} fill={a} />
+        <Circle cx={50} cy={50} r={22} fill={colors.categories[category].bg} />
+        <Path d="M33 51h8l4-9 6 17 4-8h12" fill="none" stroke={a} strokeWidth={4} strokeLinecap="round" strokeLinejoin="round" />
       </>
     ),
     // Three rolling waves under a low moon.

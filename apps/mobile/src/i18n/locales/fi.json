@@ -863,5 +863,33 @@
       "leftFoot": "Vasen jalkaterä",
       "rightFoot": "Oikea jalkaterä"
     }
+  },
+  "wearable": {
+    "title": "Puettava laite",
+    "menu": "Yhdistä puettava laite",
+    "menuDesc": "Uni, askeleet ja leposyke mitattuna puolestasi",
+    "intro": "Kello, sormus tai ranneke voi mitata unesi ja askeleesi, jotta sinun tarvitsee kirjata vähemmän.",
+    "simulated": "Simuloitu tätä demoa varten: mitään oikeaa laitetta ei yhdistetä ja kaikki arvot ovat synteettisiä.",
+    "choose": "Mitä näistä käytät?",
+    "devices": {
+      "watch": "Kello",
+      "ring": "Sormus",
+      "band": "Ranneke"
+    },
+    "connect": "Yhdistä",
+    "searching": "Etsitään laitetta: {{device}}…",
+    "found": "Löytyi. Yhdistetään…",
+    "connected": "Yhdistetty · simuloitu data",
+    "disconnect": "Katkaise yhteys",
+    "reads": "Hiillos lukee vain päivän yhteissummat: unitunnit, askeleet ja leposykkeen. Ei koskaan raakasignaaleja eikä sijaintia. Yhdistäminen on suostumuksesi; voit katkaista yhteyden milloin tahansa.",
+    "sleep": "Viime yön uni",
+    "sleepValue": "{{hours}} h",
+    "steps": "Eilisen askeleet",
+    "heart": "Leposyke",
+    "heartValue": "{{bpm}} lyöntiä/min",
+    "usual": "Sinulle tavallista: {{value}}",
+    "noUsual": "Opetellaan vielä, mikä on sinulle tavallista",
+    "weekLabel": "{{metric}}, viimeiset 7 päivää",
+    "use": "Näin Hiillos käyttää sitä: mitattu uni täydentää yöt, joita et kirjannut. Säännöt pysyvät samoina, ja anturit saavat Hiilloksen vain kysymään."
   }
 }

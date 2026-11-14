@@ -115,6 +115,9 @@ export interface SensorAggregate {
   screenOffTime?: string;
   steps?: number;
   nightPhoneMinutes?: number;
+  /** Measured by a connected wearable (simulated today): hours asleep and resting heart rate. */
+  sleepHours?: number;
+  restingHr?: number;
 }
 
 /** PHQ-9 questionnaire: 9 items scored 0–3, total 0–27. Sensors only ask; questionnaires decide. */
