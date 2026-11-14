@@ -205,11 +205,11 @@ export const useData = create<DataState>()((set, get) => {
     },
 
     requestConsult: async (reason, perceivedUrgency) => {
-      const { checkIns, sensors } = get();
+      const { checkIns, sensors, phq9 } = get();
       const today = todayISO();
       const latestToday = [...checkIns].reverse().find((c) => c.date === today);
       const risk = assessCheckInRisk({ safetyConcern: latestToday?.safetyConcern ?? false });
-      const priority = priorityScore({ checkIns, sensors, today, perceivedUrgency, flags: { bipolar: get().patient?.bipolarFlag } });
+      const priority = priorityScore({ checkIns, sensors, phq9, today, perceivedUrgency, flags: { bipolar: get().patient?.bipolarFlag } });
 
       if (routeToChannel(risk, priority) === 'urgent') {
         const alert = await get().raiseAlert('contactCareTeam');

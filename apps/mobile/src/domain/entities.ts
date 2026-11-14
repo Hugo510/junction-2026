@@ -95,6 +95,9 @@ export interface CheckIn {
   bodyMap?: BodyMap;
   energy?: Scale5;
   anxiety?: Scale5;
+  /** Early signs asked in the longer check-in (1 = not at all, 5 = a lot). */
+  restlessness?: Scale5;
+  worry?: Scale5;
   sleepHours?: number;
   note?: string;
   reaction?: ReactionAggregate;

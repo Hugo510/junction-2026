@@ -9,7 +9,7 @@ describe('clinician projection', () => {
     const before = JSON.stringify(PERSONAS);
     const rows = buildClinicianRows(PERSONAS, TODAY);
     expect(rows.map((r) => [r.id, r.priority.score, r.priority.level])).toEqual([
-      ['aino', 90, 'high'], ['sara', 25, 'low'], ['elias', 0, 'low'], ['juho', 0, 'low'], ['leena', 0, 'low'],
+      ['aino', 90, 'high'], ['sara', 35, 'medium'], ['elias', 0, 'low'], ['juho', 0, 'low'], ['leena', 0, 'low'],
     ]);
     expect(rows.filter((r) => r.lostContact).map((r) => r.id)).toEqual(['sara']);
     expect(rows.map((r) => [r.id, r.latestPhq9?.total, r.latestPhq9?.date])).toEqual([

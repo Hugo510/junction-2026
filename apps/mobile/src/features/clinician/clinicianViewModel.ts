@@ -43,7 +43,7 @@ export function buildClinicianRows(personas: readonly Persona[], today: ISODate,
     const outreach = outreachLevel(checkIns, today);
     // Early signs are set by the clinic per person; they only reorder the reasons.
     const watchedSigns = earlySigns[persona.persona.id] ?? [];
-    const priority = priorityScore({ checkIns, sensors, today, flags: { bipolar: persona.persona.bipolarFlag, earlySigns: watchedSigns } });
+    const priority = priorityScore({ checkIns, sensors, phq9: phq, today, flags: { bipolar: persona.persona.bipolarFlag, earlySigns: watchedSigns } });
     return {
       id: persona.persona.id,
       name: persona.persona.label.split(',')[0].trim(),

@@ -18,7 +18,7 @@ describe('the five demo personas on demo day', () => {
   };
   const priority = (id: string) => {
     const p = byId(id);
-    return priorityScore({ checkIns: p.checkIns, sensors: p.sensors, today: DEMO_DAY });
+    return priorityScore({ checkIns: p.checkIns, sensors: p.sensors, phq9: p.phq9, today: DEMO_DAY });
   };
 
   it('all five are registered, synthetic and valid', () => {
@@ -39,8 +39,9 @@ describe('the five demo personas on demo day', () => {
         'priority.reasons.laterNights',
       ]),
     );
-    // "home time +36 %, screen off 1 h 34 later than her own normal"
-    expect(signalDrift({ sensors: byId('aino').sensors, today: DEMO_DAY })).toEqual({ homeDeltaPct: 36, screenOffDeltaMin: 94 });
+    // Against her LAST KNOWN WELL weeks (17 Aug – 11 Oct), not a rolling window that had already
+    // absorbed part of the slide: "home time +46 %, screen off almost 2 h later than her own normal".
+    expect(signalDrift({ checkIns: byId('aino').checkIns, sensors: byId('aino').sensors, phq9: byId('aino').phq9, today: DEMO_DAY })).toEqual({ homeDeltaPct: 46, screenOffDeltaMin: 118 });
     expect(hasPhqConcern(byId('aino').phq9 ?? [], DEMO_DAY)).toBe(true);
     expect(byId('aino').phq9?.slice(-2).map((q) => q.total)).toEqual([11, 12]);
   });
@@ -53,11 +54,15 @@ describe('the five demo personas on demo day', () => {
     }
   });
 
-  it('Sara: lost contact (silence ladder), low priority, embers at the floor but not out', () => {
+  it('Sara: lost contact (silence ladder), a question from her phone signals, embers at the floor but not out', () => {
     const sara = byId('sara');
     // v0.3: her phone keeps logging while she is silent → missed check-ins + activity drop, no mood alarm
-    expect(priority('sara')).toMatchObject({ score: 25, level: 'low' });
-    expect(priority('sara').reasons).toEqual(['priority.reasons.missedCheckIns', 'priority.reasons.activityDrop']);
+    // With the smoothed trend against her own well weeks, her phone shows more time at home (+10 %)
+    // and later evenings (+56 min) on 3 of the last 5 days. That makes it "medium": Hiillos would ask
+    // two questions. It is never a clinic alert, and her silence alone still reads as lost contact.
+    expect(priority('sara')).toMatchObject({ score: 35, level: 'medium' });
+    expect(priority('sara').reasons).toEqual(['priority.reasons.missedCheckIns', 'priority.reasons.homeMore', 'priority.reasons.laterNights']);
+    expect(hasPhqConcern(sara.phq9 ?? [], DEMO_DAY)).toBe(false);
     expect(outreachLevel(sara.checkIns, DEMO_DAY)).toBe('reconnect');
     const level = emberLevel(sara.checkIns, sara.sensors, sara.feedback, DEMO_DAY);
     expect(level).toBeGreaterThanOrEqual(EMBER_FLOOR);
@@ -72,10 +77,10 @@ describe('the five demo personas on demo day', () => {
 
   it('Elias: the flu week reached medium (two questions) but never high, and his PHQ-9 stayed under 10', () => {
     const elias = byId('elias');
-    const flu = priorityScore({ checkIns: elias.checkIns, sensors: elias.sensors, today: '2026-11-04' });
+    const flu = priorityScore({ checkIns: elias.checkIns, sensors: elias.sensors, phq9: elias.phq9, today: '2026-11-04' });
     expect(flu.level).toBe('medium');
     const worst = Math.max(
-      ...Array.from({ length: 70 }, (_, i) => priorityScore({ checkIns: elias.checkIns, sensors: elias.sensors, today: addDaysISO('2026-09-06', i) }).score),
+      ...Array.from({ length: 70 }, (_, i) => priorityScore({ checkIns: elias.checkIns, sensors: elias.sensors, phq9: elias.phq9, today: addDaysISO('2026-09-06', i) }).score),
     );
     expect(worst).toBeLessThan(60); // never high on any day
     expect(Math.max(...(elias.phq9 ?? []).map((q) => q.total))).toBeLessThan(10);

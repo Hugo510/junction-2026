@@ -58,7 +58,7 @@ export function useChatContext(): ChatContext | null {
       calmInterventions: calm,
       outreach: careEnded ? 'none' : outreachLevel(checkIns, today),
       trustedContactName: trusted?.name,
-      upwardDrift: !!patient.bipolarFlag && detectUpwardDrift({ checkIns, sensors, today }),
+      upwardDrift: !!patient.bipolarFlag && detectUpwardDrift({ checkIns, sensors, phq9, today }),
       phqDue: !careEnded && isPhqDue(priority.level, phq9, today),
       careEnded,
       phqConcern: hasPhqConcern(phq9, today),

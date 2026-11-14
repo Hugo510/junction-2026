@@ -88,7 +88,7 @@ export function simulateWearable(input: { checkIns: CheckIn[]; sensors: SensorAg
 /**
  * Adds the wearable totals to the phone's daily rows. Only existing days are enriched (a new
  * empty day would look like "no activity" to the activity rule) and values already in the row
- * (persona files, the phone's own steps) are kept.
+ * (persona files) are kept.
  */
 export function mergeWearable(sensors: SensorAggregate[], days: WearableDay[]): SensorAggregate[] {
   const byDate = new Map(days.map((d) => [d.date, d]));
@@ -97,7 +97,8 @@ export function mergeWearable(sensors: SensorAggregate[], days: WearableDay[]): 
     if (!w) return s;
     return {
       ...s,
-      steps: s.steps ?? w.steps,
+      // Steps are not filled in: simulated steps are shown on the wearable screen only, so a
+      // made-up number can never trip the population step check in the score.
       sleepMinutes: s.sleepMinutes ?? w.sleepMinutes,
       restingHr: s.restingHr ?? w.restingHr,
       nightHrvMs: s.nightHrvMs ?? w.nightHrvMs,

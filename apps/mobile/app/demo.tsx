@@ -47,7 +47,7 @@ export default function DemoScreen() {
     const today = todayISO();
     const contact = useSettings.getState().trustedContact;
     // Fresh score for the (possibly just advanced) simulated day.
-    const current = priorityScore({ checkIns, sensors, today, flags: { bipolar: patient?.bipolarFlag } });
+    const current = priorityScore({ checkIns, sensors, phq9, today, flags: { bipolar: patient?.bipolarFlag } });
     const kind = noticeFor({
       level,
       daysSilent: daysSilent(checkIns, today),
@@ -133,6 +133,7 @@ export default function DemoScreen() {
     <Screen>
       <AppText tone="muted">{t('demo.subtitle')}</AppText>
       <Button title={t('clinician.title')} variant="secondary" onPress={() => router.push('/clinician')} />
+      <Button title={t('baseline.title')} variant="secondary" onPress={() => router.push('/baseline')} />
       <Card tone="sand">
         <AppText>{t('demo.simulatedDate', { date: formatDate(now(), 'EEEE d MMMM') })}</AppText>
         <AppText variant="label" key={dayOffset}>

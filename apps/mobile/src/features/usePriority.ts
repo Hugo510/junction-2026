@@ -23,7 +23,8 @@ export function useSensorsWithWearable(): SensorAggregate[] {
 export function usePriority(): PriorityResult {
   const checkIns = useData((s) => s.checkIns);
   const sensors = useSensorsWithWearable();
+  const phq9 = useData((s) => s.phq9);
   const bipolar = useData((s) => s.patient?.bipolarFlag ?? false);
   const today = useToday();
-  return useMemo(() => priorityScore({ checkIns, sensors, today, flags: { bipolar } }), [checkIns, sensors, today, bipolar]);
+  return useMemo(() => priorityScore({ checkIns, sensors, phq9, today, flags: { bipolar } }), [checkIns, sensors, phq9, today, bipolar]);
 }
