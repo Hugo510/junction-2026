@@ -6,10 +6,10 @@ uvicorn app.main:app --reload --port 8000
 
 TOKEN=$(curl -s -X POST http://localhost:8000/api/v1/auth/demo-login \
   -H "Content-Type: application/json" \
-  -d '{"role": "patient"}' | python -c "import sys, json; print(json.load(sys.stdin)['token'])")
+  -d '{"role": "patient"}' | python3 -c "import sys, json; print(json.load(sys.stdin)['token'])")
 
 
-2. Call /me with it
+2. Call /me as GET request
 
 curl -s http://localhost:8000/api/v1/me -H "Authorization: Bearer $TOKEN"
 
@@ -35,3 +35,10 @@ Expected Output:
 }
 
 ```
+
+3. Call /me as PATCH request
+
+curl -s -X PATCH http://localhost:8000/api/v1/me \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"displayName": "Aino", "language": "fi", "companion": {"species": "dog", "name": "Mika"}}'
