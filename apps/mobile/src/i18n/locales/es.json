@@ -1,6 +1,6 @@
 {
   "common": {
-    "appName": "Valo",
+    "appName": "Hiillos",
     "tagline": "Seguir bien después de la TMS, un pequeño paso a la vez",
     "continue": "Continuar",
     "back": "Atrás",
@@ -64,7 +64,9 @@
       "location": "Ubicación aproximada",
       "locationDesc": "Solo para estimar el tiempo al aire libre con luz de día. Se procesa en tu teléfono; nunca se guardan coordenadas.",
       "vibration": "Vibración",
-      "vibrationDesc": "Vibraciones suaves que guían la respiración y otros ejercicios."
+      "vibrationDesc": "Vibraciones suaves que guían la respiración y otros ejercicios.",
+      "careTeamAfterSilence": "Que mi equipo de salud me contacte si perdemos el contacto",
+      "careTeamAfterSilenceDesc": "Si pasan 7 días sin check-in, tu equipo recibe un aviso suave (simulado). Desactivado por defecto."
     },
     "companion": {
       "title": "Elige un compañero",
@@ -225,7 +227,8 @@
       "low": "Gracias por contármelo. Los días pesados pasan — hagamos algo pequeño y amable.",
       "mid": "Gracias por tu check-in. Estable está bien.",
       "high": "¡Me alegra que hoy te sientas bien! Sigamos con calma.",
-      "urgent": "Gracias por tu honestidad. Mereces apoyo — por favor, busca ayuda ahora."
+      "urgent": "Gracias por tu honestidad. Mereces apoyo — por favor, busca ayuda ahora.",
+      "steady": "Gracias por tu check-in. Mantengamos el día tranquilo y estable, y cuidemos tu sueño."
     },
     "encourage": {
       "start": "Cuando quieras empezar.",
@@ -423,7 +426,8 @@
       "highAnxiety": "Has sentido bastante tensión",
       "perceivedUrgency": "Nos dijiste que se siente urgente",
       "belowBaseline": "Tu ánimo ha estado por debajo de lo habitual en ti durante un tiempo",
-      "longSleep": "Varias noches muy largas o días en cama (10 horas o más)"
+      "longSleep": "Varias noches muy largas o días en cama (10 horas o más)",
+      "upwardDrift": "Poco sueño con energía o actividad inusualmente altas (indicador de la clínica)"
     }
   },
   "risk": {
@@ -442,7 +446,8 @@
       "movement": "Movimiento: minutos activos durante los ejercicios — nunca datos crudos del sensor.",
       "location": "Ubicación: solo si estás afuera durante un paseo. Nunca se guardan coordenadas.",
       "where": "Dónde: solo en este teléfono. Sin cuenta y sin nube por ahora.",
-      "sharing": "Compartir: tu equipo de salud solo ve un resumen cuando pides una consulta, o si una respuesta de seguridad necesita ayuda urgente."
+      "sharing": "Compartir: tu equipo de salud solo ve un resumen cuando pides una consulta, o si una respuesta de seguridad necesita ayuda urgente.",
+      "trusted": "Persona de confianza: su nombre y número solo se guardan en este teléfono."
     },
     "sensorsTitle": "Sensores",
     "export": "Exportar mis datos",
@@ -474,7 +479,14 @@
     "about": "Acerca de",
     "aboutBody": "{{app}} apoya el bienestar después del tratamiento con TMS. No es un dispositivo médico: no diagnostica ni trata, y no reemplaza a tu equipo de salud. En una emergencia, llama al 112.",
     "version": "Versión {{version}}",
-    "logo": "Logo de {{app}}"
+    "logo": "Logo de {{app}}",
+    "trusted": {
+      "title": "Persona de confianza",
+      "desc": "Solo se guarda en este teléfono. Sirve para llamar o escribir con un toque cuando todo pese.",
+      "name": "Nombre",
+      "phone": "Número de teléfono",
+      "remove": "Quitar"
+    }
   },
   "demo": {
     "title": "Modo demo",
@@ -486,7 +498,11 @@
     "reset": "Reiniciar app",
     "simulatedDate": "Fecha simulada: {{date}}",
     "priorityNow": "Prioridad actual: {{score}} / 100 ({{level}})",
-    "doneToast": "Listo ✓"
+    "doneToast": "Listo ✓",
+    "reachOut": "Simular notificación de contacto",
+    "skipDays": "Saltar 3 días sin check-in",
+    "bipolarOn": "Indicador clínico: bipolar → activar",
+    "bipolarOff": "Indicador clínico: bipolar → desactivar"
   },
   "menu": {
     "chat": "Chat",
@@ -553,7 +569,8 @@
       "care": "Tu equipo de salud está para ti. Puedes pedir una charla — tú decides.",
       "careOpen": "Ya tienes una solicitud en la fila. Así va.",
       "plan": "Aquí tienes algunas ideas pequeñas para hoy. Cualquiera cuenta.",
-      "crisis": "Me alegra que me lo dijeras. Busca ayuda ahora: llama al 112 o a una línea de crisis. Ya avisé a tu equipo (simulado)."
+      "crisis": "Me alegra que me lo dijeras. Busca ayuda ahora: llama al 112 o a una línea de crisis. Ya avisé a tu equipo (simulado).",
+      "steady": "Qué bueno que tengas energía. Mantengamos un ritmo tranquilo y cuidemos tu sueño esta noche."
     },
     "card": {
       "start": "Empezar",
@@ -563,7 +580,14 @@
       "openHelp": "Más opciones de ayuda",
       "savedTitle": "Guardado en tu diario",
       "openJournal": "Abrir diario",
-      "fullCheckin": "Añadir sueño y energía"
+      "fullCheckin": "Añadir sueño y energía",
+      "addFriend": "Añadir persona de confianza",
+      "addFriendBody": "Alguien de tu familia o una amistad a quien podrías llamar cuando todo pese.",
+      "callFriend": "Llamar a {{name}}",
+      "messageFriend": "Escribir a {{name}}",
+      "reconnectCheckin": "Hacer check-in ahora",
+      "reconnectCare": "Escribir a mi equipo de salud",
+      "reconnectHelpline": "Línea 24/7 {{number}}"
     },
     "aboutHint": "Muestra lo que este compañero puede y no puede hacer",
     "actions": {
@@ -571,6 +595,11 @@
       "title": "¿Qué te gustaría hacer?",
       "journal": "Escribir en mi diario",
       "fullCheckin": "Check-in completo"
+    },
+    "outreach": {
+      "warm": "Qué bueno saber de ti. Sin ninguna presión.",
+      "friend": "Han pasado unos días. A veces una voz conocida ayuda.",
+      "reconnect": "Perdimos el contacto un tiempo, y está bien. Así puedes encontrarnos cuando quieras."
     }
   },
   "journal": {
@@ -617,6 +646,25 @@
     "tabs": {
       "journal": "Diario",
       "trends": "Tendencias"
+    }
+  },
+  "notify": {
+    "daily": "{{name}}: ¿Hacemos un check-in? Toma un minuto.",
+    "evening": "{{name}}: ¿Cómo te fue hoy? Aquí estoy si quieres hablar.",
+    "warm": "{{name}}: Pienso en ti. ¿Cómo estás hoy?",
+    "friend": "{{name}}: Han pasado unos días. ¿Te ayudaría hablar con {{friend}}?",
+    "friendNoContact": "{{name}}: Han pasado unos días. ¿Hay alguien con quien podrías hablar?",
+    "reconnect": "{{name}}: Hace tiempo que no sabemos de ti. Así puedes encontrarnos.",
+    "now": "ahora",
+    "openHint": "Abre el chat"
+  },
+  "embers": {
+    "label": "Tus brasas: {{state}}",
+    "hint": "Crecen con pequeños actos de autocuidado y nunca se apagan.",
+    "state": {
+      "low": "brillan bajito",
+      "steady": "estables",
+      "bright": "brillantes"
     }
   }
 }

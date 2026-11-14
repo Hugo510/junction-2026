@@ -1,6 +1,6 @@
 {
   "common": {
-    "appName": "Valo",
+    "appName": "Hiillos",
     "tagline": "Hyvinvointia TMS-hoidon jälkeen, pieni askel kerrallaan",
     "continue": "Jatka",
     "back": "Takaisin",
@@ -64,7 +64,9 @@
       "location": "Likimääräinen sijainti",
       "locationDesc": "Vain ulkona päivänvalossa vietetyn ajan arvioimiseen. Käsitellään puhelimessasi; koordinaatteja ei koskaan tallenneta.",
       "vibration": "Värinä",
-      "vibrationDesc": "Pehmeät värinät ohjaavat hengitystä ja muita harjoituksia."
+      "vibrationDesc": "Pehmeät värinät ohjaavat hengitystä ja muita harjoituksia.",
+      "careTeamAfterSilence": "Hoitotiimini saa ottaa yhteyttä, jos yhteys katkeaa",
+      "careTeamAfterSilenceDesc": "Jos kuulumisia ei tule 7 päivään, hoitotiimisi saa lempeän ilmoituksen (simuloitu). Oletuksena pois päältä."
     },
     "companion": {
       "title": "Valitse kumppani",
@@ -225,7 +227,8 @@
       "low": "Kiitos, että kerroit. Raskaat päivät menevät ohi — tehdään jotain pientä ja lempeää.",
       "mid": "Kiitos kuulumisista. Tasainen on hyvä.",
       "high": "Mukavaa, että tänään tuntuu hyvältä! Jatketaan lempeästi.",
-      "urgent": "Kiitos rehellisyydestäsi. Ansaitset tukea — hae apua nyt."
+      "urgent": "Kiitos rehellisyydestäsi. Ansaitset tukea — hae apua nyt.",
+      "steady": "Kiitos kuulumisista. Pidetään päivä rauhallisena ja tasaisena, ja suojellaan untasi."
     },
     "encourage": {
       "start": "Kun olet valmis.",
@@ -423,7 +426,8 @@
       "highAnxiety": "Olet tuntenut itsesi melko jännittyneeksi",
       "perceivedUrgency": "Kerroit, että asia tuntuu kiireelliseltä",
       "belowBaseline": "Mielialasi on ollut jonkin aikaa tavallista tasoasi matalampi",
-      "longSleep": "Useita hyvin pitkiä öitä tai päiviä sängyssä (10 tuntia tai enemmän)"
+      "longSleep": "Useita hyvin pitkiä öitä tai päiviä sängyssä (10 tuntia tai enemmän)",
+      "upwardDrift": "Vähän unta ja poikkeuksellisen paljon energiaa tai liikettä (klinikan merkintä)"
     }
   },
   "risk": {
@@ -442,7 +446,8 @@
       "movement": "Liike: aktiiviset minuutit harjoitusten aikana — ei koskaan raakaa anturidataa.",
       "location": "Sijainti: vain se, oletko ulkona kävelyn aikana. Koordinaatteja ei koskaan tallenneta.",
       "where": "Missä: vain tässä puhelimessa. Ei tiliä eikä pilveä vielä.",
-      "sharing": "Jakaminen: hoitotiimisi näkee yhteenvedon vain, kun pyydät vastaanottoaikaa, tai jos turvallisuusvastaus vaatii kiireellistä apua."
+      "sharing": "Jakaminen: hoitotiimisi näkee yhteenvedon vain, kun pyydät vastaanottoaikaa, tai jos turvallisuusvastaus vaatii kiireellistä apua.",
+      "trusted": "Luotettu ihminen: nimi ja numero pysyvät vain tässä puhelimessa."
     },
     "sensorsTitle": "Anturit",
     "export": "Vie tietoni",
@@ -474,7 +479,14 @@
     "about": "Tietoja",
     "aboutBody": "{{app}} tukee hyvinvointia TMS-hoidon jälkeen. Se ei ole lääkinnällinen laite: se ei diagnosoi eikä hoida, eikä korvaa hoitotiimiäsi. Hätätilanteessa soita 112.",
     "version": "Versio {{version}}",
-    "logo": "{{app}}-logo"
+    "logo": "{{app}}-logo",
+    "trusted": {
+      "title": "Luotettu ihminen",
+      "desc": "Tallennetaan vain tähän puhelimeen. Yhdellä napautuksella voit soittaa tai viestiä, kun olo on raskas.",
+      "name": "Nimi",
+      "phone": "Puhelinnumero",
+      "remove": "Poista"
+    }
   },
   "demo": {
     "title": "Demotila",
@@ -486,7 +498,11 @@
     "reset": "Nollaa sovellus",
     "simulatedDate": "Simuloitu päivä: {{date}}",
     "priorityNow": "Kiireellisyys nyt: {{score}} / 100 ({{level}})",
-    "doneToast": "Valmis ✓"
+    "doneToast": "Valmis ✓",
+    "reachOut": "Simuloi yhteydenottoilmoitus",
+    "skipDays": "Ohita 3 päivää ilman kuulumisia",
+    "bipolarOn": "Klinikan merkintä: kaksisuuntainen → päälle",
+    "bipolarOff": "Klinikan merkintä: kaksisuuntainen → pois"
   },
   "menu": {
     "chat": "Keskustelu",
@@ -553,7 +569,8 @@
       "care": "Hoitotiimisi on tukenasi. Voit pyytää keskustelua — valinta on sinun.",
       "careOpen": "Sinulla on jo pyyntö jonossa. Tässä sen tilanne.",
       "plan": "Tässä muutama pieni idea tälle päivälle. Mikä tahansa niistä riittää.",
-      "crisis": "Hyvä, että kerroit. Hae apua nyt: soita 112 tai kriisipuhelimeen. Ilmoitin hoitotiimillesi (simuloitu)."
+      "crisis": "Hyvä, että kerroit. Hae apua nyt: soita 112 tai kriisipuhelimeen. Ilmoitin hoitotiimillesi (simuloitu).",
+      "steady": "Hyvä, että sinulla on energiaa. Pidetään rytmi rauhallisena ja suojellaan untasi tänä yönä."
     },
     "card": {
       "start": "Aloita",
@@ -563,7 +580,14 @@
       "openHelp": "Lisää apua",
       "savedTitle": "Tallennettu päiväkirjaan",
       "openJournal": "Avaa päiväkirja",
-      "fullCheckin": "Lisää uni ja energia"
+      "fullCheckin": "Lisää uni ja energia",
+      "addFriend": "Lisää luotettu ihminen",
+      "addFriendBody": "Ystävä tai läheinen, jolle voisit soittaa, kun olo on raskas.",
+      "callFriend": "Soita: {{name}}",
+      "messageFriend": "Viesti: {{name}}",
+      "reconnectCheckin": "Kerro kuulumiset nyt",
+      "reconnectCare": "Viesti hoitotiimilleni",
+      "reconnectHelpline": "Auttava puhelin 24/7 {{number}}"
     },
     "aboutHint": "Näyttää, mitä tämä kumppani voi ja ei voi tehdä",
     "actions": {
@@ -571,6 +595,11 @@
       "title": "Mitä haluaisit tehdä?",
       "journal": "Kirjoita päiväkirjaan",
       "fullCheckin": "Kattavat kuulumiset"
+    },
+    "outreach": {
+      "warm": "Kiva kuulla sinusta. Ei mitään paineita.",
+      "friend": "Muutama päivä on kulunut. Joskus tuttu ääni auttaa.",
+      "reconnect": "Yhteys katkesi hetkeksi, ja se on ihan okei. Näin tavoitat meidät milloin tahansa."
     }
   },
   "journal": {
@@ -617,6 +646,25 @@
     "tabs": {
       "journal": "Päiväkirja",
       "trends": "Kehitys"
+    }
+  },
+  "notify": {
+    "daily": "{{name}}: Kerrotaanko kuulumiset? Se vie minuutin.",
+    "evening": "{{name}}: Miten päivä meni? Olen täällä, jos haluat jutella.",
+    "warm": "{{name}}: Ajattelen sinua. Mitä kuuluu tänään?",
+    "friend": "{{name}}: Muutama päivä on kulunut. Auttaisiko jutella: {{friend}}?",
+    "friendNoContact": "{{name}}: Muutama päivä on kulunut. Onko joku, jolle voisit puhua?",
+    "reconnect": "{{name}}: Emme ole kuulleet sinusta hetkeen. Näin tavoitat meidät.",
+    "now": "nyt",
+    "openHint": "Avaa keskustelun"
+  },
+  "embers": {
+    "label": "Hiilloksesi: {{state}}",
+    "hint": "Se kasvaa pienistä itsestä huolehtimisen teoista eikä koskaan sammu.",
+    "state": {
+      "low": "hehkuu hiljaa",
+      "steady": "tasainen",
+      "bright": "kirkas"
     }
   }
 }

@@ -1,6 +1,6 @@
 {
   "common": {
-    "appName": "Valo",
+    "appName": "Hiillos",
     "tagline": "Må bra efter TMS, ett litet steg i taget",
     "continue": "Fortsätt",
     "back": "Tillbaka",
@@ -64,7 +64,9 @@
       "location": "Ungefärlig plats",
       "locationDesc": "Endast för att uppskatta tid utomhus i dagsljus. Behandlas i telefonen; koordinater sparas aldrig.",
       "vibration": "Vibration",
-      "vibrationDesc": "Mjuka vibrationer som guidar andning och andra övningar."
+      "vibrationDesc": "Mjuka vibrationer som guidar andning och andra övningar.",
+      "careTeamAfterSilence": "Låt mitt vårdteam höra av sig om vi tappar kontakten",
+      "careTeamAfterSilenceDesc": "Om det inte blir någon incheckning på 7 dagar får ditt vårdteam en mild påminnelse (simulerat). Avstängt som standard."
     },
     "companion": {
       "title": "Välj en följeslagare",
@@ -225,7 +227,8 @@
       "low": "Tack för att du berättade. Tunga dagar går över — låt oss göra något litet och snällt.",
       "mid": "Tack för att du checkade in. Jämnt är bra.",
       "high": "Vad glad jag blir att idag känns bra! Vi fortsätter i lugn takt.",
-      "urgent": "Tack för att du är ärlig. Du förtjänar stöd — sök hjälp nu."
+      "urgent": "Tack för att du är ärlig. Du förtjänar stöd — sök hjälp nu.",
+      "steady": "Tack för att du checkade in. Vi håller dagen lugn och jämn och skyddar din sömn."
     },
     "encourage": {
       "start": "När du är redo.",
@@ -423,7 +426,8 @@
       "highAnxiety": "Du har känt dig ganska spänd",
       "perceivedUrgency": "Du berättade att det känns brådskande",
       "belowBaseline": "Ditt humör har en tid legat under din vanliga nivå",
-      "longSleep": "Flera mycket långa nätter eller dagar i sängen (10 timmar eller mer)"
+      "longSleep": "Flera mycket långa nätter eller dagar i sängen (10 timmar eller mer)",
+      "upwardDrift": "Lite sömn med ovanligt hög energi eller aktivitet (klinikens markering)"
     }
   },
   "risk": {
@@ -442,7 +446,8 @@
       "movement": "Rörelse: aktiva minuter under övningar — aldrig rå sensordata.",
       "location": "Plats: endast om du är ute under en promenad. Koordinater sparas aldrig.",
       "where": "Var: endast i den här telefonen. Inget konto och inget moln än.",
-      "sharing": "Delning: ditt vårdteam ser bara en sammanfattning när du ber om en konsultation, eller om ett säkerhetssvar kräver brådskande hjälp."
+      "sharing": "Delning: ditt vårdteam ser bara en sammanfattning när du ber om en konsultation, eller om ett säkerhetssvar kräver brådskande hjälp.",
+      "trusted": "Någon du litar på: namn och nummer sparas bara i den här telefonen."
     },
     "sensorsTitle": "Sensorer",
     "export": "Exportera mina data",
@@ -474,7 +479,14 @@
     "about": "Om appen",
     "aboutBody": "{{app}} stöder välmående efter TMS-behandling. Den är inte en medicinteknisk produkt: den ställer inga diagnoser, ger ingen behandling och ersätter inte ditt vårdteam. Vid nödsituation, ring 112.",
     "version": "Version {{version}}",
-    "logo": "{{app}}-logotyp"
+    "logo": "{{app}}-logotyp",
+    "trusted": {
+      "title": "Någon du litar på",
+      "desc": "Sparas bara i den här telefonen. För att ringa eller skriva med ett tryck när det känns tungt.",
+      "name": "Namn",
+      "phone": "Telefonnummer",
+      "remove": "Ta bort"
+    }
   },
   "demo": {
     "title": "Demoläge",
@@ -486,7 +498,11 @@
     "reset": "Återställ appen",
     "simulatedDate": "Simulerat datum: {{date}}",
     "priorityNow": "Prioritet nu: {{score}} / 100 ({{level}})",
-    "doneToast": "Klart ✓"
+    "doneToast": "Klart ✓",
+    "reachOut": "Simulera kontaktnotis",
+    "skipDays": "Hoppa över 3 dagar utan incheckning",
+    "bipolarOn": "Klinikens markering: bipolär → slå på",
+    "bipolarOff": "Klinikens markering: bipolär → stäng av"
   },
   "menu": {
     "chat": "Chatt",
@@ -553,7 +569,8 @@
       "care": "Ditt vårdteam finns för dig. Du kan be om ett samtal — det är ditt val.",
       "careOpen": "Du har redan en förfrågan i kön. Så här ser den ut.",
       "plan": "Här är några små idéer för idag. Vilken som helst räknas.",
-      "crisis": "Bra att du berättade. Sök hjälp nu: ring 112 eller en krisjour. Jag har larmat ditt vårdteam (simulerat)."
+      "crisis": "Bra att du berättade. Sök hjälp nu: ring 112 eller en krisjour. Jag har larmat ditt vårdteam (simulerat).",
+      "steady": "Skönt att du har energi. Vi håller en lugn rytm och skyddar din sömn i natt."
     },
     "card": {
       "start": "Starta",
@@ -563,7 +580,14 @@
       "openHelp": "Fler hjälpalternativ",
       "savedTitle": "Sparat i din dagbok",
       "openJournal": "Öppna dagboken",
-      "fullCheckin": "Lägg till sömn och energi"
+      "fullCheckin": "Lägg till sömn och energi",
+      "addFriend": "Lägg till någon du litar på",
+      "addFriendBody": "En vän eller någon i familjen som du kan ringa när det känns tungt.",
+      "callFriend": "Ring {{name}}",
+      "messageFriend": "Skriv till {{name}}",
+      "reconnectCheckin": "Checka in nu",
+      "reconnectCare": "Skriv till mitt vårdteam",
+      "reconnectHelpline": "Stödlinje dygnet runt {{number}}"
     },
     "aboutHint": "Visar vad den här följeslagaren kan och inte kan göra",
     "actions": {
@@ -571,6 +595,11 @@
       "title": "Vad vill du göra?",
       "journal": "Skriv i min dagbok",
       "fullCheckin": "Fullständig incheckning"
+    },
+    "outreach": {
+      "warm": "Vad fint att höra från dig. Ingen press alls.",
+      "friend": "Det har gått några dagar. Ibland hjälper en bekant röst.",
+      "reconnect": "Vi tappade kontakten ett tag, och det är okej. Så här når du oss när du vill."
     }
   },
   "journal": {
@@ -617,6 +646,25 @@
     "tabs": {
       "journal": "Dagbok",
       "trends": "Trender"
+    }
+  },
+  "notify": {
+    "daily": "{{name}}: Ska vi checka in? Det tar en minut.",
+    "evening": "{{name}}: Hur var dagen? Jag finns här om du vill prata.",
+    "warm": "{{name}}: Tänker på dig. Hur mår du idag?",
+    "friend": "{{name}}: Det har gått några dagar. Skulle det hjälpa att prata med {{friend}}?",
+    "friendNoContact": "{{name}}: Det har gått några dagar. Finns det någon du kan prata med?",
+    "reconnect": "{{name}}: Vi har inte hört från dig på ett tag. Så här når du oss.",
+    "now": "nu",
+    "openHint": "Öppnar chatten"
+  },
+  "embers": {
+    "label": "Din glöd: {{state}}",
+    "hint": "Den växer med små handlingar av egenvård och slocknar aldrig.",
+    "state": {
+      "low": "glöder svagt",
+      "steady": "jämn",
+      "bright": "klar"
     }
   }
 }

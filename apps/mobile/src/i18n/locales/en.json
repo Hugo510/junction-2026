@@ -1,6 +1,6 @@
 {
   "common": {
-    "appName": "Valo",
+    "appName": "Hiillos",
     "tagline": "Staying well after TMS, one small step at a time",
     "continue": "Continue",
     "back": "Back",
@@ -64,7 +64,9 @@
       "location": "Approximate location",
       "locationDesc": "Only to estimate time outside in daylight. Processed on your phone; coordinates are never saved.",
       "vibration": "Vibration",
-      "vibrationDesc": "Gentle vibrations that guide breathing and other exercises."
+      "vibrationDesc": "Gentle vibrations that guide breathing and other exercises.",
+      "careTeamAfterSilence": "Let my care team reach out if we lose touch",
+      "careTeamAfterSilenceDesc": "If there are no check-ins for 7 days, your care team gets a gentle note (simulated). Off by default."
     },
     "companion": {
       "title": "Choose a companion",
@@ -225,7 +227,8 @@
       "low": "Thank you for telling me. Heavy days pass — let's do something small and kind.",
       "mid": "Thanks for checking in. Steady is good.",
       "high": "I'm glad today feels good! Let's keep it gentle.",
-      "urgent": "Thank you for being honest. You deserve support — please reach out now."
+      "urgent": "Thank you for being honest. You deserve support — please reach out now.",
+      "steady": "Thanks for checking in. Let's keep today calm and steady, and protect your sleep."
     },
     "encourage": {
       "start": "Whenever you're ready.",
@@ -423,7 +426,8 @@
       "highAnxiety": "You've been feeling quite tense",
       "perceivedUrgency": "You told us it feels urgent",
       "belowBaseline": "Your mood has been below your usual level for a while",
-      "longSleep": "Several very long nights or days in bed (10 hours or more)"
+      "longSleep": "Several very long nights or days in bed (10 hours or more)",
+      "upwardDrift": "Short sleep with unusually high energy or activity (clinic flag)"
     }
   },
   "risk": {
@@ -442,7 +446,8 @@
       "movement": "Movement: active minutes during exercises — never raw sensor data.",
       "location": "Location: only whether you're outside during a walk. Coordinates are never saved.",
       "where": "Where: only on this phone. No account and no cloud yet.",
-      "sharing": "Sharing: your care team only sees a summary when you request a consultation, or if a safety answer needs urgent help."
+      "sharing": "Sharing: your care team only sees a summary when you request a consultation, or if a safety answer needs urgent help.",
+      "trusted": "Trusted person: their name and number stay only on this phone."
     },
     "sensorsTitle": "Sensors",
     "export": "Export my data",
@@ -474,7 +479,14 @@
     "about": "About",
     "aboutBody": "{{app}} supports wellbeing after TMS treatment. It is not a medical device: it does not diagnose or treat, and it does not replace your care team. In an emergency, call 112.",
     "version": "Version {{version}}",
-    "logo": "{{app}} logo"
+    "logo": "{{app}} logo",
+    "trusted": {
+      "title": "Someone you trust",
+      "desc": "Stays only on this phone. Used for a one-tap call or message when things feel heavy.",
+      "name": "Name",
+      "phone": "Phone number",
+      "remove": "Remove"
+    }
   },
   "demo": {
     "title": "Demo mode",
@@ -486,7 +498,11 @@
     "reset": "Reset app",
     "simulatedDate": "Simulated date: {{date}}",
     "priorityNow": "Priority now: {{score}} / 100 ({{level}})",
-    "doneToast": "Done ✓"
+    "doneToast": "Done ✓",
+    "reachOut": "Simulate reach-out notification",
+    "skipDays": "Skip 3 days without check-ins",
+    "bipolarOn": "Clinic flag: bipolar → turn on",
+    "bipolarOff": "Clinic flag: bipolar → turn off"
   },
   "menu": {
     "chat": "Chat",
@@ -553,7 +569,8 @@
       "care": "Your care team is there for you. You can ask for a chat — it's your choice.",
       "careOpen": "You already have a request in line. Here's where it stands.",
       "plan": "Here are a few small ideas for today. Any one of them counts.",
-      "crisis": "I'm glad you told me. Please get help now: call 112 or a crisis line. I've alerted your care team (simulated)."
+      "crisis": "I'm glad you told me. Please get help now: call 112 or a crisis line. I've alerted your care team (simulated).",
+      "steady": "Good to hear you have energy. Let's keep a calm rhythm and protect your sleep tonight."
     },
     "card": {
       "start": "Start",
@@ -563,7 +580,14 @@
       "openHelp": "More help options",
       "savedTitle": "Saved to your journal",
       "openJournal": "Open journal",
-      "fullCheckin": "Add sleep & energy"
+      "fullCheckin": "Add sleep & energy",
+      "addFriend": "Add someone you trust",
+      "addFriendBody": "A friend or family member you could call when things feel heavy.",
+      "callFriend": "Call {{name}}",
+      "messageFriend": "Message {{name}}",
+      "reconnectCheckin": "Check in now",
+      "reconnectCare": "Message my care team",
+      "reconnectHelpline": "24/7 helpline {{number}}"
     },
     "aboutHint": "Shows what this companion can and cannot do",
     "actions": {
@@ -571,6 +595,11 @@
       "title": "What would you like to do?",
       "journal": "Write in my journal",
       "fullCheckin": "Full check-in"
+    },
+    "outreach": {
+      "warm": "It's good to hear from you. No pressure at all.",
+      "friend": "It's been a few days. Sometimes a familiar voice helps.",
+      "reconnect": "We lost touch for a while, and that's okay. Here's how to reach us whenever you want."
     }
   },
   "journal": {
@@ -617,6 +646,25 @@
     "tabs": {
       "journal": "Journal",
       "trends": "Trends"
+    }
+  },
+  "notify": {
+    "daily": "{{name}}: Shall we check in? It takes a minute.",
+    "evening": "{{name}}: How did today go? I'm here if you want to talk.",
+    "warm": "{{name}}: Thinking of you. How are you today?",
+    "friend": "{{name}}: It's been a few days. Would talking to {{friend}} help?",
+    "friendNoContact": "{{name}}: It's been a few days. Is there someone you could talk to?",
+    "reconnect": "{{name}}: We haven't heard from you in a while. Here's how to reach us.",
+    "now": "now",
+    "openHint": "Opens the chat"
+  },
+  "embers": {
+    "label": "Your embers: {{state}}",
+    "hint": "They grow with small acts of self-care and never go out.",
+    "state": {
+      "low": "glowing low",
+      "steady": "steady",
+      "bright": "bright"
     }
   }
 }
