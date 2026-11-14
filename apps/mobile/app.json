@@ -37,8 +37,20 @@
       ],
       "expo-localization",
       "expo-font",
-      "expo-audio",
+      [
+        "expo-audio",
+        {
+          "microphonePermission": false,
+          "recordAudioAndroid": false
+        }
+      ],
       "expo-asset"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "8d459188-1fd8-4d68-8fbc-cfae0b13f279"
+      }
+    },
+    "owner": "hugo510"
   }
 }
