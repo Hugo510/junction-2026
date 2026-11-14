@@ -96,3 +96,56 @@ curl -s -X POST http://localhost:8000/api/v1/checkins \
   -d '{"date": "2026-11-14", "mood": 5, "energy": 5, "anxiety": 1,
        "safety": {"selfHarmThoughts": true}}'
 ```
+
+
+## New Updates After Recommended Changes
+
+Consents with the new field (should return careTeamAfterSilence: true):
+
+```bash
+curl -s -X PUT http://localhost:8000/api/v1/me/consents \
+  -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -d '{"motion": true, "touchPattern": false, "approximateLocation": false, "vibration": true, "careTeamAfterSilence": true}'
+```
+
+Minimal check-in with only the required fields (should return 201):
+```bash
+curl -s -X POST http://localhost:8000/api/v1/checkins \
+  -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -d '{"date": "2026-11-13", "mood": 4, "safety": {"selfHarmThoughts": false}}'
+```
+
+
+Full check-in with the new fields (should return 201):
+
+```bash
+curl -s -X POST http://localhost:8000/api/v1/checkins \
+  -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -d '{"date": "2026-11-12", "mood": 2, "energy": 2, "anxiety": 4, "sleepHours": 5,
+       "note": "Long day", "emotions": ["tired", "worried"], "kind": "journal",
+       "bodyMap": {"chest": 3, "stomach": 2},
+       "safety": {"selfHarmThoughts": false}}'
+```
+
+Second normal check-in on the same day (should return 409):
+
+```bash
+curl -i -X POST http://localhost:8000/api/v1/checkins \
+  -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -d '{"date": "2026-11-13", "mood": 3, "safety": {"selfHarmThoughts": false}}'
+```
+
+Self-harm report on that same day (should return 201, with risk.level = urgent and an alertId):
+
+```bash
+curl -s -X POST http://localhost:8000/api/v1/checkins \
+  -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -d '{"date": "2026-11-13", "mood": 5, "safety": {"selfHarmThoughts": true}}'
+```
+
+List check-ins (should show all entries, including two for 2026-11-13):
+
+```bash
+curl -s "http://localhost:8000/api/v1/checkins?from=2026-11-01&to=2026-11-14" \
+  -H "Authorization: Bearer $TOKEN"
+```
